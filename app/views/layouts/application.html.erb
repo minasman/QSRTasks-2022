@@ -8,9 +8,15 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <script src="https://kit.fontawesome.com/ded3e591f3.js" crossorigin="anonymous"></script>
+    <%= favicon_link_tag 'favicon-16x16.png' %>
+    <%= favicon_link_tag 'apple-touch-icon.png', rel: 'apple-touch-icon', type:'image/png' %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "layouts/navbar/header"%>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
