@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+  root 'public#home'
+  get 'public/about'
+  get 'public/careers'
   resources :organizaitons
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
 end
