@@ -1,2 +1,0 @@
-class Organizaiton < ApplicationRecord
-end
