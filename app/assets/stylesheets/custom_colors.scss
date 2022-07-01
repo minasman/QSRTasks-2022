@@ -1,0 +1,39 @@
+nav.longhorn {
+  background: #bf5700;
+}
+
+.nav-link {
+  color: white;
+}
+
+.nav-link:hover {
+  color: black;
+  background-color: #f8971f;
+  border-radius: 3px;
+}
+
+.nav-link.show {
+  color: black;
+  background-color: #f8971f;
+  border-radius: 3px;
+}
+
+.navbar-brand {
+  color: white;
+}
+
+.dropdown-menu.show {
+  background: #bf5700;
+  border: black;
+  border-style: solid;
+  box-shadow: 0.5px 0.5px 0.5px;
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.dropdown-item:hover {
+  color: black;
+  background:#f8971f;
+}

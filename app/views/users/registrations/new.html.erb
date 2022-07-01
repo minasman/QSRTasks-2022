@@ -5,19 +5,19 @@
       <h2 class="text-center card-header">Register New User</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-        <div class="row">
+        <div class="row mt-3">
           <div class="col">
             <%= render "users/shared/error_messages", resource: resource %>
             <div class="row">
               <div class="col-12 col-md-6">
                 <div class="mb-3">
-                  <%= f.label :first_name, class: "form-label" %>
-                  <%= f.text_field :first_name, class: "form-control" %>
+                  <%= f.label :first_name, "First Name", class: "form-label" %>
+                  <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
                 </div>
               </div>
               <div class="col-12 col-md-6">
                 <div class="mb-3">
-                  <%= f.label :last_name, class: "form-label" %>
+                  <%= f.label :last_name, "Last Name", class: "form-label" %>
                   <%= f.text_field :last_name, class: "form-control" %>
                 </div>
               </div>
@@ -53,14 +53,14 @@
               <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <%= f.label :email, class: "form-label" %>
-                  <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+                  <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
                 </div>
               </div>
             </div>
             <div class="row">
               <div class="col-12">
                 <div class="mb-3">
-                  <%= f.label :payroll_id, class: "form-label" %>
+                  <%= f.label :payroll_id, "Payroll ID",  class: "form-label" %>
                   <%= f.text_field :payroll_id, class: "form-control" %>
                 </div>
               </div>
@@ -70,14 +70,14 @@
                 <div class="mb-3">
                   <%= f.label :password, class: "form-label" %>
                   <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <em><small>(<%= @minimum_password_length %> characters minimum)</small></em>
                   <% end %><br />
                   <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
                 </div>
               </div>
               <div class="col-12 col-md-6">
                 <div class="mb-3">
-                  <%= f.label :password_confirmation, class: "form-label" %>
+                  <%= f.label :password_confirmation, "Password Confirmation", class: "form-label" %>
                   <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
                 </div>
               </div>
@@ -90,13 +90,12 @@
                 </div>
               </div>
             </div>
-            <div class="actions">
-              <%= f.submit "Sign up" %>
+            <div class="d-grid mb-2">
+              <%= f.submit "Register", class: "btn my-submit" %>
             </div>
           </div>
         </div>
       <% end %>
-      <%= render "users/shared/links" %>
     </div>
   </div>
 </div>

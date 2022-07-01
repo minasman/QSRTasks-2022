@@ -27,4 +27,9 @@ class Admins::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+  private
+
+  def after_sign_in_path_for(_resource_or_scope)
+    admin_dashboard_path
+  end
 end

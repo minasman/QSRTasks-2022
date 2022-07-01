@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+
   root 'public#home'
   get 'public/about'
   get 'public/careers'
+
+  get 'dashboard/dashboard'
+  get 'dashboard/admin_dashboard'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',

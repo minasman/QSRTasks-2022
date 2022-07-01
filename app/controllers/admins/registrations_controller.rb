@@ -61,4 +61,9 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  private
+
+  def after_sign_in_path_for(_resource_or_scope)
+    admin_dashboard_path
+  end
 end
