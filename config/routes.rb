@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get 'public/about'
   get 'public/careers'
 
-  get 'dashboard/dashboard'
-  get 'dashboard/admin_dashboard'
+  get '/dashboard' => 'dashboard#dashboard'
+  get 'admin/dashboard' => 'dashboard#admin_dashboard'
 
   devise_for :users, controllers: {
     sessions: 'users/sessions',
@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords'
   }
 
+  resources :positions
   resources :organizations
 
 end
