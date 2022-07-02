@@ -1,7 +1,8 @@
 class DashboardController < ApplicationController
-  def dashboard
-  end
+  before_action :authenticate_admin!, only: %i[admin_dashboard]
+  before_action :authenticate_user!, only: %i[dashboard]
 
-  def admin_dashboard
-  end
+  def dashboard; end
+
+  def admin_dashboard; end
 end

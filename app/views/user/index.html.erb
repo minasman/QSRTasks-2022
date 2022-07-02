@@ -1,0 +1,40 @@
+
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Location</th>
+      <th scope="col">Name</th>
+      <th scope="col">Position</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Email</th>
+      <th scope="col">Payroll ID</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each_with_index do |user, i| %>
+      <tr>
+        <th scope="row"><%= i + 1 %></th>
+        <td><%=  %>Location</td>
+        <td><%= user.full_name %></td>
+        <td><%= user.position %></td>
+        <td><%= number_to_phone(user.phone) %></td>
+        <td><%= user.email %></td>
+        <td><%= user.payroll_id %></td>
+        <td>
+          <% if current_user.position.name == "Director" %>
+            <%= link_to "Login As ", masquerade_path(user), class: "text-longhorn-500 px-2", data: { turbo: false } %> |
+          <% end %>
+          <% if policy(:user).edit? %>
+            <%= link_to "Edit", edit_user_path(user), class: "text-longhorn-500 px-2",  data: { turbo: false } %>
+          <% end %>
+          <% if policy(:user).destroy? %>
+            | <%= link_to "Deactivate", user,  class: "text-longhorn-500 px-2",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}!" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

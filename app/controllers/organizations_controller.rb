@@ -1,5 +1,6 @@
 class OrganizationsController < ApplicationController
-  before_action :set_organization, only: %i[ show edit update destroy ]
+  before_action :authenticate_admin!
+  before_action :set_organization, only: %i[show edit update destroy]
 
   # GET /organizations or /organizations.json
   def index
@@ -65,6 +66,15 @@ class OrganizationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.require(:organization).permit(:name, :phone, :city, :state, :zip, :street)
+      params.require(:organization).permit(:name, :phone, :city, :state, :zip, :street,         users_attributes: %i[
+        first_name
+        last_name
+        phone
+        admin
+        email
+        position_id
+        password
+        password_confirmation
+      ])
     end
 end

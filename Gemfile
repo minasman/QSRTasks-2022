@@ -38,6 +38,9 @@ gem "bootsnap", require: false
 # Custom gems used by app
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'devise_masquerade', '~> 1.3', '>= 1.3.11'
+gem 'pagy', '~> 5.10', '>= 5.10.1'
+gem 'pg_search', '~> 2.3', '>= 2.3.6'
+gem 'pundit', '~> 2.2'
 
 
 gem 'phonelib', '~> 0.7.0'
@@ -45,6 +48,7 @@ gem 'phonelib', '~> 0.7.0'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'faker', '~> 2.21'
 end
 
 group :development do

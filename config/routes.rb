@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     masquerades: 'admins/masquerades'
   }
+  resources :user
 
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',
