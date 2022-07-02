@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :stores
 
   root 'public#home'
   get 'public/about'
@@ -27,6 +26,7 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords'
   }
 
+  resources :stores
   resources :positions
   resources :organizations
 

@@ -1,14 +1,70 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Stores</h1>
-
-<div id="stores">
-  <% @stores.each do |store| %>
-    <%= render store %>
-    <p>
-      <%= link_to "Show this store", store %>
-    </p>
+<div class="card">
+  <h2 class="card-header text-center">Restaurants</h2>
+  <%= form_with url: "",  method: :get, data: { turbo_frame: "stores", turbo_action: "advance" }, class: "pb-3" do |form| %>
+    <div class="pt-3 row justify-content-between">
+      <div class="col-12 col-md-5 col-xl-2 ms-3">
+        <div class="row">
+          <%= form.label "Show", class: "col-3 mb-3 col-form-label" %>
+          <div class="col-8">
+            <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4  me-3">
+        <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control", placeholder: "Search By Name" %>
+      </div>
+    </div>
   <% end %>
+  <div class="table-responsive card-body">
+    <%= turbo_frame_tag "stores" do %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Number</th>
+            <th scope="col"><%= sort_link_to "Name", :first_name, data: {turbo_action: "advance" }, class: "table-link" %></th>
+            <th scope="col">Supervisor</th>
+            <th scope="col">GM</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col">Safe</th>
+            <th scope="col">Headsets</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @stores.each_with_index do |store, i| %>
+            <tr>
+              <th scope="row"><%= i + 1 %></th>
+              <td><%=
+                store.number
+              %></td>
+              <td><%= link_to store.name, store, data: {turbo: false}, class: "table-link" %></td>
+              <td><%=
+                store.users.where(position_id: 4).any? ? store.users.where(position_id: 4 )[0].full_name : "Not Assigned" %>
+              </td>
+              <td><%=
+                store.users.where(position_id: 5).any? ? store.users.where(position_id: 5 )[0].full_name : "Not Assigned" %>
+              </td>
+              <td><%= number_to_phone(store.phone) %></td>
+              <td><%= store.email %></td>
+              <td><%= number_to_currency(store.safe, precision: 0) %></td>
+              <td><%= store.headset %></td>
+              <td>
+                <% if policy(:store).edit? %>
+                  <%= link_to "Edit", edit_store_path(store), class: "text-longhorn-500 px-2 table-link",  data: { turbo: false } %>
+                <% end %>
+                <% if policy(:store).destroy? %>
+                  | <%= link_to "Deactivate", store,  class: "text-longhorn-500 px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{store.name.titleize}!" } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="p-4">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New store", new_store_path %>

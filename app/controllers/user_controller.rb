@@ -4,7 +4,7 @@ class UserController < ApplicationController
 
   def index
     # @users = user_list(true)
-    @users = User.all
+    @users = user_list(true)
     @users = @users.search(params[:query]) if params[:query].present?
     @pagy, @users = pagy @users.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
     authorize User
