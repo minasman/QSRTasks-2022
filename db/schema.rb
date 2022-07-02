@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_01_220732) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_02_154012) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -63,6 +63,32 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_220732) do
     t.index ["organization_id"], name: "index_positions_on_organization_id"
   end
 
+  create_table "stores", force: :cascade do |t|
+    t.string "name"
+    t.integer "number"
+    t.string "street"
+    t.string "city"
+    t.string "state"
+    t.string "zip"
+    t.string "phone"
+    t.string "email"
+    t.string "safe"
+    t.string "headset"
+    t.string "store_type"
+    t.string "active"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_stores_on_organization_id"
+  end
+
+  create_table "stores_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "store_id", null: false
+    t.index ["store_id", "user_id"], name: "index_stores_users_on_store_id_and_user_id"
+    t.index ["user_id", "store_id"], name: "index_stores_users_on_user_id_and_store_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -100,6 +126,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_01_220732) do
   end
 
   add_foreign_key "positions", "organizations"
+  add_foreign_key "stores", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"
 end

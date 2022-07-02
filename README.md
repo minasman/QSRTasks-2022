@@ -22,13 +22,3 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
-
-
- <!--
-              <div class="col-12 col-md-4">
-                <div class="mb-3">
-                  <%= f.label :first_name,"Location", class: "form-label" %>
-                  <%= f.text_field :first_name, class: "form-control" %>
-                </div>
-              </div>
-              -->

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stores
 
   root 'public#home'
   get 'public/about'
@@ -16,6 +17,7 @@ Rails.application.routes.draw do
     masquerades: 'admins/masquerades'
   }
   resources :user
+  get '/inactive_users' => 'user#inactive_users'
 
   devise_for :admins, controllers: {
     sessions: 'admins/sessions',

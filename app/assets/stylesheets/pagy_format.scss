@@ -1,0 +1,77 @@
+.pagy-nav,
+  .pagy-nav-js {
+    padding: 1px;
+  }
+  .pagy-nav .page a,
+  .pagy-nav .page.active,
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled,
+  .pagy-nav-js .page a,
+  .pagy-nav-js .page.active,
+  .pagy-nav-js .page.prev.disabled,
+  .pagy-nav-js .page.next.disabled {
+    background-color: #bf5700;
+    border-radius: 3px;
+    padding: 2px;
+    margin: 2px;
+    color: white;
+    box-shadow:.5px .5px 2px #bf5700;
+    &:hover{
+      background-color: #f8971f;
+    }
+    &:active{
+      background-color:#f8971f;
+      color: white;
+    }
+  }
+
+  .pagy-nav .page.prev.disabled,
+  .pagy-nav .page.next.disabled,
+  .pagy-nav-js .page.prev.disabled,
+  .pagy-nav-js .page.next.disabled {
+    @apply text-gray-400 cursor-default;
+    &:hover {
+      @apply text-gray-400 bg-gray-200;
+    }
+    &:active {
+      color: white;
+    }
+  }
+
+  .pagy-nav .page.active,
+  .pagy-nav-js .page.active {
+    background-color:#f8971f;
+    color: white;
+    cursor: default;
+    &:hover {
+      background-color:#f8971f;
+      color: white;
+    }
+    &:active {
+      background-color:#f8971f;
+      color: white;
+    }
+  }
+
+  .pagy-combo-nav-js {
+    @apply flex max-w-max rounded-full px-3 py-1 text-sm text-gray-500 font-semibold bg-gray-200 shadow-md;
+  }
+
+  .pagy-combo-nav-js .pagy-combo-input {
+    @apply bg-white px-2 rounded-sm
+  }
+
+  .pagy-combo-nav-js .page.prev,
+  .pagy-combo-nav-js .page.next {
+    &:hover {
+      background-color: black;
+    }
+    &:active {
+      @apply text-gray-800;
+    }
+  }
+
+  .pagy-combo-nav-js .page.prev.disabled,
+  .pagy-combo-nav-js .page.next.disabled {
+    @apply text-gray-400 cursor-default;
+  }

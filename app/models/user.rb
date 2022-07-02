@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   belongs_to :organization
   belongs_to :position
+  has_and_belongs_to_many :stores
+
 
   def full_name
     self.first_name + ' ' + self.last_name

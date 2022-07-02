@@ -1,5 +1,5 @@
 <div class="card">
-  <h2 class="card-header text-center">Registered Users</h2>
+  <h2 class="card-header text-center">Inactive Users</h2>
   <%= form_with url: "",  method: :get, data: { turbo_frame: "users", turbo_action: "advance" }, class: "pb-3" do |form| %>
     <div class="pt-3 row justify-content-between">
       <div class="col-12 col-md-5 col-xl-2 ms-3">
@@ -50,7 +50,7 @@
                   <%= link_to "Edit", edit_user_path(user), class: "text-longhorn-500 px-2 table-link",  data: { turbo: false } %>
                 <% end %>
                 <% if policy(:user).destroy? %>
-                  | <%= link_to "Deactivate", user,  class: "text-longhorn-500 px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}!" } %>
+                  | <%= link_to "Activate", user,  class: "text-longhorn-500 px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}!" } %>
                 <% end %>
               </td>
             </tr>
