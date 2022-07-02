@@ -3,51 +3,73 @@
 
     <% if user_signed_in? %>
       <%= link_to dashboard_path, class: "navbar-brand" do %>
-        <span class=""><i class="fa-solid fa-burger-soda"></i></span>
+        <span class=""><i class="fa-solid fa-clipboard-check"></i></span>
         QSRTasks
       <% end %>
     <% elsif admin_signed_in? %>
-      <%= link_to dashboard_path, class: "navbar-brand" do %>
-        <span class=""><i class="fa-solid fa-burger-soda"></i></span>
+      <%= link_to admin_dashboard_path, class: "navbar-brand" do %>
+        <span class=""><i class="fa-solid fa-clipboard-check"></i></span>
         QSRTasks
       <% end %>
     <% else %>
-      <a class="navbar-brand" href="#">QSRTasks</a>
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <span class=""><i class="fa-solid fa-clipboard-check"></i></span>
+        QSRTasks
+      <% end %>
     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon"><i class="fa-solid fa-burger-soda text-white"></i></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <%= link_to "Sign In", new_user_session_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <%= link_to "Register", new_user_registration_path, class: "nav-link" %>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
-        </li>
+
+        <% if user_signed_in? %>
+         <%= render "layouts/navbar/dropdown_menus/user" %>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        <% elsif admin_signed_in? %>
+
+        <% else %>
+          <li class="nav-item">
+            <%= link_to new_user_session_path, class: "nav-link" do %>
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Sign In
+            <% end %>
+          </li>
+        <% end %>
+
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+
+      <ul class="navbar-nav mb-2 mb-lg-0">
+
+        <% if user_signed_in? %>
+          <%= render "layouts/navbar/dropdown_menus/profile" %>
+
+        <% elsif admin_signed_in? %>
+
+        <% else %>
+
+        <% end %>
+
+      </ul>
+
+
     </div>
 
   </div>

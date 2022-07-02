@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  include Accessible
-  skip_before_action :check_user, except: [:new, :create]
+  before_action :authenticate_user!
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -75,6 +74,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
       else
         warden.authenticated?(resource_name)
       end
+  end
+
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :payroll_id, :rate, :phone, :admin, :position_id, :active, :organization_id, { store_ids: [] }])
   end
 
  # If you have extra params to permit, append them to the sanitizer.

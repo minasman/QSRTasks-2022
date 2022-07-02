@@ -144,6 +144,7 @@ GEM
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.4.1)
+    phonelib (0.7.0)
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -242,6 +243,7 @@ DEPENDENCIES
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
+  phonelib (~> 0.7.0)
   puma (~> 5.0)
   rails (~> 7.0.3)
   redis (~> 4.0)
