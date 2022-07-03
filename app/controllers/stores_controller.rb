@@ -48,27 +48,35 @@ class StoresController < ApplicationController
     authorize @store
     respond_to do |format|
       if @store.update(store_params)
-        format.html { redirect_to store_url(@store), notice: "Store was successfully updated." }
+        format.html do
+          redirect_to store_url(@store), notice: 'Restaurant was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @store }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @store.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @store.errors, status: :unprocessable_entity
+        end
       end
     end
   end
 
   # DELETE /stores/1 or /stores/1.json
   def destroy
-    @store.destroy
-
+    authorize @store
+    store_name = @store.name
+    store_id = "store_#{@store.id}"
+    @store.update(active: @store.active ? false : true, user_ids: [])
     respond_to do |format|
-      format.html { redirect_to stores_url, notice: "Store was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(store_id) }
     end
   end
 
   def inactive_stores
     @stores = Store.where(active: false).order( store_type: "DESC", number: "ASC")
+    @stores = @stores.search(params[:query]) if params[:query].present?
+    puts @stores
+    @pagy, @stores = pagy @stores, items: params.fetch(:count, 10)
   end
 
   def store_roster

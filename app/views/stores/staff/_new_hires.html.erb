@@ -1,0 +1,49 @@
+<div class="row justify-content-center mb-3">
+  <h3 class="text-center">New Team Members (0-7 Days)</h3>
+  <!-- PUT LOGIC TO SEE  IF THERE ARE EMPLOYEES THAT FIT EACH CATEGORY -->
+  <% @store.users.where(position_id: 15).each do |manager| %>
+    <div class="col-6 col-md-3 col-lg-2">
+      <%= link_to manager.full_name, manager, class: "table-link" %>
+    </div>
+  <% end %>
+</div>
+<div class="row justify-content-center mb-3">
+  <h3 class="text-center">New Team Members (8-14 Days)</h3>
+  <% @store.users.where(position_id: 15).each do |manager| %>
+    <div class="col-6 col-md-3 col-lg-2">
+      <%= link_to manager.full_name, manager, class: "table-link" %>
+    </div>
+  <% end %>
+</div>
+<div class="row justify-content-center mb-3">
+  <h3 class="text-center">New Team Members (15-21 Days)</h3>
+  <% @store.users.where(position_id: 15).each do |manager| %>
+    <div class="col-6 col-md-3 col-lg-2">
+      <%= link_to manager.full_name, manager, class: "table-link" %>
+    </div>
+  <% end %>
+</div>
+<div class="row justify-content-center mb-3">
+  <h3 class="text-center">New Team Members (22-28 Days)</h3>
+  <% @store.users.where(position_id: 15).each do |manager| %>
+    <div class="col-6 col-md-3 col-lg-2">
+      <%= link_to manager.full_name, manager, class: "table-link" %>
+    </div>
+  <% end %>
+</div>
+<div class="row justify-content-center mb-3">
+  <h3 class="text-center">New Team Members (28-60 Days)</h3>
+  <% @store.users.where(position_id: 15).each do |manager| %>
+    <div class="col-6 col-md-3 col-lg-2">
+      <%= link_to manager.full_name, manager, class: "table-link" %>
+    </div>
+  <% end %>
+</div>
+<div class="row justify-content-center mb-5">
+  <h3 class="text-center">New Team Members (61-90 Days)</h3>
+  <% @store.users.where(position_id: 15).each do |manager| %>
+    <div class="col-6 col-md-3 col-lg-2">
+      <%= link_to manager.full_name, manager, class: "table-link" %>
+    </div>
+  <% end %>
+</div>

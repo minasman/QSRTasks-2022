@@ -1,10 +1,26 @@
-<p style="color: green"><%= notice %></p>
+<div class="card mt-5">
+<div class="row justify-content-center">
+  <div class="col-12 card-header">
+    <h2 class="text-center"><%= @store.number.to_s  %> <%=  @store.name %>  - GM: <%=  @store.users.where(position_id: 5).any? ? @store.users.where(position_id: 5)[0].full_name : "Not Assigned"  %> - <%= @store.store_type %></h2>
+    <h3 class="text-center">
+      <%= @store.street %>, <%= @store.city %> <%= @store.state%> <%= @store.zip %>
+    </h3>
+    <h4 class="text-center"><%= @store.phone %> | <%= @store.email %></h4>
+    <h4 class="text-center">Safe <%= number_to_currency(@store.safe, precision: 0) %> | # Headsets <%= @store.headset %></h4>
+  </div>
+</div>
+  <div class="card-body">
+    <%= render "/stores/staff/management" %>
+    <%= render "/stores/staff/in_training" %>
+    <%= render "/stores/staff/new_hires" %>
 
-<%= render @store %>
-
-<div>
-  <%= link_to "Edit this store", edit_store_path(@store) %> |
-  <%= link_to "Back to stores", stores_path %>
-
-  <%= button_to "Destroy this store", @store, method: :delete %>
+    <div class="d-grid gap-1 d-md-flex justify-content-md-end" >
+      <%= link_to "Roster", stores_path, class: "btn my-submit me-md-1" %>
+      <%= link_to "Restaurants", stores_path, class: "btn my-submit me-md-1" %>
+      <% if current_user.admin %>
+        <%= link_to "Edit", edit_store_path(@store), class: "btn my-submit me-md-1" %>
+        <%= button_to "Deactivate", @store, method: :delete , class: "btn my-submit" %>
+      <% end %>
+    </div>
+  </div>
 </div>

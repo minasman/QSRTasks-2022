@@ -1,5 +1,5 @@
 <div class="card mt-5">
-  <h2 class="card-header text-center">Restaurants</h2>
+  <h2 class="card-header text-center">Inactive Restaurants</h2>
   <%= form_with url: "",  method: :get, data: { turbo_frame: "stores", turbo_action: "advance" }, class: "pb-3" do |form| %>
     <div class="pt-3 row justify-content-between">
       <div class="col-12 col-md-5 col-xl-2 ms-3">
@@ -47,7 +47,7 @@
                 store.users.where(position_id: 5).any? ? store.users.where(position_id: 5 )[0].full_name : "Not Assigned" %>
               </td>
               <td><%= number_to_phone(store.phone) %></td>
-              <td><%= store.email %></td>
+              <td><%= mail_to(store.email) %></td>
               <td><%= number_to_currency(store.safe, precision: 0) %></td>
               <td><%= store.headset %></td>
               <td>
@@ -55,7 +55,7 @@
                   <%= link_to "Edit", edit_store_path(store), class: " px-2 table-link",  data: { turbo: false } %>
                 <% end %>
                 <% if policy(:store).destroy? %>
-                  | <%= link_to "Deactivate", store,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{store.name.titleize}!" } %>
+                  | <%= link_to "Activate", store,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Activate #{store.name.titleize}!" } %>
                 <% end %>
               </td>
             </tr>

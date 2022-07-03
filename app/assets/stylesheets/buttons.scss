@@ -19,3 +19,10 @@
   color:#bf5700;
   font-weight: bold;
 }
+
+.caret-off::before {
+  display: none;
+}
+.caret-off::after {
+  display: none;
+}

@@ -95,14 +95,16 @@
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-6 col-md-3">
-                <div class="form-check mb-3">
-                  <%= f.label :admin, class: "form-check-label" %>
-                  <%= f.check_box :admin, class: "form-check-input" %>
+            <% if current_user.admin %>
+              <div class="row">
+                <div class="col-6 col-md-3">
+                  <div class="form-check mb-3">
+                    <%= f.label :admin, class: "form-check-label" %>
+                    <%= f.check_box :admin, class: "form-check-input" %>
+                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
             <div class="d-grid mb-2">
               <%= f.submit "Register", class: "btn my-submit" %>
             </div>

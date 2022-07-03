@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   }
 
   resources :stores
+  get 'inactive_stores' => 'stores#inactive_stores'
   resources :positions
   resources :organizations
 
