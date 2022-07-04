@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :workorder_updates
+  resources :workorders
 
   root 'public#home'
   get 'public/about'
@@ -38,6 +40,15 @@ Rails.application.routes.draw do
   end
 
   scope module: 'maintenance' do
+    resources :workorders do
+      resources :workorder_updates, only: %i[new create index]
+      collection do
+        get :equipment_types
+        get :equipment_choices
+      end
+    end
+    get '/assign_workorders' => 'workorders#assign'
+    get '/weekly_recap' => 'workorders#weekly_recap'
     scope module: 'equipment' do
       resources :equipment do
         collection do

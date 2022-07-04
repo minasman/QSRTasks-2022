@@ -1,5 +1,6 @@
 class Vendor < ApplicationRecord
   belongs_to :organization
+  has_many :workorders
 
   before_save :format_content
 

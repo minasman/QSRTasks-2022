@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Workorders</h1>
+
+<div id="workorders">
+  <% @workorders.each do |workorder| %>
+    <%= render workorder %>
+    <p>
+      <%= link_to "Show this workorder", workorder %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New workorder", new_workorder_path %>

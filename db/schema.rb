@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_191215) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_203248) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -224,6 +224,42 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_191215) do
     t.index ["organization_id"], name: "index_vendors_on_organization_id"
   end
 
+  create_table "workorder_updates", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "workorder_id", null: false
+    t.string "current_update", null: false
+    t.string "manager"
+    t.string "signature"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_workorder_updates_on_user_id"
+    t.index ["workorder_id"], name: "index_workorder_updates_on_workorder_id"
+  end
+
+  create_table "workorders", force: :cascade do |t|
+    t.bigint "store_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "organization_id", null: false
+    t.bigint "equipment_id", null: false
+    t.bigint "equipment_area_id", null: false
+    t.bigint "equipment_type_id", null: false
+    t.string "workorder_issue", null: false
+    t.string "status", default: "Open"
+    t.integer "assigned"
+    t.string "level"
+    t.string "team"
+    t.bigint "vendor_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipment_area_id"], name: "index_workorders_on_equipment_area_id"
+    t.index ["equipment_id"], name: "index_workorders_on_equipment_id"
+    t.index ["equipment_type_id"], name: "index_workorders_on_equipment_type_id"
+    t.index ["organization_id"], name: "index_workorders_on_organization_id"
+    t.index ["store_id"], name: "index_workorders_on_store_id"
+    t.index ["user_id"], name: "index_workorders_on_user_id"
+    t.index ["vendor_id"], name: "index_workorders_on_vendor_id"
+  end
+
   add_foreign_key "comment_updates", "comments"
   add_foreign_key "comment_updates", "users"
   add_foreign_key "comments", "guests"
@@ -243,4 +279,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_191215) do
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"
   add_foreign_key "vendors", "organizations"
+  add_foreign_key "workorder_updates", "users"
+  add_foreign_key "workorder_updates", "workorders"
+  add_foreign_key "workorders", "equipment"
+  add_foreign_key "workorders", "equipment_areas"
+  add_foreign_key "workorders", "equipment_types"
+  add_foreign_key "workorders", "organizations"
+  add_foreign_key "workorders", "stores"
+  add_foreign_key "workorders", "users"
+  add_foreign_key "workorders", "vendors"
 end

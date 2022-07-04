@@ -4,6 +4,8 @@ class Store < ApplicationRecord
   has_many :positions, through: :users
   has_many :guests
   has_many :comments, dependent: :delete_all
+  has_many :workorders
+  has_many :equipment
 
   include PgSearch::Model
   pg_search_scope :search, against: [:number, :name],  using: {tsearch: {prefix: true}}

@@ -11,7 +11,12 @@ class User < ApplicationRecord
   belongs_to :organization
   belongs_to :position
   has_and_belongs_to_many :stores
+  has_many :comments
+  has_many :comment_updates
+  has_many :workorders
+  has_many :workorder_updates
 
+  scope :maint_list, -> { where(position_id: Position.where(department: 'Maintenance').ids).order("first_name") }
 
   def full_name
     self.first_name + ' ' + self.last_name

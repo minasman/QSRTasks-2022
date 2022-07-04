@@ -1,0 +1,77 @@
+<%= form_with(model: workorder) do |form| %>
+  <% if workorder.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(workorder.errors.count, "error") %> prohibited this workorder from being saved:</h2>
+
+      <ul>
+        <% workorder.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :store_id, style: "display: block" %>
+    <%= form.text_field :store_id %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :organization_id, style: "display: block" %>
+    <%= form.text_field :organization_id %>
+  </div>
+
+  <div>
+    <%= form.label :equipment_id, style: "display: block" %>
+    <%= form.text_field :equipment_id %>
+  </div>
+
+  <div>
+    <%= form.label :equipment_area_id, style: "display: block" %>
+    <%= form.text_field :equipment_area_id %>
+  </div>
+
+  <div>
+    <%= form.label :equipment_type_id, style: "display: block" %>
+    <%= form.text_field :equipment_type_id %>
+  </div>
+
+  <div>
+    <%= form.label :workorder_issue, style: "display: block" %>
+    <%= form.text_field :workorder_issue %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :assigned, style: "display: block" %>
+    <%= form.number_field :assigned %>
+  </div>
+
+  <div>
+    <%= form.label :level, style: "display: block" %>
+    <%= form.text_field :level %>
+  </div>
+
+  <div>
+    <%= form.label :team, style: "display: block" %>
+    <%= form.text_field :team %>
+  </div>
+
+  <div>
+    <%= form.label :vendor_id, style: "display: block" %>
+    <%= form.text_field :vendor_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

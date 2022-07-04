@@ -1,0 +1,29 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store: one
+  user: one
+  organization: one
+  equipment: one
+  equipment_area: one
+  equipment_type: one
+  workorder_issue: MyString
+  status: MyString
+  assigned: 1
+  level: MyString
+  team: MyString
+  vendor: one
+
+two:
+  store: two
+  user: two
+  organization: two
+  equipment: two
+  equipment_area: two
+  equipment_type: two
+  workorder_issue: MyString
+  status: MyString
+  assigned: 1
+  level: MyString
+  team: MyString
+  vendor: two
