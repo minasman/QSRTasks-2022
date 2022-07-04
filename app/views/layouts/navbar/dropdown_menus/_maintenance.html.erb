@@ -1,0 +1,65 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Maintenance
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% if policy(:comment).new? %>
+      <li>
+        <%= link_to  new_comment_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-wrench me-1"></i>
+          New Workorder
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:comment).index? %>
+      <li>
+        <%= link_to  comments_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-list me-1"></i>
+          Open Workorders
+          <span class="badge rounded-pill bg-light text-dark"><%= comment_badge %></span>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+          <i class="fa-solid fa-file-chart-column me-1"></i>
+          Workorder Report
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+          <i class="fa-solid fa-user-helmet-safety me-1"></i>
+          Assign Workorders
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+          <i class="fa-solid fa-folder-gear me-1"></i>
+          Weekly Recap
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:guest).index? %>
+      <li><hr class="dropdown-divider"></li>
+      <li>
+        <%= link_to  guests_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-oven me-1"></i>
+          New Equipment
+        <% end %>
+      </li>
+    <% end %>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+        <%= link_to  new_vendor_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-shop me-1"></i>
+          New Vendor
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  vendors_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-people-line me-1"></i>
+          Vendors
+        <% end %>
+      </li>
+
+  </ul>
+</li>

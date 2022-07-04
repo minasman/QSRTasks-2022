@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_011813) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_182653) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -179,6 +179,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_011813) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  create_table "vendors", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.string "contact"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_vendors_on_organization_id"
+  end
+
   add_foreign_key "comment_updates", "comments"
   add_foreign_key "comment_updates", "users"
   add_foreign_key "comments", "guests"
@@ -190,4 +201,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_011813) do
   add_foreign_key "stores", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"
+  add_foreign_key "vendors", "organizations"
 end

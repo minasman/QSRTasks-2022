@@ -34,6 +34,9 @@
           <% if policy(:comment).index? %>
             <%= render "layouts/navbar/dropdown_menus/comment" %>
           <% end %>
+          <% if policy(:comment).index? %>
+            <%= render "layouts/navbar/dropdown_menus/maintenance" %>
+          <% end %>
 
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>

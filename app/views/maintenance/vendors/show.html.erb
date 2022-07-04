@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="text-center"><%= @vendor.name %></h2>
+    <h4 class="text-center"><%= number_to_phone(@vendor.phone) %> | <%= @vendor.email %></h4>
+    <h4 class="text-center"><%= @vendor.contact %></h4>
+  </div>
+  <div class="card-body">
+
+  <div class="d-grid gap-2 d-md-flex" >
+    <%= link_to "Edit", edit_vendor_path(@vendor), class: "btn my-submit" %>
+    <%= link_to "Vendors", vendors_path, class: "btn my-submit" %>
+  </div>
+  </div>
+  <div class="card-footer" >
+    <%= button_to "Delete", @vendor, method: :delete, class: "btn my-submit" %>
+  </div>
+</div>

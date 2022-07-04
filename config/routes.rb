@@ -36,6 +36,11 @@ Rails.application.routes.draw do
       resources :comment_updates, only: %i[new create index]
     end
   end
+
+  scope module: 'maintenance' do
+    resources :vendors
+  end
+
   resources :positions
   resources :organizations
 

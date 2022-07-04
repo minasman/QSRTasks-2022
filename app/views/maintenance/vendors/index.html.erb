@@ -1,0 +1,56 @@
+<div class="card mb-5">
+  <h2 class="card-header text-center">Vendors</h2>
+  <%= form_with url: "",  method: :get, data: { turbo_frame: "vendors", turbo_action: "advance" }, class: "pb-3" do |form| %>
+    <div class="pt-3 row justify-content-between">
+      <div class="col-12 col-md-5 col-xl-2 ms-3">
+        <div class="row">
+          <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
+          <div class="col-7">
+            <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4  me-3">
+        <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control", placeholder: "Search By Name" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="table-responsive card-body">
+    <%= turbo_frame_tag "vendors" do %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @vendors.each_with_index do |vendor, i| %>
+            <tr id="<%= dom_id(vendor) %>" >
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= link_to vendor.name, vendor, class: "table-link", data: { turbo: false} %></td>
+              <td><%= vendor.contact %></td>
+              <td><%= number_to_phone(vendor.phone) %></td>
+              <td><%= vendor.email %></td>
+              <td>
+                <% if policy(:vendor).edit? %>
+                  <%= link_to "Edit", edit_vendor_path(vendor), class: "px-2 table-link",  data: { turbo: false } %>
+                <% end %>
+                <% if policy(:vendor).destroy? %>
+                  | <%= link_to "Deactivate", vendor,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{vendor.name.titleize}!" } %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="p-4">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% end %>
+  </div>
+</div>
