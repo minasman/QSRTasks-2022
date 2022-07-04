@@ -1,0 +1,45 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  visit_date: 2022-07-03
+  visit_time: 2022-07-03 20:14:46
+  comment_type: MyString
+  source: MyString
+  urgent: MyString
+  case_number: MyString
+  first_issue: MyString
+  first_issue_comment: MyString
+  second_issue: MyString
+  second_issue_comment: MyString
+  third_issue: MyString
+  third_issue_comment: MyString
+  contact_type: MyString
+  visit_type: MyString
+  employee_named: MyString
+  status: MyString
+  organization: one
+  store: one
+  user: one
+  guest: one
+
+two:
+  visit_date: 2022-07-03
+  visit_time: 2022-07-03 20:14:46
+  comment_type: MyString
+  source: MyString
+  urgent: MyString
+  case_number: MyString
+  first_issue: MyString
+  first_issue_comment: MyString
+  second_issue: MyString
+  second_issue_comment: MyString
+  third_issue: MyString
+  third_issue_comment: MyString
+  contact_type: MyString
+  visit_type: MyString
+  employee_named: MyString
+  status: MyString
+  organization: two
+  store: two
+  user: two
+  guest: two

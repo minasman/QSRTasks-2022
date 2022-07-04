@@ -1,0 +1,32 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Comments
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li>
+      <%= link_to  new_comment_path, class: "dropdown-item" do %>
+        <i class="fa fa-comment-medical me-1"></i>
+        New Comment
+      <% end %>
+    </li>
+     <li>
+      <%= link_to  comments_path, class: "dropdown-item" do %>
+        <i class="fa fa-comments me-1"></i>
+        Open Comments
+      <% end %>
+    </li>
+    <li>
+      <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+        <i class="fa-solid fa-file-chart-column me-1"></i>
+        Comment Reports
+      <% end %>
+    </li>
+    <li><hr class="dropdown-divider"></li>
+    <li>
+      <%= link_to  guests_path, class: "dropdown-item" do %>
+        <i class="fa-solid fa-people-group me-1"></i>
+        Guests
+      <% end %>
+    </li>
+  </ul>
+</li>

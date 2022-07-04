@@ -29,6 +29,13 @@ Rails.application.routes.draw do
   resources :stores
   get '/inactive_stores' => 'stores#inactive_stores'
   get '/store_roster/:id' => 'stores#store_roster'
+
+  scope module: 'comments' do
+    resources :guests
+    resources :comments do
+      resources :comment_updates, only: %i[new create index]
+    end
+  end
   resources :positions
   resources :organizations
 

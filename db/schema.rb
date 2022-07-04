@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_02_154012) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_011813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,60 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_02_154012) do
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_admins_on_unlock_token", unique: true
+  end
+
+  create_table "comment_updates", force: :cascade do |t|
+    t.date "update_date", null: false
+    t.time "update_time", null: false
+    t.string "update_type", null: false
+    t.string "current_update", null: false
+    t.string "employee_name", null: false
+    t.bigint "comment_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["comment_id"], name: "index_comment_updates_on_comment_id"
+    t.index ["user_id"], name: "index_comment_updates_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.date "visit_date"
+    t.time "visit_time"
+    t.string "comment_type", null: false
+    t.string "source", null: false
+    t.string "urgent"
+    t.string "case_number", null: false
+    t.string "first_issue", null: false
+    t.string "first_issue_comment", null: false
+    t.string "second_issue"
+    t.string "second_issue_comment"
+    t.string "third_issue"
+    t.string "third_issue_comment"
+    t.string "contact_type", null: false
+    t.string "visit_type"
+    t.string "employee_named"
+    t.string "status", default: "Open"
+    t.bigint "organization_id", null: false
+    t.bigint "store_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "guest_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guest_id"], name: "index_comments_on_guest_id"
+    t.index ["organization_id"], name: "index_comments_on_organization_id"
+    t.index ["store_id"], name: "index_comments_on_store_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "guests", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone"
+    t.string "email"
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_guests_on_organization_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -125,6 +179,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_02_154012) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "comment_updates", "comments"
+  add_foreign_key "comment_updates", "users"
+  add_foreign_key "comments", "guests"
+  add_foreign_key "comments", "organizations"
+  add_foreign_key "comments", "stores"
+  add_foreign_key "comments", "users"
+  add_foreign_key "guests", "organizations"
   add_foreign_key "positions", "organizations"
   add_foreign_key "stores", "organizations"
   add_foreign_key "users", "organizations"

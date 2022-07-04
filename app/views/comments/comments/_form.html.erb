@@ -1,0 +1,117 @@
+<%= form_with(model: comment) do |form| %>
+  <% if comment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+      <ul>
+        <% comment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :visit_date, style: "display: block" %>
+    <%= form.date_field :visit_date %>
+  </div>
+
+  <div>
+    <%= form.label :visit_time, style: "display: block" %>
+    <%= form.time_field :visit_time %>
+  </div>
+
+  <div>
+    <%= form.label :comment_type, style: "display: block" %>
+    <%= form.text_field :comment_type %>
+  </div>
+
+  <div>
+    <%= form.label :source, style: "display: block" %>
+    <%= form.text_field :source %>
+  </div>
+
+  <div>
+    <%= form.label :urgent, style: "display: block" %>
+    <%= form.text_field :urgent %>
+  </div>
+
+  <div>
+    <%= form.label :case_number, style: "display: block" %>
+    <%= form.text_field :case_number %>
+  </div>
+
+  <div>
+    <%= form.label :first_issue, style: "display: block" %>
+    <%= form.text_field :first_issue %>
+  </div>
+
+  <div>
+    <%= form.label :first_issue_comment, style: "display: block" %>
+    <%= form.text_field :first_issue_comment %>
+  </div>
+
+  <div>
+    <%= form.label :second_issue, style: "display: block" %>
+    <%= form.text_field :second_issue %>
+  </div>
+
+  <div>
+    <%= form.label :second_issue_comment, style: "display: block" %>
+    <%= form.text_field :second_issue_comment %>
+  </div>
+
+  <div>
+    <%= form.label :third_issue, style: "display: block" %>
+    <%= form.text_field :third_issue %>
+  </div>
+
+  <div>
+    <%= form.label :third_issue_comment, style: "display: block" %>
+    <%= form.text_field :third_issue_comment %>
+  </div>
+
+  <div>
+    <%= form.label :contact_type, style: "display: block" %>
+    <%= form.text_field :contact_type %>
+  </div>
+
+  <div>
+    <%= form.label :visit_type, style: "display: block" %>
+    <%= form.text_field :visit_type %>
+  </div>
+
+  <div>
+    <%= form.label :employee_named, style: "display: block" %>
+    <%= form.text_field :employee_named %>
+  </div>
+
+  <div>
+    <%= form.label :status, style: "display: block" %>
+    <%= form.text_field :status %>
+  </div>
+
+  <div>
+    <%= form.label :organization_id, style: "display: block" %>
+    <%= form.text_field :organization_id %>
+  </div>
+
+  <div>
+    <%= form.label :store_id, style: "display: block" %>
+    <%= form.text_field :store_id %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :guest_id, style: "display: block" %>
+    <%= form.text_field :guest_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
