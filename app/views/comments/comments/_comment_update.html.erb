@@ -1,0 +1,9 @@
+<div id="<%= dom_id update %>">
+  <div class="row">
+    <div class="col-12">
+      <p><strong>Date: </strong><%= update.update_date.strftime("%m/%d/%y") %> <strong>Contacted By: </strong><%= update.employee_name %><br>
+      <strong>By: </strong><%= update.update_type %> <strong>Entered By: </strong><%= update.user.full_name %><br>
+      <strong>Details: </strong><%= update.current_update %></p>
+    </div>
+  </div>
+</div>

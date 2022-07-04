@@ -5,6 +5,8 @@ class Comments::CommentsController < ApplicationController
   # GET /comments or /comments.json
   def index
     @comments = get_comments
+    @comments = @comments.search(params[:query]) if params[:query].present?
+    @pagy, @comments = pagy @comments.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
     authorize Comment
   end
 
@@ -29,6 +31,7 @@ class Comments::CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.organization = current_user.organization
+    @comment.guest.organization = current_user.organization
     @comment.user = current_user
 
     respond_to do |format|
@@ -82,5 +85,13 @@ class Comments::CommentsController < ApplicationController
       else
         Comment.where(store_id: current_user.stores, status: 'Open', organization: current_user.organization).order(store_id: :asc, visit_date: :asc)
       end
+    end
+
+    def sort_column
+      %w{ store_id }.include?(params[:sort]) ? params[:sort] : "store_id"
+    end
+
+    def sort_direction
+      %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

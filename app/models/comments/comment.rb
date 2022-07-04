@@ -8,6 +8,9 @@ class Comment < ApplicationRecord
   validates :case_number, uniqueness: true
   before_save :format_content
 
+  include PgSearch::Model
+  pg_search_scope :search, against: [:store_id],  using: {tsearch: {prefix: true}}
+
   COMMENT_TYPES = %w[Complaint Compliment Inquiry]
   SOURCE = ['1-800#', 'VOICE', 'Local']
   URGENT = %w[General Urgent]
@@ -32,7 +35,6 @@ class Comment < ApplicationRecord
       g.last_name = guest[:last_name].strip.downcase.titleize
       g.email = guest[:email].strip.downcase
       g.phone = guest[:phone].strip
-      g.organization_id = current_user.organization_id
       g.save
     end
   end

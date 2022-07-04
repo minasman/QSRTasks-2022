@@ -1,14 +1,63 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Comments</h1>
-
-<div id="comments">
-  <% @comments.each do |comment| %>
-    <%= render comment %>
-    <p>
-      <%= link_to "Show this comment", comment %>
-    </p>
+<div class="card">
+  <h2 class="card-header text-center">Open Comments</h2>
+  <%= form_with url: "",  method: :get, data: { turbo_frame: "comments", turbo_action: "advance" }, class: "pb-3" do |form| %>
+    <div class="pt-3 row justify-content-between">
+      <div class="col-12 col-md-5 col-xl-2 ms-3">
+        <div class="row">
+          <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
+          <div class="col-8">
+            <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4  me-3">
+        <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control", placeholder: "Search By" %>
+      </div>
+    </div>
   <% end %>
+  <div class="table-responsive card-body">
+    <%= turbo_frame_tag "comments" do %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Restaurant</th>
+            <th scope="col">Case Number</th>
+            <th scope="col">Date Received</th>
+            <th scope="col">Visit Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Issue</th>
+            <th scope="col">Source</th>
+            <th scope="col">Type</th>
+            <th scope="col">Updates</th>
+            <th scope="col">Time Open</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comments.each_with_index do |comment, i| %>
+            <tr id="<%= dom_id(comment) %>" >
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= comment.store.number %></td>
+              <td><%= link_to comment.case_number, comment, data: {turbo: false}, class: "table-link" %></td>
+              <td><%= comment.created_at.strftime('%m/%d/%y') %></td>
+              <td><%= comment.visit_date? ? comment.visit_date.strftime('%m/%d/%y') : 'Date Not Given'  %></td>
+              <td><%= link_to comment.guest.full_name, comment.guest, data: {turbo: false}, class: "table-link" %></td>
+              <td><%= number_to_phone(comment.guest.phone) %></td>
+              <td><%= comment.first_issue %></td>
+              <td><%= comment.source %></td>
+              <td><%= comment.comment_type %></td>
+              <td><%= comment.comment_updates.any? ? comment.comment_updates.count : '0' %></td>
+              <td><%= time_ago_in_words(comment.created_at) %></td>
+              <td><%= comment.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="p-4">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New comment", new_comment_path %>

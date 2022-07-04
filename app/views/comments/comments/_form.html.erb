@@ -1,117 +1,148 @@
-<%= form_with(model: comment) do |form| %>
+<%= form_for @comment do |f| %>
   <% if comment.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
-
+    <div class="alert alert-danger" id="error_explanation">
+      <h2 class="text-center"><%= pluralize(comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
       <ul>
-        <% comment.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
+      <% comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :visit_date, style: "display: block" %>
-    <%= form.date_field :visit_date %>
+  <%= f.fields_for :guest do |guest| %>
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <%= guest.label :first_name, "First Name", class: 'form-label' %>
+            <%= guest.text_field :first_name, required: "true", :class => "form-control" %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <%= guest.label :last_name, "Last Name", class: 'form-label' %>
+          <%= guest.text_field :last_name, required: "true", :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <%= guest.label :email, "Email Address", class: 'form-label' %>
+          <%= guest.text_field :email, :class => "form-control" %>
+        </div>
+      </div>
+      <div class="col">
+        <div class="mb-3">
+          <%= guest.label :email, "Phone", class: 'form-label' %>
+          <%= guest.text_field :phone, :class => "form-control" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <hr>
+  <div class="mb-3">
+    <%= f.label :store_id, "Restaurant", class: 'form-label' %>
+    <%= f.collection_select :store_id, Store.all.order('id ASC'), :id, :number, {}, {class: "form-control"} %>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="mb-3">
+        <%= f.label :visit_date, "Incident Date", class: 'form-label' %>
+        <%= f.date_field :visit_date, :class => "form-control" %>
+      </div>
+    </div>
+    <div class="col">
+      <div class="mb-3">
+        <%= f.label :visit_time, "Incident Time", class: 'form-label' %>
+        <%= f.time_field :visit_time, :class => "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 col-lg-4">
+      <div class="mb-3">
+        <%= f.label :comment_type, "Type of Comment", class: 'form-label' %>
+        <%= f.select :comment_type, Comment::COMMENT_TYPES, {},  {required: "true", :class =>"form-control"} %>
+      </div>
+    </div>
+    <div class="col-6 col-lg-4">
+      <div class="mb-3">
+        <%= f.label :source, "Source of Comment", class: 'form-label' %>
+        <%= f.select :source, Comment::SOURCE, {}, {required: "true", :class =>"form-control"} %>
+      </div>
+    </div>
+    <div class="col-6 col-lg-4">
+      <div class="mb-3">
+        <%= f.label :urgent, "Urgent or General", class: 'form-label' %>
+        <%= f.select :urgent, Comment::URGENT, {}, { :class =>"form-control"} %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :visit_time, style: "display: block" %>
-    <%= form.time_field :visit_time %>
+  <div class="mb-3">
+    <%= f.label :case_number, "Case Number", class: 'form-label' %>
+    <%= f.text_field :case_number, required: "true", :class => "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :first_issue, "Customer Issue 1", class: 'form-label' %>
+    <%= f.text_field :first_issue, required: "true", :class => "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :first_issue_comment, "Details", class: 'form-label' %>
+    <%= f.text_area :first_issue_comment, size: "50 x 4", required: "true", :class => "form-control"%>
+  </div>
+  <div class="mb-3">
+    <%= f.label :second_issue, "Customer Issue 2", class: 'form-label' %>
+    <%= f.text_field :second_issue, :class => "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :second_issue_comment, "Details", class: 'form-label' %>
+    <%= f.text_area :second_issue_comment, size: "50 x 4", :class => "form-control"%>
+  </div>
+  <div class="mb-3">
+    <%= f.label :third_issue, "Customer Issue 3", class: 'form-label' %>
+    <%= f.text_field :third_issue, :class => "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= f.label :third_issue_comment, "Details", class: 'form-label' %>
+    <%= f.text_area :third_issue_comment, size: "50 x 4", :class => "form-control" %>
+  </div>
+  <div class="row">
+    <div class="col-6 col-lg-4">
+      <div class="mb-3">
+        <%= f.label :contact_type, "Contact Type", class: 'form-label' %>
+        <%= f.select :contact_type, Comment::CONTACT_TYPE, {}, { :class =>"form-control"} %>
+      </div>
+    </div>
+    <div class="col-6 col-lg-4">
+      <div class="mb-3">
+        <%= f.label :visit_type, "Order Point", class: 'form-label' %>
+        <%= f.select :visit_type, Comment::ORDER_POINT, {}, { :class =>"form-control"} %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="mb-3">
+        <%= f.label :employee_named, "Employee Named", class: 'form-label' %>
+        <%= f.text_field :employee_named, :class => "form-control" %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :comment_type, style: "display: block" %>
-    <%= form.text_field :comment_type %>
+  <div class="mb-3">
+    <%= f.label :status, "Status", class: 'form-label' %>
+    <%= f.select :status, Comment::STATUS, {}, { :class =>"form-control"} %>
   </div>
 
-  <div>
-    <%= form.label :source, style: "display: block" %>
-    <%= form.text_field :source %>
-  </div>
-
-  <div>
-    <%= form.label :urgent, style: "display: block" %>
-    <%= form.text_field :urgent %>
-  </div>
-
-  <div>
-    <%= form.label :case_number, style: "display: block" %>
-    <%= form.text_field :case_number %>
-  </div>
-
-  <div>
-    <%= form.label :first_issue, style: "display: block" %>
-    <%= form.text_field :first_issue %>
-  </div>
-
-  <div>
-    <%= form.label :first_issue_comment, style: "display: block" %>
-    <%= form.text_field :first_issue_comment %>
-  </div>
-
-  <div>
-    <%= form.label :second_issue, style: "display: block" %>
-    <%= form.text_field :second_issue %>
-  </div>
-
-  <div>
-    <%= form.label :second_issue_comment, style: "display: block" %>
-    <%= form.text_field :second_issue_comment %>
-  </div>
-
-  <div>
-    <%= form.label :third_issue, style: "display: block" %>
-    <%= form.text_field :third_issue %>
-  </div>
-
-  <div>
-    <%= form.label :third_issue_comment, style: "display: block" %>
-    <%= form.text_field :third_issue_comment %>
-  </div>
-
-  <div>
-    <%= form.label :contact_type, style: "display: block" %>
-    <%= form.text_field :contact_type %>
-  </div>
-
-  <div>
-    <%= form.label :visit_type, style: "display: block" %>
-    <%= form.text_field :visit_type %>
-  </div>
-
-  <div>
-    <%= form.label :employee_named, style: "display: block" %>
-    <%= form.text_field :employee_named %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :organization_id, style: "display: block" %>
-    <%= form.text_field :organization_id %>
-  </div>
-
-  <div>
-    <%= form.label :store_id, style: "display: block" %>
-    <%= form.text_field :store_id %>
-  </div>
-
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div>
-    <%= form.label :guest_id, style: "display: block" %>
-    <%= form.text_field :guest_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class='row'>
+    <div class='col-12 col-md-3'>
+      <div class="d-grid gap-2">
+        <%= f.submit class: "btn my-submit" %>
+      </div>
+    </div>
+    <div class='col-12 col-md-3 pt-2 pt-md-0'>
+      <div class="d-grid gap-2">
+        <%= link_to "Dashboard", dashboard_path, :class => "btn my-submit" %>
+      </div>
+    </div>
   </div>
 <% end %>

@@ -1,10 +1,92 @@
-<p style="color: green"><%= notice %></p>
+<div class="card my-5">
+  <h2 class="text-center card-header">Case Number <%= @comment.case_number %></h2>
+  <div class="card-body">
+    <div class="row justify-content-start">
+      <div class="col-6 col-md-3">
+        <h6><strong>Restaurant: </strong><%= @comment.store.number %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Incident Date: </strong><%= @comment.visit_date.strftime("%m/%d/%y") %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Time: </strong><%= @comment.visit_time.strftime("%I:%M %p") %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Status: </strong><%= @comment.status %></h6>
+      </div>
+    </div>
 
-<%= render @comment %>
+    <div class="row justify-content-start">
+      <div class="col-6 col-md-3">
+        <h6><strong>Type: </strong><%= @comment.comment_type %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Source: </strong><%= @comment.source %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Urgent?: </strong><%= @comment.urgent %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Order Point: </strong><%= @comment.visit_type %></h6>
+      </div>
+    </div>
 
-<div>
-  <%= link_to "Edit this comment", edit_comment_path(@comment) %> |
-  <%= link_to "Back to comments", comments_path %>
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-3">
+        <h6><strong>Guest: </strong><%= @comment.guest.full_name %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Phone: </strong><%= number_to_phone(@comment.guest.phone) %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Email: </strong><%= @comment.guest.email %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong># Updates: </strong><%= @comment.comment_updates.size %></h6>
+      </div>
+    </div>
+    <div class="row justify-content-start">
+      <div class="col-12">
+        <h6><strong>First Issue: </strong><%= @comment.first_issue %></h6>
+      </div>
+      <div class="col-12">
+        <p><strong>Issue Details: </strong><%= @comment.first_issue_comment %></p>
+      </div>
+    </div>
+    <% if @comment.second_issue.size > 0 %>
+      <div class="row justify-content-start">
+        <div class="col-12">
+          <h6><strong>Second Issue: </strong><%= @comment.second_issue %></h6>
+        </div>
+        <div class="col-12">
+          <p><strong>Issue Details: </strong><%= @comment.second_issue_comment %></p>
+        </div>
+      </div>
+    <% end %>
+    <% if @comment.third_issue.size > 0 %>
+      <div class="row justify-content-start">
+        <div class="col-12">
+          <h6><strong>Third Issue: </strong><%= @comment.third_issue %></h6>
+        </div>
+        <div class="col-12">
+          <p><strong>Issue Details: </strong><%= @comment.third_issue_comment %></p>
+        </div>
+      </div>
+    <% end %>
 
-  <%= button_to "Destroy this comment", @comment, method: :delete %>
+    <% if @comment.comment_updates.any? %>
+      <h3>Updates</h3>
+      <% @comment.comment_updates.order(id: :desc).each do |update| %>
+        <%= render "/comments/comments/comment_update", update: update %>
+      <% end %>
+    <% end %>
+    <div class="d-grid gap-2 d-md-block mb-3">
+      <%= link_to "Update", new_comment_comment_update_path(@comment), class: "btn my-submit" %>
+      <%= link_to "Edit", edit_comment_path(@comment), class: "btn my-submit" %>
+      <%= link_to "Comments", comments_path, class: "btn my-submit" %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= button_to "Delete", @comment, method: :delete, class: "btn my-submit" %>
+  </div>
 </div>

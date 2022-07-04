@@ -1,9 +1,51 @@
-<h1>New comment update</h1>
 
-<%= render "form", comment_update: @comment_update %>
-
-<br>
-
-<div>
-  <%= link_to "Back to comment updates", comment_updates_path %>
+    <div class='card mt-5'>
+      <h1 class='text-center card-header'>Case Number <%= @comment.case_number %></h1>
+      <div class='card-body'>
+        <p><strong>Restaurant: </strong><%= @comment.store.number %> <strong>Incident Date:</strong> <%= @comment.visit_date ? @comment.visit_date.strftime("%m/%d/%Y") : "No Date Given" %> <strong>Time: </strong><%= @comment.visit_time ? @comment.visit_time.strftime("%I:%M %p") : "No Time Given" %> <strong>Status: </strong><%= @comment.status %> <br>
+        <strong>Guest: </strong><%= @comment.guest.full_name %> <strong>Main Issue: </strong><%= @comment.first_issue %> <strong>#Updates </strong><%= @comment.comment_updates.count %><p>
+        <% if @comment.status == "Open" %>
+          <h4>Update Comment</h4>
+          <%= form_with(model: [ @comment, @comment.comment_updates.build ], local: true) do |form| %>
+            <div class="row">
+              <div class="col-12 col-md-4">
+                <div class="mb-3">
+                  <%= form.label :update_date, "Date Updated", class: 'form-label' %>
+                  <%= form.date_field :update_date, required: "true", :value => Date.today, :class => "form-control" %>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="mb-3">
+                  <%= form.label :update_type, "Contact Type", class: 'form-label' %>
+                  <%= form.select :update_type, Comment::CONTACT_TYPE, {selected: "Phone"}, { required: "true", class: "form-control"} %>
+                </div>
+              </div>
+              <div class="col-12 col-md-4">
+                <div class="mb-3">
+                  <%= form.label :employee_name, "Who Contacted", class: 'form-label' %>
+                  <%= form.text_field :employee_name, required: "true", :class => "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= form.label :current_update, "Update", class: 'form-label' %><br>
+              <%= form.text_area :current_update, size: "50x5", required: "true", :class => "form-control" %>
+            </div>
+            <div class="mb-3 form-check form-check-inline">
+              <%= form.radio_button :status , "Closed", :class => "form-check-input" %>
+              <%= form.label :status, "Close Comment?", :class => "form-check-label" %>
+            </div>
+            <div class="row pt-2">
+              <div class="col-12 col-md-3 d-grid gap-2">
+                <%= form.submit 'Add Update', :class => "btn my-button" %>
+              </div>
+              <div class="col-12 col-md-3 d-grid gap-2 pt-2 pt-md-0">
+                <%= link_to "Dashboard", dashboard_path, class: "btn my-button" %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

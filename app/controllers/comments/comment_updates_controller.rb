@@ -23,6 +23,7 @@ class Comments::CommentUpdatesController < ApplicationController
   # POST /comment_updates or /comment_updates.json
   def create
     params[:comment_update][:user_id] = current_user.id
+    params[:comment_update][:update_time] = Time.now
     @comment.comment_updates.create(comment_params)
     flash.notice = 'Comment Update Successfully Added'
     if params[:comment_update][:status] && params[:comment_update][:status] == 'Closed'
