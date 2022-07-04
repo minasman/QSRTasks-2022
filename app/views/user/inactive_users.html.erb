@@ -32,7 +32,7 @@
         </thead>
         <tbody>
           <% @users.each_with_index do |user, i| %>
-            <tr>
+            <tr id="<%= dom_id(user) %>" >
               <th scope="row"><%= i + 1 %></th>
               <td><%=
                 user.stores.any? ? user.stores[0].number : "Office"

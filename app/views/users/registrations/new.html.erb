@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-5">
   <div class="col-12 col-md-10 col-lg-8 col-xl-7">
     <div class="card card-body">
 
@@ -41,7 +41,7 @@
               <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <%= f.label :position_id, "Position", class: "form-label" %>
-                  <%= f.select :position_id, Position.all.pluck(:name, :id), {:include_blank => "Select Position"}, { class: "form-control", required: true } %>
+                  <%= f.collection_select :position_id, position_list, :id, :name, {:include_blank => "Select Position"}, { class: "form-control", required: true } %>
                 </div>
               </div>
               <div class="col-12 col-md-6">

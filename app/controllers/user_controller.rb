@@ -89,7 +89,7 @@ class UserController < ApplicationController
     if current_user.position.department == 'Administration'
       users
     elsif current_user.position.department == 'Operations'
-     users =  users.where(stores: { id: current_user.stores.ids },  position_id: Position.where(name: [ 'General Manager', 'Manager', 'Crew']).ids)
+     users =  users.where(stores: { id: current_user.stores.ids },  position_id: Position.where(name: [ 'General Manager', 'Manager', 'Crew']).ids).order(store_id: :asc)
     elsif current_user.position.department == 'Maintenance'
       users = users.where(position_id: Position.where(department: "Maintenance").ids).where.not(id: current_user.id)
     else

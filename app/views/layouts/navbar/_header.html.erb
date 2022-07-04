@@ -65,7 +65,12 @@
         <% elsif admin_signed_in? %>
 
         <% else %>
-
+          <li class="nav-item">
+            <%= link_to new_admin_session_path, class: "nav-link" do %>
+              <i class="fa-solid fa-right-to-bracket"></i>
+              Admin Sign In
+            <% end %>
+          </li>
         <% end %>
 
       </ul>
