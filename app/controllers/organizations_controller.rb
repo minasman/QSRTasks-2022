@@ -8,17 +8,16 @@ class OrganizationsController < ApplicationController
   end
 
   # GET /organizations/1 or /organizations/1.json
-  def show
-  end
+  def show; end
 
   # GET /organizations/new
   def new
     @organization = Organization.new
+    @organization.users.build
   end
 
   # GET /organizations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /organizations or /organizations.json
   def create
@@ -26,11 +25,16 @@ class OrganizationsController < ApplicationController
 
     respond_to do |format|
       if @organization.save
-        format.html { redirect_to organization_url(@organization), notice: "Organization was successfully created." }
+        format.html do
+          redirect_to organization_url(@organization),
+                      notice: 'Organization was successfully created.'
+        end
         format.json { render :show, status: :created, location: @organization }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @organization.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -39,11 +43,16 @@ class OrganizationsController < ApplicationController
   def update
     respond_to do |format|
       if @organization.update(organization_params)
-        format.html { redirect_to organization_url(@organization), notice: "Organization was successfully updated." }
+        format.html do
+          redirect_to organization_url(@organization),
+                      notice: 'Organization was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @organization }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @organization.errors, status: :unprocessable_entity }
+        format.json do
+          render json: @organization.errors, status: :unprocessable_entity
+        end
       end
     end
   end
@@ -53,28 +62,42 @@ class OrganizationsController < ApplicationController
     @organization.destroy
 
     respond_to do |format|
-      format.html { redirect_to organizations_url, notice: "Organization was successfully destroyed." }
+      format.html do
+        redirect_to organizations_url,
+                    notice: 'Organization was successfully destroyed.'
+      end
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_organization
-      @organization = Organization.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def organization_params
-      params.require(:organization).permit(:name, :phone, :city, :state, :zip, :street,         users_attributes: %i[
-        first_name
-        last_name
-        phone
-        admin
-        email
-        position_id
-        password
-        password_confirmation
-      ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_organization
+    @organization = Organization.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def organization_params
+    params
+      .require(:organization)
+      .permit(
+        :name,
+        :street,
+        :city,
+        :state,
+        :zip,
+        :phone,
+        users_attributes: %i[
+          first_name
+          last_name
+          phone
+          admin
+          email
+          position_id
+          password
+          password_confirmation
+        ]
+      )
+  end
 end

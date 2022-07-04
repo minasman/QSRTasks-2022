@@ -61,9 +61,8 @@
 
         <% if user_signed_in? %>
           <%= render "layouts/navbar/dropdown_menus/profile" %>
-
         <% elsif admin_signed_in? %>
-
+          <%= render "layouts/navbar/dropdown_menus/admin_profile" %>
         <% else %>
           <li class="nav-item">
             <%= link_to new_admin_session_path, class: "nav-link" do %>

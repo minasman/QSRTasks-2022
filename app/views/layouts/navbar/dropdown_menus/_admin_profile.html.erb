@@ -1,0 +1,19 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <%= current_admin.full_name %>
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <li class="nav-item">
+      <%= link_to  edit_admin_registration_path, class: "dropdown-item" do %>
+        <i class="fa-solid fa-id-badge me-1"></i>
+        My Profile
+      <% end %>
+    </li>
+    <li class="nav-item">
+      <%= link_to destroy_admin_session_path, {class: "dropdown-item",  data: {"turbo-method": :delete}} do %>
+        <i class="fa-solid fa-right-from-bracket me-1"></i>
+        Sign Out
+      <% end %>
+    </li>
+  </ul>
+</li>

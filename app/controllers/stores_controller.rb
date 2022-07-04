@@ -1,6 +1,6 @@
 class StoresController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_store, only: %i[ show edit update destroy ]
+  before_action :set_store, only: %i[ show edit update destroy store_roster]
 
   # GET /stores or /stores.json
   def index
@@ -81,7 +81,6 @@ class StoresController < ApplicationController
 
   def store_roster
     @roster = @store.users.where(position_id: [26, 15])
-    @stores = Store.where(active: false).order( store_type: "DESC", number: "ASC")
   end
 
 
