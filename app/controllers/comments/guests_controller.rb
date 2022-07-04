@@ -5,6 +5,8 @@ class Comments::GuestsController < ApplicationController
   # GET /guests or /guests.json
   def index
     @guests = Guest.all
+    @guests = @guests.search(params[:query]) if params[:query].present?
+    @pagy, @guests = pagy @guests.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
     authorize Guest
   end
 
@@ -74,5 +76,13 @@ class Comments::GuestsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def guest_params
       params.require(:guest).permit(:first_name, :last_name, :phone, :email, :organization_id)
+    end
+
+    def sort_column
+      %w{ first_name }.include?(params[:sort]) ? params[:sort] : "first_name"
+    end
+
+    def sort_direction
+      %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

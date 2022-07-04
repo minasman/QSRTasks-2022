@@ -1,1 +1,49 @@
-guest list
+<div class="card my-5">
+  <h2 class="card-header text-center">Guests</h2>
+  <%= form_with url: "",  method: :get, data: { turbo_frame: "guests", turbo_action: "advance" }, class: "pb-3" do |form| %>
+    <div class="pt-3 row justify-content-between">
+      <div class="col-12 col-md-5 col-xl-2 ms-3">
+        <div class="row">
+          <%= form.label "Show", class: "col-3 mb-3 col-form-label" %>
+          <div class="col-8">
+            <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4  me-3">
+        <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control", placeholder: "Search By Name" %>
+      </div>
+    </div>
+  <% end %>
+  <div class="table-responsive card-body">
+    <%= turbo_frame_tag "guests" do %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col"><%= sort_link_to "Name", :first_name, data: {turbo_action: "advance" }, class: "table-link" %></th>
+            <th scope="col">Phone</th>
+            <th scope="col">Email</th>
+            <th scope="col"># Comments</th>
+            <th scope="col">Stores Visited</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @guests.each_with_index do |guest, i| %>
+            <tr id="<%= dom_id(guest) %>" >
+              <th scope="row"><%= i + 1 %></th>
+              <td><%= link_to guest.full_name, guest, data: {turbo: false}, class: "table-link" %></td>
+              <td><%= number_to_phone(guest.phone) %></td>
+              <td><%= guest.email %></td>
+              <td><%= guest.comments.size %></td>
+              <td><%= guest.stores.uniq.size %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="p-4">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% end %>
+  </div>
+</div>
