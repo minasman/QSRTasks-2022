@@ -1,4 +1,4 @@
-<div class="card mt-5">
+<div class="card mb-5">
 <div class="row justify-content-center">
   <div class="col-12 card-header">
     <h2 class="text-center"><%= @store.number.to_s  %> <%=  @store.name %>  - GM: <%=  @store.users.where(position_id: 5).any? ? @store.users.where(position_id: 5)[0].full_name : "Not Assigned"  %> - <%= @store.store_type %></h2>

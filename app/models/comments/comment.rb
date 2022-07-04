@@ -9,7 +9,7 @@ class Comment < ApplicationRecord
   before_save :format_content
 
   include PgSearch::Model
-  pg_search_scope :search, against: [:store_id],  using: {tsearch: {prefix: true}}
+  pg_search_scope :search,  associated_against: {store: [:number, :name]}, using: {tsearch: {prefix: true}}
 
   COMMENT_TYPES = %w[Complaint Compliment Inquiry]
   SOURCE = ['1-800#', 'VOICE', 'Local']

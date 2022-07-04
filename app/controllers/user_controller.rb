@@ -69,7 +69,7 @@ class UserController < ApplicationController
    end
 
    def inactive_users
-    @users = User.where(active: false)
+    @users = user_list(false)
     @users = @users.search(params[:query]) if params[:query].present?
     @pagy, @users = pagy @users.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
    end

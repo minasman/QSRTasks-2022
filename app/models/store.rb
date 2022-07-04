@@ -2,6 +2,8 @@ class Store < ApplicationRecord
   belongs_to :organization
   has_and_belongs_to_many :users
   has_many :positions, through: :users
+  has_many :guests
+  has_many :comments, dependent: :delete_all
 
   include PgSearch::Model
   pg_search_scope :search, against: [:number, :name],  using: {tsearch: {prefix: true}}

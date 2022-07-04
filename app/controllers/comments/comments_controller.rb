@@ -81,9 +81,9 @@ class Comments::CommentsController < ApplicationController
 
     def get_comments
       if current_user.position.department.in? %w[Administration Maintenance Office]
-        Comment.all.where(organization: current_user.organization, status: 'Open').order(store_id: :asc, visit_date: :asc)
+        Comment.all.where(organization: current_user.organization, status: 'Open', comment_type: "Complaint").order(store_id: :asc, visit_date: :asc)
       else
-        Comment.where(store_id: current_user.stores, status: 'Open', organization: current_user.organization).order(store_id: :asc, visit_date: :asc)
+        Comment.where(store_id: current_user.stores, status: 'Open', organization: current_user.organization, comment_type: "Complaint").order(store_id: :asc, visit_date: :asc)
       end
     end
 

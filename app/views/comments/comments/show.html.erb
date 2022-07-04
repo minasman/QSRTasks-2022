@@ -81,12 +81,18 @@
       <% end %>
     <% end %>
     <div class="d-grid gap-2 d-md-block mb-3">
-      <%= link_to "Update", new_comment_comment_update_path(@comment), class: "btn my-submit" %>
-      <%= link_to "Edit", edit_comment_path(@comment), class: "btn my-submit" %>
+      <% if policy(:comment_update).new? %>
+        <%= link_to "Update", new_comment_comment_update_path(@comment), class: "btn my-submit" %>
+      <% end %>
+      <% if policy(:comment).edit? %>
+        <%= link_to "Edit", edit_comment_path(@comment), class: "btn my-submit" %>
+      <% end %>
       <%= link_to "Comments", comments_path, class: "btn my-submit" %>
     </div>
   </div>
-  <div class="card-footer">
-    <%= button_to "Delete", @comment, method: :delete, class: "btn my-submit" %>
-  </div>
+  <% if policy(:comment).destroy? %>
+    <div class="card-footer">
+      <%= button_to "Delete", @comment, method: :delete, class: "btn my-submit" %>
+    </div>
+  <% end %>
 </div>

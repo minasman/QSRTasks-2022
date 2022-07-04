@@ -99,7 +99,7 @@ class StoresController < ApplicationController
       if c_user.position.name.in? ["Supervisor", "General Manager", "Manager", "Operations Manager", "Crew"]
         Store.where(id: c_user.store_ids, active: true).order(number: :asc)
       else
-        Store.where(organization_id: c_user.organization_id, active: true).order(number: :asc)
+        Store.where(organization_id: c_user.organization_id, active: true).order(store_type: :desc, number: :asc)
       end
     end
 end

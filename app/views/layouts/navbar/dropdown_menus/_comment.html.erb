@@ -16,6 +16,7 @@
         <%= link_to  comments_path, class: "dropdown-item" do %>
           <i class="fa fa-comments me-1"></i>
           Open Comments
+          <span class="badge rounded-pill bg-light text-dark"><%= comment_badge %></span>
         <% end %>
       </li>
       <li>
@@ -25,7 +26,7 @@
         <% end %>
       </li>
     <% end %>
-    <% if policy(:guest).index %>
+    <% if policy(:guest).index? %>
       <li><hr class="dropdown-divider"></li>
       <li>
         <%= link_to  guests_path, class: "dropdown-item" do %>

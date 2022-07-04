@@ -4,8 +4,8 @@
     <div class="pt-3 row justify-content-between">
       <div class="col-12 col-md-5 col-xl-2 ms-3">
         <div class="row">
-          <%= form.label "Show", class: "col-3 mb-3 col-form-label" %>
-          <div class="col-8">
+          <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
+          <div class="col-7">
             <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
           </div>
         </div>
