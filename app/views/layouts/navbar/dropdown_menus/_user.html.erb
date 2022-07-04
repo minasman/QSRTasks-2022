@@ -3,23 +3,29 @@
     Users
   </a>
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-    <li>
-      <%= link_to  new_user_registration_path, class: "dropdown-item" do %>
-        <i class="fa-solid fa-user-plus me-1"></i>
-        New User
-      <% end %>
-    </li>
-     <li>
-      <%= link_to  "/user", class: "dropdown-item" do %>
-        <i class="fa fa-users me-1"></i>
-        Users
-      <% end %>
-    </li>
-    <li>
-      <%= link_to  "/inactive_users", class: "dropdown-item" do %>
-        <i class="fa fa-users-slash me-1"></i>
-        Inactive Users
-      <% end %>
-    </li>
+    <% if policy(:user).new? %>
+      <li>
+        <%= link_to  new_user_registration_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-user-plus me-1"></i>
+          New User
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:user).index? %>
+      <li>
+        <%= link_to  "/user", class: "dropdown-item" do %>
+          <i class="fa fa-users me-1"></i>
+          Users
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:user).new? %>
+      <li>
+        <%= link_to  "/inactive_users", class: "dropdown-item" do %>
+          <i class="fa fa-users-slash me-1"></i>
+          Inactive Users
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </li>

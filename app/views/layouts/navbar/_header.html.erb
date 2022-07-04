@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg longhorn">
+<nav class="navbar navbar-expand-lg longhorn fixed-top">
   <div class="container-fluid">
 
     <% if user_signed_in? %>
@@ -25,9 +25,16 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <% if user_signed_in? %>
-         <%= render "layouts/navbar/dropdown_menus/user" %>
-         <%= render "layouts/navbar/dropdown_menus/store" %>
-         <%= render "layouts/navbar/dropdown_menus/comment" %>
+          <% if policy(:user).index? %>
+            <%= render "layouts/navbar/dropdown_menus/user" %>
+          <% end %>
+          <% if policy(:store).index? %>
+            <%= render "layouts/navbar/dropdown_menus/store" %>
+          <% end %>
+          <% if policy(:comment).index? %>
+            <%= render "layouts/navbar/dropdown_menus/comment" %>
+          <% end %>
+
           <li class="nav-item">
             <a class="nav-link" href="#">Link</a>
           </li>
