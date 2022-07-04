@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_182653) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_04_191215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -84,6 +84,40 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_182653) do
     t.index ["organization_id"], name: "index_comments_on_organization_id"
     t.index ["store_id"], name: "index_comments_on_store_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.string "name", null: false
+    t.date "service_date", null: false
+    t.string "equipment_tag", null: false
+    t.bigint "store_id", null: false
+    t.bigint "equipment_type_id", null: false
+    t.bigint "equipment_area_id", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipment_area_id"], name: "index_equipment_on_equipment_area_id"
+    t.index ["equipment_type_id"], name: "index_equipment_on_equipment_type_id"
+    t.index ["organization_id"], name: "index_equipment_on_organization_id"
+    t.index ["store_id"], name: "index_equipment_on_store_id"
+  end
+
+  create_table "equipment_areas", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_equipment_areas_on_organization_id"
+  end
+
+  create_table "equipment_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "equipment_area_id", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["equipment_area_id"], name: "index_equipment_types_on_equipment_area_id"
+    t.index ["organization_id"], name: "index_equipment_types_on_organization_id"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -196,6 +230,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_182653) do
   add_foreign_key "comments", "organizations"
   add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
+  add_foreign_key "equipment", "equipment_areas"
+  add_foreign_key "equipment", "equipment_types"
+  add_foreign_key "equipment", "organizations"
+  add_foreign_key "equipment", "stores"
+  add_foreign_key "equipment_areas", "organizations"
+  add_foreign_key "equipment_types", "equipment_areas"
+  add_foreign_key "equipment_types", "organizations"
   add_foreign_key "guests", "organizations"
   add_foreign_key "positions", "organizations"
   add_foreign_key "stores", "organizations"

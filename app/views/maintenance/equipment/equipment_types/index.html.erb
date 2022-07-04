@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Equipment types</h1>
+
+<div id="equipment_types">
+  <% @equipment_types.each do |equipment_type| %>
+    <%= render equipment_type %>
+    <p>
+      <%= link_to "Show this equipment type", equipment_type %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New equipment type", new_equipment_type_path %>

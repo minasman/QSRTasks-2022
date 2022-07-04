@@ -38,6 +38,13 @@ Rails.application.routes.draw do
   end
 
   scope module: 'maintenance' do
+    scope module: 'equipment' do
+      resources :equipment do
+        collection do
+          get :add_equipment
+        end
+      end
+    end
     resources :vendors
   end
 

@@ -1,0 +1,65 @@
+<%= form_with(model: equipment) do |form| %>
+  <% if equipment.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
+
+      <ul>
+        <% equipment.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <%= form.label :service_date, class: "form-label" %>
+        <%= form.date_field :service_date, class: "form-control", required: true, autofocus: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row" data-controller="equipment">
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :equipment_area_id, class: "form-label" %>
+        <%= form.collection_select :equipment_area_id, EquipmentArea.all.order(name: :asc), :id, :name, { prompt: "Select Equipment Area" }, class: "form-select", data: { action: "change->equipment#add_equipment" }, required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :equipment_type_id, class: "form-label" %>
+        <%= form.select :equipment_type_id, [], { prompt: "Select Equipment Type" }, class: "form-select", data: { equipment_target: "equipmentArea" }, disabled: true, required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.fields_for :store_list do |f| %>
+    <div class='mb-3'>
+      <%= f.label :stores, "Restaurants:", class: 'form-label' %>
+      <div class='row'>
+        <%= f.collection_check_boxes :store_id, Store.all.order('number ASC'), :id, :number do |s| %>
+          <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
+            <div class='form-check form-check-inline' style="margin-left: 12px; margin-right: 0px;">
+              <%= s.check_box(class: "form-check-input") %>
+              <%= s.label(class: "form-check-label") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+
+
+  <div class="mb-3">
+    <%= form.submit class: "btn my-submit" %>
+  </div>
+<% end %>

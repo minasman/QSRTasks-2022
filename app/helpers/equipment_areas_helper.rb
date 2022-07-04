@@ -1,0 +1,2 @@
+module EquipmentAreasHelper
+end

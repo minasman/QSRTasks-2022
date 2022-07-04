@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  service_date: 2022-07-04
+  equipment_tag: MyString
+  store: one
+  equipment_type: one
+  equipment_area: one
+  organization: one
+
+two:
+  name: MyString
+  service_date: 2022-07-04
+  equipment_tag: MyString
+  store: two
+  equipment_type: two
+  equipment_area: two
+  organization: two
