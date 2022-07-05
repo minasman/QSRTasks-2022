@@ -5,6 +5,14 @@
     <h4 class="text-center"><%= @vendor.contact %></h4>
   </div>
   <div class="card-body">
+   <h5>Workorder History</h5>
+    <div class="row mb-5">
+      <div class="d-block gap-2">
+        <% @vendor.workorders.order(id: :desc).each do |workorder| %>
+          <%= link_to workorder.id, workorder, class: "btn my-submit mb-2" %>
+        <% end %>
+      </div>
+    </div>
 
   <div class="d-grid gap-2 d-md-flex" >
     <%= link_to "Edit", edit_vendor_path(@vendor), class: "btn my-submit" %>

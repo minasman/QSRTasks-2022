@@ -26,7 +26,7 @@
         <h6><strong>Assigned To: </strong><%= @workorder.assigned? ? User.find(@workorder.assigned).full_name : "Not Assigned" %></h6>
       </div>
       <div class="col-12 col-md-3">
-        <h6><strong>Vendor: </strong><%= @workorder.vendor.name %></h6>
+        <h6><strong>Vendor: </strong><%= link_to @workorder.vendor.name, @workorder.vendor, class: "table-link", data: { turbo: false } %></h6>
       </div>
       <div class="col-6 col-md-3">
         <h6><strong>Priority Level: </strong><%= @workorder.level? ? @workorder.level : "Not Assigned" %></h6>

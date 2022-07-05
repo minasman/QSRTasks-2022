@@ -23,7 +23,3 @@ Things you may want to cover:
 
 * ...
 TODO:
-
-Start on Workorder Updates
-Flesh out equipment show page with associated workorders
-Flesh out vendor show page with associated workorders

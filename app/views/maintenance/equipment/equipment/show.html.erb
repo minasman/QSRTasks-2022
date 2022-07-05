@@ -1,10 +1,28 @@
-<p style="color: green"><%= notice %></p>
+<div class="card mb-5">
+  <div class="card-header">
+    <h2 class="text-center"><%= @equipment.name %></h2>
+    <h4 class="text-center"><%= @equipment.store.number %> <strong>Area: </strong><%= @equipment.equipment_area.name %>  | <strong>Type: </strong> <%= @equipment.equipment_type.name %></h4>
+    <h4 class="text-center"><strong>Service Date: </strong> <%= @equipment.service_date.strftime("%m/%d/%y") %>  | <strong>Tag: </strong><%= @equipment.equipment_tag %></h4>
+  </div>
+  <div class="card-body">
+    <h5>Workorder History</h5>
+    <div class="row mb-5">
+      <div class="d-block gap-2">
+        <% @equipment.workorders.order(id: :desc).each do |workorder| %>
+          <%= link_to workorder.id, workorder, class: "btn my-submit mb-2" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="d-grid gap-2 d-md-flex" >
+      <%= link_to "Edit", edit_equipment_path(@equipment), class: "btn my-submit" %>
+      <%= link_to "Back", :back, class: "btn my-submit" %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= button_to "Delete", @equipment, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are You Sure? "}} %>
+  </div>
+</div>
 
-<%= render @equipment %>
 
-<div>
-  <%= link_to "Edit this equipment", edit_equipment_path(@equipment) %> |
-  <%= link_to "Back to equipment", equipment_index_path %>
 
-  <%= button_to "Destroy this equipment", @equipment, method: :delete %>
 </div>
