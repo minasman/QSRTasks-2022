@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @safe_audit %>
+
+<div>
+  <%= link_to "Edit this safe audit", edit_safe_audit_path(@safe_audit) %> |
+  <%= link_to "Back to safe audits", safe_audits_path %>
+
+  <%= button_to "Destroy this safe audit", @safe_audit, method: :delete %>
+</div>

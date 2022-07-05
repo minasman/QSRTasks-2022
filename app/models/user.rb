@@ -15,6 +15,7 @@ class User < ApplicationRecord
   has_many :comment_updates
   has_many :workorders
   has_many :workorder_updates
+  has_many :safe_audits
 
   scope :maint_list, -> { where(position_id: Position.where(department: 'Maintenance').ids).order("first_name") }
 

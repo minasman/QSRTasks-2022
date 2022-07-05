@@ -57,6 +57,11 @@ Rails.application.routes.draw do
     resources :vendors
   end
 
+  scope module: 'audits' do
+    resources :safe_audits
+    #resources :food_safety_audits
+  end
+
   resources :positions
   resources :organizations
 

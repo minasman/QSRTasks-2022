@@ -1,0 +1,81 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  store: one
+  organization: one
+  safe_audit_date: 2022-07-05
+  safe_audit_time: 2022-07-05 11:39:25
+  shift_manager: MyString
+  comment: MyString
+  hundred: 1
+  fifty: 1
+  twenty: 1
+  ten: 1
+  five: 1
+  two: 1
+  one: 1
+  quarter: 1
+  dime: 1
+  nickel: 1
+  penny: 1
+  dollar_coin: 1
+  half_dollar: 1
+  misc_coin: 1.5
+  gift_certificate: 1
+  gift_certificate_redeemed: 1
+  receipt: 1.5
+  other: 1.5
+  coin_changer: 1.5
+  drawer: 1
+  drawer_amount: 1
+  working_headset: 1
+  non_working_headset: 1
+  total_headset: 1
+  misc_other: 1.5
+  total_safe: 1.5
+  safe_variance: 1.5
+  manager: MyString
+  signature: MyString
+  missing_headset: 1
+  ipad: 1
+
+two:
+  user: two
+  store: two
+  organization: two
+  safe_audit_date: 2022-07-05
+  safe_audit_time: 2022-07-05 11:39:25
+  shift_manager: MyString
+  comment: MyString
+  hundred: 1
+  fifty: 1
+  twenty: 1
+  ten: 1
+  five: 1
+  two: 1
+  one: 1
+  quarter: 1
+  dime: 1
+  nickel: 1
+  penny: 1
+  dollar_coin: 1
+  half_dollar: 1
+  misc_coin: 1.5
+  gift_certificate: 1
+  gift_certificate_redeemed: 1
+  receipt: 1.5
+  other: 1.5
+  coin_changer: 1.5
+  drawer: 1
+  drawer_amount: 1
+  working_headset: 1
+  non_working_headset: 1
+  total_headset: 1
+  misc_other: 1.5
+  total_safe: 1.5
+  safe_variance: 1.5
+  manager: MyString
+  signature: MyString
+  missing_headset: 1
+  ipad: 1

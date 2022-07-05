@@ -1,0 +1,207 @@
+<%= form_with(model: safe_audit) do |form| %>
+  <% if safe_audit.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(safe_audit.errors.count, "error") %> prohibited this safe_audit from being saved:</h2>
+
+      <ul>
+        <% safe_audit.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+    <%= form.label :store_id, style: "display: block" %>
+    <%= form.text_field :store_id %>
+  </div>
+
+  <div>
+    <%= form.label :organization_id, style: "display: block" %>
+    <%= form.text_field :organization_id %>
+  </div>
+
+  <div>
+    <%= form.label :safe_audit_date, style: "display: block" %>
+    <%= form.date_field :safe_audit_date %>
+  </div>
+
+  <div>
+    <%= form.label :safe_audit_time, style: "display: block" %>
+    <%= form.time_field :safe_audit_time %>
+  </div>
+
+  <div>
+    <%= form.label :shift_manager, style: "display: block" %>
+    <%= form.text_field :shift_manager %>
+  </div>
+
+  <div>
+    <%= form.label :comment, style: "display: block" %>
+    <%= form.text_field :comment %>
+  </div>
+
+  <div>
+    <%= form.label :hundred, style: "display: block" %>
+    <%= form.number_field :hundred %>
+  </div>
+
+  <div>
+    <%= form.label :fifty, style: "display: block" %>
+    <%= form.number_field :fifty %>
+  </div>
+
+  <div>
+    <%= form.label :twenty, style: "display: block" %>
+    <%= form.number_field :twenty %>
+  </div>
+
+  <div>
+    <%= form.label :ten, style: "display: block" %>
+    <%= form.number_field :ten %>
+  </div>
+
+  <div>
+    <%= form.label :five, style: "display: block" %>
+    <%= form.number_field :five %>
+  </div>
+
+  <div>
+    <%= form.label :two, style: "display: block" %>
+    <%= form.number_field :two %>
+  </div>
+
+  <div>
+    <%= form.label :one, style: "display: block" %>
+    <%= form.number_field :one %>
+  </div>
+
+  <div>
+    <%= form.label :quarter, style: "display: block" %>
+    <%= form.number_field :quarter %>
+  </div>
+
+  <div>
+    <%= form.label :dime, style: "display: block" %>
+    <%= form.number_field :dime %>
+  </div>
+
+  <div>
+    <%= form.label :nickel, style: "display: block" %>
+    <%= form.number_field :nickel %>
+  </div>
+
+  <div>
+    <%= form.label :penny, style: "display: block" %>
+    <%= form.number_field :penny %>
+  </div>
+
+  <div>
+    <%= form.label :dollar_coin, style: "display: block" %>
+    <%= form.number_field :dollar_coin %>
+  </div>
+
+  <div>
+    <%= form.label :half_dollar, style: "display: block" %>
+    <%= form.number_field :half_dollar %>
+  </div>
+
+  <div>
+    <%= form.label :misc_coin, style: "display: block" %>
+    <%= form.text_field :misc_coin %>
+  </div>
+
+  <div>
+    <%= form.label :gift_certificate, style: "display: block" %>
+    <%= form.number_field :gift_certificate %>
+  </div>
+
+  <div>
+    <%= form.label :gift_certificate_redeemed, style: "display: block" %>
+    <%= form.number_field :gift_certificate_redeemed %>
+  </div>
+
+  <div>
+    <%= form.label :receipt, style: "display: block" %>
+    <%= form.text_field :receipt %>
+  </div>
+
+  <div>
+    <%= form.label :other, style: "display: block" %>
+    <%= form.text_field :other %>
+  </div>
+
+  <div>
+    <%= form.label :coin_changer, style: "display: block" %>
+    <%= form.text_field :coin_changer %>
+  </div>
+
+  <div>
+    <%= form.label :drawer, style: "display: block" %>
+    <%= form.number_field :drawer %>
+  </div>
+
+  <div>
+    <%= form.label :drawer_amount, style: "display: block" %>
+    <%= form.number_field :drawer_amount %>
+  </div>
+
+  <div>
+    <%= form.label :working_headset, style: "display: block" %>
+    <%= form.number_field :working_headset %>
+  </div>
+
+  <div>
+    <%= form.label :non_working_headset, style: "display: block" %>
+    <%= form.number_field :non_working_headset %>
+  </div>
+
+  <div>
+    <%= form.label :total_headset, style: "display: block" %>
+    <%= form.number_field :total_headset %>
+  </div>
+
+  <div>
+    <%= form.label :misc_other, style: "display: block" %>
+    <%= form.text_field :misc_other %>
+  </div>
+
+  <div>
+    <%= form.label :total_safe, style: "display: block" %>
+    <%= form.text_field :total_safe %>
+  </div>
+
+  <div>
+    <%= form.label :safe_variance, style: "display: block" %>
+    <%= form.text_field :safe_variance %>
+  </div>
+
+  <div>
+    <%= form.label :manager, style: "display: block" %>
+    <%= form.text_field :manager %>
+  </div>
+
+  <div>
+    <%= form.label :signature, style: "display: block" %>
+    <%= form.text_field :signature %>
+  </div>
+
+  <div>
+    <%= form.label :missing_headset, style: "display: block" %>
+    <%= form.number_field :missing_headset %>
+  </div>
+
+  <div>
+    <%= form.label :ipad, style: "display: block" %>
+    <%= form.number_field :ipad %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

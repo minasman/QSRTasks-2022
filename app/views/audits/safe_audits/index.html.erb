@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Safe audits</h1>
+
+<div id="safe_audits">
+  <% @safe_audits.each do |safe_audit| %>
+    <%= render safe_audit %>
+    <p>
+      <%= link_to "Show this safe audit", safe_audit %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New safe audit", new_safe_audit_path %>
