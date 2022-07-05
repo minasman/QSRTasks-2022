@@ -1,10 +1,91 @@
-<p style="color: green"><%= notice %></p>
+<div class="card mb-5">
+  <div class="card-header">
+    <h2 class="text-center">Workorder #<%= @workorder.id %></h2>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-4 col-lg-3">
+        <h6><strong>Location: </strong><%= @workorder.store.number %></h6>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <h6><strong>Submitted On: </strong><%= @workorder.created_at.strftime("%m/%d/%y") %></h6>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h6><strong>Time: </strong><%= @workorder.created_at.strftime("%I:%M %p") %></h6>
+      </div>
+      <div class="col-6 col-md-2 col-lg-2">
+        <h6><strong>Status: </strong><%= @workorder.level? ? @workorder.level : "Not Assigned" %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Equipment: </strong><%= link_to @workorder.equipment.name, @workorder.equipment, class: "table-link", data: { turbo: false } %></h6>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6><strong>Updates: </strong><%= @workorder.workorder_updates.size %></h6>
+      </div>
+      <div class="col-12 col-md-5">
+        <h6><strong>Assigned To: </strong><%= @workorder.assigned? ? User.find(@workorder.assigned).full_name : "Not Assigned" %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Vendor: </strong><%= @workorder.vendor.name %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Priority Level: </strong><%= @workorder.level? ? @workorder.level : "Not Assigned" %></h6>
+      </div>
+    </div>
 
-<%= render @workorder %>
+    <div class="row">
+      <div class="col-12">
+        <h6><strong>Description: </strong><%= @workorder.workorder_issue %></h6>
+      </div>
+    </div>
 
-<div>
-  <%= link_to "Edit this workorder", edit_workorder_path(@workorder) %> |
-  <%= link_to "Back to workorders", workorders_path %>
+    <div class='row'>
+      <% @workorder.pictures.each do |p| %>
+        <div class='col-12 col-lg-4 col-xl-3'>
+          <%= image_tag p.variant(resize_to_fit: [300, 300]), class: "my-4" %>
+        </div>
+      <% end %>
+    </div>
 
-  <%= button_to "Destroy this workorder", @workorder, method: :delete %>
+    <% if @workorder.workorder_updates.any? %>
+      <div class="pt-5">
+        <h2 class="text-xl font-medium">Updates</h2>
+        <% @workorder.workorder_updates.order(created_at: "DESC").each do |update| %>
+          <p class="py-3"><strong>Date: </strong><%= update.created_at.strftime('%m/%d/%Y') %>
+            <br>
+            <strong>Submitted By: </strong><%= update.user.full_name %>
+            <br>
+            <strong>Details: </strong><%= update.current_update %>
+          </p>
+          <div class='row'>
+            <% update.pictures.each do |p| %>
+              <div class='col-12 col-lg-4 col-xl-3'>
+                <%= image_tag p.variant(resize_to_fit: [200, 200]), class: "my-4" %>
+              </div>
+            <% end %>
+          </div>
+          <% if update.signature %>
+            <div id="signature-pad<%= update.id %>" data-controller="show-signature" data-show-signature-signature="<%= update.signature %>"
+              data-show-signature-id="<%= update.id %>" >
+              <h6 data-action="click->show-signature#showSig">Signature:</h6>
+              <canvas class="shadow-md p-0 mb-0 bg-white rounded" width="100" height="50" style="display: none;"></canvas>
+              <% if update.manager %>
+                <p><strong>Update Verified By:</strong> <%= update.manager %></p>
+              <% end %>
+            </div>
+          <% end %>
+          <hr>
+        <% end %>
+      </div>
+    <% end %>
+
+
+    <div class="d-grid gap-2 d-md-flex">
+      <%= link_to "Edit", edit_workorder_path(@workorder), class: "btn my-submit" %>
+      <%= link_to "Workorders", workorders_path, class: "btn my-submit" %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= button_to "Delete", @workorder, method: :delete, class: "btn btn-danger" %>
+  </div>
 </div>

@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  resources :workorder_updates
-  resources :workorders
 
   root 'public#home'
   get 'public/about'

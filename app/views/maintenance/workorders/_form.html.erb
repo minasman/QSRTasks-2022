@@ -10,68 +10,90 @@
       </ul>
     </div>
   <% end %>
-
-  <div>
-    <%= form.label :store_id, style: "display: block" %>
-    <%= form.text_field :store_id %>
+  <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="mb-3" data-controller="equipment" >
+        <%= form.label :store_id, class: "form-label" %>
+        <%= form.collection_select :store_id, Store.all.order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", data: { action: "change->equipment#store"}, autofocus: true, required: true} %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.text_field :user_id %>
+  <div class="row" data-controller="equipment" >
+    <div class="col-12 col-md-4">
+      <div class="mb-3" >
+        <%= form.label :equipment_area_id, class: "form-label" %>
+        <%= form.collection_select :equipment_area_id, EquipmentArea.all.order('name ASC'), :id, :name, {prompt: "Select Equipment Area"}, {class: "form-select", data: { action: "change->equipment#equipment_type" }, disabled: true, required: true} %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3" >
+        <%= form.label :equipment_type_id, class: "form-label" %>
+        <%= form.select :equipment_type_id, [],  {prompt: "Select Equipment Type"}, {class: "form-select", data: {action: "change->equipment#equipment_choice",  equipment_target: "equipmentArea"}, disabled: true, required: true} %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3" >
+        <%= form.label :equipment_id, class: "form-label" %>
+        <%= form.select :equipment_id, [], {prompt: "Select Equipment"}, {class: "form-select", data: {equipment_target: "equipmentChoice"}, disabled: true, required: true} %>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :organization_id, style: "display: block" %>
-    <%= form.text_field :organization_id %>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <h5 class='text-center'>If this issue is preventing you from serving product, creating an immediate safety hazard or is directly impacting service, call the Workorder in to your supervisor</h5>
+    </div>
+    <div class="row justify-content-center">
+      <span class='col-12 col-md-4 text-center text-muted'>Maint Reg Hours: (210) 293-2210</span>
+      <span class='col-12 col-md-4 text-center text-muted'>On-Call: (210) 300-1337</span>
+      <span class='col-12 col-md-4 text-center text-muted'>OTP On-Call: (210) 573-8713</span>
+    </div>
+  </div>
+  <hr>
+
+  <div class="mb-3" >
+    <%= form.label :workorder_issue, "Workorder Description", class: "form-label" %>
+    <%= form.text_area :workorder_issue, class: "form-control", placeholder: "Enter Workorder Details. Be Specific & Detailed", required: true %>
   </div>
 
-  <div>
-    <%= form.label :equipment_id, style: "display: block" %>
-    <%= form.text_field :equipment_id %>
+  <div class="mb-3">
+    <%= form.label :pictures, "Add Pictures If Needed", class: "form-label" %>
+    <%= form.file_field :pictures, multiple: true, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :equipment_area_id, style: "display: block" %>
-    <%= form.text_field :equipment_area_id %>
-  </div>
+  <% if policy(:workorder).edit? %>
+    <div class="row">
+      <div class="col-12 col-md-3">
+        <div class= "mb-3" >
+          <%= form.label :assigned, class: "form-label" %>
+          <%= form.collection_select(:assigned, User.maint_list, :id, :full_name, {prompt: "Assign a Tech"}, class: "form-select") %>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class= "mb-3" >
+          <%= form.label :level, class: "form-label" %>
+          <%= form.select :level, Workorder::PRIORITY, {prompt: "Level"} ,class: "form-select" %>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class= "mb-3" >
+          <%= form.label :vendor_id, class: "form-label" %>
+          <%= form.collection_select(:vendor_id, Vendor.all.order('name ASC'), :id, :name, {prompt: "Vendor"} ,class: "form-select") %>
+        </div>
+      </div>
+      <div class="col-12 col-md-3">
+        <div class= "mb-3" >
+          <%= form.label :team, class: "form-label" %>
+          <%= form.select :team, Workorder::TEAM, {prompt: "Team"}, class: "form-select" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
 
-  <div>
-    <%= form.label :equipment_type_id, style: "display: block" %>
-    <%= form.text_field :equipment_type_id %>
-  </div>
 
-  <div>
-    <%= form.label :workorder_issue, style: "display: block" %>
-    <%= form.text_field :workorder_issue %>
-  </div>
-
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.text_field :status %>
-  </div>
-
-  <div>
-    <%= form.label :assigned, style: "display: block" %>
-    <%= form.number_field :assigned %>
-  </div>
-
-  <div>
-    <%= form.label :level, style: "display: block" %>
-    <%= form.text_field :level %>
-  </div>
-
-  <div>
-    <%= form.label :team, style: "display: block" %>
-    <%= form.text_field :team %>
-  </div>
-
-  <div>
-    <%= form.label :vendor_id, style: "display: block" %>
-    <%= form.text_field :vendor_id %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mb-3" >
+    <%= form.submit class: "btn my-submit" %>
   </div>
 <% end %>

@@ -1,14 +1,67 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Workorders</h1>
-
-<div id="workorders">
-  <% @workorders.each do |workorder| %>
-    <%= render workorder %>
-    <p>
-      <%= link_to "Show this workorder", workorder %>
-    </p>
+<div class="card mb-5">
+  <h2 class="card-header text-center">Open Workorders</h2>
+  <%= form_with url: "",  method: :get, data: { turbo_frame: "workorders", turbo_action: "advance" }, class: "pb-3" do |form| %>
+    <div class="pt-3 row justify-content-between">
+      <div class="col-12 col-md-5 col-xl-2 ms-3">
+        <div class="row">
+          <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
+          <div class="col-7">
+            <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4  me-3">
+        <%= form.search_field :query, value: params[:query], oninput: "this.form.requestSubmit()", class: "form-control", placeholder: "Search By" %>
+      </div>
+    </div>
   <% end %>
+  <div class="table-responsive card-body">
+    <%= turbo_frame_tag "workorders" do %>
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Location</th>
+            <th scope="col">WO#</th>
+            <th scope="col">Submitted On</th>
+            <th scope="col">Equipment</th>
+            <th scope="col">Submitted By</th>
+            <th scope="col">Team</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Vendor</th>
+            <th scope="col">Updates</th>
+            <th scope="col">Last Update</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Time Open</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @workorders.each_with_index do |workorder, i| %>
+            <tr id="<%= dom_id(workorder) %>" >
+              <th scope="row" rowspan="2" class="align-middle border-bottom border-dark"><%= i + 1 %></th>
+              <td><%= workorder.store.number %></td>
+              <td><%= link_to workorder.id, workorder, class: "table-link", data: { turbo: false } %></td>
+              <td><%= workorder.created_at.strftime("%m/%d/%y") %></td>
+              <td><%= link_to workorder.equipment.name, workorder.equipment, class: "table-link", data: { turbo: false } %></td>
+              <td><%= workorder.user.full_name %></td>
+              <td><%= workorder.team.size > 0 ? workorder.team : "Not Assigned" %></td>
+              <td><%= workorder.assigned > 0 ? User.find(workorder.assigned).full_name : "Not Assigned" %></td>
+              <td><%= link_to workorder.vendor.name, workorder.vendor, class: "table-link", data: { turbo: false } %></td>
+              <td><%= workorder.workorder_updates.size %></td>
+              <td><%= workorder.workorder_updates.any? ? workorder.workorder_updates.last.created_at.strftime("%m/%d/%y") : "N/A" %></td>
+              <td><%= workorder.level %></td>
+              <td><%= time_ago_in_words(workorder.created_at) %></td>
+            </tr>
+            <tr class="border-bottom border-dark">
+              <th>Description:</th>
+              <td colspan="11"><%= workorder.workorder_issue %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <div class="p-4">
+        <%== pagy_nav @pagy %>
+      </div>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New workorder", new_workorder_path %>

@@ -86,6 +86,8 @@ class Maintenance::WorkordersController < ApplicationController
 
   def weekly_recap
     @workorders = Workorder.where(status: 'Open').order('store_id').order('created_at')
+    @workorders = @workorders.search(params[:query]) if params[:query].present?
+    @pagy, @workorders = pagy @workorders.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
   def equipment_types

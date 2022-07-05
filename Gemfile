@@ -33,7 +33,7 @@ gem "bootsnap", require: false
 # gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
 
 # Custom gems used by app
 gem 'devise', '~> 4.8', '>= 4.8.1'
@@ -41,9 +41,14 @@ gem 'devise_masquerade', '~> 1.3', '>= 1.3.11'
 gem 'pagy', '~> 5.10', '>= 5.10.1'
 gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem 'pundit', '~> 2.2'
-
+gem 'aws-sdk-core', '~> 3.131', '>= 3.131.2'
+gem 'aws-sdk-s3', '~> 1.114'
+gem 'chartkick', '~> 4.2'
+gem 'groupdate', '~> 6.1'
+gem 'hightop', '~> 0.3.0'
 
 gem 'phonelib', '~> 0.7.0'
+gem 'twilio-ruby', '~> 5.68'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -66,3 +71,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem 'sidekiq', '~> 6.5', '>= 6.5.1'
+gem 'whenever', '~> 1.0'
+gem 'wicked_pdf', '~> 2.6', '>= 2.6.3'
+gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
+gem 'mailgun-ruby', '~> 1.2', '>= 1.2.5'

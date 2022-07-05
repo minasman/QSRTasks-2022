@@ -9,3 +9,9 @@ application.register("equipment", EquipmentController)
 
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
+
+import ShowSignatureController from "./show_signature_controller.js"
+application.register("show-signature", ShowSignatureController)
+
+import SignatureController from "./signature_controller.js"
+application.register("signature", SignatureController)

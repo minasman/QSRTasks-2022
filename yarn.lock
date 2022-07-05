@@ -280,6 +280,11 @@ sass@^1.53.0:
     immutable "^4.0.0"
     source-map-js ">=0.6.2 <2.0.0"
 
+signature_pad@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/signature_pad/-/signature_pad-4.0.5.tgz#4db9938e215557d851146552614f83df6f133b93"
+  integrity sha512-DeqSbAyO59ET/Cu92fLEgFmvGiaeaWkRgOetm0GnUV7z3LtEKOz2CazkIGmIdr9ZfSyZz6VgTpTxbP0fgfYuyg==
+
 "source-map-js@>=0.6.2 <2.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"

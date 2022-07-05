@@ -9,10 +9,10 @@ class CreateWorkorders < ActiveRecord::Migration[7.0]
       t.references :equipment_type, null: false, foreign_key: true
       t.string :workorder_issue, null: false
       t.string :status, default: "Open"
-      t.integer :assigned
-      t.string :level
-      t.string :team
-      t.references :vendor, null: false, foreign_key: true
+      t.integer :assigned, default: "NULL"
+      t.string :level, default: "NULL"
+      t.string :team, default: "NULL"
+      t.references :vendor, null: false, foreign_key: true, default: 166
 
       t.timestamps
     end

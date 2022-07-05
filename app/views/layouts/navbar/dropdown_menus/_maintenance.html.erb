@@ -5,7 +5,7 @@
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% if policy(:comment).new? %>
       <li>
-        <%= link_to  new_comment_path, class: "dropdown-item" do %>
+        <%= link_to  new_workorder_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-wrench me-1"></i>
           New Workorder
         <% end %>
@@ -13,10 +13,10 @@
     <% end %>
     <% if policy(:comment).index? %>
       <li>
-        <%= link_to  comments_path, class: "dropdown-item" do %>
+        <%= link_to  workorders_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-list me-1"></i>
           Open Workorders
-          <span class="badge rounded-pill bg-light text-dark"><%= comment_badge %></span>
+          <span class="badge rounded-pill bg-light text-dark"><%= workorder_badge %></span>
         <% end %>
       </li>
       <li>
@@ -26,13 +26,14 @@
         <% end %>
       </li>
       <li>
-        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+        <%= link_to  "/assign_workorders", class: "dropdown-item" do %>
           <i class="fa-solid fa-user-helmet-safety me-1"></i>
           Assign Workorders
+          <span class="badge rounded-pill bg-light text-dark"><%= workorder_assign_badge %></span>
         <% end %>
       </li>
       <li>
-        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+        <%= link_to  "/weekly_recap", class: "dropdown-item" do %>
           <i class="fa-solid fa-folder-gear me-1"></i>
           Weekly Recap
         <% end %>
