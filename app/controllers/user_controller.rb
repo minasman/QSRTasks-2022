@@ -46,17 +46,7 @@ class UserController < ApplicationController
         end
       end
     end
-    # params['user']['tclass_ids'] = get_classes(params['user']['tclass_ids'])
-    # respond_to do |format|
-      # if @user.update(user_params)
-      #   format.html { redirect_back_or_to "/full_roster/#{@user.stores.first.id}", notice: @user.full_name + ' Was Successfully Updated' }
-      #   format.json { render :show, status: :ok, location: @user }
-      # else
-      #   puts "THIS IS THE ERROR FOUND #{@user.errors.details}"
-      #   format.html { render :edit }
-      #   format.json { render json: @user.errors, status: :unprocessable_entity }
-      # end
-    end
+   end
 
   def destroy
     authorize @user

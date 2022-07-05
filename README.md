@@ -23,3 +23,12 @@ Things you may want to cover:
 
 * ...
 TODO:
+Finish testing user access
+
+Shops
+Audits
+Training
+Documentation
+Wellness Check & Vaccination
+Onboarding
+Dashboards

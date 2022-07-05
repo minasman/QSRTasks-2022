@@ -4,7 +4,7 @@ class Maintenance::WorkordersController < ApplicationController
 
   # GET /workorders or /workorders.json
   def index
-    @workorders = Workorder.all
+    @workorders = workorder_list
     @workorders = @workorders.search(params[:query]) if params[:query].present?
     @pagy, @workorders = pagy @workorders.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
     authorize Workorder

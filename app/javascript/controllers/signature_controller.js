@@ -14,8 +14,6 @@ export default class extends Controller {
       backgroundColor: 'rgb(255, 255, 245)'
     })
     console.log(signaturePad)
-    canvas.addEventListener("mouseover",  () => console.log("Mouse!!"))
-    canvas.addEventListener("mouseout",  () => console.log("Mouse Gone"))
     canvas.addEventListener("touchend", doMouseUp)
     canvas.addEventListener("pointerup", doMouseUp)  }
 }

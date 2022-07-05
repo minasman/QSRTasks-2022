@@ -7,7 +7,7 @@ class VendorPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head"]
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head"]
   end
 
   def show?

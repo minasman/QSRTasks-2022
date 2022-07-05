@@ -18,11 +18,9 @@
       <%= link_to "Back", :back, class: "btn my-submit" %>
     </div>
   </div>
-  <div class="card-footer">
-    <%= button_to "Delete", @equipment, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are You Sure? "}} %>
-  </div>
-</div>
-
-
-
+  <% if policy(:equipment).destroy? %>
+    <div class="card-footer">
+      <%= button_to "Delete", @equipment, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are You Sure? "}} %>
+    </div>
+  <% end %>
 </div>
