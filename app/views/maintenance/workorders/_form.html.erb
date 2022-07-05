@@ -29,7 +29,11 @@
     <div class="col-12 col-md-4">
       <div class="mb-3" >
         <%= form.label :equipment_type_id, class: "form-label" %>
-        <%= form.select :equipment_type_id, [],  {prompt: "Select Equipment Type"}, {class: "form-select", data: {action: "change->equipment#equipment_choice",  equipment_target: "equipmentArea"}, disabled: true, required: true} %>
+        <% if @workorder.equipment_type.nil? %>
+          <%= form.select :equipment_type_id, [],  {prompt: "Select Equipment Type"}, {class: "form-select", data: {action: "change->equipment#equipment_choice",  equipment_target: "equipmentArea"}, disabled: true, required: true} %>
+        <% else %>
+          <%= form.select :equipment_type_id, [],  {prompt: "Select Equipment Type"}, {class: "form-select", data: {action: "change->equipment#equipment_choice",  equipment_target: "equipmentArea"},  required: true} %>
+        <% end %>
       </div>
     </div>
     <div class="col-12 col-md-4">

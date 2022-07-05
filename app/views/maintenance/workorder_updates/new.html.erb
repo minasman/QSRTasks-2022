@@ -1,9 +1,81 @@
-<h1>New workorder update</h1>
+<div class="card mb-5">
+  <div class="card-header">
+    <h2 class="text-center">Workorder #<%= @workorder.id %></h2>
+  </div>
+  <div class="card-body">
+    <div class="row justify-content-start">
+      <div class="col-12 col-md-4 col-lg-3">
+        <h6><strong>Location: </strong><%= @workorder.store.number %></h6>
+      </div>
+      <div class="col-12 col-md-4 col-lg-3">
+        <h6><strong>Submitted On: </strong><%= @workorder.created_at.strftime("%m/%d/%y") %></h6>
+      </div>
+      <div class="col-6 col-md-4 col-lg-2">
+        <h6><strong>Time: </strong><%= @workorder.created_at.strftime("%I:%M %p") %></h6>
+      </div>
+      <div class="col-6 col-md-2 col-lg-2">
+        <h6><strong>Status: </strong><%= @workorder.status  %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Equipment: </strong><%= link_to @workorder.equipment.name, @workorder.equipment, class: "table-link", data: { turbo: false } %></h6>
+      </div>
+      <div class="col-6 col-md-2">
+        <h6><strong>Updates: </strong><%= @workorder.workorder_updates.size %></h6>
+      </div>
+      <div class="col-12 col-md-5">
+        <h6><strong>Assigned To: </strong><%= @workorder.assigned? ? User.find(@workorder.assigned).full_name : "Not Assigned" %></h6>
+      </div>
+      <div class="col-12 col-md-3">
+        <h6><strong>Vendor: </strong><%= @workorder.vendor.name %></h6>
+      </div>
+      <div class="col-6 col-md-3">
+        <h6><strong>Priority Level: </strong><%= @workorder.level? ? @workorder.level : "Not Assigned" %></h6>
+      </div>
+    </div>
 
-<%= render "form", workorder_update: @workorder_update %>
+    <div class="row">
+      <div class="col-12">
+        <h6><strong>Description: </strong><%= @workorder.workorder_issue %></h6>
+      </div>
+    </div>
 
-<br>
-
-<div>
-  <%= link_to "Back to workorder updates", workorder_updates_path %>
+    <% if @workorder.status == "Open" || policy(:workorder_update).new? %>
+      <h4 class="text-2xl font-semibold pt-4 pb-2">Update Work Order</h4>
+      <%= form_with(model: [ @workorder, @workorder.workorder_updates.build ], local: true) do |form| %>
+        <div class="mb-3">
+          <%= form.label :current_update, "Update Status", class: 'form-label' %>
+          <%= form.text_area :current_update, required: "true",size: "50 x 4", class: "form-control" %>
+        </div>
+        <div class="mb-3">
+          <%= form.label :pictures, "Add Pictures If Needed", class: "form-label" %>
+          <%= form.file_field :pictures, multiple: true, class: "form-control" %>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <%= form.label :status, "Close Work Order?", class: 'form-check-label' %>
+            <%= form.check_box :status, class: "form-check-input" %>
+          </div>
+        </div>
+        <%= form.hidden_field :signature %>
+        <hr>
+        <div id="signature-pad" class="signature-pad" data-controller="signature">
+          <div>
+            <h6>Manager's Signature Required Below</h6>
+            <canvas id="signature-space" width="300" height="200" style="background-color: #d9c1b6;" class="shadow-md p-0 mb-0  rounded"></canvas>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <div class="mb-3">
+              <%= form.label :manager, "Manager's Name", class: 'form-label' %>
+              <%= form.text_field :manager, required: "true", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+        <div class='col-12 col-md-4 d-grid'>
+          <%= form.submit 'Add Update', :class=> "btn my-submit",  'data-turbo' => "false"  %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>

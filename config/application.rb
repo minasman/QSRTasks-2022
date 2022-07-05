@@ -11,7 +11,7 @@ module QSRTasks2022B
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
 
-    config.active_storage.replace_on_assign_to_many = false
+    config.active_storage.replace_on_assign_to_many = true
     config.autoload_paths += Dir[Rails.root.join('app', 'jobs', '**/')]
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '**/')]
     config.autoload_paths += Dir[Rails.root.join('app', 'mailers', '**/')]

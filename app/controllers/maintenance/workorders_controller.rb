@@ -60,6 +60,9 @@ class Maintenance::WorkordersController < ApplicationController
   def update
     authorize @workorder
     respond_to do |format|
+      if params[:workorder][:status] == "1"
+        params[:workorder][:status] = "Open"
+      end
       if @workorder.update(workorder_params)
         format.html { redirect_to workorder_url(@workorder), notice: "Workorder was successfully updated." }
         format.json { render :show, status: :ok, location: @workorder }
@@ -82,6 +85,8 @@ class Maintenance::WorkordersController < ApplicationController
 
   def assign
     @workorders = Workorder.where(assigned: nil, status: 'Open').order(store_id: 'ASC', id: 'ASC')
+    @workorders = @workorders.search(params[:query]) if params[:query].present?
+    @pagy, @workorders = pagy @workorders.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
   def weekly_recap
@@ -115,7 +120,7 @@ class Maintenance::WorkordersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def workorder_params
-      params.require(:workorder).permit(:store_id, :user_id, :organization_id, :equipment_id, :equipment_area_id, :equipment_type_id, :workorder_issue, :status, :assigned, :level, :team, :vendor_id)
+      params.require(:workorder).permit(:store_id, :user_id, :organization_id, :equipment_id, :equipment_area_id, :equipment_type_id, :workorder_issue, :status, :assigned, :level, :team, :vendor_id, pictures: [])
     end
 
     def sort_column

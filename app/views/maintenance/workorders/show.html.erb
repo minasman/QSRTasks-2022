@@ -14,7 +14,7 @@
         <h6><strong>Time: </strong><%= @workorder.created_at.strftime("%I:%M %p") %></h6>
       </div>
       <div class="col-6 col-md-2 col-lg-2">
-        <h6><strong>Status: </strong><%= @workorder.level? ? @workorder.level : "Not Assigned" %></h6>
+        <h6><strong>Status: </strong><%= @workorder.status%></h6>
       </div>
       <div class="col-12 col-md-3">
         <h6><strong>Equipment: </strong><%= link_to @workorder.equipment.name, @workorder.equipment, class: "table-link", data: { turbo: false } %></h6>
@@ -80,7 +80,7 @@
     <% end %>
 
 
-    <div class="d-grid gap-2 d-md-flex">
+    <div class="d-grid gap-2 d-md-flex mt-3">
       <% if policy(:workorder_update).new? %>
         <%= link_to "Add Update", new_workorder_workorder_update_path(@workorder),  class: "btn my-submit" %>
       <% end %>
@@ -92,7 +92,7 @@
   </div>
   <% if policy(:workorder).destroy? %>
     <div class="card-footer">
-      <%= button_to "Delete", @workorder, method: :delete, class: "btn btn-danger" %>
+      <%= button_to "Delete", @workorder, method: :delete, class: "btn btn-danger", form: { data: { turbo_confirm: "Are You Sure? "}} %>
     </div>
   <% end %>
 </div>
