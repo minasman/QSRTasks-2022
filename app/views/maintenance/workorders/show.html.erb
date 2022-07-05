@@ -81,11 +81,18 @@
 
 
     <div class="d-grid gap-2 d-md-flex">
-      <%= link_to "Edit", edit_workorder_path(@workorder), class: "btn my-submit" %>
+      <% if policy(:workorder_update).new? %>
+        <%= link_to "Add Update", new_workorder_workorder_update_path(@workorder),  class: "btn my-submit" %>
+      <% end %>
+      <% if policy(:workorder).edit? %>
+        <%= link_to "Edit", edit_workorder_path(@workorder), class: "btn my-submit" %>
+      <% end %>
       <%= link_to "Workorders", workorders_path, class: "btn my-submit" %>
     </div>
   </div>
-  <div class="card-footer">
-    <%= button_to "Delete", @workorder, method: :delete, class: "btn btn-danger" %>
-  </div>
+  <% if policy(:workorder).destroy? %>
+    <div class="card-footer">
+      <%= button_to "Delete", @workorder, method: :delete, class: "btn btn-danger" %>
+    </div>
+  <% end %>
 </div>
