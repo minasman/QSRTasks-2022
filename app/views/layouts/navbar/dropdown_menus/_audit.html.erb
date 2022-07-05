@@ -1,0 +1,37 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Audits
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% if policy(:safe_audit).new? %>
+      <li>
+        <%= link_to  new_safe_audit_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-money-check-dollar-pen me-1"></i>
+          New Safe Audit
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:safe_audit).index? %>
+      <li>
+        <%= link_to  safe_audits_path, class: "dropdown-item" do %>
+          <i class="fa fa-folders me-1"></i>
+          Safe Audits
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:safe_audit).new? %>
+      <li>
+        <%= link_to  "", class: "dropdown-item" do %>
+          <i class="fa fa-heart-circle-check me-1"></i>
+          New Food Safety Audit
+        <% end %>
+      </li>
+    <% end %>
+    <li>
+      <%= link_to  "", class: "dropdown-item" do %>
+        <i class="fa fa-folders me-1"></i>
+        Food Safety Audits
+      <% end %>
+    </li>
+  </ul>
+</li>

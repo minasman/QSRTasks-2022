@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_04_211731) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -188,6 +188,52 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_211731) do
     t.index ["organization_id"], name: "index_positions_on_organization_id"
   end
 
+  create_table "safe_audits", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "store_id", null: false
+    t.bigint "organization_id", null: false
+    t.date "safe_audit_date", null: false
+    t.time "safe_audit_time", null: false
+    t.string "shift_manager", null: false
+    t.string "comment"
+    t.integer "hundred"
+    t.integer "fifty"
+    t.integer "twenty"
+    t.integer "ten"
+    t.integer "five"
+    t.integer "two"
+    t.integer "one"
+    t.integer "quarter"
+    t.integer "dime"
+    t.integer "nickel"
+    t.integer "penny"
+    t.integer "dollar_coin"
+    t.integer "half_dollar"
+    t.float "misc_coin"
+    t.integer "gift_certificate"
+    t.integer "gift_certificate_redeemed"
+    t.float "receipt"
+    t.float "other"
+    t.float "coin_changer"
+    t.integer "drawer"
+    t.integer "drawer_amount"
+    t.integer "working_headset", null: false
+    t.integer "non_working_headset", null: false
+    t.integer "total_headset", null: false
+    t.float "misc_other"
+    t.float "total_safe"
+    t.float "safe_variance"
+    t.string "manager", null: false
+    t.string "signature", null: false
+    t.integer "missing_headset"
+    t.integer "ipad", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_safe_audits_on_organization_id"
+    t.index ["store_id"], name: "index_safe_audits_on_store_id"
+    t.index ["user_id"], name: "index_safe_audits_on_user_id"
+  end
+
   create_table "stores", force: :cascade do |t|
     t.string "name", null: false
     t.integer "number", null: false
@@ -314,6 +360,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_04_211731) do
   add_foreign_key "equipment_types", "organizations"
   add_foreign_key "guests", "organizations"
   add_foreign_key "positions", "organizations"
+  add_foreign_key "safe_audits", "organizations"
+  add_foreign_key "safe_audits", "stores"
+  add_foreign_key "safe_audits", "users"
   add_foreign_key "stores", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"
