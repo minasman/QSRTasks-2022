@@ -189,7 +189,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
   end
 
   create_table "safe_audits", force: :cascade do |t|
-    t.bigint "user_id", null: false
+    t.bigint "auditor_id"
+    t.bigint "manager_id"
     t.bigint "store_id", null: false
     t.bigint "organization_id", null: false
     t.date "safe_audit_date", null: false
@@ -229,9 +230,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
     t.integer "ipad", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["auditor_id"], name: "index_safe_audits_on_auditor_id"
+    t.index ["manager_id"], name: "index_safe_audits_on_manager_id"
     t.index ["organization_id"], name: "index_safe_audits_on_organization_id"
     t.index ["store_id"], name: "index_safe_audits_on_store_id"
-    t.index ["user_id"], name: "index_safe_audits_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -246,6 +248,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
     t.string "safe", null: false
     t.string "headset", null: false
     t.string "store_type", null: false
+    t.integer "ipad", null: false
     t.boolean "active", default: true, null: false
     t.bigint "organization_id", null: false
     t.datetime "created_at", null: false
@@ -297,7 +300,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
   end
 
   create_table "vendors", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "email"
     t.string "phone"
     t.string "contact"
@@ -329,9 +332,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
     t.string "workorder_issue", null: false
     t.string "status", default: "Open"
     t.integer "assigned"
-    t.string "level"
-    t.string "team"
-    t.bigint "vendor_id", null: false
+    t.string "level", default: "NULL"
+    t.string "team", default: "NULL"
+    t.bigint "vendor_id", default: 166, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["equipment_area_id"], name: "index_workorders_on_equipment_area_id"
@@ -362,7 +365,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
   add_foreign_key "positions", "organizations"
   add_foreign_key "safe_audits", "organizations"
   add_foreign_key "safe_audits", "stores"
-  add_foreign_key "safe_audits", "users"
   add_foreign_key "stores", "organizations"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"

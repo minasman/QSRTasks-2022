@@ -15,7 +15,8 @@ class User < ApplicationRecord
   has_many :comment_updates
   has_many :workorders
   has_many :workorder_updates
-  has_many :safe_audits
+  has_many :auditor_safe_audits, class_name: "SafeAudit", foreign_key: "auditor_id"
+  has_many :manager_safe_audits, class_name: "SafeAudit", foreign_key: 'manager_id"'
 
   scope :maint_list, -> { where(position_id: Position.where(department: 'Maintenance').ids).order("first_name") }
 

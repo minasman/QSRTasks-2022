@@ -1,9 +1,9 @@
-<h1>New safe audit</h1>
-
-<%= render "form", safe_audit: @safe_audit %>
-
-<br>
-
-<div>
-  <%= link_to "Back to safe audits", safe_audits_path %>
+<div class="card mb-5">
+  <h2 class="text-center card-header">New Safe Audit</h2>
+  <div class="card-body">
+    <%= render "form", safe_audit: @safe_audit %>
+  </div>
+  <div class="card-footer">
+    <%= link_to "Safe Audits", safe_audits_path, class: "btn my-submit" %>
+  </div>
 </div>

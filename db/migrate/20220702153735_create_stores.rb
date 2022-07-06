@@ -12,6 +12,7 @@ class CreateStores < ActiveRecord::Migration[7.0]
       t.string :safe, null: false
       t.string :headset, null: false
       t.string :store_type, null: false
+      t.integer :ipad, null: false
       t.boolean :active, null: false, default: true
       t.references :organization, null: false, foreign_key: true
 

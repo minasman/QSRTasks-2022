@@ -1,12 +1,12 @@
 class CreateSafeAudits < ActiveRecord::Migration[7.0]
   def change
     create_table :safe_audits do |t|
-      t.references :user, null: false, foreign_key: true
+      t.references :auditor
+      t.references :manager
       t.references :store, null: false, foreign_key: true
       t.references :organization, null: false, foreign_key: true
       t.date :safe_audit_date, null: false
       t.time :safe_audit_time, null: false
-      t.string :shift_manager, null: false
       t.string :comment
       t.integer :hundred
       t.integer :fifty
