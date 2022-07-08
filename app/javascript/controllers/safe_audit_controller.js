@@ -40,7 +40,6 @@ export default class extends Controller {
   }
 
   headset(event) {
-    console.log("Hit action")
     const store = parseInt(document.getElementById('safe_audit_store_id').value)
 
     let working = isNaN(parseInt(document.getElementById('safe_audit_working_headset').value)) ? 0 : parseInt(document.getElementById('safe_audit_working_headset').value)
