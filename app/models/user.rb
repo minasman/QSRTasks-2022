@@ -19,7 +19,7 @@ class User < ApplicationRecord
   has_many :manager_safe_audits, class_name: "SafeAudit", foreign_key: 'manager_id"'
 
   scope :maint_list, -> { where(position_id: Position.where(department: 'Maintenance').ids).order("first_name") }
-
+  scope :managers, -> {where(position_id: [5, 15], active: true).order(first_name: :asc)}
   def full_name
     self.first_name + ' ' + self.last_name
   end

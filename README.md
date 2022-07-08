@@ -26,9 +26,9 @@ TODO:
 Finish testing user access
 
 Shops
-Audits
-Training
+Audits - Return to Safe Audits
 Documentation
+Training
 Wellness Check & Vaccination
 Onboarding
 Dashboards

@@ -25,43 +25,45 @@
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="mb-3">
+      <div class="mb-3" data-controller="safe-audit" >
         <%= form.label :store_id, class: "form-label" %>
-        <%= form.text_field :store_id, class: "form-control" %>
+        <%= form.collection_select(:store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number,{ prompt: true}, { class: "form-select", 'data-action': "change->safe-audit#store" }) %>
       </div>
     </div>
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :manager_id, class: "form-label" %>
-        <%= form.text_field :manager_id, class: "form-control" %>
+        <%= form.collection_select(:manager_id, User.managers, :id, :full_name, {prompt: true}, {class: "form-select"})%>
       </div>
     </div>
   </div>
   <hr>
   <h3 class="text-center">DT Headsets</h3>
-  <div class="row">
-    <div class="col-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :working_headset, "Working Headset", class: "form-label" %>
-        <%= form.number_field :working_headset, class: "form-control" %>
+  <div id="headsets" data-controller="safe-audit" >
+    <div class="row">
+      <div class="col-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :working_headset, "Working Headset", class: "form-label" %>
+          <%= form.number_field :working_headset, class: "form-control",'data-action': "change->safe-audit#headset" %>
+        </div>
       </div>
-    </div>
-    <div class="col-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :non_working_headset, "Non-Working Headset", class: "form-label" %>
-        <%= form.number_field :non_working_headset, class: "form-control" %>
+      <div class="col-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :non_working_headset, "Non-Working Headset", class: "form-label" %>
+          <%= form.number_field :non_working_headset, class: "form-control",'data-action': "change->safe-audit#headset" %>
+        </div>
       </div>
-    </div>
-    <div class="col-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :total_headset, "Total Headsets", class: "form-label" %>
-        <%= form.number_field :total_headset, class: "form-control" %>
+      <div class="col-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :total_headset, "Total Headsets", class: "form-label" %>
+          <%= form.number_field :total_headset, class: "form-control", readonly: true %>
+        </div>
       </div>
-    </div>
-    <div class="col-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :missing_headset, "Missing Headset", class: "form-label" %>
-        <%= form.number_field :missing_headset, class: "form-control" %>
+      <div class="col-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :missing_headset, "Missing Headset", class: "form-label" %>
+          <%= form.number_field :missing_headset, class: "form-control" %>
+        </div>
       </div>
     </div>
   </div>
@@ -75,18 +77,17 @@
     </div>
   </div>
   <h3 class="text-center">Cash Tills</h3>
-  <div class="row">
-    <div class="col-6 col-md-3">
-      <div class="mb-3">
+  <div class="row align-items-end mb-3" data-controller="safe-audit" data-safe-audit-drawer="0" >
+    <div class="col-6 col-md-4">
         <%= form.label :drawer, class: "form-label" %>
-        <%= form.number_field :drawer, class: "form-control" %>
-      </div>
+        <%= form.number_field :drawer, class: "form-control",'data-action': "change->safe-audit#totalDrawer" %>
     </div>
-    <div class="col-6 col-md-3">
-      <div class="mb-3">
+    <div class="col-6 col-md-4">
         <%= form.label :drawer_amount, "Drawer Amount", class: "form-label" %>
-        <%= form.number_field :drawer_amoun, class: "form-control" %>
-      </div>
+        <%= form.number_field :drawer_amount, class: "form-control",'data-action': "change->safe-audit#totalDrawer" %>
+    </div>
+    <div class="col-4 col-md-4">
+        <h5 id="totalDrawers" class="pl-3 text-2xl font-medium"></h5>
     </div>
   </div>
   <h3 class="text-center">Currency</h3>
@@ -349,30 +350,39 @@
   </div>
   <hr>
   <div class="row align-items-end mb-3">
-    <div class="col 6 col-md-3">
+    <div class="col-0 col-md-4">
     </div>
-    <div class="col 6 col-md-3">
+    <div class="col-6 col-md-4">
       <div class="mb-3">
-        <%= form.label :total_safe, "Total:", class: "form-label" %>
-        <%= form.text_field :total_safe, class: "form-control" %>
+        <h3 class="text-xl">Total:</h3>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="mb-3">
+        <h5 id="totalSafe" class="text-2xl font-medium"></h5>
       </div>
     </div>
   </div>
   <div class="row align-items-end mb-3">
-    <div class="col 6 col-md-3">
+    <div class="col-0 col-md-4">
     </div>
-    <div class="col 6 col-md-3">
-      <h6>Safe Started At:</h6>
+    <div class="col-6 col-md-4">
+      <h3 class="text-xl">Safe Started At:</h3>
+    </div>
+    <div class="col-6 col-md-4">
+      <h5 id="safeControl" class="text-2xl font-medium"></h5>
     </div>
   </div>
   <div class="row align-items-end mb-3">
-    <div class="col 6 col-md-3">
+    <div class="col-0 col-md-4">
     </div>
-    <div class="col 6 col-md-3">
+    <div class="col-6 col-md-4">
       <div class="mb-3">
-        <%= form.label :safe_variance, "Variance:", class: "form-label" %>
-        <%= form.text_field :safe_variance, class: "form-control" %>
+        <h3 class="text-xl">Variance:</h3>
       </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <h5 id="safeVariance" class="text-2xl font-medium"></h5>
     </div>
   </div>
   <div class="row align-items-end mb-3">
@@ -397,28 +407,28 @@
     </div>
   </div>
 
+  <%= form.hidden_field :totalSafe %>
+  <%= form.hidden_field :safeVariance %>
+  <%= form.hidden_field :signature %>
 
-
+  <div class="row">
+    <div class="col">
       <div class="mb-3">
-        <%= form.label :misc_other, class: "form-label" %>
-        <%= form.text_field :misc_other, class: "form-control" %>
+        <div id="signature-pad" class="signature-pad" data-controller='safe-audit'>
+          <div>
+            <br>
+            <h6>Manager's Signature Required Below</h6>
+            <canvas class="shadow-sm p-0 mb-0 bg-white rounded"></canvas>
+          </div>
+        </div>
       </div>
+    </div>
+  </div>
 
-
-
-
-
-      <div class="mb-3">
-        <%= form.label :manager, class: "form-label" %>
-        <%= form.text_field :manager, class: "form-control" %>
-      </div>
-
-      <div class="mb-3">
-        <%= form.label :signature, class: "form-label" %>
-        <%= form.text_field :signature, class: "form-control" %>
-      </div>
-
-
+    <div class="mb-3">
+      <%= form.label :manager, class: "form-label" %>
+      <%= form.text_field :manager, class: "form-control" %>
+    </div>
 
   <div class="mb-3">
     <%= form.submit class: "btn my-submit" %>

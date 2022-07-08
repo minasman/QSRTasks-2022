@@ -32,7 +32,6 @@ class CreateSafeAudits < ActiveRecord::Migration[7.0]
       t.integer :working_headset, null: false
       t.integer :non_working_headset, null: false
       t.integer :total_headset, null: false
-      t.float :misc_other
       t.float :total_safe
       t.float :safe_variance
       t.string :manager, null: false
