@@ -38,7 +38,11 @@ Rails.application.routes.draw do
   end
 
   scope module: 'documentations' do
-    resources :documents
+    resources :documents do
+      collection do
+        get :level_list
+      end
+    end
     resources :documentations
   end
 

@@ -1,10 +1,59 @@
-<h1>Editing document</h1>
+<div class="card mb-5">
+  <h2 class="text-center card-header">Editing <%= @document.documentation_type %></h2>
+  <div class="card-body">
+    <%= form_with(model: @document) do |form| %>
+      <% if @document.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(@document.errors.count, "error") %> prohibited this document from being saved:</h2>
 
-<%= render "form", document: @document %>
+          <ul>
+            <% @document.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="row" data-controller="document">
+        <div class="col-6 col-md-3">
+          <div class="mb-3">
+            <%= form.label :documentation_type, "Document Type", class: "form-label" %>
+            <%= form.select :documentation_type, Document::DOCUMENT_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true, data: {action: "change->document#document_level"} }  %>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="mb-3">
+            <%= form.label :level, "Document Level", class: "form-label" %>
+            <%= form.select :level, @document.documentation_type == "Commendation" ? Document::DOCUMENT_LEVEL_COMMENDATION : Document::DOCUMENT_LEVEL_DOCUMENTATION, { prompt: "Select" }, { class: "form-control", data: { document_target: "levelList" }, required: true} %>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="mb-3">
+            <%= form.label :documentation_class, "Document Class", class: "form-label" %>
+            <%= form.select :documentation_class, Document::DOCUMENT_CLASS, {:include_blank => "Select Class"}, {class: "form-control", required: true }  %>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="mb-3">
+            <%= form.label :points, class: "form-label" %>
+            <%= form.number_field :points, class: "form-control", required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <%= form.label :definition, class: "form-label" %>
+        <%= form.text_area :definition, class: "form-control", required: true %>
+      </div>
 
-<br>
 
-<div>
-  <%= link_to "Show this document", @document %> |
-  <%= link_to "Back to documents", documents_path %>
+
+      <div class="mb-3">
+        <%= form.submit class: "btn my-submit"  %>
+      </div>
+    <% end %>
+  </div>
+  <div class="card-footer">
+    <div>
+      <%= link_to "Documents", documents_path, class: "btn my-submit" %>
+    </div>
+  </div>
 </div>

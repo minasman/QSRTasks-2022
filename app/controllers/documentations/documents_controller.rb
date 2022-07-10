@@ -7,6 +7,7 @@ class Documentations::DocumentsController < ApplicationController
     @documents = Document.all
     @documents = @documents.search(params[:query]) if params[:query].present?
     @pagy, @documents = pagy @documents.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+    authorize Document
   end
 
   # GET /documents/1 or /documents/1.json
@@ -16,16 +17,19 @@ class Documentations::DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @document = Document.new
+    authorize @document
   end
 
   # GET /documents/1/edit
   def edit
+    authorize @document
   end
 
   # POST /documents or /documents.json
   def create
     @document = Document.new(document_params)
-
+    authorize @document
+    @document.organization = current_user.organization
     respond_to do |format|
       if @document.save
         format.html { redirect_to document_url(@document), notice: "Document was successfully created." }
@@ -39,6 +43,7 @@ class Documentations::DocumentsController < ApplicationController
 
   # PATCH/PUT /documents/1 or /documents/1.json
   def update
+    authorize @document
     respond_to do |format|
       if @document.update(document_params)
         format.html { redirect_to document_url(@document), notice: "Document was successfully updated." }
@@ -52,10 +57,23 @@ class Documentations::DocumentsController < ApplicationController
 
   # DELETE /documents/1 or /documents/1.json
   def destroy
+    authorize @document
     document_id = "document_#{@document.id}"
     @document.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(document_id) }
+    end
+  end
+
+  def level_list
+    @target = params[:target]
+    if params[:type] == "Documentation"
+      @levels = Document::DOCUMENT_LEVEL_DOCUMENTATION
+    else
+      @levels = Document::DOCUMENT_LEVEL_COMMENDATION
+    end
+    respond_to do |format|
+      format.turbo_stream
     end
   end
 
