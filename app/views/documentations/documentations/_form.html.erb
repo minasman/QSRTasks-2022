@@ -59,7 +59,7 @@
     <div class="col-12 col-md-4">
       <div class="mb-3">
         <%= form.label :documentation_class, class: "form-label" %>
-        <%= form.select :documentation_class, Document::DOCUMENT_CLASS,{ prompt: "Select" }, { class: "form-control", data: { action: "change->document#document_list", document_target: "" }, required: true} %>
+        <%= form.select :documentation_class, Document::DOCUMENT_CLASS,{ prompt: "Select" }, { class: "form-control", data: { action: "change->document#document_list", document_target: "docKlassList" }, required: true} %>
       </div>
     </div>
     <div class="col-12">

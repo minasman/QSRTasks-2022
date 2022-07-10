@@ -5,6 +5,8 @@ class Documentations::DocumentationsController < ApplicationController
   # GET /documentations or /documentations.json
   def index
     @documentations = Documentation.all
+    @documentations = @documentations.search(params[:query]) if params[:query].present?
+    @pagy, @documentations = pagy @documentations.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
   # GET /documentations/1 or /documentations/1.json
@@ -185,5 +187,13 @@ class Documentations::DocumentationsController < ApplicationController
         flow_document.description = "Initial Named Employee: #{document.employee_named.full_name} at #{document.store.number}: #{document.description}"
         flow_document.save
       end
+    end
+
+    def sort_column
+      %w{ employee_named_id }.include?(params[:sort]) ? params[:sort] : "employee_named_id"
+    end
+
+    def sort_direction
+      %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

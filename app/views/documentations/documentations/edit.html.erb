@@ -1,10 +1,103 @@
-<h1>Editing documentation</h1>
+<div class="card mb-5">
+  <h2 class="text-center card-header">Editing <%= @documentation.documentation_type %> for <%= @documentation.employee_named.full_name %></h2>
+  <div class="card-body">
 
-<%= render "form", documentation: @documentation %>
+  <%= form_with(model: @documentation) do |form| %>
+    <% if @documentation.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(@documentation.errors.count, "error") %> prohibited this document from being saved:</h2>
 
-<br>
+        <ul>
+          <% @documentation.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-<div>
-  <%= link_to "Show this documentation", @documentation %> |
-  <%= link_to "Back to documentations", documentations_path %>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <%= form.label :document_date, "Date", class: "form-label" %>
+          <%= form.date_field :document_date, class: "form-control", required: true, value: Date.today %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" data-controller="document">
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <%= form.label :store_id, "Location", class: "form-label" %>
+          <%= form.collection_select :store_id, Store.all.order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", autofocus: true, required: true, data: { action: "change->document#employee"}} %>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <%= form.label :employee_named_id, "Team Member", class: "form-label" %>
+          <%= form.collection_select :employee_named_id, User.all, :id, :full_name, {prompt: "Select Team Member"}, {class: "form-select", data: { document_target: "employeeList"}, required: true} %>
+        </div>
+      </div>
+      <div class="col-12 col-md-2 align-self-end">
+        <div class="mb-3">
+          <div class="form-check mb-3">
+            <%= form.label :individiual, "Individual?", class: "form-check-label" %>
+            <%= form.check_box :individiual, class: "form-check-input" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row" data-controller="document">
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <%= form.label :documentation_type, class: "form-label" %>
+          <%= form.select :documentation_type, Document::DOCUMENT_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true, data: { action: "change->document#document_level"}} %>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <%= form.label :level, class: "form-label" %>
+          <%= form.select :level, @documentation.level == "Commendation" ? Document::DOCUMENT_LEVEL_COMMENDATION : Document::DOCUMENT_LEVEL_DOCUMENTATION,{ prompt: "Select" }, { class: "form-control", data: { document_target: "levelList" }, required: true} %>
+        </div>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-3">
+          <%= form.label :documentation_class, class: "form-label" %>
+          <%= form.select :documentation_class, Document::DOCUMENT_CLASS, { prompt: "Select" }, { class: "form-control", data: { action: "change->document#document_list", document_target: "" }, required: true} %>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="mb-3">
+          <%= form.label :document_id, "Document", class: "form-label" %>
+          <%= form.collection_select :document_id, Document.all, :id, :definition, { prompt: "Select" }, { class: "form-control", data: { document_target: "documentList" }, required: true} %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <div class="mb-3">
+          <%= form.label :description, class: "form-label" %>
+          <%= form.text_area :description, class: "form-control", required: true %>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <%= form.label :pictures, "Add Picture?", class: "form-label" %>
+          <%= form.file_field :pictures, multiple: true, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= form.submit class: "btn my-submit" %>
+    </div>
+  <% end %>
+  </div>
+  <div class="card-footer">
+    <div class="d-grid gap-2 d-md-flex pt-3">
+      <%= link_to "Show", @documentation, class: "btn my-submit" %>
+      <%= link_to "Documentations", documentations_path, class: "btn my-submit" %>
+    </div>
+  </div>
 </div>

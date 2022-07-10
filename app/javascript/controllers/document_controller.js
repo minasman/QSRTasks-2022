@@ -4,7 +4,7 @@ import { get } from "@rails/request.js"
 
 // Connects to data-controller="document"
 export default class extends Controller {
-  static targets = ["employeeList", "levelList", "documentList"]
+  static targets = ["employeeList", "levelList", "documentList", "docKlassList"]
 
   connect() {
   }
@@ -20,6 +20,9 @@ export default class extends Controller {
 
   document_level(e) {
     let type = document.getElementById(e.path[0].id).value
+    this.levelListTarget.selected = ''
+    this.docKlassListTarget.value = ''
+    document.getElementById("documentation_document_id").value = ''
     let target = this.levelListTarget.id
     get(`/documents/level_list?target=${target}&type=${type}`, {
       responseKind: "turbo-stream"})
