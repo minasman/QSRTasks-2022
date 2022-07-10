@@ -58,6 +58,18 @@ class Documentations::DocumentationsController < ApplicationController
     end
   end
 
+  def level_list
+    @target = params[:target]
+    if params[:type] == "Documentation"
+      @levels = Document::DOCUMENT_LEVEL_DOCUMENTATION
+    else
+      @levels = Document::DOCUMENT_LEVEL_COMMENDATION
+    end
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_documentation

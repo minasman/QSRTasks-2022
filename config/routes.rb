@@ -43,7 +43,12 @@ Rails.application.routes.draw do
         get :level_list
       end
     end
-    resources :documentations
+    resources :documentations do
+      collection do
+        get :employee_list
+        get :level_list
+      end
+    end
   end
 
   scope module: 'maintenance' do
