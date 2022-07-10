@@ -44,13 +44,13 @@
               <td><%= user.payroll_id %></td>
               <td>
                 <% if current_user.position.name == "Director" %>
-                  <%= link_to "Login As ", masquerade_path(user), class: "text-longhorn-500 px-2 table-link", data: { turbo: false } %> |
+                  <%= link_to "Login As ", masquerade_path(user), class: "px-2 table-link", data: { turbo: false } %> |
                 <% end %>
                 <% if policy(:user).edit? %>
-                  <%= link_to "Edit", edit_user_path(user), class: "text-longhorn-500 px-2 table-link",  data: { turbo: false } %>
+                  <%= link_to "Edit", edit_user_path(user), class: "px-2 table-link",  data: { turbo: false } %>
                 <% end %>
                 <% if policy(:user).destroy? %>
-                  | <%= link_to "Deactivate", user,  class: "text-longhorn-500 px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}!" } %>
+                  | <%= link_to "Deactivate", user,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}!" } %>
                 <% end %>
               </td>
             </tr>

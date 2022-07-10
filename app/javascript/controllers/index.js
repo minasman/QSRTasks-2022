@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import DocumentController from "./document_controller.js"
+application.register("document", DocumentController)
+
 import EquipmentController from "./equipment_controller.js"
 application.register("equipment", EquipmentController)
 

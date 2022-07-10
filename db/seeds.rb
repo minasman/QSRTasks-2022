@@ -1,160 +1,264 @@
-admin =
-  Admin.new(
-    first_name: 'Daniel',
-    last_name: 'Hernandez',
-    email: 'qsrtasks@gmail.com',
-    phone: '2107718720',
-    password: 'mina1973',
-    password_confirmation: 'mina1973'
-  )
-admin.save
+# admin =
+#   Admin.new(
+#     first_name: 'Daniel',
+#     last_name: 'Hernandez',
+#     email: 'qsrtasks@gmail.com',
+#     phone: '2107718720',
+#     password: 'mina1973',
+#     password_confirmation: 'mina1973'
+#   )
+# admin.save
 
-org =
-  Organization.new(
-    name: 'Stagg Restaurants',
-    street: '8507 Speedway',
-    state: 'TX',
-    city: 'San Antonio',
-    zip: '78230',
-    phone: '2103757100'
-  )
-org.save
+# org =
+#   Organization.new(
+#     name: 'Stagg Restaurants',
+#     street: '8507 Speedway',
+#     state: 'TX',
+#     city: 'San Antonio',
+#     zip: '78230',
+#     phone: '2103757100'
+#   )
+# org.save
 
-positions_list = {
-  'DO' => {
-    'name' => 'Director',
+# positions_list = {
+#   'DO' => {
+#     'name' => 'Director',
+#     'organization_id' => '1',
+#     'department' => 'Administration'
+#   },
+#   'OM' => {
+#     'name' => 'Operations Manager',
+#     'organization_id' => '1',
+#     'department' => 'Operations'
+#   },
+#   'AA' => {
+#     'name' => 'AA',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Supervisor' => {
+#     'name' => 'Supervisor',
+#     'organization_id' => '1',
+#     'department' => 'Operations'
+#   },
+#   'General Manager' => {
+#     'name' => 'General Manager',
+#     'organization_id' => '1',
+#     'department' => 'Operations'
+#   },
+#   'AP Manager' => {
+#     'name' => 'AP Manager',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'AR Manager' => {
+#     'name' => 'AR Manager',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'Business Director' => {
+#     'name' => 'Business Director',
+#     'organization_id' => '1',
+#     'department' => 'Administration'
+#   },
+#   'HR Manager' => {
+#     'name' => 'HR Manager',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'HR Office Admin' => {
+#     'name' => 'HR Office Admin',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'Maint Admin' => {
+#     'name' => 'Maint Admin',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Maint Department Head' => {
+#     'name' => 'Maint Department Head',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Maint Tech' => {
+#     'name' => 'Maint Tech',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Maint Tech Department Head' => {
+#     'name' => 'Maint Tech Department Head',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Manager' => {
+#     'name' => 'Manager',
+#     'organization_id' => '1',
+#     'department' => 'Operations'
+#   },
+#   'Marketing Manager' => {
+#     'name' => 'Marketing Manager',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'Office Admin' => {
+#     'name' => 'Office Admin',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'OTP Tech' => {
+#     'name' => 'OTP Tech',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Owner' => {
+#     'name' => 'Owner',
+#     'organization_id' => '1',
+#     'department' => 'Administration'
+#   },
+#   'Patch Maint' => {
+#     'name' => 'Patch Maint',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Payroll Manager' => {
+#     'name' => 'Payroll Manager',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'PM Department Head' => {
+#     'name' => 'PM Department Head',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Shopper' => {
+#     'name' => 'Shopper',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'Technology Department Head' => {
+#     'name' => 'Technology Department Head',
+#     'organization_id' => '1',
+#     'department' => 'Maintenance'
+#   },
+#   'Training Manager' => {
+#     'name' => 'Training Manager',
+#     'organization_id' => '1',
+#     'department' => 'Office'
+#   },
+#   'Crew' => {
+#     'name' => 'Crew',
+#     'organization_id' => '1',
+#     'department' => 'Operations'
+#   }
+# }
+
+# positions_list.each do |_name, position_hash|
+#   p = Position.create(position_hash)
+#   p.save
+# end
+
+docs = {
+  'major1' => {
     'organization_id' => '1',
-    'department' => 'Administration'
+    'documentation_type' => 'Documentation',
+    'documentation_class' => 'Behavior',
+    'level' => 'Major',
+    'definition' => "This is a Major Behavior",
+    'points' => -1
   },
-  'OM' => {
-    'name' => 'Operations Manager',
+  'major2' => {
     'organization_id' => '1',
-    'department' => 'Operations'
+    'documentation_type' => 'Documentation',
+    'documentation_class' => 'Result',
+    'level' => 'Major',
+    'definition' => "This is a Major Result",
+    'points' => -1
   },
-  'AA' => {
-    'name' => 'AA',
+  'major3' => {
     'organization_id' => '1',
-    'department' => 'Maintenance'
+    'documentation_type' => 'Documentation',
+    'documentation_class' => 'Behavior',
+    'level' => 'Serious',
+    'definition' => "This is a Serious Behavior",
+    'points' => -2
   },
-  'Supervisor' => {
-    'name' => 'Supervisor',
+  'major4' => {
     'organization_id' => '1',
-    'department' => 'Operations'
+    'documentation_type' => 'Documentation',
+    'documentation_class' => 'Result',
+    'level' => 'Serious',
+    'definition' => "This is a Serious Result",
+    'points' => -2
   },
-  'General Manager' => {
-    'name' => 'General Manager',
+  'major5' => {
     'organization_id' => '1',
-    'department' => 'Operations'
+    'documentation_type' => 'Documentation',
+    'documentation_class' => 'Behavior',
+    'level' => 'Critical',
+    'definition' => "This is a Critical Behavior",
+    'points' => -3
   },
-  'AP Manager' => {
-    'name' => 'AP Manager',
+  'major6' => {
     'organization_id' => '1',
-    'department' => 'Office'
+    'documentation_type' => 'Documentation',
+    'documentation_class' => 'Result',
+    'level' => 'Critical',
+    'definition' => "This is a Critical Result",
+    'points' => -3
   },
-  'AR Manager' => {
-    'name' => 'AR Manager',
+  'major7' => {
     'organization_id' => '1',
-    'department' => 'Office'
+    'documentation_type' => 'Commendation',
+    'documentation_class' => 'Behavior',
+    'level' => 'Praise!',
+    'definition' => "This is a Praise! Behavior",
+    'points' => 1
   },
-  'Business Director' => {
-    'name' => 'Business Director',
+  'major8' => {
     'organization_id' => '1',
-    'department' => 'Administration'
+    'documentation_type' => 'Commendation',
+    'documentation_class' => 'Result',
+    'level' => 'Praise!',
+    'definition' => "This is a Praise! Result",
+    'points' => 1
   },
-  'HR Manager' => {
-    'name' => 'HR Manager',
+  'major9' => {
     'organization_id' => '1',
-    'department' => 'Office'
+    'documentation_type' => 'Commendation',
+    'documentation_class' => 'Behavior',
+    'level' => 'Cheers!',
+    'definition' => "This is a Cheers! Behavior",
+    'points' => 2
   },
-  'HR Office Admin' => {
-    'name' => 'HR Office Admin',
+  'major10' => {
     'organization_id' => '1',
-    'department' => 'Office'
+    'documentation_type' => 'Commendation',
+    'documentation_class' => 'Result',
+    'level' => 'Cheers!',
+    'definition' => "This is a Cheers! Result",
+    'points' => 2
   },
-  'Maint Admin' => {
-    'name' => 'Maint Admin',
+  'major11' => {
     'organization_id' => '1',
-    'department' => 'Maintenance'
+    'documentation_type' => 'Commendation',
+    'documentation_class' => 'Behavior',
+    'level' => 'Applause!',
+    'definition' => "This is a Applause! Behavior",
+    'points' => 3
   },
-  'Maint Department Head' => {
-    'name' => 'Maint Department Head',
+  'major12' => {
     'organization_id' => '1',
-    'department' => 'Maintenance'
+    'documentation_type' => 'Commendation',
+    'documentation_class' => 'Result',
+    'level' => 'Applause!',
+    'definition' => "This is a antother Applause! Result",
+    'points' => 3
   },
-  'Maint Tech' => {
-    'name' => 'Maint Tech',
-    'organization_id' => '1',
-    'department' => 'Maintenance'
-  },
-  'Maint Tech Department Head' => {
-    'name' => 'Maint Tech Department Head',
-    'organization_id' => '1',
-    'department' => 'Maintenance'
-  },
-  'Manager' => {
-    'name' => 'Manager',
-    'organization_id' => '1',
-    'department' => 'Operations'
-  },
-  'Marketing Manager' => {
-    'name' => 'Marketing Manager',
-    'organization_id' => '1',
-    'department' => 'Office'
-  },
-  'Office Admin' => {
-    'name' => 'Office Admin',
-    'organization_id' => '1',
-    'department' => 'Office'
-  },
-  'OTP Tech' => {
-    'name' => 'OTP Tech',
-    'organization_id' => '1',
-    'department' => 'Maintenance'
-  },
-  'Owner' => {
-    'name' => 'Owner',
-    'organization_id' => '1',
-    'department' => 'Administration'
-  },
-  'Patch Maint' => {
-    'name' => 'Patch Maint',
-    'organization_id' => '1',
-    'department' => 'Maintenance'
-  },
-  'Payroll Manager' => {
-    'name' => 'Payroll Manager',
-    'organization_id' => '1',
-    'department' => 'Office'
-  },
-  'PM Department Head' => {
-    'name' => 'PM Department Head',
-    'organization_id' => '1',
-    'department' => 'Maintenance'
-  },
-  'Shopper' => {
-    'name' => 'Shopper',
-    'organization_id' => '1',
-    'department' => 'Office'
-  },
-  'Technology Department Head' => {
-    'name' => 'Technology Department Head',
-    'organization_id' => '1',
-    'department' => 'Maintenance'
-  },
-  'Training Manager' => {
-    'name' => 'Training Manager',
-    'organization_id' => '1',
-    'department' => 'Office'
-  },
-  'Crew' => {
-    'name' => 'Crew',
-    'organization_id' => '1',
-    'department' => 'Operations'
-  }
 }
 
-positions_list.each do |_name, position_hash|
-  p = Position.create(position_hash)
+docs.each do |name, position_hash|
+  p = Document.create(position_hash)
   p.save
 end
 

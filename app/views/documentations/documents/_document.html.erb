@@ -1,37 +1,9 @@
-<div id="<%= dom_id document %>">
-  <p>
-    <strong>Organization:</strong>
-    <%= document.organization_id %>
-  </p>
-
-  <p>
-    <strong>Documentation type:</strong>
-    <%= document.documentation_type %>
-  </p>
-
-  <p>
-    <strong>Documentation class:</strong>
-    <%= document.documentation_class %>
-  </p>
-
-  <p>
-    <strong>Level:</strong>
-    <%= document.level %>
-  </p>
-
-  <p>
-    <strong>Definition:</strong>
-    <%= document.definition %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= document.description %>
-  </p>
-
-  <p>
-    <strong>Points:</strong>
-    <%= document.points %>
-  </p>
-
+<div class="card mb-5">
+  <h2 class="text-center card-header"><%= @document.documentation_type %> - <%= @document.level %></h2>
+  <div class="card-body">
+    <h3>This is based on a team member's <%= @document.documentation_class %></h3>
+    <h3>It is defined as: </h3>
+    <h4><%= @document.definition %></h4>
+    <h3>This document adjusts a team member's points by <%= @document.points %></h3>
+  </div>
 </div>

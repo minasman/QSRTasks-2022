@@ -5,6 +5,8 @@ class Documentations::DocumentsController < ApplicationController
   # GET /documents or /documents.json
   def index
     @documents = Document.all
+    @documents = @documents.search(params[:query]) if params[:query].present?
+    @pagy, @documents = pagy @documents.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
 
   # GET /documents/1 or /documents/1.json
@@ -50,11 +52,10 @@ class Documentations::DocumentsController < ApplicationController
 
   # DELETE /documents/1 or /documents/1.json
   def destroy
+    document_id = "document_#{@document.id}"
     @document.destroy
-
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: "Document was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(document_id) }
     end
   end
 
@@ -66,6 +67,14 @@ class Documentations::DocumentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def document_params
-      params.require(:document).permit(:organization_id, :documentation_type, :documentation_class, :level, :definition, :description, :points)
+      params.require(:document).permit(:organization_id, :documentation_type, :documentation_class, :level, :definition, :points)
+    end
+
+    def sort_column
+      %w{ documentation_type }.include?(params[:sort]) ? params[:sort] : "documentation_type"
+    end
+
+    def sort_direction
+      %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
     end
 end

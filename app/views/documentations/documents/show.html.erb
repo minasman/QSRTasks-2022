@@ -1,10 +1,16 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @document %>
-
-<div>
-  <%= link_to "Edit this document", edit_document_path(@document) %> |
-  <%= link_to "Back to documents", documents_path %>
-
-  <%= button_to "Destroy this document", @document, method: :delete %>
+<div class="card mb-5">
+  <h2 class="text-center card-header"><%= @document.documentation_type %> - <%= @document.level %></h2>
+  <div class="card-body">
+    <h3>This is based on a team member's <%= @document.documentation_class %></h3>
+    <h3>It is defined as: </h3>
+    <h4><%= @document.definition %></h4>
+    <h3>This document adjusts a team member's points by <%= @document.points %></h3>
+    <div class="d-grid gap-2 d-md-flex pt-5" >
+      <%= link_to "Edit", edit_document_path(@document), class: "btn my-submit" %>
+      <%= link_to "Documents", documents_path, class: "btn my-submit" %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= button_to "Destroy this document", @document, method: :delete, class: "btn btn-danger" %>
+  </div>
 </div>

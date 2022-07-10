@@ -11,42 +11,32 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :organization_id, style: "display: block" %>
-    <%= form.text_field :organization_id %>
+  <div class="mb-3">
+    <%= form.label :documentation_type, "Document Type", class: "form-label" %>
+    <%= form.select :documentation_type, Document::DOCUMENT_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true }  %>
   </div>
 
-  <div>
-    <%= form.label :documentation_type, style: "display: block" %>
-    <%= form.text_field :documentation_type %>
+  <div class="mb-3">
+    <%= form.label :documentation_class, "Document Class", class: "form-label" %>
+    <%= form.select :documentation_class, Document::DOCUMENT_CLASS, {:include_blank => "Select Type"}, {class: "form-control", required: true }  %>
   </div>
 
-  <div>
-    <%= form.label :documentation_class, style: "display: block" %>
-    <%= form.text_field :documentation_class %>
-  </div>
-
-  <div>
-    <%= form.label :level, style: "display: block" %>
+  <div class="mb-3">
+    <%= form.label :level, "Document Level", class: "form-label" %>
     <%= form.text_field :level %>
   </div>
 
-  <div>
-    <%= form.label :definition, style: "display: block" %>
-    <%= form.text_field :definition %>
+  <div class="mb-3">
+    <%= form.label :definition, class: "form-label" %>
+    <%= form.text_area :definition, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="mb-3">
+    <%= form.label :points, class: "form-label" %>
+    <%= form.number_field :points, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.label :points, style: "display: block" %>
-    <%= form.number_field :points %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <%= form.submit class: "btn my-submit"  %>
   </div>
 <% end %>
