@@ -84,6 +84,14 @@ class Documentations::DocumentationsController < ApplicationController
     end
   end
 
+  def document_list
+    @target = params[:target]
+    @document_list = Document.where(documentation_type: params[:type], documentation_class: params[:klass], level: params[:level])
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_documentation

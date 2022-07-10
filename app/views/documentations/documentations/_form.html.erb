@@ -44,16 +44,28 @@
   </div>
 
   <div class="row" data-controller="document">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
       <div class="mb-3">
         <%= form.label :documentation_type, class: "form-label" %>
         <%= form.select :documentation_type, Document::DOCUMENT_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true, data: { action: "change->document#document_level"}} %>
       </div>
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
       <div class="mb-3">
         <%= form.label :level, class: "form-label" %>
         <%= form.select :level,[],{ prompt: "Select" }, { class: "form-control", data: { document_target: "levelList" }, required: true} %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :documentation_class, class: "form-label" %>
+        <%= form.select :documentation_class, Document::DOCUMENT_CLASS,{ prompt: "Select" }, { class: "form-control", data: { action: "change->document#document_list", document_target: "" }, required: true} %>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :document_id, "Document", class: "form-label" %>
+        <%= form.select :document_id,[],{ prompt: "Select" }, { class: "form-control", data: { document_target: "documentList" }, required: true} %>
       </div>
     </div>
   </div>

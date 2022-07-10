@@ -2,7 +2,7 @@ class Document < ApplicationRecord
   belongs_to :organization
 
   DOCUMENT_TYPE = %w[Commendation Documentation]
-  DOCUMENT_CLASS = %w[Behaviour Result]
+  DOCUMENT_CLASS = %w[Behavior Result]
   DOCUMENT_LEVEL_COMMENDATION = %w[Praise! Cheers! Applause!]
   DOCUMENT_LEVEL_DOCUMENTATION = %w[Major Serious Critical]
 

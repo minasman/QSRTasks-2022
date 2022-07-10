@@ -1,0 +1,3 @@
+<%= turbo_stream.update @target do %>
+  <%= options_for_select @document_list.collect { |e| [e.definition, e.id ] } %>
+<% end %>

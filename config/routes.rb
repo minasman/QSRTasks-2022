@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       collection do
         get :employee_list
         get :level_list
+        get :document_list
       end
     end
   end
