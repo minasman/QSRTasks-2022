@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :documentations
 
   root 'public#home'
   get 'public/about'
@@ -40,6 +39,7 @@ Rails.application.routes.draw do
 
   scope module: 'documentations' do
     resources :documents
+    resources :documentations
   end
 
   scope module: 'maintenance' do

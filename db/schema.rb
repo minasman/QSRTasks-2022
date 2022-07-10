@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_10_004947) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_10_010052) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -121,6 +121,31 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_004947) do
     t.index ["organization_id"], name: "index_comments_on_organization_id"
     t.index ["store_id"], name: "index_comments_on_store_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "documentations", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "store_id", null: false
+    t.bigint "employee_named_id", null: false
+    t.bigint "awarded_by_id", null: false
+    t.bigint "position_id", null: false
+    t.bigint "document_id", null: false
+    t.string "documentation_type", null: false
+    t.string "level", null: false
+    t.string "documentation_class", null: false
+    t.string "description", null: false
+    t.string "points"
+    t.string "document_date", null: false
+    t.boolean "individiual", default: false
+    t.string "document_description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["awarded_by_id"], name: "index_documentations_on_awarded_by_id"
+    t.index ["document_id"], name: "index_documentations_on_document_id"
+    t.index ["employee_named_id"], name: "index_documentations_on_employee_named_id"
+    t.index ["organization_id"], name: "index_documentations_on_organization_id"
+    t.index ["position_id"], name: "index_documentations_on_position_id"
+    t.index ["store_id"], name: "index_documentations_on_store_id"
   end
 
   create_table "documents", force: :cascade do |t|
@@ -364,6 +389,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_004947) do
   add_foreign_key "comments", "organizations"
   add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
+  add_foreign_key "documentations", "documents"
+  add_foreign_key "documentations", "organizations"
+  add_foreign_key "documentations", "positions"
+  add_foreign_key "documentations", "stores"
   add_foreign_key "documents", "organizations"
   add_foreign_key "equipment", "equipment_areas"
   add_foreign_key "equipment", "equipment_types"

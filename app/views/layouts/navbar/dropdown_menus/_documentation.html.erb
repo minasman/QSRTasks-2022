@@ -1,0 +1,69 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Documentation
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% if policy(:documentation).new? %>
+      <li>
+        <%= link_to  new_documentation_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-wrench me-1"></i>
+          New Documentation
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:documentation).index? %>
+      <li>
+        <%= link_to  documentations_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-list me-1"></i>
+          Documentations
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+          <i class="fa-solid fa-file-chart-column me-1"></i>
+          Documentation Report
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:documentation).edit? %>
+      <li>
+        <%= link_to  "/assign_documentations", class: "dropdown-item" do %>
+          <i class="fa-solid fa-user-helmet-safety me-1"></i>
+          Assign documentations
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  "/weekly_recap", class: "dropdown-item" do %>
+          <i class="fa-solid fa-folder-gear me-1"></i>
+          Weekly Recap
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:equipment).new? %>
+      <li><hr class="dropdown-divider"></li>
+      <li>
+        <%= link_to  new_equipment_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-oven me-1"></i>
+          New Equipment
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:vendor).index? %>
+      <li><hr class="dropdown-divider"></li>
+      <% if policy(:vendor).new? %>
+        <li>
+          <%= link_to  new_vendor_path, class: "dropdown-item" do %>
+            <i class="fa-solid fa-shop me-1"></i>
+            New Vendor
+          <% end %>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to  vendors_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-people-line me-1"></i>
+          Vendors
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>

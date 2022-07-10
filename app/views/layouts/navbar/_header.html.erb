@@ -34,7 +34,10 @@
           <% if policy(:comment).index? %>
             <%= render "layouts/navbar/dropdown_menus/comment" %>
           <% end %>
-          <% if policy(:comment).index? %>
+          <% if policy(:documentation).index? %>
+            <%= render "layouts/navbar/dropdown_menus/documentation" %>
+          <% end %>
+          <% if policy(:workorder).index? %>
             <%= render "layouts/navbar/dropdown_menus/maintenance" %>
           <% end %>
           <% if policy(:safe_audit).index? %>
