@@ -1,8 +1,8 @@
 class Documentation < ApplicationRecord
   belongs_to :organization
   belongs_to :store
-  belongs_to :employee_named
-  belongs_to :awarded_by
+  belongs_to :employee_named, class_name: 'User'
+  belongs_to :awarded_by, class_name: 'User'
   belongs_to :position
   has_one :document
   has_many_attached :pictures, dependent: :delete_all

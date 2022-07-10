@@ -22,13 +22,19 @@ class Documentations::DocumentationsController < ApplicationController
 
   # POST /documentations or /documentations.json
   def create
-    @documentation = Documentation.new(documentation_params)
-    new_params = params.merge!(
+    new_params = documentation_params.merge!(
       :organization_id => current_user.organization.id,
       :awarded_by_id => current_user.id,
       :position_id => User.find(params[:documentation][:employee_named_id]).position.id,
-      :points => Document.find(params[:documentation][:document_id]).points
+      :points => Document.find(params[:documentation][:document_id]).points,
+      :document_description => Document.find(params[:documentation][:document_id]).definition
     )
+
+    @documentation = Documentation.new(new_params)
+
+    if params[:documentation][:individiual] == "0"
+      flow_of_accountability(@documentation, new_params)
+    end
 
     respond_to do |format|
       if @documentation.save
@@ -69,7 +75,7 @@ class Documentations::DocumentationsController < ApplicationController
     store = Store.find(params[:store])
     users =  store.users
     if store.store_type == "OFFICE"
-      @employees = User.where(position_id: Position.where(department: ["Administration", "Maintenance"])).or(User.where(position: Position.where(name: ["Supervisor", "Operations Manager"]))).order(position_id: :desc, first_name: :asc)
+      @employees = User.where(position_id: Position.where(department: ["Office", "Administration", "Maintenance"]).ids).or(User.where(position: Position.where(name: ["Supervisor", "Operations Manager"]))).order(position_id: :desc, first_name: :asc)
     else
       @employees = users.where(position_id: [5, 15, 26], active: true).order(position_id: :desc, first_name: :asc)
     end
@@ -106,7 +112,7 @@ class Documentations::DocumentationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def documentation_params
-      params.require(:documentation).permit(:organization_id, :store_id, :employee_named_id, :awarded_by_id, :position_id, :document_id, :documentation_type, :level, :documentation_class, :description, :points, :document_date, :individual, pictures: [])
+      params.require(:documentation).permit(:organization_id, :store_id, :employee_named_id, :awarded_by_id, :position_id, :document_id, :documentation_type, :level, :documentation_class, :description, :points, :document_date, :individiual, :document_description, pictures: [])
     end
 
     def flow_of_accountability(document, new_params)
@@ -126,23 +132,23 @@ class Documentations::DocumentationsController < ApplicationController
 
       elsif department == "Maintenance"
         if position == "Maint Admin"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "AA"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "Maint Tech"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Tech Department Head", "Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Maint Tech Department Head", "Maint Department Head", "Business Director"]).ids)
         elsif position == "OTP Tech"
-          flow_list = User.where(position_id: Position.where(name: ["Technology Department Head", "Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Technology Department Head", "Maint Department Head", "Business Director"]).ids)
         elsif position == "Patch Maint"
-          flow_list = User.where(position_id: Position.where(name: ["PM Department Head", "Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["PM Department Head", "Maint Department Head", "Business Director"]).ids)
         elsif position == "PM Department Head"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "Maint Tech Department Head"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "Technology Department Head"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
-        else # Maint Department Head (Need logic to not duplicate when DM is doc)
-          flow_list = User.where(position_id: Position.where(name: [""]).ids)
+          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
+        else
+          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
         end
 
       else
@@ -173,7 +179,7 @@ class Documentations::DocumentationsController < ApplicationController
         end
       end
       flow_list.each do |employee|
-        flow_document = Document.new(new_params)
+        flow_document = Documentation.new(new_params)
         flow_document.employee_named = employee
         flow_document.position = employee.position
         flow_document.description = "Initial Named Employee: #{document.employee_named.full_name} at #{document.store.number}: #{document.description}"
