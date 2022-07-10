@@ -30,16 +30,13 @@ class Documentations::DocumentationsController < ApplicationController
       :position_id => User.find(params[:documentation][:employee_named_id]).position.id,
       :points => Document.find(params[:documentation][:document_id]).points
     )
-
     @documentation = Documentation.new(new_params)
-
     if params[:documentation][:individual] == "0"
       flow_of_accountability(@documentation, new_params)
     end
-
     respond_to do |format|
       if @documentation.save
-        format.html { redirect_to documentation_url(@documentation), notice: "Documentation was successfully created." }
+        format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
       else
         format.html { render :new, status: :unprocessable_entity }

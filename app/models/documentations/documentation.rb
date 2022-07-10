@@ -9,7 +9,8 @@ class Documentation < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search, associated_against: {
-    user: [:employee_named_id, :awarded_by_id] },  using: {tsearch: {prefix: true}}
+    employee_named: [:first_name, :last_name] },  using: {tsearch: {prefix: true}}
+
 
 
   validate :acceptable_images
