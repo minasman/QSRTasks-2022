@@ -7,15 +7,15 @@ class DocumentationPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "Crew", "HR Manager", "Training Manager", "HR Office Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Office Admin", "Shopper"]
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Office Admin", "Shopper", "Payroll Admin", "AR Admin", "AP Admin", "Training Assistant", "Marketing Admin"]
   end
 
   def show?
-    index?
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Office Admin", "Shopper", "Payroll Admin", "AR Admin", "AP Admin", "Training Assistant", "Marketing Admin", "Crew", "PM Maint", "Maint Tech", "OTP Tech"]
   end
 
   def new?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "HR Manager", "HR Admin"]
+    index?
   end
 
   def create?
@@ -23,11 +23,11 @@ class DocumentationPolicy < ApplicationPolicy
   end
 
   def edit?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "HR Manager", "HR Admin"]
+    index?
   end
 
   def update?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "HR Manager", "HR Admin", "Operations Manager", "Supervisor"]
+    index?
   end
 
   def destroy?

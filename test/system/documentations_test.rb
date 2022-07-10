@@ -22,7 +22,7 @@ class DocumentationsTest < ApplicationSystemTestCase
     fill_in "Documentation class", with: @documentation.documentation_class
     fill_in "Documentation type", with: @documentation.documentation_type
     fill_in "Employee named", with: @documentation.employee_named_id
-    fill_in "Individiual", with: @documentation.individiual
+    fill_in "individual", with: @documentation.individual
     fill_in "Level", with: @documentation.level
     fill_in "Organization", with: @documentation.organization_id
     fill_in "Points", with: @documentation.points
@@ -46,7 +46,7 @@ class DocumentationsTest < ApplicationSystemTestCase
     fill_in "Documentation class", with: @documentation.documentation_class
     fill_in "Documentation type", with: @documentation.documentation_type
     fill_in "Employee named", with: @documentation.employee_named_id
-    fill_in "Individiual", with: @documentation.individiual
+    fill_in "individual", with: @documentation.individual
     fill_in "Level", with: @documentation.level
     fill_in "Organization", with: @documentation.organization_id
     fill_in "Points", with: @documentation.points

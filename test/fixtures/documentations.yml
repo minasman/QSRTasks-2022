@@ -13,7 +13,7 @@ one:
   description: MyString
   points: MyString
   document_date: MyString
-  individiual: MyString
+  individual: MyString
   document_description: MyString
 
 two:
@@ -29,5 +29,5 @@ two:
   description: MyString
   points: MyString
   document_date: MyString
-  individiual: MyString
+  individual: MyString
   document_description: MyString

@@ -28,13 +28,12 @@ class Documentations::DocumentationsController < ApplicationController
       :organization_id => current_user.organization.id,
       :awarded_by_id => current_user.id,
       :position_id => User.find(params[:documentation][:employee_named_id]).position.id,
-      :points => Document.find(params[:documentation][:document_id]).points,
-      :document_description => Document.find(params[:documentation][:document_id]).definition
+      :points => Document.find(params[:documentation][:document_id]).points
     )
 
     @documentation = Documentation.new(new_params)
 
-    if params[:documentation][:individiual] == "0"
+    if params[:documentation][:individual] == "0"
       flow_of_accountability(@documentation, new_params)
     end
 
@@ -114,7 +113,7 @@ class Documentations::DocumentationsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def documentation_params
-      params.require(:documentation).permit(:organization_id, :store_id, :employee_named_id, :awarded_by_id, :position_id, :document_id, :documentation_type, :level, :documentation_class, :description, :points, :document_date, :individiual, :document_description, pictures: [])
+      params.require(:documentation).permit(:organization_id, :store_id, :employee_named_id, :awarded_by_id, :position_id, :document_id, :documentation_type, :level, :documentation_class, :description, :points, :document_date, :individual, pictures: [])
     end
 
     def flow_of_accountability(document, new_params)
