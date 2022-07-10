@@ -58,6 +58,20 @@ class Documentations::DocumentationsController < ApplicationController
     end
   end
 
+  def employee_list
+    @target = params[:target]
+    store = Store.find(params[:store])
+    users =  store.users
+    if store.store_type == "OFFICE"
+      @employees = User.where(position_id: Position.where(department: ["Administration", "Maintenance"])).or(User.where(position: Position.where(name: ["Supervisor", "Operations Manager"]))).order(position_id: :desc, first_name: :asc)
+    else
+      @employees = users.where(position_id: [5, 15, 26], active: true).order(position_id: :desc, first_name: :asc)
+    end
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   def level_list
     @target = params[:target]
     if params[:type] == "Documentation"
