@@ -7,6 +7,7 @@ class Store < ApplicationRecord
   has_many :workorders
   has_many :equipment
   has_many :safe_audits
+  has_many :documentations
 
   include PgSearch::Model
   pg_search_scope :search, against: [:number, :name],  using: {tsearch: {prefix: true}}

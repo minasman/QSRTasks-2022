@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @documentation %>
+
+<div>
+  <%= link_to "Edit this documentation", edit_documentation_path(@documentation) %> |
+  <%= link_to "Back to documentations", documentations_path %>
+
+  <%= button_to "Destroy this documentation", @documentation, method: :delete %>
+</div>

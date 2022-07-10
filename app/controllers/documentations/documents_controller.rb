@@ -1,4 +1,5 @@
 class Documentations::DocumentsController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_document, only: %i[ show edit update destroy ]
 
   # GET /documents or /documents.json

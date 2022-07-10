@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :documentations
 
   root 'public#home'
   get 'public/about'

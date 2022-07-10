@@ -129,7 +129,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_004947) do
     t.string "documentation_class"
     t.string "level"
     t.string "definition"
-    t.string "description"
     t.integer "points"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

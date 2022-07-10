@@ -1,0 +1,33 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  store: one
+  employee_named: one
+  awarded_by: one
+  position: one
+  document: one
+  documentation_type: MyString
+  level: MyString
+  documentation_class: MyString
+  description: MyString
+  points: MyString
+  document_date: MyString
+  individiual: MyString
+  document_description: MyString
+
+two:
+  organization: two
+  store: two
+  employee_named: two
+  awarded_by: two
+  position: two
+  document: two
+  documentation_type: MyString
+  level: MyString
+  documentation_class: MyString
+  description: MyString
+  points: MyString
+  document_date: MyString
+  individiual: MyString
+  document_description: MyString
