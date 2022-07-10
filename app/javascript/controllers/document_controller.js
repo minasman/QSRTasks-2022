@@ -19,7 +19,7 @@ export default class extends Controller {
   }
 
   document_level(e) {
-    let type = document.getElementById("document_documentation_type").value
+    let type = document.getElementById(e.path[0].id).value
     let target = this.levelListTarget.id
     get(`/documents/level_list?target=${target}&type=${type}`, {
       responseKind: "turbo-stream"})
