@@ -24,8 +24,10 @@ class Documentations::DocumentationsController < ApplicationController
   def create
     @documentation = Documentation.new(documentation_params)
     new_params = params.merge!(
-      organization_id = current_user.organization.id,
-
+      :organization_id => current_user.organization.id,
+      :awarded_by_id => current_user.id,
+      :position_id => User.find(params[:documentation][:employee_named_id]).position.id,
+      :points => Document.find(params[:documentation][:document_id]).points
     )
 
     respond_to do |format|
