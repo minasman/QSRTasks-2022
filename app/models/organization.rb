@@ -8,4 +8,5 @@ class Organization < ApplicationRecord
   has_many :equipment_types, dependent: :delete_all
   has_many :workorders, dependent: :delete_all
   has_many :safe_audits, dependent: :delete_all
+  has_many :documents, dependent: :delete_all
 end

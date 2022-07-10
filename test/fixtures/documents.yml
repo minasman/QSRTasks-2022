@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  documentation_type: MyString
+  documentation_class: MyString
+  level: MyString
+  definition: MyString
+  description: MyString
+  points: 1
+
+two:
+  organization: two
+  documentation_type: MyString
+  documentation_class: MyString
+  level: MyString
+  definition: MyString
+  description: MyString
+  points: 1

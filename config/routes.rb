@@ -37,6 +37,10 @@ Rails.application.routes.draw do
     end
   end
 
+  scope module: 'documentations' do
+    resources :documents
+  end
+
   scope module: 'maintenance' do
     resources :workorders do
       resources :workorder_updates, only: %i[new create index]

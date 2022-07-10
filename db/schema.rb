@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_10_004947) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -123,6 +123,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.string "documentation_type"
+    t.string "documentation_class"
+    t.string "level"
+    t.string "definition"
+    t.string "description"
+    t.integer "points"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_documents_on_organization_id"
+  end
+
   create_table "equipment", force: :cascade do |t|
     t.string "name", null: false
     t.date "service_date", null: false
@@ -195,7 +208,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
     t.bigint "organization_id", null: false
     t.date "safe_audit_date", null: false
     t.time "safe_audit_time", null: false
-    t.string "shift_manager", null: false
     t.string "comment"
     t.integer "hundred"
     t.integer "fifty"
@@ -221,7 +233,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
     t.integer "working_headset", null: false
     t.integer "non_working_headset", null: false
     t.integer "total_headset", null: false
-    t.float "misc_other"
     t.float "total_safe"
     t.float "safe_variance"
     t.string "manager", null: false
@@ -354,6 +365,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_05_163925) do
   add_foreign_key "comments", "organizations"
   add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
+  add_foreign_key "documents", "organizations"
   add_foreign_key "equipment", "equipment_areas"
   add_foreign_key "equipment", "equipment_types"
   add_foreign_key "equipment", "organizations"
