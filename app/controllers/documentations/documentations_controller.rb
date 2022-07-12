@@ -36,6 +36,10 @@ class Documentations::DocumentationsController < ApplicationController
     end
     respond_to do |format|
       if @documentation.save
+        new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
+        puts "EMPLOYEE TOTAL IS NOW #{@documentation.employee_named.accumulated_points}"
+        @documentation.employee_named.update(accumulated_points: new_point_total)
+        puts "EMPLOYEE TOTAL IS changed to #{@documentation.employee_named.accumulated_points}"
         format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
       else
@@ -182,6 +186,8 @@ class Documentations::DocumentationsController < ApplicationController
         flow_document.position = employee.position
         flow_document.description = "Initial Named Employee: #{document.employee_named.full_name} at #{document.store.number}: #{document.description}"
         flow_document.save
+        updated_points = flow_document.employee_named.accumulated_points + flow_document.points
+        flow_document.employee_named.update(accumulated_points: updated_points)
       end
     end
 

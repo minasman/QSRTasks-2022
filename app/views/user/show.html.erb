@@ -3,7 +3,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-auto border">
-        <h4>Total Recognition Points: <%= @user.employee_named_documentations.sum(:points) %></h4>
+        <h4>Total Recognition Points: <%= @user.accumulated_points %></h4>
         <h5>Earned documentation: </h5>
         <ul>
           <li>Praise! <%= @user.employee_named_documentations.where(level: "Praise!").size %></li>

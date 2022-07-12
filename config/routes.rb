@@ -50,8 +50,13 @@ Rails.application.routes.draw do
         get :document_list
       end
     end
-    resources :rewards
+    resources :rewards do
+      collection do
+        get '/redeem_points/:id/reward/:reward_id' => 'rewards#redeem_points'
+      end
+    end
     get '/rewards/claim_my_reward/:id' => 'rewards#claim_my_reward'
+    get '/pending_to_redeem/' => 'rewards#pending_to_redeem'
   end
 
   scope module: 'maintenance' do

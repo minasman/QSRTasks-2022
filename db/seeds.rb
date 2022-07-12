@@ -178,6 +178,39 @@ positions_list.each do |_name, position_hash|
   p.save
 end
 
+rewards = {
+  '10' =>{
+    'organization_id' => 1,
+    'name' => "$10 Gift Card",
+    'value' => 10
+  },
+  '25' =>{
+    'organization_id' => 1,
+    'name' => "$25 Gift Card",
+    'value' => 25
+  },
+  '50' =>{
+    'organization_id' => 1,
+    'name' => "$50 Gift Card",
+    'value' => 50
+  },
+  '75' =>{
+    'organization_id' => 1,
+    'name' => "$75 Gift Card",
+    'value' => 75
+  },
+  '100' =>{
+    'organization_id' => 1,
+    'name' => "$100 Gift Card",
+    'value' => 100
+  },
+}
+
+rewards.each do |_name, reward_hash|
+  r = Reward.create(reward_hash)
+  r.save
+end
+
 docs = {
   'major1' => {
     'organization_id' => '1',

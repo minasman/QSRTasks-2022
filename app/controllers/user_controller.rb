@@ -3,7 +3,6 @@ class UserController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
   def index
-    # @users = user_list(true)
     @users = user_list(true)
     @users = @users.search(params[:query]) if params[:query].present?
     @pagy, @users = pagy @users.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)

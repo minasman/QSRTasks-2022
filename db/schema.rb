@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_12_081636) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_12_113202) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -135,7 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_081636) do
     t.string "documentation_class", null: false
     t.string "description", null: false
     t.integer "points"
-    t.string "document_date", null: false
+    t.date "document_date", null: false
     t.boolean "individual", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -334,6 +334,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_081636) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "position_id", null: false
+    t.integer "accumulated_points", default: 0
+    t.integer "rewards", default: [], array: true
+    t.integer "redeemed_rewards", default: [], array: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"
