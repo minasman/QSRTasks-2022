@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_10_010052) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_12_081636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -224,6 +224,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_010052) do
     t.index ["organization_id"], name: "index_positions_on_organization_id"
   end
 
+  create_table "rewards", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "value", null: false
+    t.bigint "organization_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_rewards_on_organization_id"
+  end
+
   create_table "safe_audits", force: :cascade do |t|
     t.bigint "auditor_id"
     t.bigint "manager_id"
@@ -402,6 +411,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_10_010052) do
   add_foreign_key "equipment_types", "organizations"
   add_foreign_key "guests", "organizations"
   add_foreign_key "positions", "organizations"
+  add_foreign_key "rewards", "organizations"
   add_foreign_key "safe_audits", "organizations"
   add_foreign_key "safe_audits", "stores"
   add_foreign_key "stores", "organizations"

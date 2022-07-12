@@ -60,11 +60,11 @@ class Documentations::DocumentationsController < ApplicationController
 
   # DELETE /documentations/1 or /documentations/1.json
   def destroy
+    authorize @documentation
+    documentation_id = "documentation_#{@documentation.id}"
     @documentation.destroy
-
     respond_to do |format|
-      format.html { redirect_to documentations_url, notice: "Documentation was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(documentation_id) }
     end
   end
 

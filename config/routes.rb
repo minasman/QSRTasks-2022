@@ -50,6 +50,8 @@ Rails.application.routes.draw do
         get :document_list
       end
     end
+    resources :rewards
+    get '/rewards/claim_my_reward/:id' => 'rewards#claim_my_reward'
   end
 
   scope module: 'maintenance' do

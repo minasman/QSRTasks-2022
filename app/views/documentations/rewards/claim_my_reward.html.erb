@@ -1,0 +1,20 @@
+<div class="card mb-5">
+  <div class="card-header">
+    <h2 class="text-center"><%= @user.full_name %></h2>
+    <h4 class="text-center">Current Point Total: <%= @user.employee_named_documentations.sum(:points) %></h4>
+  </div>
+  <div class="card-body">
+    <% if @rewards.any? %>
+      <div class="row justify-content-center">
+        <% @rewards.each do |reward| %>
+        <!-- This link should update the users point total, assign the reward to the users record, notify HR Manager, and Chain of command that the reward was chosen. A list of pending rewards should be created that is managed by HR to verify distribution. page should update and reflect new point total and any other options. this will all be done using hotwire/turbo/etc-->
+          <div class="col-6 col-md-2">
+            <h3 class=""><%= link_to reward.name, '', class: "btn my-submit" %></h3>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <h3 class="text-center">You don't have enough points to redeem a reward</h3>
+    <% end %>
+  </div>
+</div>

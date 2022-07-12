@@ -42,5 +42,29 @@
         <% end %>
       </li>
     <% end %>
+    <% if policy(:reward).index? %>
+      <li><hr class="dropdown-divider"></li>
+      <% if policy(:reward).new? %>
+        <li>
+          <%= link_to new_reward_path, class: "dropdown-item" do %>
+            <i class="fa-solid fa-award me-1"></i>
+            New Reward
+          <% end %>
+        </li>
+      <% end %>
+      <li>
+        <%= link_to rewards_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-trophy me-1"></i>
+          Rewards
+        <% end %>
+      </li>
+      <li>
+        <%= link_to "", class: "dropdown-item" do %>
+          <i class="fa-solid fa-envelope-open-dollar me-1"></i>
+          Pending Rewards
+          <span class="badge rounded-pill bg-light text-dark"><%= %></span>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </li>

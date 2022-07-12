@@ -1,64 +1,25 @@
 <div id="<%= dom_id documentation %>">
 
-
-  <p>
-    <strong>Store:</strong>
-    <%= documentation.store_id %>
-  </p>
-
-  <p>
-    <strong>Employee named:</strong>
-    <%= documentation.employee_named.full_name %>
-  </p>
-
-  <p>
-    <strong>Awarded by:</strong>
-    <%= documentation.awarded_by.full_name %>
-  </p>
-
-  <p>
-    <strong>Position:</strong>
-    <%= documentation.position.name %>
-  </p>
-
-  <p>
-    <strong>Document:</strong>
-    <%= documentation.document_id %>
-  </p>
-
-  <p>
-    <strong>Documentation type:</strong>
-    <%= documentation.documentation_type %>
-  </p>
-
-  <p>
-    <strong>Level:</strong>
-    <%= documentation.level %>
-  </p>
-
-  <p>
-    <strong>Documentation class:</strong>
-    <%= documentation.documentation_class %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= documentation.description %>
-  </p>
-
-  <p>
-    <strong>Points:</strong>
-    <%= documentation.points %>
-  </p>
-
-  <p>
-    <strong>Document date:</strong>
-    <%= documentation.document_date %>
-  </p>
-
-  <p>
-    <strong>individual:</strong>
-    <%= documentation.individual %>
-  </p>
+  <div class="row">
+    <div class="col-12">
+      <% if documentation.documentation_type == "Commendation" %>
+        <h4 class="text-center">You have been recognized by <%= documentation.awarded_by.full_name %> on <%= documentation.document_date %> for <%= documentation.description %></h4>
+      <% else %>
+        <h4 class="text-center">You have been documented by <%= documentation.awarded_by.full_name %> on <%= documentation.document_date %> for <%= documentation.description %></h4>
+      <% end %>
+    </div>
+    <div class="col-12">
+      <h5 class="text-center">This takes you to <%= documentation.employee_named.employee_named_documentations.sum(:points) %> points for this period!</h5>
+    </div>
+  </div>
+  <% if documentation.pictures.any? %>
+    <div class="row justify-content-center">
+      <% documentation.pictures.each do |p| %>
+        <div class='col-12 col-lg-4 col-xl-3'>
+          <%= image_tag p.variant(resize_to_fit: [300, 300]), class: "my-4" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 
 </div>

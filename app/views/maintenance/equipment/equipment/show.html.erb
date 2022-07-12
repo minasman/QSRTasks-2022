@@ -9,7 +9,7 @@
     <div class="row mb-5">
       <div class="d-block gap-2">
         <% @equipment.workorders.order(id: :desc).each do |workorder| %>
-          <%= link_to workorder.id, workorder, class: "btn my-submit mb-2" %>
+          <%= link_to "#{workorder.created_at.strftime("%m/%d/%y")} - #{workorder.id}", workorder, class: "btn my-submit mb-2" %>
         <% end %>
       </div>
     </div>

@@ -12,7 +12,7 @@ class CreateDocumentations < ActiveRecord::Migration[7.0]
       t.string :documentation_class, null: false
       t.string :description, null: false
       t.integer :points
-      t.string :document_date, null: false
+      t.date :document_date, null: false
       t.boolean :individual, default: false
 
       t.timestamps
