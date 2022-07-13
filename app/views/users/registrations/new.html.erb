@@ -1,116 +1,116 @@
 <div class="row justify-content-center mt-5">
-  <div class="col-12 col-md-10 col-lg-8 col-xl-7">
-    <div class="card card-body">
-
+  <div class="col-12 col-md-10 col-lg-8 col-xl-4">
+    <div class="card">
       <h2 class="text-center card-header">Register New User</h2>
-
-      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f| %>
-        <div class="row mt-3">
-          <div class="col">
-            <%= render "users/shared/error_messages", resource: resource %>
-            <div class="row">
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :first_name, "First Name", class: "form-label" %>
-                  <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :last_name, "Last Name", class: "form-label" %>
-                  <%= f.text_field :last_name, class: "form-control" %>
-                </div>
-              </div>
-            </div>
-             <div class="row">
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :phone, class: "form-label" %>
-                  <em><small>(format 1-xxx-xxx-xxxx)</small></em>
-                  <%= f.telephone_field :phone, class: "form-control" %>
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :email, class: "form-label" %>
-                  <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :position_id, "Position", class: "form-label" %>
-                  <%= f.collection_select :position_id, position_list, :id, :name, {:include_blank => "Select Position"}, { class: "form-control", required: true } %>
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <%= f.label :rate, class: "form-label" %>
-                  <div class="input-group mb-3">
-                    <span class="input-group-text">$</span>
-                    <%= f.text_field :rate, class: "form-control" %>
-                  </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <div class="col-12">
-                <div class="mb-3">
-                  <%= f.label :payroll_id, "Payroll ID",  class: "form-label" %>
-                  <%= f.text_field :payroll_id, class: "form-control" %>
-                </div>
-              </div>
-            </div>
-
-            <% if (current_user.position.department == 'Operations') || (current_user.admin?) %>
-              <div class='mb-3'>
-                <%= f.label :stores, "Assigned Restaurants:", class: 'form-label' %>
-                <div class='row'>
-                  <%= f.collection_check_boxes :store_ids, current_user.stores.all.order('number ASC'), :id, :number do |s| %>
-                    <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
-                      <div class='form-check form-check-inline' style="margin-left: 12px; margin-right: 0px;">
-                        <%= s.check_box(class: "form-check-input") %>
-                        <%= s.label(class: "form-check-label") %>
-                      </div>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            <% end %>
-
-            <div class="row">
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :password, class: "form-label" %>
-                  <% if @minimum_password_length %>
-                  <em><small>(<%= @minimum_password_length %> characters minimum)</small></em>
-                  <% end %><br />
-                  <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-                </div>
-              </div>
-              <div class="col-12 col-md-6">
-                <div class="mb-3">
-                  <%= f.label :password_confirmation, "Password Confirmation", class: "form-label" %>
-                  <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-                </div>
-              </div>
-            </div>
-            <% if current_user.admin %>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), data: {turbo: false}) do |f| %>
+          <div class="row mt-3">
+            <div class="col">
+              <%= render "users/shared/error_messages", resource: resource %>
               <div class="row">
-                <div class="col-6 col-md-3">
-                  <div class="form-check mb-3">
-                    <%= f.label :admin, class: "form-check-label" %>
-                    <%= f.check_box :admin, class: "form-check-input" %>
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :first_name, "First Name", class: "form-label" %>
+                    <%= f.text_field :first_name, autofocus: true, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :last_name, "Last Name", class: "form-label" %>
+                    <%= f.text_field :last_name, class: "form-control" %>
                   </div>
                 </div>
               </div>
-            <% end %>
-            <div class="d-grid mb-2">
-              <%= f.submit "Register", class: "btn my-submit" %>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :phone, class: "form-label" %>
+                    <em><small>(format 1-xxx-xxx-xxxx)</small></em>
+                    <%= f.telephone_field :phone, class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :email, class: "form-label" %>
+                    <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :position_id, "Position", class: "form-label" %>
+                    <%= f.collection_select :position_id, position_list, :id, :name, {:include_blank => "Select Position"}, { class: "form-control", required: true } %>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <%= f.label :rate, class: "form-label" %>
+                    <div class="input-group mb-3">
+                      <span class="input-group-text">$</span>
+                      <%= f.text_field :rate, class: "form-control" %>
+                    </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-12">
+                  <div class="mb-3">
+                    <%= f.label :payroll_id, "Payroll ID",  class: "form-label" %>
+                    <%= f.text_field :payroll_id, class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+
+              <% if (current_user.position.department == 'Operations') || (current_user.admin?) %>
+                <div class='mb-3'>
+                  <%= f.label :stores, "Assigned Restaurants:", class: 'form-label' %>
+                  <div class='row'>
+                    <%= f.collection_check_boxes :store_ids, current_user.stores.all.order('number ASC'), :id, :number do |s| %>
+                      <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
+                        <div class='form-check form-check-inline' style="margin-left: 12px; margin-right: 0px;">
+                          <%= s.check_box(class: "form-check-input") %>
+                          <%= s.label(class: "form-check-label") %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
+
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :password, class: "form-label" %>
+                    <% if @minimum_password_length %>
+                    <em><small>(<%= @minimum_password_length %> characters minimum)</small></em>
+                    <% end %><br />
+                    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="mb-3">
+                    <%= f.label :password_confirmation, "Password Confirmation", class: "form-label" %>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+                  </div>
+                </div>
+              </div>
+              <% if current_user.admin %>
+                <div class="row">
+                  <div class="col-6 col-md-3">
+                    <div class="form-check mb-3">
+                      <%= f.label :admin, class: "form-check-label" %>
+                      <%= f.check_box :admin, class: "form-check-input" %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              <div class="d-grid mb-2">
+                <%= f.submit "Register", class: "btn my-submit" %>
+              </div>
             </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

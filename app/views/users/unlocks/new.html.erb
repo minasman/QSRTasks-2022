@@ -1,22 +1,20 @@
 <div class="row justify-content-center mt-5">
-  <div class="col-12 col-md-8 col-lg-6">
-    <div class="card card-body">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-4">
+    <div class="card">
       <h2 class="text-center card-header">Resend Unlock Instructions</h2>
-
-      <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-        <%= render "users/shared/error_messages", resource: resource %>
-
-        <div class="mb-3">
-          <%= f.label :email, class: "form-label" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-        </div>
-
-        <div class="d-grid mb-2">
-          <%= f.submit "Resend Unlock Instructions", class: "btn my-submit" %>
-        </div>
-      <% end %>
-
-      <%= render "users/shared/links" %>
+      <div class="card-body">
+        <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+          <%= render "users/shared/error_messages", resource: resource %>
+          <div class="mb-3">
+            <%= f.label :email, class: "form-label" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+          </div>
+          <div class="d-grid mb-2">
+            <%= f.submit "Resend Unlock Instructions", class: "btn my-submit" %>
+          </div>
+        <% end %>
+        <%= render "users/shared/links" %>
+      </div>
     </div>
   </div>
 </div>
