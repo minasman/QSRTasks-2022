@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     end
     get '/rewards/claim_my_reward/:id' => 'rewards#claim_my_reward'
     get '/pending_to_redeem/' => 'rewards#pending_to_redeem'
+    get '/pay_out/:id/:reward' => 'rewards#pay_out'
   end
 
   scope module: 'maintenance' do

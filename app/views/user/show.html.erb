@@ -13,6 +13,11 @@
           <li>Serious <%= @user.employee_named_documentations.where(level: "Serious").size %></li>
           <li>Critical <%= @user.employee_named_documentations.where(level: "Critical").size %></li>
         </ul>
+        <div class="row">
+          <div class="col-12">
+          <h5 class="text-center">You have redeemed <%= number_to_currency(redeemed_dollars(@user), precision: 0) %></h5>
+          </div>
+        </div>
         <%= link_to "Documentation", "", class: "btn my-submit my-3" %>
         <% if @user.id === current_user.id %>
           <%= link_to "Claim Reward", "/rewards/claim_my_reward/#{@user.id}", class: "btn my-submit my-3" %>

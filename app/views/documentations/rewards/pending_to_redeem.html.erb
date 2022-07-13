@@ -30,15 +30,15 @@
           </thead>
           <tbody>
             <% @users_with_rewards_pending.each do |user| %>
-              <% user.rewards.each do |reward| %>
-                <tr id="reward_<%= user.id %>_<%= reward %>" >
+              <% user.rewards.each_with_index do |reward, i| %>
+                <tr id="reward_<%= user.id %>_<%= i %>_<%= reward %>" >
                   <td><%= user.stores.any? ? user.stores[0].number : "Office" %></td>
                   <td><%= user.full_name %></td>
                   <td><%= user.position.name %></td>
                   <td><%= Reward.find(reward).name %></td>
                   <td>
                     <% if policy(:documentation).show? %>
-                      <%= link_to "Pay Out", '', class: "px-2 table-link", data: {turbo: false} %>
+                      <%= link_to "Pay Out", "/pay_out/#{user.id}/#{reward}", class: "table-link", data: {turbo: false} %>
                     <% end %>
                   </td>
                 </tr>
@@ -53,7 +53,7 @@
     </div>
   <% else %>
     <div class="card-body">
-      <h3 class="text-center">You do not currently have any documenations</h3>
+      <h3 class="text-center">All Rewards Have Been Paid Out!! 😀</h3>
     </div>
   <% end %>
 

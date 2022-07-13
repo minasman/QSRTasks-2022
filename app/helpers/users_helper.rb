@@ -7,4 +7,12 @@ module UsersHelper
     end
     link_to name, request.params.merge(sort: column, direction: direction), **options
   end
+
+  def redeemed_dollars(user)
+    dollars = 0
+    user.redeemed_rewards.each do |reward|
+      dollars += Reward.find(reward).value
+    end
+    dollars
+  end
 end

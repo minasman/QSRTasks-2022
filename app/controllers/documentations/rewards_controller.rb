@@ -81,10 +81,19 @@ class Documentations::RewardsController < ApplicationController
   end
 
   def pending_to_redeem
-    # Need to add functionality in the view to move rewards to redeemed_rewards in the users file
     @users_with_rewards_pending = User.where.not('rewards = ?', '{}')
     @users_with_rewards_pending = @users_with_rewards_pending.search(params[:query]) if params[:query].present?
     @pagy, @users_with_rewards_pending = pagy @users_with_rewards_pending.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def pay_out
+    user = User.find(params[:id])
+    rewards = user.rewards
+    redeemed = user.redeemed_rewards
+    rewards.delete_at(rewards.index(params[:reward].to_i))
+    redeemed.push(params[:reward])
+    user.update(rewards: rewards, redeemed_rewards: redeemed)
+    redirect_to "/pending_to_redeem"
   end
 
   private

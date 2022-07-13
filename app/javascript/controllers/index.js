@@ -10,6 +10,9 @@ application.register("document", DocumentController)
 import EquipmentController from "./equipment_controller.js"
 application.register("equipment", EquipmentController)
 
+import FormController from "./form_controller.js"
+application.register("form", FormController)
+
 import HelloController from "./hello_controller.js"
 application.register("hello", HelloController)
 

@@ -2,7 +2,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :validatable, :confirmable, :lockable, :timeoutable, :trackable, :masqueradable
 
   include PgSearch::Model
-  pg_search_scope :search, against: [:first_name, :last_name],  using: {tsearch: {prefix: true}}
+  pg_search_scope :search, against: [:first_name, :last_name], using: {tsearch: {prefix: true}}
 
   before_save :format_content
   validates :phone, phone: true
