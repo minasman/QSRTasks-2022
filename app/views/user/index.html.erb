@@ -39,8 +39,8 @@
               %></td>
               <td><%= link_to user.full_name, user, data: {turbo: false}, class: "table-link" %></td>
               <td><%= user.position.name %></td>
-              <td><%= number_to_phone(user.phone) %></td>
-              <td><%= user.email %></td>
+              <td><%= sms_to(number_to_phone(user.phone)) %></td>
+              <td><%= mail_to(user.email) %></td>
               <td><%= user.payroll_id %></td>
               <td>
                 <% if current_user.position.name == "Director" %>
@@ -50,7 +50,7 @@
                   <%= link_to "Edit", edit_user_path(user), class: "px-2 table-link",  data: { turbo: false } %>
                 <% end %>
                 <% if policy(:user).destroy? %>
-                  | <%= link_to "Deactivate", user,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}!" } %>
+                  | <%= link_to "Deactivate", user,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{user.full_name.titleize}! Note that ALL earned Points (#{user.accumulated_points}), Rewards and Documentation will be PERMANENTLY lost!" } %>
                 <% end %>
               </td>
             </tr>

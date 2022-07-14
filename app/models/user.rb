@@ -1,9 +1,6 @@
 class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :validatable, :confirmable, :lockable, :timeoutable, :trackable, :masqueradable
 
-  include PgSearch::Model
-  pg_search_scope :search, against: [:first_name, :last_name], using: {tsearch: {prefix: true}}
-
   before_save :format_content
   validates :phone, phone: true
   validates :rate, numericality: true
@@ -22,6 +19,17 @@ class User < ApplicationRecord
 
   scope :maint_list, -> { where(position_id: Position.where(department: 'Maintenance').ids).order("first_name") }
   scope :managers, -> {where(position_id: [5, 15], active: true).order(first_name: :asc)}
+  scope :crew, -> {where(position_id: [26], active: true).order(first_name: :asc)}
+  scope :first_week, -> {where(active: true, created_at: Date.today - 7.days..Date.today).order(first_name: :asc)}
+  scope :second_week, -> {where(active: true, created_at: Date.today - 14.days..Date.today - 7.days).order(first_name: :asc)}
+  scope :third_week, -> {where(active: true, created_at: Date.today - 21.days..Date.today - 14.days).order(first_name: :asc)}
+  scope :fourth_week, -> {where(active: true, created_at: Date.today - 28.days..Date.today - 21.days).order(first_name: :asc)}
+  scope :second_month, -> {where(active: true, created_at: Date.today - 2.months..Date.today - 28.days).order(first_name: :asc)}
+  scope :third_month, -> {where(active: true, created_at: Date.today - 3.months..Date.today - 2.months).order(first_name: :asc)}
+
+  include PgSearch::Model
+  pg_search_scope :search, against: [:first_name, :last_name], using: {tsearch: {prefix: true}}
+
   def full_name
     self.first_name + ' ' + self.last_name
   end

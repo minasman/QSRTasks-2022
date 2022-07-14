@@ -26,3 +26,13 @@
 .caret-off::after {
   display: none;
 }
+
+td a {
+  text-decoration: none;
+  color: black;
+}
+
+td a:hover {
+  color:#bf5700;
+  font-weight: bold;
+}
