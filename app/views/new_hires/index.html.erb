@@ -1,0 +1,7 @@
+<% if current_user.position.department == "Operations" %>
+  <%= render "/new_hires/operations_index", new_hires: @new_hires.where(store: current_user.stores) %>
+<% elsif current_user.position.department == "Maintenance" %>
+  <%= render "/new_hires/maintenance", new_hires: @new_hires.where(position_id: Position.where(department: "Maintenance").ids) %>
+<% else %>
+  <%= render "/new_hires/office_index", new_hires: @new_hires %>
+<% end %>

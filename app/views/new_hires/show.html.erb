@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @new_hire %>
+
+<div>
+  <%= link_to "Edit this new hire", edit_new_hire_path(@new_hire) %> |
+  <%= link_to "Back to new hires", new_hires_path %>
+
+  <%= button_to "Destroy this new hire", @new_hire, method: :delete %>
+</div>

@@ -1,0 +1,70 @@
+<div class="card mb-5">
+  <h2 class="card-header text-center">Pending Team Members</h2>
+  <% if new_hires.any? %>
+    <%= form_with url: "",  method: :get, data: { turbo_frame: "new-hires", turbo_action: "advance", controller: "form", action: "input->form#submit" }, class: "pb-3" do |form| %>
+      <div class="pt-3 row justify-content-between">
+        <div class="col-12 col-md-5 col-xl-2 ms-3">
+          <div class="row">
+            <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
+            <div class="col-7">
+              <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4  me-3">
+          <%= form.search_field :query, value: params[:query], class: "form-control", placeholder: "Search By Name" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="table-responsive card-body">
+      <%= turbo_frame_tag "new-hires" do %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Location</th>
+              <th scope="col" style="width: 10rem">Background Check Received</th>
+              <th scope="col" style="width: 10rem">Background Check OK</th>
+              <th scope="col"><%= sort_link_to "Name", :first_name, data: {turbo_action: "advance" }, class: "table-link" %></th>
+              <th scope="col">Phone</th>
+              <th scope="col">Email</th>
+              <th scope="col">Days On?</th>
+              <th scope="col">Comments</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% new_hires.each_with_index do |new_hire, i| %>
+              <tr id="<%= dom_id(new_hire) %>" class="align-middle">
+                <th scope="row"><%= i + 1 %></th>
+                <td><%= new_hire.store.number %></td>
+                <td class="text-center"><%= check_box_tag "bcdr-#{new_hire.id}", nil, new_hire.background_received?, id: new_hire.id, disabled: true, class: "form-check-input" %></td>
+                <td class="text-center"><%= check_box_tag "bcdr-#{new_hire.id}", nil, new_hire.background_ok?, id: new_hire.id, disabled: true, class: "form-check-input" %></td>
+                <td><%= link_to new_hire.full_name, new_hire, data: {turbo: false}, class: "table-link" %></td>
+                <td><%=  sms_to(new_hire.phone) %></td>
+                <td><%= mail_to(new_hire.email) %></td>
+                <td><%= time_ago_in_words(new_hire.created_at) %></td>
+                <td><%= new_hire.comments %></td>
+                <td>
+                  <% if policy(:new_hire).edit? %>
+                    <%= link_to "Edit", edit_new_hire_path(new_hire), class: "px-2 table-link", data: { turbo: false } %>
+                  <% end %>
+                  <% if policy(:new_hire).destroy? %>
+                    | <%= link_to "Remove", new_hire,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Remove #{new_hire.full_name.titleize}!" } %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="p-4">
+          <%== pagy_nav @pagy %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="card-body">
+      <h3 class="text-center">No Pending Team Members 😥</h3>
+    </div>
+  <% end %>
+</div>

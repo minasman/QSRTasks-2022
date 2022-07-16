@@ -11,4 +11,5 @@ class Organization < ApplicationRecord
   has_many :documents, dependent: :delete_all
   has_many :documentations, dependent: :delete_all
   has_many :rewards, dependent: :delete_all
+  has_many :new_hires, dependent: :delete_all
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_12_113202) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_16_141352) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -202,6 +202,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_113202) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_guests_on_organization_id"
+  end
+
+  create_table "new_hires", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "store_id", null: false
+    t.bigint "user_id", null: false
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.string "social", null: false
+    t.string "rate", null: false
+    t.date "birthdate", null: false
+    t.bigint "position_id", null: false
+    t.string "referred_by"
+    t.boolean "rehire", default: false, null: false
+    t.string "notes"
+    t.string "hear", null: false
+    t.boolean "attended", default: false, null: false
+    t.string "requirements"
+    t.boolean "background_received", default: false, null: false
+    t.boolean "background_ok"
+    t.string "comments"
+    t.boolean "background_na"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_new_hires_on_organization_id"
+    t.index ["position_id"], name: "index_new_hires_on_position_id"
+    t.index ["store_id"], name: "index_new_hires_on_store_id"
+    t.index ["user_id"], name: "index_new_hires_on_user_id"
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -413,6 +443,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_113202) do
   add_foreign_key "equipment_types", "equipment_areas"
   add_foreign_key "equipment_types", "organizations"
   add_foreign_key "guests", "organizations"
+  add_foreign_key "new_hires", "organizations"
+  add_foreign_key "new_hires", "positions"
+  add_foreign_key "new_hires", "stores"
+  add_foreign_key "new_hires", "users"
   add_foreign_key "positions", "organizations"
   add_foreign_key "rewards", "organizations"
   add_foreign_key "safe_audits", "organizations"

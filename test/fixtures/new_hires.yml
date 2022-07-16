@@ -1,0 +1,47 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  store: one
+  user: one
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  social: MyString
+  rate: MyString
+  birthdate: 2022-07-16
+  position: one
+  referred_by: MyString
+  rehire: false
+  notes: MyString
+  hear: MyString
+  attended: false
+  requirements: MyString
+  background_received: false
+  background_ok: false
+  comments: MyString
+  background_na: false
+
+two:
+  organization: two
+  store: two
+  user: two
+  first_name: MyString
+  last_name: MyString
+  email: MyString
+  phone: MyString
+  social: MyString
+  rate: MyString
+  birthdate: 2022-07-16
+  position: two
+  referred_by: MyString
+  rehire: false
+  notes: MyString
+  hear: MyString
+  attended: false
+  requirements: MyString
+  background_received: false
+  background_ok: false
+  comments: MyString
+  background_na: false

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :new_hires
 
   root 'public#home'
   get 'public/about'

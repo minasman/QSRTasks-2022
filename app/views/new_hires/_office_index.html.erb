@@ -1,0 +1,69 @@
+<div class="card mb-5">
+  <h2 class="card-header text-center">Pending Team Members</h2>
+  <% if @new_hires.any? %>
+    <%= form_with url: "",  method: :get, data: { turbo_frame: "new-hires", turbo_action: "advance", controller: "form", action: "input->form#submit" }, class: "pb-3" do |form| %>
+      <div class="pt-3 row justify-content-between">
+        <div class="col-12 col-md-5 col-xl-2 ms-3">
+          <div class="row">
+            <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
+            <div class="col-7">
+              <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4  me-3">
+          <%= form.search_field :query, value: params[:query], class: "form-control", placeholder: "Search By Name" %>
+        </div>
+      </div>
+    <% end %>
+    <div class="table-responsive card-body">
+      <%= turbo_frame_tag "new-hires" do %>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Attended</th>
+              <th scope="col" style="width: 10rem">Background Check Received</th>
+              <th scope="col" style="width: 10rem">Background Check OK</th>
+              <th scope="col">Location</th>
+              <th scope="col"><%= sort_link_to "Name", :first_name, data: {turbo_action: "advance" }, class: "table-link" %></th>
+              <th scope="col">Rate</th>
+              <th scope="col"><%= sort_link_to "Position", :position_id, data: {turbo_action: "advance" }, class: "table-link" %></th>
+              <th scope="col">Attention?</th>
+              <th scope="col">Rehire?</th>
+              <th scope="col">Days On?</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Comments</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @new_hires.each_with_index do |new_hire, i| %>
+              <tr id="<%= dom_id(new_hire) %>" class="align-middle">
+                <th scope="row"><%= i + 1 %></th>
+                <td class="text-center"><%= check_box_tag "nh-#{new_hire.id}", nil, new_hire.attended?, data: { action: 'click->new-hire#comment', new_hire_id_param: new_hire.id, new_hire_myaction_param: "attended", new_hire_mynum_param: i }, class: "form-check-input" %></td>
+                <td class="text-center"><%= check_box_tag "bcdr-#{new_hire.id}", nil, new_hire.background_received?, data: { action: 'click->new-hire#background', hire_id_param: new_hire.id, hire_myaction_param: "received", hire_mynum_param: i }, class: "form-check-input" %></td>
+                <td class="text-center"><%= check_box_tag "bcdo-#{new_hire.id}", nil, new_hire.background_ok?, data: { action: 'click->new-hire#background', hire_id_param: new_hire.id, hire_myaction_param: "approved", hire_mynum_param: i }, class: "form-check-input" %></td>
+                <td><%= new_hire.store.number %></td>
+                <td><%= link_to new_hire.full_name, new_hire, data: {turbo: false}, class: "table-link" %></td>
+                <td><%= number_to_currency(new_hire.rate) %></td>
+                <td><%= new_hire.position.name %></td>
+                <td><%=  new_hire.requirements %></td>
+                <td><%=  new_hire.rehire ? "YES" : "NO" %></td>
+                <td><%= time_ago_in_words(new_hire.created_at) %></td>
+                <td><%= new_hire.notes %></td>
+                <td><%= text_area_tag "neh-#{new_hire.id}", new_hire.comments, data: { action: 'input->new-hire#comment', new_hire_id_param: new_hire.id, new_hire_mynum_param: i,new_hire_myaction_param: "comment" }, class: "form-control" %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="p-4">
+          <%== pagy_nav @pagy %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <div class="card-body">
+      <h3 class="text-center">No Pending Team Members 😥</h3>
+    </div>
+  <% end %>
+</div>

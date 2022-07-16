@@ -1,0 +1,141 @@
+<%= form_with(model: new_hire) do |form| %>
+  <% if new_hire.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(new_hire.errors.count, "error") %> prohibited this new_hire from being saved:</h2>
+
+      <ul>
+        <% new_hire.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div class="row">
+    <div class="col-12 col-md-4">
+      <div class="mb-3" >
+        <%= form.label :store_id, class: "form-label" %>
+        <%= form.collection_select :store_id, current_user.position.department == "Operations" ? current_user.stores.order(number: :asc) : Store.where(active: true).order('number ASC'), :id, :number, {prompt: "Select Location"}, {class: "form-select", autofocus: true, required: true} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h4 class="text-center fw-bold text-blink">CONFIRM THAT THE INFORMATION BELOW MATCHES THE APPLICANT'S IDENTIFICATION</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-4 col-xl-5">
+      <div class="mb-3">
+        <%= form.label :first_name, "First Name", class: "form-label" %>
+        <%= form.text_field :first_name, class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 col-xl-5">
+      <div class="mb-3">
+        <%= form.label :last_name, "Last Name", class: "form-label" %>
+        <%= form.text_field :last_name, class: "form-control", required: true %>
+      </div>
+    </div>
+     <div class="col-12 col-md-4 col-xl-2">
+      <div class="mb-3">
+        <%= form.label :social, "Last 5 SS#", class: "form-label" %>
+        <em><small>(format #####)</small></em>
+        <%= form.text_field :social, class: "form-control", required: true %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <%= form.label :email, class: "form-label" %>
+        <%= form.email_field :email, class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <%= form.label :phone, class: "form-label" %>
+        <em><small>(format 1-xxx-xxx-xxxx)</small></em>
+        <%= form.telephone_field :phone, class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :birthdate, class: "form-label" %>
+        <%= form.date_field :birthdate, class: "form-control", required: true %>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :position_id, class: "form-label" %>
+        <%= form.collection_select :position_id, position_list, :id, :name, {:include_blank => "Select Position"}, { class: "form-control", required: true } %>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+      <div class="mb-3">
+        <%= form.label :rate, class: "form-label" %>
+        <div class="input-group mb-3">
+          <span class="input-group-text">$</span>
+          <%= form.text_field :rate, class: "form-control" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-4">
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-12 col-xl-2">
+      <div class="mb-3">
+        <%= form.label :rehire, "Rehire?", class: "form-label" %><br>
+        <div class="form-check form-check-inline">
+          <%= form.label :rehire, "Yes" %>
+          <%= form.radio_button :rehire, true, {data: {action: ""}, class: "form-check-input"} %>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.label :rehire, "No" %>
+          <%= form.radio_button :rehire, false, {data: {action: ""}, class: "form-check-input"} %>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-4">
+      <div class="mb-3">
+        <%= form.label :referred_by, "Referred By?", class: "form-label" %>
+        <%= form.text_field :referred_by, class: "form-control" %>
+      </div>
+    </div>
+    <div class="col-12 col-md-6 col-xl-6">
+      <div class="mb-3">
+        <%= form.label :hear, "How did you hear about us?", class: "form-label" %>
+        <%= form.select :hear, NewHire::HEAR, { prompt: true, required: true }, {class: "form-control"} %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :requirements, class: "form-label" do %>
+          <span>Requires Additional Attention <small>(J1 Students, Translation needed(Spanish, French, etc.), Job/Life Coach, Etc.)</small>
+          </span>
+        <% end %>
+        <%= form.select :requirements, NewHire::REQUIREMENTS, { prompt: true, required: true }, {class: "form-control"} %>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :notes, class: "form-label" %>
+        <%= form.text_area :notes, class: "form-control", placeholder: "Tattoos/Piercings Meet Appearance Guidelines or Approved by DO?" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit "Add Team Member", class: "btn my-submit" %>
+  </div>
+<% end %>

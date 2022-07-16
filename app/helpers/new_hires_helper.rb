@@ -1,0 +1,2 @@
+module NewHiresHelper
+end
