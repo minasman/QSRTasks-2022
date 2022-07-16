@@ -6,7 +6,7 @@ class CreateDocuments < ActiveRecord::Migration[7.0]
       t.string :documentation_class, null: false
       t.string :level, null: false
       t.string :definition, null: false
-      t.integer :points
+      t.integer :points, null: false
 
       t.timestamps
     end

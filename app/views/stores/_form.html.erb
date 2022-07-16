@@ -76,7 +76,7 @@
         </div>
 
         <div class="row">
-          <div class="col-12 col-md-6">
+          <div class="col-12 col-md-4">
             <div class="mb-3" >
               <%= form.label :safe, class: "form-label" %>
               <div class="input-group mb-3">
@@ -85,10 +85,16 @@
               </div>
             </div>
           </div>
-          <div class="col-12 col-md-6">
+           <div class="col-12 col-md-4">
+            <div class="mb-3" >
+              <%= form.label :ipad, "IPad #", class: "form-label" %>
+              <%= form.number_field :ipad, class: "form-control", required: true  %>
+            </div>
+          </div>
+          <div class="col-12 col-md-4">
             <div class="mb-3" >
               <%= form.label :headset, class: "form-label" %>
-              <%= form.text_field :headset, class: "form-control", required: true  %>
+              <%= form.number_field :headset, class: "form-control", required: true  %>
             </div>
           </div>
         </div>

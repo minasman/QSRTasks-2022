@@ -67,7 +67,7 @@ positions_list = {
     'department' => 'Office'
   },
   'HR Admin' => {
-    'name' => 'HR Office Admin',
+    'name' => 'HR Admin',
     'organization_id' => '1',
     'department' => 'Office'
   },
@@ -102,7 +102,7 @@ positions_list = {
     'department' => 'Office'
   },
   'Payroll Admin' => {
-    'name' => 'Office Admin',
+    'name' => 'Payroll Admin',
     'organization_id' => '1',
     'department' => 'Office'
   },
@@ -202,6 +202,16 @@ rewards = {
   '100' =>{
     'organization_id' => 1,
     'name' => "$100 Gift Card",
+    'value' => 100
+  },
+  'Spurs Tickets' =>{
+    'organization_id' => 1,
+    'name' => "Spurs Courtside",
+    'value' => 100
+  },
+  'UT' =>{
+    'organization_id' => 1,
+    'name' => "UT Longhorn Tickets",
     'value' => 100
   },
 }

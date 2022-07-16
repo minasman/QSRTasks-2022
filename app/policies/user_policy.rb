@@ -7,7 +7,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Payroll Admin", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "Maint Admin"]
+    true
   end
 
   def show?
@@ -27,7 +27,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def update?
-    edit?
+    true
   end
 
   def destroy?

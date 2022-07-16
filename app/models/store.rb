@@ -10,15 +10,14 @@ class Store < ApplicationRecord
   has_many :documentations
   has_many :rewards
 
-  include PgSearch::Model
-  pg_search_scope :search, against: [:number, :name],  using: {tsearch: {prefix: true}}
-
-
-  STORE_TYPE = %w[Traditional WM Office]
-
   validates :number, :name, :store_type, :phone, :email, :city, :state, :zip, :headset, :street, presence: true
   validates :safe, :headset, numericality: { only_integer: true }
   before_save :format_content
+
+  include PgSearch::Model
+  pg_search_scope :search, against: [:number, :name],  using: {tsearch: {prefix: true}}
+
+  STORE_TYPE = %w[Traditional WM Office]
 
   def format_content
     self.name = name.strip.titleize
@@ -28,7 +27,5 @@ class Store < ApplicationRecord
     self.zip = zip.strip
     self.phone = phone.strip
     self.email = email.strip.downcase
-    self.safe = safe.strip
-    self.headset = headset.strip
   end
 end

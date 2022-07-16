@@ -7,7 +7,7 @@ class StorePolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Crew", "HR Manager", "Training Manager", "HR Office Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head"]
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Crew", "HR Manager", "Training Manager", "HR Admin", "Payroll Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "Maint Admin"]
   end
 
   def show?

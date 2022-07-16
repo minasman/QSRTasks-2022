@@ -9,8 +9,8 @@ class CreateStores < ActiveRecord::Migration[7.0]
       t.string :zip, null: false
       t.string :phone, null: false
       t.string :email, null: false
-      t.string :safe, null: false
-      t.string :headset, null: false
+      t.integer :safe, null: false
+      t.integer :headset, null: false
       t.string :store_type, null: false
       t.integer :ipad, null: false
       t.boolean :active, null: false, default: true

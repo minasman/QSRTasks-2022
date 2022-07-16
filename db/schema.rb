@@ -153,7 +153,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_113202) do
     t.string "documentation_class", null: false
     t.string "level", null: false
     t.string "definition", null: false
-    t.integer "points"
+    t.integer "points", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_documents_on_organization_id"
@@ -288,8 +288,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_12_113202) do
     t.string "zip", null: false
     t.string "phone", null: false
     t.string "email", null: false
-    t.string "safe", null: false
-    t.string "headset", null: false
+    t.integer "safe", null: false
+    t.integer "headset", null: false
     t.string "store_type", null: false
     t.integer "ipad", null: false
     t.boolean "active", default: true, null: false
