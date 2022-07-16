@@ -17,10 +17,16 @@ class NewHiresController < ApplicationController
   # GET /new_hires/new
   def new
     @new_hire = NewHire.new
+    @min_date = min_date
+    @max_date = max_date
+    authorize @new_hire
   end
 
   # GET /new_hires/1/edit
   def edit
+    @min_date = min_date
+    @max_date = max_date
+    authorize @new_hire
   end
 
   # POST /new_hires or /new_hires.json
@@ -63,6 +69,17 @@ class NewHiresController < ApplicationController
     end
   end
 
+  def verify_rehire
+    email = params[:email]
+    @target = "rehire-found"
+    @rehire = User.find_by(email: email)
+    unless @rehire.nil?
+      respond_to do |format|
+        format.turbo_stream
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_new_hire
@@ -72,6 +89,14 @@ class NewHiresController < ApplicationController
     # Only allow a list of trusted parameters through.
     def new_hire_params
       params.require(:new_hire).permit(:organization_id, :store_id, :user_id, :first_name, :last_name, :email, :phone, :social, :rate, :birthdate, :position_id, :referred_by, :rehire, :notes, :hear, :attended, :requirements, :background_received, :background_ok, :comments, :background_na)
+    end
+
+    def max_date
+      (Date.today - 16.years).strftime('%Y-%m-%d')
+    end
+
+    def min_date
+      (Date.today - 100.years).strftime('%Y-%m-%d')
     end
 
     def sort_column

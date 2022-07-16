@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :new_hires
 
   root 'public#home'
   get 'public/about'
@@ -80,6 +79,10 @@ Rails.application.routes.draw do
     end
     resources :vendors
   end
+
+  resources :new_hires
+  get '/verify_rehire' => 'new_hires#verify_rehire'
+
 
   scope module: 'audits' do
     resources :safe_audits

@@ -1,0 +1,16 @@
+<%= turbo_stream.update @target do %>
+  <% if @rehire.nil? %>
+
+  <% else %>
+    <div class="col-12 alert alert-warning">
+      <% if @rehire.active %>
+        <h4 class="text-center text-danger">Verify that your applicant is not currently employed at another location. The email <%= @rehire.email %> is currently listed under <%= @rehire.full_name %> possibly still employed at <%= @rehire.stores.any? ? @rehire.stores[0].number : "the Office" %>. Before continuing with this applicant contact Patty Ruiz, (210) 375-7100</h4>
+        <h4 class="text-center text-danger">If the applicant is a current employee, he/she must request a transfer in order move to your restaurant. DO NOT CONTINUE WITH THIS ONBOARDING</h4>
+      <% else %>
+        <h4 class="text-center text-danger">Verify that your applicant is not a rehire. The email <%= @rehire.email %> is currently listed under <%= @rehire.full_name %> with a separation date on or about <%= @rehire.updated_at.strftime("%m/%d/%y")%>. Before continuing with this applicant contact Patty Ruiz at (210) 375-7100 to verify eligibility for rehire</h4>
+        <h4 class="text-center text-danger">If rehire is approved, an administrator MUST reactivate him/her on QSRTasks once all of the required onboarding actions have been completed</h4>
+      <% end %>
+    </div>
+
+  <% end %>
+<% end %>

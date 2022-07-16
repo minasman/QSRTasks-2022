@@ -25,6 +25,11 @@
       <h4 class="text-center fw-bold text-blink">CONFIRM THAT THE INFORMATION BELOW MATCHES THE APPLICANT'S IDENTIFICATION</h4>
     </div>
   </div>
+
+  <div class="row" id="rehire-found">
+
+  </div>
+
   <div class="row">
     <div class="col-12 col-md-4 col-xl-5">
       <div class="mb-3">
@@ -47,11 +52,11 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row" data-controller="new-hire">
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :email, class: "form-label" %>
-        <%= form.email_field :email, class: "form-control", required: true %>
+        <%= form.email_field :email, class: "form-control", required: true, data: { action: "change->new-hire#verify_rehire"} %>
       </div>
     </div>
     <div class="col-12 col-md-6">
@@ -61,20 +66,27 @@
         <%= form.telephone_field :phone, class: "form-control", required: true %>
       </div>
     </div>
-    <div class="col-12 col-md-4">
+  </div>
+  <div class="row" data-controller="new-hire">
+    <div class="col-6 col-md-3">
       <div class="mb-3">
         <%= form.label :birthdate, class: "form-label" %>
-        <%= form.date_field :birthdate, class: "form-control", required: true %>
+        <%= form.date_field :birthdate, class: "form-control", required: true, data: { action: "change->new-hire#confirm_age" }, min: @min_date, max: @max_date %>
       </div>
     </div>
-
+    <div class="col-6 col-md-2">
+      <div class="mb-3">
+        <label class="form-label">Age</label>
+        <input type="number" id="new-hire-age" min="16" max="100" required="true" class="form-control" data-new-hire-target="newHireAge">
+      </div>
+    </div>
     <div class="col-12 col-md-4">
       <div class="mb-3">
         <%= form.label :position_id, class: "form-label" %>
         <%= form.collection_select :position_id, position_list, :id, :name, {:include_blank => "Select Position"}, { class: "form-control", required: true } %>
       </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-3">
       <div class="mb-3">
         <%= form.label :rate, class: "form-label" %>
         <div class="input-group mb-3">
@@ -83,23 +95,20 @@
         </div>
       </div>
     </div>
-    <div class="col-12 col-md-4">
-
-    </div>
   </div>
 
 
   <div class="row">
-    <div class="col-12 col-xl-2">
+    <div class="col-12 col-xl-2" data-controller="new-hire">
       <div class="mb-3">
         <%= form.label :rehire, "Rehire?", class: "form-label" %><br>
         <div class="form-check form-check-inline">
           <%= form.label :rehire, "Yes" %>
-          <%= form.radio_button :rehire, true, {data: {action: ""}, class: "form-check-input"} %>
+          <%= form.radio_button :rehire, true, {data: {action: "change->new-hire#rehire"}, class: "form-check-input"} %>
         </div>
         <div class="form-check form-check-inline">
           <%= form.label :rehire, "No" %>
-          <%= form.radio_button :rehire, false, {data: {action: ""}, class: "form-check-input"} %>
+          <%= form.radio_button :rehire, false, {data: {action: "change->new-hire#rehire"}, class: "form-check-input"} %>
         </div>
       </div>
     </div>
