@@ -61,11 +61,12 @@ class NewHiresController < ApplicationController
 
   # DELETE /new_hires/1 or /new_hires/1.json
   def destroy
+    authorize @new_hire
+    new_hire_id = "new_hire_#{@new_hire.id}"
     @new_hire.destroy
 
     respond_to do |format|
-      format.html { redirect_to new_hires_url, notice: "New hire was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(new_hire_id) }
     end
   end
 
@@ -77,6 +78,26 @@ class NewHiresController < ApplicationController
       respond_to do |format|
         format.turbo_stream
       end
+    end
+  end
+
+  def approve_background
+    @new_hires = NewHire.where(attended: false, background_received: [false, nil]).or(NewHire.where(attended: false, background_ok: nil, background_na: nil))
+    @new_hires = @new_hires.search(params[:query]) if params[:query].present?
+    @pagy, @new_hires = pagy @new_hires.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+  end
+
+  def update_background
+    @received = params[:received] == "true" ? true : false
+    @approve = params[:approved] == "true" ? true : false
+    @not_approved = params[:not_approved] == "true" ? true : false
+    @target = params[:target]
+    @row = params[:row]
+    @new_hire = NewHire.find(@target.delete_prefix("new_hire_"))
+    puts "Received = #{@received} - Approved = #{@approve} - Not Approved = #{@not_approved}"
+    @new_hire.update(background_received: @received, background_ok: @approve, background_na: @not_approved)
+    respond_to do |format|
+      format.turbo_stream
     end
   end
 

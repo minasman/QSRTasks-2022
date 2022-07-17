@@ -1,0 +1,30 @@
+<% if @received && @not_approved %>
+  <%= turbo_stream.remove @target do %>
+  <% end %>
+<% elsif @received && @approve %>
+  <%= turbo_stream.remove @target do %>
+  <% end %>
+<% else %>
+  <%= turbo_stream.replace @target do %>
+    <tr id="<%= dom_id(@new_hire) %>" class="align-middle" data-controller="background" >
+      <th scope="row"><%= @row %></th>
+      <td><%= @new_hire.store.number %></td>
+      <td class="text-center"><%= check_box_tag "bcd-rcvd-#{@new_hire.id}", nil, @new_hire.background_received?, id: @new_hire.id, class: "form-check-input", data: {action: "change->background#check_background", background_target: "received"} %></td>
+      <td class="text-center"><%= check_box_tag "bcd-ok-#{@new_hire.id}", nil, @new_hire.background_ok?, id: @new_hire.id, class: "form-check-input", data: {action: "change->background#check_background", background_target: "approved"} %></td>
+      <td class="text-center"><%= check_box_tag "bcdn-na-#{@new_hire.id}", nil, @new_hire.background_na?, id: @new_hire.id, class: "form-check-input", data: {action: "change->background#check_background", background_target: "notApproved"} %></td>
+      <td><%= link_to @new_hire.full_name, @new_hire, data: {turbo: false}, class: "table-link" %></td>
+      <td><%= @new_hire.position.name  %></td>
+      <td><%= sms_to(@new_hire.phone) %></td>
+      <td><%= mail_to(@new_hire.email) %></td>
+      <td><%= time_ago_in_words(@new_hire.created_at) %></td>
+      <td>
+        <% if policy(:new_hire).edit? %>
+          <%= link_to "Edit", edit_new_hire_path(@new_hire), class: "px-2 table-link", data: { turbo: false } %>
+        <% end %>
+        <% if policy(:new_hire).destroy? %>
+          | <%= link_to "Remove", @new_hire,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Remove #{@new_hire.full_name.titleize}!" } %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>

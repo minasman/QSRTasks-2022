@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import BackgroundController from "./background_controller.js"
+application.register("background", BackgroundController)
+
 import DocumentController from "./document_controller.js"
 application.register("document", DocumentController)
 

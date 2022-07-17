@@ -8,4 +8,8 @@ module NewHiresHelper
       NewHire.where(attended: false).size
     end
   end
+
+  def pending_background_check
+    NewHire.where(attended: false, background_received: [false, nil]).size
+  end
 end

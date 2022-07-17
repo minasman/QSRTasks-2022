@@ -25,6 +25,13 @@
           New Team Member Report
         <% end %>
       </li>
+      <li>
+        <%= link_to  "/approve_background", class: "dropdown-item" do %>
+          <i class="fa-solid fa-user-check me-1"></i>
+          Pending Background Checks
+          <span class="badge rounded-pill bg-light text-dark"><%= pending_background_check %></span>
+        <% end %>
+      </li>
     <% end %>
   </ul>
 </li>
