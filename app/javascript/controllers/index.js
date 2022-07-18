@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import AttendController from "./attend_controller.js"
+application.register("attend", AttendController)
+
 import BackgroundController from "./background_controller.js"
 application.register("background", BackgroundController)
 

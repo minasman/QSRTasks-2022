@@ -1,10 +1,6 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @new_hire %>
-
-<div>
-  <%= link_to "Edit this new hire", edit_new_hire_path(@new_hire) %> |
-  <%= link_to "Back to new hires", new_hires_path %>
-
-  <%= button_to "Destroy this new hire", @new_hire, method: :delete %>
+<div class="card mb-5">
+  <div class="text-center card-header"><%= @new_hire.full_name %> - <%= @new_hire.store.number %> - <%= @new_hire.position.name %></div>
+  <div class="card-body">
+    <%= render @new_hire %>
+  </div>
 </div>

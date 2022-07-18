@@ -84,7 +84,8 @@ Rails.application.routes.draw do
   get '/verify_rehire/:email' => 'new_hires#verify_rehire'
   get '/approve_background' => 'new_hires#approve_background'
   get '/update_background' => 'new_hires#update_background'
-
+  get '/attended' => 'new_hires#attended'
+  get '/comment_update' => 'new_hires#comment_update'
 
   scope module: 'audits' do
     resources :safe_audits

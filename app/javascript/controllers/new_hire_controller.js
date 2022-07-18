@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { get, post, put, patch, destroy } from "@rails/request.js"
+import { get } from "@rails/request.js"
 
 // Connects to data-controller="new-hire"
 export default class extends Controller {
@@ -43,11 +43,13 @@ export default class extends Controller {
   }
 
   verify_rehire(event) {
-    console.log('v rehire')
     let email = event.target.value
     get(`/verify_rehire?email=${email}`, {
       responseKind: "turbo-stream"
     })
+  }
+
+  attended(event) {
 
   }
 }

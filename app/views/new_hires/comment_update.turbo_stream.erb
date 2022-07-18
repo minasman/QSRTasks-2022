@@ -1,0 +1,3 @@
+<%= turbo_stream.replace @target do %>
+  <%= text_area_tag "neh-#{@new_hire.id}", @new_hire.comments, data: { action: 'change->attend#comment_update'}, class: "form-control" %>
+<% end %>

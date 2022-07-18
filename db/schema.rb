@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_16_141352) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_180556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -223,9 +223,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_141352) do
     t.boolean "attended", default: false, null: false
     t.string "requirements"
     t.boolean "background_received", default: false, null: false
-    t.boolean "background_ok"
+    t.boolean "background_ok", default: false, null: false
     t.string "comments"
-    t.boolean "background_na"
+    t.boolean "background_na", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_new_hires_on_organization_id"
@@ -367,6 +367,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_16_141352) do
     t.integer "accumulated_points", default: 0
     t.integer "rewards", default: [], array: true
     t.integer "redeemed_rewards", default: [], array: true
+    t.date "birthdate"
+    t.date "hire_date"
+    t.integer "past_stores", default: [], array: true
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["organization_id"], name: "index_users_on_organization_id"

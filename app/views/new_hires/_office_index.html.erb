@@ -23,8 +23,8 @@
             <tr>
               <th scope="col">#</th>
               <th scope="col">Attended</th>
-              <th scope="col" style="width: 10rem">Background Check Received</th>
-              <th scope="col" style="width: 10rem">Background Check OK</th>
+              <!-- <th scope="col" style="width: 10rem">Background Check Received</th>
+              <th scope="col" style="width: 10rem">Background Check OK</th> -->
               <th scope="col">Location</th>
               <th scope="col"><%= sort_link_to "Name", :first_name, data: {turbo_action: "advance" }, class: "table-link" %></th>
               <th scope="col">Rate</th>
@@ -38,11 +38,11 @@
           </thead>
           <tbody>
             <% @new_hires.each_with_index do |new_hire, i| %>
-              <tr id="<%= dom_id(new_hire) %>" class="align-middle">
+              <tr id="<%= dom_id(new_hire) %>" class="align-middle" data-controller="attend">
                 <th scope="row"><%= i + 1 %></th>
-                <td class="text-center"><%= check_box_tag "nh-#{new_hire.id}", nil, new_hire.attended?, data: { action: 'click->new-hire#comment', new_hire_id_param: new_hire.id, new_hire_myaction_param: "attended", new_hire_mynum_param: i }, class: "form-check-input" %></td>
-                <td class="text-center"><%= check_box_tag "bcdr-#{new_hire.id}", nil, new_hire.background_received?, data: { action: 'click->new-hire#background', hire_id_param: new_hire.id, hire_myaction_param: "received", hire_mynum_param: i }, class: "form-check-input" %></td>
-                <td class="text-center"><%= check_box_tag "bcdo-#{new_hire.id}", nil, new_hire.background_ok?, data: { action: 'click->new-hire#background', hire_id_param: new_hire.id, hire_myaction_param: "approved", hire_mynum_param: i }, class: "form-check-input" %></td>
+                <td class="text-center"><%= check_box_tag "nh-#{new_hire.id}", nil, new_hire.attended?, data: { action: 'change->attend#attended', attend_target: 'attended' }, class: "form-check-input" %></td>
+                <!-- <td class="text-center"><%= check_box_tag "bcdr-#{new_hire.id}", nil, new_hire.background_received?, data: { action: 'change->attend#attended', background_target: 'received' }, class: "form-check-input" %></td>
+                <td class="text-center"><%= check_box_tag "bcdo-#{new_hire.id}", nil, new_hire.background_ok?, data: { action: 'change->attend#attended', background_target: 'approved' }, class: "form-check-input" %></td> -->
                 <td><%= new_hire.store.number %></td>
                 <td><%= link_to new_hire.full_name, new_hire, data: {turbo: false}, class: "table-link" %></td>
                 <td><%= number_to_currency(new_hire.rate) %></td>
@@ -50,8 +50,8 @@
                 <td><%=  new_hire.requirements %></td>
                 <td><%=  new_hire.rehire ? "YES" : "NO" %></td>
                 <td><%= time_ago_in_words(new_hire.created_at) %></td>
-                <td><%= new_hire.notes %></td>
-                <td><%= text_area_tag "neh-#{new_hire.id}", new_hire.comments, data: { action: 'input->new-hire#comment', new_hire_id_param: new_hire.id, new_hire_mynum_param: i,new_hire_myaction_param: "comment" }, class: "form-control" %></td>
+                <td><%= new_hire.notes.size > 0 ? new_hire.notes : "None" %></td>
+                <td><%= text_area_tag "neh-#{new_hire.id}", new_hire.comments, data: { action: 'change->attend#comment_update'}, class: "form-control" %></td>
               </tr>
             <% end %>
           </tbody>

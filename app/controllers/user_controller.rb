@@ -50,8 +50,9 @@ class UserController < ApplicationController
   def destroy
     authorize @user
     user_name = @user.full_name
+    store_list = @user.past_stores.push(@user.stores)
     user_id = "user_#{@user.id}"
-    @user.update(active: @user.active ? false : true, store_ids: [], position_id: 26, admin: false, rewards: [], redeemed_rewards: [], accumulated_points: 0)
+    @user.update(active: @user.active ? false : true, store_ids: [], position_id: 26, admin: false, rewards: [], redeemed_rewards: [], accumulated_points: 0, past_stores: store_list)
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(user_id) }
     end
@@ -70,7 +71,7 @@ class UserController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :phone, :admin, :position_id, :active, :organizations_id, { store_ids: [] }, { tclass_ids: [] })
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation, :phone, :admin, :position_id, :active, :organizations_id, :birthdate, :hire_date, { store_ids: [] }, { tclass_ids: [] })
   end
 
   def user_list(active)

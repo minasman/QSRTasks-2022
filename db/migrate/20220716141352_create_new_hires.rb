@@ -19,9 +19,9 @@ class CreateNewHires < ActiveRecord::Migration[7.0]
       t.boolean :attended, null: false, default: false
       t.string :requirements
       t.boolean :background_received, null: false, default: false
-      t.boolean :background_ok
+      t.boolean :background_ok, null: false, default: false
       t.string :comments
-      t.boolean :background_na
+      t.boolean :background_na, null: false, default: false
 
       t.timestamps
     end
