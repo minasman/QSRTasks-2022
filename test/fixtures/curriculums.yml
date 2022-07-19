@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_date: 2022-07-18
+  class_type: MyString
+  organization: one
+  current: false
+
+two:
+  name: MyString
+  start_date: 2022-07-18
+  class_type: MyString
+  organization: two
+  current: false

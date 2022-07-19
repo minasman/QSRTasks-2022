@@ -33,3 +33,6 @@ application.register("show-signature", ShowSignatureController)
 
 import SignatureController from "./signature_controller.js"
 application.register("signature", SignatureController)
+
+import StudentController from "./student_controller.js"
+application.register("student", StudentController)

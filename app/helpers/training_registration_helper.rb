@@ -1,0 +1,2 @@
+module TrainingRegistrationHelper
+end

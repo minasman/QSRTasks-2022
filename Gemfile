@@ -59,6 +59,14 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem 'listen', '~> 3.3'
+  gem 'flamegraph', '~> 0.9.5'
+  gem 'memory_profiler', '~> 1.0'
+  gem 'rack-mini-profiler', '~> 2.0'
+  gem 'stackprof', '~> 0.2.16'
+
+
+
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]

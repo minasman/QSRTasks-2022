@@ -1,0 +1,10 @@
+<%= form_with(model: student) do |form| %>
+  <div class="row" data-controller="student">
+    <%= form.label :curriculum_id, "Curriculum", class: "form-label" %>
+    <%= form.collection_select :curriculum_id, Curriculum.all, :id, :number, {prompt: "Select Curriculum"}, {class: "form-select", autofocus: true, required: true, data: { action: "change->student#get_tclasses"}} %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

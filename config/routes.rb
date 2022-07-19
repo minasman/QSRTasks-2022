@@ -1,8 +1,14 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
 
   root 'public#home'
   get 'public/about'
   get 'public/careers'
+
+  authenticate :user, ->(user) { user.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   get '/dashboard' => 'dashboard#dashboard'
   get 'admin/dashboard' => 'dashboard#admin_dashboard'
@@ -78,6 +84,15 @@ Rails.application.routes.draw do
       end
     end
     resources :vendors
+  end
+
+  scope module: 'training' do
+    resources :training_registration
+    resources :tclasses
+    resources :curriculums
+    get '/get_classes' => 'training_registration#get_classes'
+    post '/register' => 'training_registration#register'
+    get '/register' => 'training_registration#register'
   end
 
   resources :new_hires

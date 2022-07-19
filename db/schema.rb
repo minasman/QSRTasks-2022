@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_18_180556) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_18_212851) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -121,6 +121,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_180556) do
     t.index ["organization_id"], name: "index_comments_on_organization_id"
     t.index ["store_id"], name: "index_comments_on_store_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "curriculums", force: :cascade do |t|
+    t.string "name", null: false
+    t.date "start_date", null: false
+    t.string "class_type", null: false
+    t.bigint "organization_id", null: false
+    t.boolean "current", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_curriculums_on_organization_id"
   end
 
   create_table "documentations", force: :cascade do |t|
@@ -336,6 +347,29 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_180556) do
     t.index ["user_id", "store_id"], name: "index_stores_users_on_user_id_and_store_id"
   end
 
+  create_table "tclasses", force: :cascade do |t|
+    t.string "name", null: false
+    t.bigint "instructor_id", null: false
+    t.string "duration", null: false
+    t.integer "capacity", null: false
+    t.date "class_date", null: false
+    t.time "class_time", null: false
+    t.string "location", null: false
+    t.bigint "curriculum_id", null: false
+    t.string "expense", default: "0"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["curriculum_id"], name: "index_tclasses_on_curriculum_id"
+    t.index ["instructor_id"], name: "index_tclasses_on_instructor_id"
+  end
+
+  create_table "tclasses_users", id: false, force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "tclass_id", null: false
+    t.index ["tclass_id", "user_id"], name: "index_tclasses_users_on_tclass_id_and_user_id"
+    t.index ["user_id", "tclass_id"], name: "index_tclasses_users_on_user_id_and_tclass_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -433,6 +467,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_180556) do
   add_foreign_key "comments", "organizations"
   add_foreign_key "comments", "stores"
   add_foreign_key "comments", "users"
+  add_foreign_key "curriculums", "organizations"
   add_foreign_key "documentations", "documents"
   add_foreign_key "documentations", "organizations"
   add_foreign_key "documentations", "positions"
@@ -455,6 +490,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_180556) do
   add_foreign_key "safe_audits", "organizations"
   add_foreign_key "safe_audits", "stores"
   add_foreign_key "stores", "organizations"
+  add_foreign_key "tclasses", "curriculums"
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"
   add_foreign_key "vendors", "organizations"

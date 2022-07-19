@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Tclasses</h1>
+
+<div id="tclasses">
+  <% @tclasses.each do |tclass| %>
+    <%= render tclass %>
+    <p>
+      <%= link_to "Show this tclass", tclass %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New tclass", new_tclass_path %>

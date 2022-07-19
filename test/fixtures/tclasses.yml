@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  duration: MyString
+  capacity: 1
+  class_date: 2022-07-18
+  class_time: 2022-07-18 16:21:27
+  location: MyString
+  curriculum: one
+  expense: MyString
+
+two:
+  name: MyString
+  duration: MyString
+  capacity: 1
+  class_date: 2022-07-18
+  class_time: 2022-07-18 16:21:27
+  location: MyString
+  curriculum: two
+  expense: MyString

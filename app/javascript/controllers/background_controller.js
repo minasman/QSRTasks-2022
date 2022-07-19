@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { get, post, put, patch, destroy } from "@rails/request.js"
+import { get } from "@rails/request.js"
 
 
 // Connects to data-controller="background"

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @tclass %>
+
+<div>
+  <%= link_to "Edit this tclass", edit_tclass_path(@tclass) %> |
+  <%= link_to "Back to tclasses", tclasses_path %>
+
+  <%= button_to "Destroy this tclass", @tclass, method: :delete %>
+</div>

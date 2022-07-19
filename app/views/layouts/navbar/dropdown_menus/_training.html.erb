@@ -1,0 +1,23 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Training
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% if policy(:store).index? %>
+      <li>
+        <%= link_to curriculums_path, class: "dropdown-item" do %>
+          <i class="fa fa-books me-1"></i>
+          Curriculum
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:store).new? %>
+      <li>
+        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+          <i class="fa fa-calendar me-1"></i>
+          My Schedule
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>
