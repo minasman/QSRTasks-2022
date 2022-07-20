@@ -1,14 +1,37 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Curriculums</h1>
-
-<div id="curriculums">
-  <% @curriculums.each do |curriculum| %>
-    <%= render curriculum %>
-    <p>
-      <%= link_to "Show this curriculum", curriculum %>
-    </p>
-  <% end %>
+<div class="card mb-5">
+  <h2 class="card-header text-center">Training Schedule</h2>
+  <div class="row card-body">
+    <div class="table table-responsive">
+      <table class="col-auto table table-hover">
+        <% @curriculums.each do |curriculum| %>
+          <tr class="text-center">
+            <th colspan="8" class="fs-3"><%= curriculum.name %></th>
+          </tr>
+          <tr>
+            <th>Class</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Duration</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Open Seats</th>
+            <th>Instructor</th>
+          </tr>
+          <% curriculum.tclasses.each do |tclass| %>
+            <tr>
+              <td><%= tclass.name %></td>
+              <td><%= tclass.class_date.strftime("%m/%d/%y") %></td>
+              <td><%= tclass.class_time.strftime("%I:%M %p") %></td>
+              <td><%= tclass.duration %> Hours</td>
+              <td><%= tclass.location %></td>
+              <td><%= tclass.capacity %></td>
+              <td><%= tclass.capacity - tclass.users.count %></td>
+              <td><%= tclass.instructor.full_name %></td>
+            </tr>
+          <% end %>
+          <tr class="m-3"></tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New curriculum", new_curriculum_path %>

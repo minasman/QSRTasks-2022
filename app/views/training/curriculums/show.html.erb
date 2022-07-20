@@ -1,10 +1,47 @@
-<p style="color: green"><%= notice %></p>
+<div class="card mb-3">
+  <h2 class="text-center card-header"><%= @curriculum.name %></h2>
+  <div class="card-body">
+    <div class="table table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Class</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Duration</th>
+            <th>Location</th>
+            <th>Capacity</th>
+            <th>Seats Left</th>
+            <th>Instructor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @curriculum.tclasses.each_with_index do |tclass, i| %>
+            <tr>
+              <td><%= i + 1 %></td>
+              <td><%= tclass.name %></td>
+              <td><%= tclass.class_date.strftime("%m/%d/%y") %></td>
+              <td><%= tclass.class_time.strftime("%I:%M %p") %></td>
+              <td><%= tclass.duration %> Hours</td>
+              <td><%= tclass.location %></td>
+              <td><%= tclass.capacity %></td>
+              <td><%= tclass.capacity - tclass.users.count %></td>
+              <td><%= tclass.instructor.full_name %></td>
+            </tr>
+          <% end %>
+        </tbody>
 
-<%= render @curriculum %>
+      </table>
+    </div>
 
-<div>
-  <%= link_to "Edit this curriculum", edit_curriculum_path(@curriculum) %> |
-  <%= link_to "Back to curriculums", curriculums_path %>
 
-  <%= button_to "Destroy this curriculum", @curriculum, method: :delete %>
+    <div class="d-grid gap-2 d-md-flex">
+      <%= link_to "Edit", edit_curriculum_path(@curriculum), class: "btn my-submit", data: {turbo: false} %>
+      <%= link_to "Curriculums", curriculums_path, class: "btn my-submit" %>
+    </div>
+  </div>
+  <div class="card-footer">
+    <%= button_to "Remove", @curriculum, method: :delete, class: "btn btn-danger" %>
+  </div>
 </div>
