@@ -26,9 +26,8 @@ TODO:
 Finish testing user access
 
 Shops
+Need to finish class registrations
 Audits - Return to Safe Audits
-Documentation
 Training
 Wellness Check & Vaccination
-Onboarding
 Dashboards

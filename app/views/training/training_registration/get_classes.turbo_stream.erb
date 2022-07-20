@@ -1,9 +1,30 @@
 
-<%= turbo_stream.append "classes" do %>
-  <% @tclasses.each do |tclass| %>
-    <div class="col-12 col-md-4">
-      <%= check_box_tag "tclass_id#{tclass.id}", tclass.id, false, class: "form-check-input", data: {student_target: "class_id"} %>
-      <%= label_tag "tclass_ids", "#{tclass.class_date.strftime("%m/%d/%y")} #{tclass.class_time.strftime("%I:%M %p")} - #{tclass.name} @ #{tclass.location}", class: "form-check-label" %>
+<%= turbo_stream.update "classes" do %>
+  <%= form_with url: "/register", method: :get do |form| %>
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="mb-3">
+          <%= form.label :curriculum, "Curriculum", class: "form-label" %>
+          <%= form.collection_select :curriculum, @c, :id, :name, { prompt: "Select Curriculum", selected: @c_id }, class: "form-select", data: { action: "change->student#get_tclasses" }, required: true %>
+        </div>
+      </div>
+    </div>
+    <div class="row" >
+      <%= form.label :tclass_ids, "Available Classes:", class: 'form-label' %>
+      <div class='row'>
+        <%= form.collection_check_boxes :tclass_ids, @tclasses, :id, :tclass_details do |s| %>
+          <div class="col-12 text-left" style="padding: 0px 15px 0px 0px;">
+            <div class='form-check form-check-inline' style="margin-left: 12px; margin-right: 0px;">
+              <%= s.check_box(class: "form-check-input", data: {student_target: "tclasses"})%>
+              <%= s.label(class: "form-check-label") %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= form.hidden_field :id, value: @training_registration.id%>
+    <div class="mt-4">
+      <%= form.submit "Register", class: "btn my-submit" %>
     </div>
   <% end %>
 <% end %>

@@ -91,7 +91,7 @@ Rails.application.routes.draw do
     resources :tclasses
     resources :curriculums
     get '/get_classes' => 'training_registration#get_classes'
-    post '/register' => 'training_registration#register'
+    #post '/register' => 'training_registration#register'
     get '/register' => 'training_registration#register'
   end
 

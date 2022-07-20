@@ -1,17 +1,21 @@
 <div class="card mb-5">
-  <h2 class="text-center card-header">Register <%= @student.full_name %> For Training</h2>
-  <div class="card-body" data-controller="student">
-    <div class="row">
-      <div class="col-12 col-md-6">
-        <div class="mb-3">
-          <%= label_tag :curriculum_id, "Curriculum", class: "form-label" %>
-          <%= select_tag "curriculum_id", options_from_collection_for_select(@curriculum, "id", "name"), {prompt: "Select Curriculum", class: "form-select", autofocus: true, required: true, data: { action: "change->student#get_tclasses"}} %>
+  <h2 class="text-center card-header">Register <%= @training_registration.full_name %> For Training</h2>
+  <div class="card-body" data-controller="student" data-student-id-value="<%= @training_registration.id %>">
+    <div id="classes" data-student-target="tclasses">
+      <%= form_with url: "/register", method: :get do |form| %>
+        <div class="row">
+          <div class="col-12 col-md-6">
+            <div class="mb-3">
+              <%= form.label :curriculum, "Curriculum", class: "form-label" %>
+              <%= form.collection_select :curriculum, @curriculum, :id, :name, { prompt: "Select Curriculum" }, class: "form-select", data: { action: "change->student#get_tclasses" }, required: true %>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-      <div class="row form-check" id="classes" data-student-target="classes"></div>
-    <div class="mt-4">
-      <%= button_to "Register", "/register", class: "btn my-submit", data: {action: "click->student#register"} %>
+        <%= form.hidden_field :id, value: @training_registration.id %>
+        <div class="mt-4">
+          <%= form.submit "Register", class: "btn my-submit" %>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
