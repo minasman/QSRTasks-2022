@@ -1,6 +1,6 @@
 class Training::TclassesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_student, only: %i[ show edit update destroy ]
+  before_action :set_student, only: %i[ edit update destroy ]
 
   # GET /tclasses or /tclasses.json
   def index
@@ -9,6 +9,7 @@ class Training::TclassesController < ApplicationController
 
   # GET /tclasses/1 or /tclasses/1.json
   def show
+    @tclass = Tclass.find(params[:id])
   end
 
   # GET /tclasses/new

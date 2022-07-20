@@ -4,7 +4,7 @@ class Training::CurriculumsController < ApplicationController
 
   # GET /curriculums or /curriculums.json
   def index
-    @curriculums = Curriculum.all
+    @curriculums = Curriculum.is_current
     authorize Curriculum
   end
 
@@ -67,6 +67,11 @@ class Training::CurriculumsController < ApplicationController
     end
   end
 
+  def schedule
+    @tclasses = my_people
+    @counter = 0
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_curriculum
@@ -76,5 +81,19 @@ class Training::CurriculumsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def curriculum_params
       params.require(:curriculum).permit(:name, :start_date, :class_type, :organization_id, :current,tclasses_attributes: %i[name id duration instructor_id capacity location class_date class_time _destroy])
+    end
+
+    def my_people
+      tclass_list = []
+      Curriculum.is_current.each do |course|
+        course.tclasses.each do |tclass|
+          tclass.users.each do |user|
+            if user.stores[0].in? current_user.stores
+              tclass_list.push(tclass)
+            end
+          end
+        end
+      end
+      tclass_list.uniq
     end
 end

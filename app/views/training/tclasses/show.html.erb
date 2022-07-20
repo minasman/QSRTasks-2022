@@ -1,10 +1,37 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @tclass %>
-
-<div>
-  <%= link_to "Edit this tclass", edit_tclass_path(@tclass) %> |
-  <%= link_to "Back to tclasses", tclasses_path %>
-
-  <%= button_to "Destroy this tclass", @tclass, method: :delete %>
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-center"><%= @tclass.name %></h2>
+        <h4 class="text-center"><%= @tclass.class_date.strftime("%m/%d/%y") %> @ <%= @tclass.class_time.strftime("%I:%M %p") %> at <%= @tclass.location %></h4>
+      </div>
+      <div class="card-body">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Location</th>
+                <th>Position</th>
+                <th>Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @tclass.users.each_with_index do |user, i| %>
+                <tr>
+                  <td><%= i + 1 %></td>
+                  <td><%= user.stores[0].number %></td>
+                  <td><%= user.position.name %></td>
+                  <td><%= link_to user.full_name, user, class: "table-link" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <div>
+          <%= link_to "Back", :back, class: "btn my-submit d-grid" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
