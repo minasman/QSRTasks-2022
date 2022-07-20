@@ -10,6 +10,9 @@ application.register("attend", AttendController)
 import BackgroundController from "./background_controller.js"
 application.register("background", BackgroundController)
 
+import CurriculumController from "./curriculum_controller.js"
+application.register("curriculum", CurriculumController)
+
 import DocumentController from "./document_controller.js"
 application.register("document", DocumentController)
 

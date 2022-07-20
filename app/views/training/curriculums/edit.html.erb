@@ -1,10 +1,6 @@
-<h1>Editing curriculum</h1>
-
-<%= render "form", curriculum: @curriculum %>
-
-<br>
-
-<div>
-  <%= link_to "Show this curriculum", @curriculum %> |
-  <%= link_to "Back to curriculums", curriculums_path %>
+<div class="card mb-3">
+  <h2 class="text-center card-header">Editing <%= @curriculum.name %></h2>
+  <div class="card-body">
+    <%= render "form", curriculum: @curriculum %>
+  </div>
 </div>

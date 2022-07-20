@@ -11,32 +11,67 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control", required: true, autofocus: true %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <%= form.label :start_date, class: "form-label" %>
+        <%= form.date_field :start_date, class: "form-control", required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="mb-3">
+        <%= form.label :class_type, "Class Type", class: "form-label" %>
+        <%= form.select :class_type, Curriculum::CLASS_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true }  %>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <h4>Classes</h4>
+  <div data-controller='curriculum'>
+    <template data-curriculum-target='template'>
+      <%= form.fields_for :tclasses, Tclass.new, child_index: 'NEW_RECORD' do |tclass| %>
+        <%= render "class_template", form: tclass %>
+      <% end %>
+    </template>
+
+    <%= form.fields_for :tclasses do |tclass| %>
+      <%= render "class_template", form: tclass %>
+    <% end %>
+    <% if policy(:tclass).new? %>
+      <div class='col-6 col-md-2 col-lg-1 mb-3' data-curriculum-target='links'>
+        <%= link_to 'Add Class', '#', class: 'btn my-submit text-nowrap d-grid', data: { action: 'click->curriculum#add_class'} %>
+      </div>
+    <% end %>
   </div>
 
-  <div>
-    <%= form.label :start_date, style: "display: block" %>
-    <%= form.date_field :start_date %>
-  </div>
-
-  <div>
-    <%= form.label :class_type, style: "display: block" %>
-    <%= form.text_field :class_type %>
-  </div>
-
-  <div>
-    <%= form.label :organization_id, style: "display: block" %>
-    <%= form.text_field :organization_id %>
-  </div>
-
-  <div>
-    <%= form.label :current, style: "display: block" %>
-    <%= form.check_box :current %>
-  </div>
-
-  <div>
-    <%= form.submit %>
+  <div class="mb-3">
+    <div class='col-12 col-md-3 col-lg-2 d-grid'>
+      <%= form.submit class: 'btn my-submit' %>
+    </div>
+    <% if curriculum.persisted? %>
+      <div class='row'>
+        <div class='col-12 col-md-3 col-lg-2 pt-2 d-grid'>
+          <%= link_to "Cancel", curriculum, class: "btn my-submit text-nowrap" %>
+        </div>
+        <% if policy(:curriculum).destroy? %>
+          <div class="col-12 col-md-3 col-lg-2 pt-2 d-grid">
+            <%= link_to 'Cancel Curriculum', curriculum, method: :delete, class: "btn btn-danger", data: { confirm: 'Are you sure?' } %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class='col-12 col-md-3 col-lg-2 pt-2 d-grid'>
+        <%= link_to "Cancel", curriculums_path, class: "btn my-submit text-nowrap" %>
+      </div>
+    <% end %>
   </div>
 <% end %>

@@ -5,24 +5,31 @@ class Training::CurriculumsController < ApplicationController
   # GET /curriculums or /curriculums.json
   def index
     @curriculums = Curriculum.all
+    authorize Curriculum
   end
 
   # GET /curriculums/1 or /curriculums/1.json
   def show
+    authorize @curriculum
   end
 
   # GET /curriculums/new
   def new
     @curriculum = Curriculum.new
+    @curriculum.tclasses.new
+    authorize @curriculum
   end
 
   # GET /curriculums/1/edit
   def edit
+    authorize @curriculum
   end
 
   # POST /curriculums or /curriculums.json
   def create
     @curriculum = Curriculum.new(curriculum_params)
+    authorize @curriculum
+    @curriculum.organization = current_user.organization
 
     respond_to do |format|
       if @curriculum.save
@@ -37,6 +44,7 @@ class Training::CurriculumsController < ApplicationController
 
   # PATCH/PUT /curriculums/1 or /curriculums/1.json
   def update
+    authorize @curriculum
     respond_to do |format|
       if @curriculum.update(curriculum_params)
         format.html { redirect_to curriculum_url(@curriculum), notice: "Curriculum was successfully updated." }
@@ -50,6 +58,7 @@ class Training::CurriculumsController < ApplicationController
 
   # DELETE /curriculums/1 or /curriculums/1.json
   def destroy
+    authorize @curriculum
     @curriculum.destroy
 
     respond_to do |format|
@@ -66,6 +75,6 @@ class Training::CurriculumsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def curriculum_params
-      params.require(:curriculum).permit(:name, :start_date, :class_type, :organization_id, :current)
+      params.require(:curriculum).permit(:name, :start_date, :class_type, :organization_id, :current,tclasses_attributes: %i[name id duration instructor_id capacity location class_date class_time _destroy])
     end
 end

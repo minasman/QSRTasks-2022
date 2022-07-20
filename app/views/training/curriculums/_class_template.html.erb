@@ -1,0 +1,58 @@
+
+<%= content_tag :div, class: 'nested_classes', data: {new_record: form.object.new_record? } do %>
+
+  <div class='row'>
+    <div class='col-12 col-lg-4'>
+      <div class='mb-3'>
+        <%= form.label :name, 'Class Name', class: 'form-label' %>
+        <%= form.text_field :name, class: 'form-control', required: true %>
+      </div>
+    </div>
+    <div class='col-12 col-lg-4'>
+      <div class='mb-3'>
+        <%= form.label :instructor_id, 'Class Instructor', class: 'form-label' %>
+        <%= form.collection_select :instructor_id, User.where(active: true, position_id: Position.where(name: ["Director", "Ops Manager", "Supervisor", "General Manager", "Training Manager", "Training Assistant"]).ids).order(first_name: :asc), :id, :full_name, {prompt: "Select Instructor"}, {class: "form-select", required: true} %>
+
+      </div>
+    </div>
+    <div class='col-12 col-lg-4'>
+      <div class='mb-3'>
+        <%= form.label :location, 'Location', class: 'form-label' %>
+        <%= form.text_field :location, class: 'form-control', required: true  %>
+      </div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-12 col-lg-4'>
+      <div class='mb-3'>
+        <%= form.label :class_date, 'Class Date', class: 'form-label' %>
+        <%= form.date_field :class_date, class: 'form-control', required: true  %>
+      </div>
+    </div>
+    <div class='col-12 col-lg-4'>
+      <div class='mb-3'>
+        <%= form.label :class_time, 'Class Time', class: 'form-label' %>
+        <%= form.time_field :class_time, class: 'form-control', required: true   %>
+      </div>
+    </div>
+    <div class='col-6 col-lg-2'>
+      <div class='mb-3'>
+        <%= form.label :duration, class: 'form-label' %>
+        <%= form.text_field :duration, class: 'form-control', required: true   %>
+      </div>
+    </div>
+    <div class='col-6 col-lg-2'>
+      <div class='mb-3'>
+        <%= form.label :capacity, class: 'form-label' %>
+        <%= form.number_field :capacity, class: 'form-control', required: true   %>
+      </div>
+    </div>
+    <% if policy(:tclass).destroy? %>
+      <small><%= link_to "Remove", "#", class: 'btn btn-danger btn-sm mb-3 text-white', data: { action: "click->curriculum#remove_class" } %></small>
+    <% end %>
+  </div>
+  <hr>
+
+  <%= form.hidden_field :_destroy %>
+
+<% end %>
