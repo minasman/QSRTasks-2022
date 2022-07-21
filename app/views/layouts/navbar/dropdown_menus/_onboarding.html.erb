@@ -5,7 +5,7 @@
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% if policy(:new_hire).new? %>
       <li>
-        <%= link_to  new_new_hire_path, class: "dropdown-item" do %>
+        <%= link_to new_new_hire_path, class: "dropdown-item" do %>
           <i class="fa fa-person-circle-plus me-1"></i>
           New Team Member
         <% end %>
@@ -13,20 +13,22 @@
     <% end %>
     <% if policy(:new_hire).index? %>
       <li>
-        <%= link_to  new_hires_path, class: "dropdown-item" do %>
+        <%= link_to new_hires_path, class: "dropdown-item" do %>
           <i class="fa fa-users-line me-1"></i>
           Pending Team Members
           <span class="badge rounded-pill bg-light text-dark"><%= pending_hires %></span>
         <% end %>
       </li>
       <li>
-        <%= link_to  "", class: "dropdown-item" do %>
+        <%= link_to "", class: "dropdown-item" do %>
           <i class="fa-solid fa-file-chart-column me-1"></i>
           New Team Member Report
         <% end %>
       </li>
+    <% end %>
+    <% if policy(:new_hire).new? && current_user.position.name.in? ["Administration", "Office"]%>
       <li>
-        <%= link_to  "/approve_background", class: "dropdown-item" do %>
+        <%= link_to "/approve_background", class: "dropdown-item" do %>
           <i class="fa-solid fa-user-check me-1"></i>
           Pending Background Checks
           <span class="badge rounded-pill bg-light text-dark"><%= pending_background_check %></span>

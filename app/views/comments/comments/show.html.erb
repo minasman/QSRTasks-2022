@@ -92,7 +92,7 @@
   </div>
   <% if policy(:comment).destroy? %>
     <div class="card-footer">
-      <%= button_to "Delete", @comment, method: :delete, class: "btn my-submit",  form: { data: {turbo_confirm: "Are You Sure?" }} %>
+      <%= button_to "Delete", @comment, method: :delete, class: "btn btn-danger",  form: { data: {turbo_confirm: "Are You Sure?" }} %>
     </div>
   <% end %>
 </div>

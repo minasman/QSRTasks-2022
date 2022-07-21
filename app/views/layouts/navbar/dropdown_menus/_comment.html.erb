@@ -5,7 +5,7 @@
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% if policy(:comment).new? %>
       <li>
-        <%= link_to  new_comment_path, class: "dropdown-item" do %>
+        <%= link_to new_comment_path, class: "dropdown-item" do %>
           <i class="fa fa-comment-medical me-1"></i>
           New Comment
         <% end %>
@@ -13,18 +13,20 @@
     <% end %>
     <% if policy(:comment).index? %>
       <li>
-        <%= link_to  comments_path, class: "dropdown-item" do %>
+        <%= link_to comments_path, class: "dropdown-item" do %>
           <i class="fa fa-comments me-1"></i>
           Open Comments
           <span class="badge rounded-pill bg-light text-dark"><%= comment_badge %></span>
         <% end %>
       </li>
-      <li>
-        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
-          <i class="fa-solid fa-file-chart-column me-1"></i>
-          Comment Report
-        <% end %>
-      </li>
+      <% if policy(:comment).index? %>
+        <li>
+          <%= link_to "", class: "dropdown-item" do %>
+            <i class="fa-solid fa-file-chart-column me-1"></i>
+            Comment Report
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
     <% if policy(:guest).index? %>
       <li><hr class="dropdown-divider"></li>

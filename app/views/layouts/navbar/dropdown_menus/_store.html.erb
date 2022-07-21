@@ -5,7 +5,7 @@
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% if policy(:store).new? %>
       <li>
-        <%= link_to  new_store_path, class: "dropdown-item" do %>
+        <%= link_to new_store_path, class: "dropdown-item" do %>
           <i class="fa fa-plus me-1"></i>
           New Restaurant
         <% end %>
@@ -13,7 +13,7 @@
     <% end %>
     <% if policy(:store).index? %>
       <li>
-        <%= link_to  stores_path, class: "dropdown-item" do %>
+        <%= link_to stores_path, class: "dropdown-item" do %>
           <i class="fa fa-store me-1"></i>
           Restaurants
         <% end %>
@@ -21,7 +21,7 @@
     <% end %>
     <% if policy(:store).new? %>
       <li>
-        <%= link_to  "/inactive_stores", class: "dropdown-item" do %>
+        <%= link_to "/inactive_stores", class: "dropdown-item" do %>
           <i class="fa fa-store-slash me-1"></i>
           Inactive Reataurants
         <% end %>

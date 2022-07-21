@@ -5,7 +5,7 @@
   <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
     <% if policy(:documentation).new? %>
       <li>
-        <%= link_to  new_documentation_path, class: "dropdown-item" do %>
+        <%= link_to new_documentation_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-file-certificate me-1"></i>
           New Record
         <% end %>
@@ -13,7 +13,7 @@
     <% end %>
     <% if policy(:documentation).index? %>
       <li>
-        <%= link_to  documentations_path, class: "dropdown-item" do %>
+        <%= link_to documentations_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-folders me-1"></i>
           Documentations
         <% end %>
@@ -25,18 +25,18 @@
         <% end %>
       </li>
     <% end %>
-    <% if policy(:documentation).edit? %>
+    <% if policy(:document).new? %>
       <li><hr class="dropdown-divider"></li>
       <li>
-        <%= link_to  new_document_path, class: "dropdown-item" do %>
+        <%= link_to new_document_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-file-circle-plus me-1"></i>
           New Document
         <% end %>
       </li>
     <% end %>
-    <% if policy(:equipment).new? %>
+    <% if policy(:document).index? %>
       <li>
-        <%= link_to  documents_path, class: "dropdown-item" do %>
+        <%= link_to documents_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-list me-1"></i>
           Document List
         <% end %>
@@ -58,13 +58,15 @@
           Rewards
         <% end %>
       </li>
-      <li>
-        <%= link_to "/pending_to_redeem", class: "dropdown-item" do %>
-          <i class="fa-solid fa-envelope-open-dollar me-1"></i>
-          Pending Rewards
-          <span class="badge rounded-pill bg-light text-dark"><%= %></span>
-        <% end %>
-      </li>
+      <% if policy(:reward).new? %>
+        <li>
+          <%= link_to "/pending_to_redeem", class: "dropdown-item" do %>
+            <i class="fa-solid fa-envelope-open-dollar me-1"></i>
+            Pending Rewards
+            <span class="badge rounded-pill bg-light text-dark"><%= %></span>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 </li>
