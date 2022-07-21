@@ -26,7 +26,7 @@
         <% end %>
       </li>
     <% end %>
-    <% if (policy(:new_hire).new?) && (current_user.position.name.in? (["Administration", "Office"])) %>
+    <% if (policy(:new_hire).new?) && (current_user.position.department.in? ["Administration", "Office"]) %>
       <li>
         <%= link_to "/approve_background", class: "dropdown-item" do %>
           <i class="fa-solid fa-user-check me-1"></i>

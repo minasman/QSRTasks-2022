@@ -72,6 +72,12 @@ class Training::CurriculumsController < ApplicationController
     @counter = 0
   end
 
+  def my_schedule
+    @tclasses = personal_schedule(params[:id])
+    @counter = 0
+    @user = User.find(params[:id])
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_curriculum
@@ -89,6 +95,20 @@ class Training::CurriculumsController < ApplicationController
         course.tclasses.each do |tclass|
           tclass.users.each do |user|
             if user.stores[0].in? current_user.stores
+              tclass_list.push(tclass)
+            end
+          end
+        end
+      end
+      tclass_list.uniq
+    end
+
+    def personal_schedule(student)
+      tclass_list = []
+      Curriculum.is_current.each do |course|
+        course.tclasses.each do |tclass|
+          tclass.users.each do |user|
+            if user.id == student.to_i
               tclass_list.push(tclass)
             end
           end

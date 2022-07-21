@@ -7,24 +7,29 @@ class Maintenance::VendorsController < ApplicationController
     @vendors = Vendor.where(organization: current_user.organization).order(name: :asc)
     @vendors = @vendors.search(params[:query]) if params[:query].present?
     @pagy, @vendors = pagy @vendors.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+    authorize Vendor
   end
 
   # GET /vendors/1 or /vendors/1.json
   def show
+    authorize @vendor
   end
 
   # GET /vendors/new
   def new
     @vendor = Vendor.new
+    authorize @vendor
   end
 
   # GET /vendors/1/edit
   def edit
+    authorize @vendor
   end
 
   # POST /vendors or /vendors.json
   def create
     @vendor = Vendor.new(vendor_params)
+    authorize @vendor
     @vendor.organization = current_user.organization
     respond_to do |format|
       if @vendor.save
@@ -39,6 +44,7 @@ class Maintenance::VendorsController < ApplicationController
 
   # PATCH/PUT /vendors/1 or /vendors/1.json
   def update
+    authorize @vendor
     respond_to do |format|
       if @vendor.update(vendor_params)
         format.html { redirect_to vendor_url(@vendor), notice: "Vendor was successfully updated." }
@@ -52,6 +58,7 @@ class Maintenance::VendorsController < ApplicationController
 
   # DELETE /vendors/1 or /vendors/1.json
   def destroy
+    authorize @vendor
     @vendor.destroy
 
     respond_to do |format|

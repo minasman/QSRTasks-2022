@@ -14,7 +14,9 @@
       </div>
     </div>
     <div class="d-grid gap-2 d-md-flex" >
-      <%= link_to "Edit", edit_equipment_path(@equipment), class: "btn my-submit" %>
+      <% if policy(:equipment).edit? %>
+        <%= link_to "Edit", edit_equipment_path(@equipment), class: "btn my-submit" %>
+      <% end %>
       <%= link_to "Back", :back, class: "btn my-submit" %>
     </div>
   </div>

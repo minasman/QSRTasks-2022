@@ -11,7 +11,7 @@ class EquipmentPolicy < ApplicationPolicy
   end
 
   def show?
-    index?
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "General Manager", "Manager"]
   end
 
   def new?

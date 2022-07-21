@@ -7,7 +7,8 @@ class NewHirePolicy < ApplicationPolicy
   end
 
   def index?
-    true
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "Office Admin", "Payroll Admin", "Training Assistant"]
+
   end
 
   def new?

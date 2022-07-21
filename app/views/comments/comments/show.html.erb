@@ -6,10 +6,10 @@
         <h6><strong>Restaurant: </strong><%= @comment.store.number %></h6>
       </div>
       <div class="col-12 col-md-3">
-        <h6><strong>Incident Date: </strong><%= @comment.visit_date.strftime("%m/%d/%y") %></h6>
+        <h6><strong>Incident Date: </strong><%= @comment.visit_date? ? @comment.visit_date.strftime("%m/%d/%y") : "Not Provided" %></h6>
       </div>
       <div class="col-6 col-md-3">
-        <h6><strong>Time: </strong><%= @comment.visit_time.strftime("%I:%M %p") %></h6>
+        <h6><strong>Time: </strong><%= @comment.visit_time? ? @comment.visit_time.strftime("%I:%M %p") : "Not Provided" %></h6>
       </div>
       <div class="col-6 col-md-3">
         <h6><strong>Status: </strong><%= @comment.status %></h6>

@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-auto">
       <div class="card mb-5">
-        <h2 class="text-center card-header">My Team Schedule</h2>
+        <h2 class="text-center card-header">My Schedule</h2>
         <div class="card-body">
           <% if @tclasses.any? %>
             <div class="table table-responsive">
@@ -21,7 +21,7 @@
                   </thead>
                   <tbody>
                     <% tclass.users.each do |user| %>
-                      <% if user.stores[0].in? current_user.stores %>
+                      <% if user == @user %>
                         <% @counter += 1 %>
                         <tr>
                           <td><%= @counter %></td>

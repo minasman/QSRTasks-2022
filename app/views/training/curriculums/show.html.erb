@@ -37,11 +37,15 @@
 
 
     <div class="d-grid gap-2 d-md-flex">
-      <%= link_to "Edit", edit_curriculum_path(@curriculum), class: "btn my-submit", data: {turbo: false} %>
+      <% if policy(:curriculum).edit? %>
+        <%= link_to "Edit", edit_curriculum_path(@curriculum), class: "btn my-submit", data: {turbo: false} %>
+      <% end %>
       <%= link_to "Curriculums", curriculums_path, class: "btn my-submit" %>
     </div>
   </div>
-  <div class="card-footer">
-    <%= button_to "Remove", @curriculum, method: :delete, class: "btn btn-danger" %>
-  </div>
+  <% if policy(:curriculum).destroy? %>
+    <div class="card-footer">
+      <%= button_to "Remove", @curriculum, method: :delete, class: "btn btn-danger" %>
+    </div>
+  <% end %>
 </div>

@@ -4,7 +4,11 @@ class NewHiresController < ApplicationController
 
   # GET /new_hires or /new_hires.json
   def index
-    @new_hires = NewHire.where(attended: false, background_received: true, background_ok: true)
+    if current_user.position.department == "Operations"
+      @new_hires = NewHire.where(attended: false)
+    else
+      @new_hires = NewHire.where(attended: false, background_received: true, background_ok: true)
+    end
     @new_hires = @new_hires.search(params[:query]) if params[:query].present?
     @pagy, @new_hires = pagy @new_hires.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
     authorize NewHire

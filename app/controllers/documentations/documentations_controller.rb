@@ -4,7 +4,7 @@ class Documentations::DocumentationsController < ApplicationController
 
   # GET /documentations or /documentations.json
   def index
-    @documentations = Documentation.all
+    @documentations = documentation_list
     @documentations = @documentations.search(params[:query]) if params[:query].present?
     @pagy, @documentations = pagy @documentations.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
   end
@@ -20,6 +20,11 @@ class Documentations::DocumentationsController < ApplicationController
 
   # GET /documentations/1/edit
   def edit
+    if @documentation.awarded_by != current_user
+      respond_to do |format|
+        format.html { redirect_to documentation_url(@documentation), alert: "You cannot edit documentation you did not generate" }
+      end
+    end
   end
 
   # POST /documentations or /documentations.json
@@ -188,6 +193,46 @@ class Documentations::DocumentationsController < ApplicationController
         flow_document.save
         updated_points = flow_document.employee_named.accumulated_points + flow_document.points
         flow_document.employee_named.update(accumulated_points: updated_points)
+      end
+    end
+
+    def documentation_list
+      case current_user.position.department
+      when "Administration"
+        Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today)
+      when "Maintenance"
+        case current_user.position.name
+        when "Technology Department Head"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "OTP Tech").ids)
+        when "PM Department Head"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Patch Maint").ids)
+        when "Maint Tech Department Head"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Maint Tech").ids)
+        else
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(department: "Maintenance").ids)
+        end
+      when "Office"
+        case current_user.position.name
+        when "HR Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "HR Admin").ids)
+        when "Training Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Training Assistant").ids)
+        when "Marketing Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Marketing Admin").ids)
+        when "AR Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "AR Admin").ids)
+        when "AP Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "AP Admin").ids)
+        else
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Payroll Admin").ids)
+        end
+      when "Operations"
+        case current_user.position.name
+        when "Crew"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_documentations_id: current_user.id)
+        else
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, store_id: current_user.stores)
+        end
       end
     end
 

@@ -14,20 +14,20 @@ class WorkorderPolicy
     index?
   end
 
-  def create?
-    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'Maint Department Head', 'Maint Tech Department Head', 'PM Department Head', 'Technology Department Head', 'Operations Manager', 'Supervisor', 'Gerneral Manager', 'AA', 'Maint Admin', 'Maint Tech', 'OTP Tech', 'Patch Maint', 'Training Manager']
-  end
-
   def new?
-    create?
+    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'Maint Department Head', 'Maint Tech Department Head', 'PM Department Head', 'Technology Department Head', 'Operations Manager', 'Supervisor', 'General Manager', 'AA', 'Maint Admin', 'Maint Tech', 'OTP Tech', 'Patch Maint', 'Training Manager']
   end
 
-  def update?
-    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'Maint Department Head', 'Maint Tech Department Head', 'PM Department Head', 'Technology Department Head', 'Maint Admin']
+  def create?
+    new?
   end
 
   def edit?
-    update?
+    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'Maint Department Head', 'Maint Tech Department Head', 'PM Department Head', 'Technology Department Head', 'Maint Admin', "Patch Maint", "OTP Tech", "Maint Tech", "AA"]
+  end
+
+  def update?
+    edit?
   end
 
   def destroy?
