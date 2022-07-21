@@ -10,6 +10,7 @@ class Store < ApplicationRecord
   has_many :documentations
   has_many :rewards
   has_many :new_hires
+  has_many :shops
 
   validates :number, :name, :store_type, :phone, :email, :city, :state, :zip, :headset, :street, presence: true
   validates :safe, :headset, numericality: { only_integer: true }

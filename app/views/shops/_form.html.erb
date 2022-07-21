@@ -1,0 +1,512 @@
+<%= form_with(model: shop) do |form| %>
+  <% if shop.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(shop.errors.count, "error") %> prohibited this shop from being saved:</h2>
+
+      <ul>
+        <% shop.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :store_id, style: "display: block" %>
+    <%= form.text_field :store_id %>
+  </div>
+
+  <div>
+    <%= form.label :organization_id, style: "display: block" %>
+    <%= form.text_field :organization_id %>
+  </div>
+
+  <div>
+    <%= form.label :shopDate, style: "display: block" %>
+    <%= form.date_field :shopDate %>
+  </div>
+
+  <div>
+    <%= form.label :shopTime, style: "display: block" %>
+    <%= form.time_field :shopTime %>
+  </div>
+
+  <div>
+    <%= form.label :shopType, style: "display: block" %>
+    <%= form.text_field :shopType %>
+  </div>
+
+  <div>
+    <%= form.label :upFront, style: "display: block" %>
+    <%= form.text_field :upFront %>
+  </div>
+
+  <div>
+    <%= form.label :mgrAppearance, style: "display: block" %>
+    <%= form.text_field :mgrAppearance %>
+  </div>
+
+  <div>
+    <%= form.label :headset, style: "display: block" %>
+    <%= form.text_field :headset %>
+  </div>
+
+  <div>
+    <%= form.label :crewAppearance, style: "display: block" %>
+    <%= form.text_field :crewAppearance %>
+  </div>
+
+  <div>
+    <%= form.label :r2d2Charts, style: "display: block" %>
+    <%= form.text_field :r2d2Charts %>
+  </div>
+
+  <div>
+    <%= form.label :rdm, style: "display: block" %>
+    <%= form.text_field :rdm %>
+  </div>
+
+  <div>
+    <%= form.label :kiosks, style: "display: block" %>
+    <%= form.text_field :kiosks %>
+  </div>
+
+  <div>
+    <%= form.label :tableService, style: "display: block" %>
+    <%= form.text_field :tableService %>
+  </div>
+
+  <div>
+    <%= form.label :tableTent, style: "display: block" %>
+    <%= form.text_field :tableTent %>
+  </div>
+
+  <div>
+    <%= form.label :shiftMgrComment, style: "display: block" %>
+    <%= form.text_field :shiftMgrComment %>
+  </div>
+
+  <div>
+    <%= form.label :fastComment, style: "display: block" %>
+    <%= form.text_field :fastComment %>
+  </div>
+
+  <div>
+    <%= form.label :qualityComment, style: "display: block" %>
+    <%= form.text_field :qualityComment %>
+  </div>
+
+  <div>
+    <%= form.label :accuracyComment, style: "display: block" %>
+    <%= form.text_field :accuracyComment %>
+  </div>
+
+  <div>
+    <%= form.label :hospitalityComment, style: "display: block" %>
+    <%= form.text_field :hospitalityComment %>
+  </div>
+
+  <div>
+    <%= form.label :cleanComment, style: "display: block" %>
+    <%= form.text_field :cleanComment %>
+  </div>
+
+  <div>
+    <%= form.label :foodSafetyComment, style: "display: block" %>
+    <%= form.text_field :foodSafetyComment %>
+  </div>
+
+  <div>
+    <%= form.label :itemsOrdered, style: "display: block" %>
+    <%= form.text_field :itemsOrdered %>
+  </div>
+
+  <div>
+    <%= form.label :waitTime, style: "display: block" %>
+    <%= form.text_field :waitTime %>
+  </div>
+
+  <div>
+    <%= form.label :responseTime, style: "display: block" %>
+    <%= form.text_field :responseTime %>
+  </div>
+
+  <div>
+    <%= form.label :presentTime, style: "display: block" %>
+    <%= form.text_field :presentTime %>
+  </div>
+
+  <div>
+    <%= form.label :oepTime, style: "display: block" %>
+    <%= form.text_field :oepTime %>
+  </div>
+
+  <div>
+    <%= form.label :totalTime, style: "display: block" %>
+    <%= form.text_field :totalTime %>
+  </div>
+
+  <div>
+    <%= form.label :pullForward, style: "display: block" %>
+    <%= form.text_field :pullForward %>
+  </div>
+
+  <div>
+    <%= form.label :pullForwardTime, style: "display: block" %>
+    <%= form.text_field :pullForwardTime %>
+  </div>
+
+  <div>
+    <%= form.label :numberCars, style: "display: block" %>
+    <%= form.text_field :numberCars %>
+  </div>
+
+  <div>
+    <%= form.label :tandem, style: "display: block" %>
+    <%= form.text_field :tandem %>
+  </div>
+
+  <div>
+    <%= form.label :fcWaitTime, style: "display: block" %>
+    <%= form.text_field :fcWaitTime %>
+  </div>
+
+  <div>
+    <%= form.label :fcDeliveryTime, style: "display: block" %>
+    <%= form.text_field :fcDeliveryTime %>
+  </div>
+
+  <div>
+    <%= form.label :fcTotalTime, style: "display: block" %>
+    <%= form.text_field :fcTotalTime %>
+  </div>
+
+  <div>
+    <%= form.label :numberGuests, style: "display: block" %>
+    <%= form.text_field :numberGuests %>
+  </div>
+
+  <div>
+    <%= form.label :completeOrder, style: "display: block" %>
+    <%= form.text_field :completeOrder %>
+  </div>
+
+  <div>
+    <%= form.label :condiment, style: "display: block" %>
+    <%= form.text_field :condiment %>
+  </div>
+
+  <div>
+    <%= form.label :condimentBag, style: "display: block" %>
+    <%= form.text_field :condimentBag %>
+  </div>
+
+  <div>
+    <%= form.label :readerboard, style: "display: block" %>
+    <%= form.text_field :readerboard %>
+  </div>
+
+  <div>
+    <%= form.label :marketing, style: "display: block" %>
+    <%= form.text_field :marketing %>
+  </div>
+
+  <div>
+    <%= form.label :dtCommentNumber, style: "display: block" %>
+    <%= form.text_field :dtCommentNumber %>
+  </div>
+
+  <div>
+    <%= form.label :presell, style: "display: block" %>
+    <%= form.text_field :presell %>
+  </div>
+
+  <div>
+    <%= form.label :upsell, style: "display: block" %>
+    <%= form.text_field :upsell %>
+  </div>
+
+  <div>
+    <%= form.label :otName, style: "display: block" %>
+    <%= form.text_field :otName %>
+  </div>
+
+  <div>
+    <%= form.label :cashierName, style: "display: block" %>
+    <%= form.text_field :cashierName %>
+  </div>
+
+  <div>
+    <%= form.label :presenterName, style: "display: block" %>
+    <%= form.text_field :presenterName %>
+  </div>
+
+  <div>
+    <%= form.label :pullForwardPresenterName, style: "display: block" %>
+    <%= form.text_field :pullForwardPresenterName %>
+  </div>
+
+  <div>
+    <%= form.label :repeatOrderAsk, style: "display: block" %>
+    <%= form.text_field :repeatOrderAsk %>
+  </div>
+
+  <div>
+    <%= form.label :cashierGreeting, style: "display: block" %>
+    <%= form.text_field :cashierGreeting %>
+  </div>
+
+  <div>
+    <%= form.label :cashierAsk, style: "display: block" %>
+    <%= form.text_field :cashierAsk %>
+  </div>
+
+  <div>
+    <%= form.label :presenterGreet, style: "display: block" %>
+    <%= form.text_field :presenterGreet %>
+  </div>
+
+  <div>
+    <%= form.label :presenterTell, style: "display: block" %>
+    <%= form.text_field :presenterTell %>
+  </div>
+
+  <div>
+    <%= form.label :pfTell, style: "display: block" %>
+    <%= form.text_field :pfTell %>
+  </div>
+
+  <div>
+    <%= form.label :fresh, style: "display: block" %>
+    <%= form.text_field :fresh %>
+  </div>
+
+  <div>
+    <%= form.label :friesGood, style: "display: block" %>
+    <%= form.text_field :friesGood %>
+  </div>
+
+  <div>
+    <%= form.label :drinkGood, style: "display: block" %>
+    <%= form.text_field :drinkGood %>
+  </div>
+
+  <div>
+    <%= form.label :codClean, style: "display: block" %>
+    <%= form.text_field :codClean %>
+  </div>
+
+  <div>
+    <%= form.label :dtClean, style: "display: block" %>
+    <%= form.text_field :dtClean %>
+  </div>
+
+  <div>
+    <%= form.label :lotClean, style: "display: block" %>
+    <%= form.text_field :lotClean %>
+  </div>
+
+  <div>
+    <%= form.label :corralClean, style: "display: block" %>
+    <%= form.text_field :corralClean %>
+  </div>
+
+  <div>
+    <%= form.label :lidsClosed, style: "display: block" %>
+    <%= form.text_field :lidsClosed %>
+  </div>
+
+  <div>
+    <%= form.label :dtGlassClean, style: "display: block" %>
+    <%= form.text_field :dtGlassClean %>
+  </div>
+
+  <div>
+    <%= form.label :windowsClean, style: "display: block" %>
+    <%= form.text_field :windowsClean %>
+  </div>
+
+  <div>
+    <%= form.label :trashFull, style: "display: block" %>
+    <%= form.text_field :trashFull %>
+  </div>
+
+  <div>
+    <%= form.label :commentSignVisible, style: "display: block" %>
+    <%= form.text_field :commentSignVisible %>
+  </div>
+
+  <div>
+    <%= form.label :floorClean, style: "display: block" %>
+    <%= form.text_field :floorClean %>
+  </div>
+
+  <div>
+    <%= form.label :tableClean, style: "display: block" %>
+    <%= form.text_field :tableClean %>
+  </div>
+
+  <div>
+    <%= form.label :drinkClean, style: "display: block" %>
+    <%= form.text_field :drinkClean %>
+  </div>
+
+  <div>
+    <%= form.label :ventsClean, style: "display: block" %>
+    <%= form.text_field :ventsClean %>
+  </div>
+
+  <div>
+    <%= form.label :sanitizer, style: "display: block" %>
+    <%= form.text_field :sanitizer %>
+  </div>
+
+  <div>
+    <%= form.label :tvOn, style: "display: block" %>
+    <%= form.text_field :tvOn %>
+  </div>
+
+  <div>
+    <%= form.label :restroomClean, style: "display: block" %>
+    <%= form.text_field :restroomClean %>
+  </div>
+
+  <div>
+    <%= form.label :insideTrash, style: "display: block" %>
+    <%= form.text_field :insideTrash %>
+  </div>
+
+  <div>
+    <%= form.label :crewRoom, style: "display: block" %>
+    <%= form.text_field :crewRoom %>
+  </div>
+
+  <div>
+    <%= form.label :uhcTimer, style: "display: block" %>
+    <%= form.text_field :uhcTimer %>
+  </div>
+
+  <div>
+    <%= form.label :prepTimer, style: "display: block" %>
+    <%= form.text_field :prepTimer %>
+  </div>
+
+  <div>
+    <%= form.label :bunTimer, style: "display: block" %>
+    <%= form.text_field :bunTimer %>
+  </div>
+
+  <div>
+    <%= form.label :qtrCorrect, style: "display: block" %>
+    <%= form.text_field :qtrCorrect %>
+  </div>
+
+  <div>
+    <%= form.label :qtrDate, style: "display: block" %>
+    <%= form.date_field :qtrDate %>
+  </div>
+
+  <div>
+    <%= form.label :qtrTime, style: "display: block" %>
+    <%= form.time_field :qtrTime %>
+  </div>
+
+  <div>
+    <%= form.label :glove, style: "display: block" %>
+    <%= form.text_field :glove %>
+  </div>
+
+  <div>
+    <%= form.label :pieTimer, style: "display: block" %>
+    <%= form.text_field :pieTimer %>
+  </div>
+
+  <div>
+    <%= form.label :ppe, style: "display: block" %>
+    <%= form.text_field :ppe %>
+  </div>
+
+  <div>
+    <%= form.label :contactless, style: "display: block" %>
+    <%= form.text_field :contactless %>
+  </div>
+
+  <div>
+    <%= form.label :lotGum, style: "display: block" %>
+    <%= form.text_field :lotGum %>
+  </div>
+
+  <div>
+    <%= form.label :codGum, style: "display: block" %>
+    <%= form.text_field :codGum %>
+  </div>
+
+  <div>
+    <%= form.label :dtGum, style: "display: block" %>
+    <%= form.text_field :dtGum %>
+  </div>
+
+  <div>
+    <%= form.label :otPPE, style: "display: block" %>
+    <%= form.text_field :otPPE %>
+  </div>
+
+  <div>
+    <%= form.label :csPPE, style: "display: block" %>
+    <%= form.text_field :csPPE %>
+  </div>
+
+  <div>
+    <%= form.label :pPPE, style: "display: block" %>
+    <%= form.text_field :pPPE %>
+  </div>
+
+  <div>
+    <%= form.label :p2PPE, style: "display: block" %>
+    <%= form.text_field :p2PPE %>
+  </div>
+
+  <div>
+    <%= form.label :folded, style: "display: block" %>
+    <%= form.text_field :folded %>
+  </div>
+
+  <div>
+    <%= form.label :cashierRound, style: "display: block" %>
+    <%= form.text_field :cashierRound %>
+  </div>
+
+  <div>
+    <%= form.label :possiblePoints, style: "display: block" %>
+    <%= form.number_field :possiblePoints %>
+  </div>
+
+  <div>
+    <%= form.label :achievedPoints, style: "display: block" %>
+    <%= form.number_field :achievedPoints %>
+  </div>
+
+  <div>
+    <%= form.label :score, style: "display: block" %>
+    <%= form.text_field :score %>
+  </div>
+
+  <div>
+    <%= form.label :promptCondiments, style: "display: block" %>
+    <%= form.text_field :promptCondiments %>
+  </div>
+
+  <div>
+    <%= form.label :docRequired, style: "display: block" %>
+    <%= form.check_box :docRequired %>
+  </div>
+
+  <div>
+    <%= form.label :loyalty, style: "display: block" %>
+    <%= form.text_field :loyalty %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

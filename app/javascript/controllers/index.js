@@ -31,6 +31,9 @@ application.register("new-hire", NewHireController)
 import SafeAuditController from "./safe_audit_controller.js"
 application.register("safe-audit", SafeAuditController)
 
+import ShopController from "./shop_controller.js"
+application.register("shop", ShopController)
+
 import ShowSignatureController from "./show_signature_controller.js"
 application.register("show-signature", ShowSignatureController)
 

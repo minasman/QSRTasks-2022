@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :employee_named_documentations, class_name: "Documentation", foreign_key: "employee_named_id"
   has_many :awarded_by_documentations, class_name: "Documentation", foreign_key: "awarded_by_id"
   has_many :instructor_tclasses, class_name: "Tclass", foreign_key: "instructor_id"
+  has_many :shopper_shops, class_name: "Shop", foreign_key: "shopper_id"
+  has_many :shift_manager_shops, class_name: "Shop", foreign_key: "shift_manager_id"
   has_many :new_hires
   has_and_belongs_to_many :tclasses
 
