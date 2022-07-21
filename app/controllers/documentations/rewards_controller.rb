@@ -4,25 +4,30 @@ class Documentations::RewardsController < ApplicationController
 
   # GET /rewards or /rewards.json
   def index
-    @rewards = Reward.all
+    @rewards = Reward.where(active: true)
+    authorize Reward
   end
 
   # GET /rewards/1 or /rewards/1.json
   def show
+    authorize @reward
   end
 
   # GET /rewards/new
   def new
     @reward = Reward.new
+    authorize @reward
   end
 
   # GET /rewards/1/edit
   def edit
+    authorize @reward
   end
 
   # POST /rewards or /rewards.json
   def create
     @reward = Reward.new(reward_params)
+    authorize @reward
 
     respond_to do |format|
       if @reward.save
@@ -37,6 +42,7 @@ class Documentations::RewardsController < ApplicationController
 
   # PATCH/PUT /rewards/1 or /rewards/1.json
   def update
+    authorize @reward
     respond_to do |format|
       if @reward.update(reward_params)
         format.html { redirect_to reward_url(@reward), notice: "Reward was successfully updated." }
@@ -50,11 +56,11 @@ class Documentations::RewardsController < ApplicationController
 
   # DELETE /rewards/1 or /rewards/1.json
   def destroy
-    @reward.destroy
-
+    authorize @reward
+    reward_id = "reward_#{@reward.id}"
+    @reward.update(active: @reward.active ? false : true)
     respond_to do |format|
-      format.html { redirect_to rewards_url, notice: "Reward was successfully destroyed." }
-      format.json { head :no_content }
+      format.turbo_stream { render turbo_stream: turbo_stream.remove(reward_id) }
     end
   end
 

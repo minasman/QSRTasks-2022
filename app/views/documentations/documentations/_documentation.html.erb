@@ -3,13 +3,13 @@
   <div class="row">
     <div class="col-12">
       <% if documentation.documentation_type == "Commendation" %>
-        <h4 class="text-center">You have been recognized by <%= documentation.awarded_by.full_name %> on <%= documentation.document_date %> for <%= documentation.description %></h4>
+        <h4 class="text-center">You have been recognized by <%= documentation.awarded_by.full_name %> on <%= documentation.document_date.strftime("%m/%d/%y") %> for <%= documentation.description %></h4>
       <% else %>
-        <h4 class="text-center">You have been documented by <%= documentation.awarded_by.full_name %> on <%= documentation.document_date %> for <%= documentation.description %></h4>
+        <h4 class="text-center">Your <%= documentation.documentation_class %> on <%= documentation.document_date.strftime("%m/%d/%y") %> was identified as an exception by <%= documentation.awarded_by.full_name %>. Details: <%= documentation.description %></h4>
       <% end %>
     </div>
     <div class="col-12">
-      <h5 class="text-center">This takes you to <%= documentation.employee_named.employee_named_documentations.sum(:points) %> points for this period!</h5>
+      <h5 class="text-center">This takes your current point total to <%= documentation.employee_named.employee_named_documentations.sum(:points) %>!</h5>
     </div>
   </div>
   <% if documentation.pictures.any? %>

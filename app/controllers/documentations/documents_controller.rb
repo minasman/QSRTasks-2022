@@ -67,8 +67,8 @@ class Documentations::DocumentsController < ApplicationController
 
   def level_list
     @target = params[:target]
-    if params[:type] == "Documentation"
-      @levels = Document::DOCUMENT_LEVEL_DOCUMENTATION
+    if params[:type] == "Exception"
+      @levels = Document::DOCUMENT_LEVEL_EXCEPTION
     else
       @levels = Document::DOCUMENT_LEVEL_COMMENDATION
     end

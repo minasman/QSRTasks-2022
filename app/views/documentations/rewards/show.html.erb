@@ -1,10 +1,14 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @reward %>
-
-<div>
-  <%= link_to "Edit this reward", edit_reward_path(@reward) %> |
-  <%= link_to "Back to rewards", rewards_path %>
-
-  <%= button_to "Destroy this reward", @reward, method: :delete %>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header"><%= @reward.name %></h2>
+      <div class="card-body">
+        <h4 class="text-center">The value of this reward is <%= @reward.value %> points </h4>
+        <div class="d-grid gap-2 d-md-flex mt-4">
+          <%= link_to "Edit", edit_reward_path(@reward), class: "btn my-submit" %>
+          <%= link_to "Back", rewards_path, class: "btn my-submit" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

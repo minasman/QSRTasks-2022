@@ -1,14 +1,39 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Rewards</h1>
-
-<div id="rewards">
-  <% @rewards.each do |reward| %>
-    <%= render reward %>
-    <p>
-      <%= link_to "Show this reward", reward %>
-    </p>
-  <% end %>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Reward List</h2>
+      <div class="card-body">
+        <div class="table table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Reward</th>
+                <th>Value</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @rewards.each_with_index do |reward, i| %>
+                <tr id="<%= dom_id(reward) %>">
+                  <td><%= i + 1 %></td>
+                  <td><%= reward.name %></td>
+                  <td><%= reward.value %></td>
+                  <td>
+                    <%= link_to "Show", reward, class: "px-2 table-link" %>
+                    <% if policy(:reward).edit? %>
+                      | <%= link_to "Edit", edit_reward_path(reward), class: "px-2 table-link", data: {turbo: false} %>
+                    <% end %>
+                    <% if policy(:reward).destroy? %>
+                      | <%= link_to "Remove", reward, class: "px-2 table-link", data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{reward.name.titleize}!"} %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New reward", new_reward_path %>

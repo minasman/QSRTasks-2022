@@ -224,7 +224,7 @@ end
 docs = {
   'major1' => {
     'organization_id' => '1',
-    'documentation_type' => 'Documentation',
+    'documentation_type' => 'Exception',
     'documentation_class' => 'Behavior',
     'level' => 'Major',
     'definition' => "This is a Major Behavior",
@@ -232,7 +232,7 @@ docs = {
   },
   'major2' => {
     'organization_id' => '1',
-    'documentation_type' => 'Documentation',
+    'documentation_type' => 'Exception',
     'documentation_class' => 'Result',
     'level' => 'Major',
     'definition' => "This is a Major Result",
@@ -240,7 +240,7 @@ docs = {
   },
   'major3' => {
     'organization_id' => '1',
-    'documentation_type' => 'Documentation',
+    'documentation_type' => 'Exception',
     'documentation_class' => 'Behavior',
     'level' => 'Serious',
     'definition' => "This is a Serious Behavior",
@@ -248,7 +248,7 @@ docs = {
   },
   'major4' => {
     'organization_id' => '1',
-    'documentation_type' => 'Documentation',
+    'documentation_type' => 'Exception',
     'documentation_class' => 'Result',
     'level' => 'Serious',
     'definition' => "This is a Serious Result",
@@ -256,7 +256,7 @@ docs = {
   },
   'major5' => {
     'organization_id' => '1',
-    'documentation_type' => 'Documentation',
+    'documentation_type' => 'Exception',
     'documentation_class' => 'Behavior',
     'level' => 'Critical',
     'definition' => "This is a Critical Behavior",
@@ -264,7 +264,7 @@ docs = {
   },
   'major6' => {
     'organization_id' => '1',
-    'documentation_type' => 'Documentation',
+    'documentation_type' => 'Exception',
     'documentation_class' => 'Result',
     'level' => 'Critical',
     'definition' => "This is a Critical Result",

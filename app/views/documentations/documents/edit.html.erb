@@ -23,7 +23,7 @@
         <div class="col-6 col-md-3">
           <div class="mb-3">
             <%= form.label :level, "Document Level", class: "form-label" %>
-            <%= form.select :level, @document.documentation_type == "Commendation" ? Document::DOCUMENT_LEVEL_COMMENDATION : Document::DOCUMENT_LEVEL_DOCUMENTATION, { prompt: "Select" }, { class: "form-control", data: { document_target: "levelList" }, required: true} %>
+            <%= form.select :level, @document.documentation_type == "Commendation" ? Document::DOCUMENT_LEVEL_COMMENDATION : Document::DOCUMENT_LEVEL_EXCEPTION, { prompt: "Select" }, { class: "form-control", data: { document_target: "levelList" }, required: true} %>
           </div>
         </div>
         <div class="col-6 col-md-3">
