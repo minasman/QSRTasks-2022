@@ -1,7 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :shops
 
   root 'public#home'
   get 'public/about'
@@ -65,6 +64,12 @@ Rails.application.routes.draw do
     get '/rewards/claim_my_reward/:id' => 'rewards#claim_my_reward'
     get '/pending_to_redeem/' => 'rewards#pending_to_redeem'
     get '/pay_out/:id/:reward' => 'rewards#pay_out'
+  end
+
+  resources :shops do
+    collection do
+      get :manager_list
+    end
   end
 
   scope module: 'maintenance' do

@@ -1,0 +1,112 @@
+<div id="accurate" data-controller="toggle" data-toggle-class="hidden">
+  <div class="row align-items-center">
+    <div class="col-1">
+      <h5 id="accuracyControl" data-action='click->toggle#toggle'>X</h5>
+    </div>
+    <div class="col-11">
+      <h3 class="text-center mySubHeader">ACCURATE</h3>
+    </div>
+  </div>
+  <div id="accuracyQuestions" data-toggle-target='content'>
+    <div class="mb-3">
+      <%= form.label :itemsOrdered, "Items Ordered:", class: "font-weight-bold form-label" %><br>
+      <%= form.text_area :itemsOrdered, class: "form-control" %><br>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :completeOrder, "Did you receive all food and drink items that were ordered?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :completeOrder ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :completeOrder ,0, class: "form-check-input shopRadioButton doc" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :condiment, "Did you receive all requested condiments? (Sauces, Jelly, Napkins, Straws, Stirrers)", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :condiment ,4, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :condiment ,0, class: "form-check-input shopRadioButton doc" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :condimentBag, "Did the condiments come (DT)in a condiment bag, (FC)on the tray?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :condimentBag ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :condimentBag ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :folded, "Were your bags double folded?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :folded ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :folded ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="traditional">
+      <div class="mb-3">
+        <%= form.label :readerboard, "Is the Reader Board Message Correct? ", class: 'form-label' %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :readerboard ,3, class: "form-check-input shopRadioButton ml-5" %>
+          <label class="form-check-label" >Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :readerboard ,0, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >No</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :readerboard ,"N/A", class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >N/A</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :marketing, "Is the POP/Marketing Correct? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :marketing ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :marketing ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="traditional">
+      <div class="mb-3">
+        <%= form.label :dtCommentNumber, "Are the 800# signs on the DT Windows? ", class: 'form-label' %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :dtCommentNumber ,1, class: "form-check-input shopRadioButton ml-5" %>
+          <label class="form-check-label" >Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :dtCommentNumber ,0, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >No</label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :accuracyComment, "COMMENTS:", class: "font-weight-bold form-label" %><br>
+      <%= form.text_area :accuracyComment, {class: "form-control", rows: 4 } %>
+    </div>
+  </div>
+</div>

@@ -57,6 +57,15 @@ class ShopsController < ApplicationController
     end
   end
 
+  def manager_list
+    @target = params[:target]
+    store = Store.find(params[:store])
+    @managers =  store.users.where(position_id: [5, 15], active: true).order(position_id: :desc, first_name: :asc)
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_shop

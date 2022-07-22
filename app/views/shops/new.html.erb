@@ -1,9 +1,10 @@
-<h1>New shop</h1>
-
-<%= render "form", shop: @shop %>
-
-<br>
-
-<div>
-  <%= link_to "Back to shops", shops_path %>
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <div class="h2 text-center card-header">New Shop</div>
+      <div class="card-body">
+        <%= render "form", shop: @shop %>
+      </div>
+    </div>
+  </div>
 </div>

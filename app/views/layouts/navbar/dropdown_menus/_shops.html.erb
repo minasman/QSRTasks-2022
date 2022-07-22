@@ -1,0 +1,29 @@
+ <li class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle caret-off" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Shops
+  </a>
+  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+    <% if policy(:shop).new? %>
+      <li>
+        <%= link_to new_shop_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-magnifying-glass-plus me-1"></i>
+          New Shop
+        <% end %>
+      </li>
+    <% end %>
+    <% if policy(:shop).index? %>
+      <li>
+        <%= link_to shops_path, class: "dropdown-item" do %>
+          <i class="fa-solid fa-folders me-1"></i>
+          Shops
+        <% end %>
+      </li>
+      <li>
+        <%= link_to  "", class: "dropdown-item" do %>
+          <i class="fa-solid fa-file-chart-column me-1"></i>
+          Shop Report
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>

@@ -91,8 +91,8 @@ class Training::CurriculumsController < ApplicationController
 
     def my_people
       tclass_list = []
-      Curriculum.is_current.each do |course|
-        course.tclasses.each do |tclass|
+      Curriculum.order(start_date: :asc).is_current.each do |course|
+        course.tclasses.order(class_date: :asc).each do |tclass|
           tclass.users.each do |user|
             if user.stores[0].in? current_user.stores
               tclass_list.push(tclass)
@@ -106,7 +106,7 @@ class Training::CurriculumsController < ApplicationController
     def personal_schedule(student)
       tclass_list = []
       Curriculum.is_current.each do |course|
-        course.tclasses.each do |tclass|
+        course.tclasses.order(class_date: :asc).each do |tclass|
           tclass.users.each do |user|
             if user.id == student.to_i
               tclass_list.push(tclass)

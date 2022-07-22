@@ -1,0 +1,124 @@
+<div id="shiftManagment" data-controller="toggle" data-toggle-class="hidden">
+  <div class="row align-items-center">
+    <div class="col-1">
+      <h5 id="smControl" data-action='click->toggle#toggle'>X</h5>
+    </div>
+    <div class="col-11">
+      <h3 class="text-center">SHIFT MANAGEMENT</h3>
+    </div>
+  </div>
+  <div id="shiftManagementQuestions" data-toggle-target='content'>
+    <div class="mb-3">
+      <%= form.label :shift_manager_id, "Shift Manager", class: "form-label" %>
+      <%= form.select :shift_manager_id, [], {prompt: "Select Manager"}, {class: "form-select", data: { shop_target: "managerList"}, required: true} %>
+    </div>
+    <div class="mb-3">
+      <%= form.label :upFront, "Is the shift manager up front and visibly in charge?", class:'form-label'%><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :upFront, 2, class: "form-check-input shopRadioButton ms-2" %>
+        <label class="form-check-label">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :upFront, 0, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label">No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :mgrAppearance, "Is the Shift Manager Appearance Acceptable? (Shirt clean, Tie, Shoes, Name Tag)",class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :mgrAppearance, 2, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label">Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :mgrAppearance, 0, class: "form-check-input shopRadioButton"%>
+        <label class="form-check-label">No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :headset, "Is the Shift Manager Wearing a Headset?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :headset, 3, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :headset, 0, class: "form-check-input shopRadioButton"%>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :crewAppearance, "Is the Crew Appearance Acceptable? (Shirts Clean, Correct Shoes, Name Tags, Hats)", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :crewAppearance, 2, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :crewAppearance, 0, class: "form-check-input shopRadioButton"%>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :r2d2Charts, "Are R2D2 Charts Posted and Current?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :r2d2Charts, 2, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :r2d2Charts, 0, class: "form-check-input shopRadioButton"%>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :rdm, "Are the RDM Boards Current?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :rdm, 2, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :rdm, 0, class: "form-check-input shopRadioButton"%>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :kiosks, "Were Kiosks Staffed and in use?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :kiosks, 3, class: "form-check-input shopRadioButton ms-2" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :kiosks, 0, class: "form-check-input shopRadioButton " %>
+        <label class="form-check-label" >No</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :kiosks, "N/A", class: "form-check-input shopRadioButton"%>
+        <label class="form-check-label" >N/A</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :tableService, "Was GEL/Table Service Being Used During Your Visit?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :tableService, 3, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :tableService, 0, class: "form-check-input shopRadioButton doc"%>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :tableTent, "Are Benefits/Employment Visible?" %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :tableTent, 1, class: "form-check-input shopRadioButton ms-2"%>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :tableTent, 0, class: "form-check-input shopRadioButton "%>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :shiftMgrComment, "COMMENTS:", class: "font-weight-bold form-label" %>
+      <%= form.text_area :shiftMgrComment, {class: "form-control", rows: 4} %>
+    </div>
+  </div>
+</div>

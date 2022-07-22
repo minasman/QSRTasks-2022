@@ -1,0 +1,49 @@
+<div id="quality" data-controller="toggle" data-toggle-class="hidden">
+  <div class="row align-items-center">
+    <div class="col-1">
+      <h5 id="qualityControl" data-action='click->toggle#toggle'>X</h5>
+    </div>
+    <div class="col-11">
+      <h3 class="text-center">QUALITY</h3>
+    </div>
+  </div>
+  <div id="qualityQuestions" data-toggle-target='content'>
+    <div class="form-group">
+      <%= form.label :fresh, "Were all products properly prepared and fresh and hot?  Neatly assembled? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :fresh ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :fresh ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.label :friesGood, "Were fries fresh and properly salted? Hashbrown hot and properly cooked?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :friesGood ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :friesGood ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= form.label :drinkGood, "Did the beverage have good taste?  (Cold/hot, carbonated, prepared correctly,stickered)", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :drinkGood ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :drinkGood ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="form-group">
+        <%= form.label :qualityComment, "COMMENTS:", class: "font-weight-bold form-label" %><br>
+        <%= form.text_area :qualityComment, {class: "form-control", rows: 4} %>
+    </div>
+  </div>
+</div>

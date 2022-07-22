@@ -1,0 +1,100 @@
+<div id="foodSafety" data-controller="toggle" data-toggle-class="hidden">
+  <div class="row align-items-center">
+    <div class="col-1">
+      <h5 id="fsControl" data-action='click->toggle#toggle'>X</h5>
+    </div>
+    <div class="col-11">
+      <h3 class="text-center">FOOD SAFETY</h3>
+    </div>
+  </div>
+  <div id="fsQuestions" data-toggle-target='content'>
+    <div class="form-group">
+      <%= form.label :uhcTimer, "Are UHC timers being used correctly? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :uhcTimer ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :uhcTimer ,0, class: "form-check-input shopRadioButton doc" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :prepTimer, "Are times on the prep table being used and are current? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :prepTimer ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :prepTimer ,0, class: "form-check-input shopRadioButton doc" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :bunTimer, "Are the buns held correctly with times marked? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :bunTimer ,3, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :bunTimer ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :qtrCorrect, "Is the HOTG 4:1 Held in the 2 Drawer Cooler Correctly? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :qtrCorrect ,5, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :qtrCorrect ,0, class: "form-check-input shopRadioButton doc" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :qtrDate, "Secondary Shelf Life on Oldest 4:1 Package:", class: 'form-label' %><br>
+      <div class="row">
+        <div class="col-6">
+          <span>Date: </span><%= form.date_field :qtrDate, class: "form-control"%>
+        </div>
+        <div class="col-6">
+          <span>Time: </span><%= form.time_field :qtrTime, class: "form-control"%>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :glove, "Are Glove Procedures Followed in The Grill Area? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :glove ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :glove ,0, class: "form-check-input shopRadioButton doc" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :pieTimer, "Are the pies held correctly with times marked? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :pieTimer ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :pieTimer ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :foodSafetyComment, "COMMENTS:", class: "font-weight-bold form-label"%><br>
+      <%= form.text_area :foodSafetyComment, {class: "form-control", rows: 4}%>
+    </div>
+  </div>
+</div>

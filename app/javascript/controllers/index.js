@@ -42,3 +42,6 @@ application.register("signature", SignatureController)
 
 import StudentController from "./student_controller.js"
 application.register("student", StudentController)
+
+import ToggleController from "./toggle_controller.js"
+application.register("toggle", ToggleController)

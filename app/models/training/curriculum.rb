@@ -14,7 +14,7 @@ class Curriculum < ApplicationRecord
     current_curriculum = []
     where(current: true).order(name: 'ASC', start_date: 'ASC').each do |c|
       current = true
-      c.tclasses.order(id: 'ASC').each do |t|
+      c.tclasses.order(class_date: 'ASC').each do |t|
         if t.class_date >= Date.today
           current_curriculum << c
           current = true

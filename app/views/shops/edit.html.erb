@@ -1,10 +1,10 @@
-<h1>Editing shop</h1>
-
-<%= render "form", shop: @shop %>
-
-<br>
-
-<div>
-  <%= link_to "Show this shop", @shop %> |
-  <%= link_to "Back to shops", shops_path %>
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <div class="card">
+      <div class="h2 text-center card-header">Edit <%= @shop.store.number %> Shop Completed On <%= @shop.shopDate.strftime("%m/%d/%y")%></div>
+      <div class="card-body">
+        <%= render "form", shop: @shop %>
+      </div>
+    </div>
+  </div>
 </div>

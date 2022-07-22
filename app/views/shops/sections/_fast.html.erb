@@ -1,0 +1,229 @@
+<div id="fast" data-controller="toggle" data-toggle-class="hidden">
+  <div class="row align-items-center">
+    <div class="col-1">
+      <h5 id="fastControl" data-action='click->toggle#toggle'>X</h5>
+    </div>
+    <div class="col-11">
+      <h3 class="text-center">FAST</h3>
+    </div>
+  </div>
+  <div id="fastQuestions" data-toggle-target='content'>
+    <div class="row">
+      <div class="col">
+        <h6 class="text-center font-italic" style="color: red;">RECORD THE AUDIO OF THE TRANSACTION AND SEND TO MARY, NED, DANIEL & SUPERVISOR</h6>
+      </div>
+    </div>
+    <div id="dt">
+      <h5 class="text-center">DRIVE-THRU</h5>
+      <div class="row dttimer">
+        <div class="col-auto mx-auto" >
+          <div class="table-responsive">
+            <table style="border: collapse;" class="text-center">
+              <tr style="bgcolor: #C0B8B8;">
+                <th>Start</th>
+                <th>At COD</th>
+                <th>Greeted</th>
+                <th>Order End</th>
+                <th>At Cashier</th>
+                <th>Change Given</th>
+                <th>At Present</th>
+                <th>Pulled</th>
+                <th>Total</th>
+              </tr>
+              <tr height="25px" style="bgcolor: gray;" >
+                <td><span id="orderStart"></span></td>
+                <td><span id="atcod"></span></td>
+                <td><span id="greeted"></span></td>
+                <td><span id="orderend"></span></td>
+                <td><span id="atcash"></span></td>
+                <td><span id="change"></span></td>
+                <td><span id="atpresent"></span></td>
+                <td><span id="pulledfwd"></span></td>
+                <td><span id="total"></span></td>
+              </tr>
+              <tr>
+                <td><input type="button" name="startButton" id="startButton" value="Start" class="btn my-submit"></td>
+                <td><input type="button" name="codButton" id="codButton" value="At COD" class="btn my-submit"></td>
+                <td><input type="button" name="greetedButton" id="greetedButton" value="Greeted" class="btn my-submit" ></td>
+                <td><input type="button" name="oeButton" id="oeButton" value="Order End" class="btn my-submit" ></td>
+                <td><input type="button" name="cashierButton" id="cashierButton" value="At Cash" class="btn my-submit" ></td>
+                <td><input type="button" name="changeButton" id="changeButton" value="Change Given" class="btn my-submit" ></td>
+                <td><input type="button" name="presentButton" id="presentButton" value="At Present" class="btn my-submit" ></td>
+                <td><input type="button" name="pulledButton" id="pulledButton" value="Pulled" class="btn my-submit" ></td>
+                <td><input type="button" name="endButton" id="endButton" value="Done" class="btn my-submit" ></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 col-lg-4">
+          <div class="form-group">
+            <%= form.label :waitTime, "Wait Time: ", class: 'form-label'%>
+            <%= form.text_field :waitTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-6 col-lg-4">
+          <div class="form-group">
+            <%= form.label :responseTime, "Response Time: ", class: 'form-label'%>
+            <%= form.text_field :responseTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-6 col-lg-4">
+          <div class="form-group">
+            <%= form.label :presentTime, "Present Time:  ", class: 'form-label'%>
+            <%= form.text_field :presentTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-6 col-lg-4">
+          <div class="form-group">
+            <%= form.label :oepTime, "OEPE Time: ", class: 'form-label'%>
+            <%= form.text_field :oepTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-6 col-lg-4">
+          <div class="form-group">
+            <%= form.label :totalTime, "Total Time: ", class: 'form-label'%>
+            <%= form.text_field :totalTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-6 col-lg-4">
+          <div class="form-group">
+            <div class="pulledForwardYes">
+              <%= form.label :pullForwardTime, "Pull Forward Time: ", class: 'form-label'%>
+              <%= form.text_field :pullForwardTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= form.label :pullForward, "Were you pulled forward?", class: 'form-label' %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :pullForward ,"Yes", class: "form-check-input shopRadioButton ml-5"%>
+          <label class="form-check-label" >Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :pullForward ,"No", class: "form-check-input shopRadioButton"%>
+          <label class="form-check-label" >No</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :numberCars, "Number of cars between COD & You, include car at COD: ", class: 'form-label'%>
+        <%= form.text_field :numberCars, class: "form-control"%>
+      </div>
+      <div class="form-group">
+        <%= form.label :tandem, "If Dual Lane/Tandem/HHOT, was second order point in use?", class: 'form-label' %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :tandem ,5, class: "form-check-input shopRadioButton ml-5"%>
+          <label class="form-check-label" >Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :tandem ,0, class: "form-check-input shopRadioButton doc"%>
+          <label class="form-check-label" >No</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :tandem ,"N/A", class: "form-check-input shopRadioButton"%>
+          <label class="form-check-label" >N/A</label>
+        </div>
+      </div>
+    </div>
+    <div id="fc">
+      <h5 class="text-center">FRONT COUNTER</h5>
+      <div class="row fctimer">
+        <div class="col-auto mx-auto" >
+          <div class="table-responsive">
+            <table style="border: collapse;" class="text-center">
+              <tr style="bgcolor: #C0B8B8;">
+                <th>Start</th>
+                <th>Greeted</th>
+                <th>Order Complete</th>
+                <th>Change Given</th>
+                <th>Rcvd Food</th>
+              </tr>
+              <tr height="25px" style="bgcolor: gray;">
+                <td><span id="fcstart"></span></td>
+                <td><span id="fcgreeted"></span></td>
+                <td><span id="fcordercomplete"></span></td>
+                <td><span id="fcchange"></span></td>
+                <td><span id="fcdone"></span></td>
+              </tr>
+              <tr>
+                <td><input type="button" id="fcstartbutton" value="Start" class="btn my-submit"></td>
+                <td><input type="button" id="fcgreetbutton" value="Greeted" class="btn my-submit"></td>
+                <td><input type="button" id="fcorderbutton" value="Order Done" class="btn my-submit"></td>
+                <td><input type="button" id="fcchangebutton" value="Change Given" class="btn my-submit"></td>
+                <td><input type="button" id="fcdonebutton" value="Done" class="btn my-submit"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8 col-lg-4">
+          <div class="form-group">
+            <%= form.label :fcWaitTime, "Wait Time: ", class: 'form-label'%>
+            <%= form.text_field :fcWaitTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-8 col-lg-4">
+          <div class="form-group">
+            <%= form.label :fcDeliveryTIme, "Delivery Time: ", class: 'form-label'%>
+            <%= form.text_field :fcDeliveryTIme, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+        <div class="col-8 col-lg-4">
+          <div class="form-group">
+            <%= form.label :fcTotalTime, "Total Time: ", class: 'form-label'%>
+            <%= form.text_field :fcTotalTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= form.label :numberGuests, "Number of guests ahead of you in line: ", class: 'form-label' %><br>
+        <%= form.text_field :numberGuests, class: "form-control" %>
+      </div>
+    </div>
+    <div id="curbside">
+      <h5 class="text-center">CURBSIDE</h5>
+      <div class="row curbtimer">
+        <div class="col-auto mx-auto" >
+          <div class="table-responsive">
+            <table style="border: collapse;" class="text-center">
+              <tr style="bgcolor: #C0B8B8;">
+                <th>Start</th>
+                <th>Rcvd Food</th>
+              </tr>
+              <tr height="25px" style="bgcolor: gray;">
+                <td><span id="curbstart"></span></td>
+                <td><span id="curbdone"></span></td>
+              </tr>
+              <tr>
+                <td><input type="button" id="curbstartbutton" value="Start" class="btn my-submit"></td>
+                <td><input type="button" id="curbdonebutton" value="Done" class="btn my-submit"></td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-8 col-lg-4">
+          <div class="form-group">
+            <%= form.label :curbTotalTime, "Total Time: ", class: 'form-label'%>
+            <%= form.text_field :curbTotalTime, placeholder: "Enter Time In Seconds", class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="delivery">
+      <h5 class="text-center">DELIVERY</h5>
+    </div>
+    <div class="form-group">
+      <%= form.label :fastComment, "COMMENTS:", class: "font-weight-bold", class: 'form-label' %><br>
+      <%= form.text_area :fastComment, {class: "form-control", rows: 4} %>
+    </div>
+  </div>
+</div>

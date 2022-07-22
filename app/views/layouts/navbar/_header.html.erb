@@ -45,6 +45,9 @@
           <% if policy(:new_hire).index? %>
             <%= render "layouts/navbar/dropdown_menus/onboarding" %>
           <% end %>
+          <% if policy(:shop).index? %>
+            <%= render "layouts/navbar/dropdown_menus/shops" %>
+          <% end %>
           <% if policy(:safe_audit).index? %>
             <%= render "layouts/navbar/dropdown_menus/audit" %>
           <% end %>
