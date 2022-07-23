@@ -61,12 +61,6 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem 'listen', '~> 3.3'
-  gem 'flamegraph', '~> 0.9.5'
-  gem 'memory_profiler', '~> 1.0'
-  gem 'rack-mini-profiler', '~> 2.0'
-  gem 'stackprof', '~> 0.2.16'
-
-
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -86,5 +80,11 @@ gem 'whenever', '~> 1.0'
 gem 'wicked_pdf', '~> 2.6', '>= 2.6.3'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 gem 'mailgun-ruby', '~> 1.2', '>= 1.2.5'
+
+gem 'flamegraph', '~> 0.9.5'
+gem 'memory_profiler', '~> 1.0'
+gem 'rack-mini-profiler', '~> 2.0'
+gem 'stackprof', '~> 0.2.16'
+
 
  #github
