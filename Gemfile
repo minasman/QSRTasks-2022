@@ -85,3 +85,5 @@ gem 'whenever', '~> 1.0'
 gem 'wicked_pdf', '~> 2.6', '>= 2.6.3'
 gem 'wkhtmltopdf-binary', '~> 0.12.6.5'
 gem 'mailgun-ruby', '~> 1.2', '>= 1.2.5'
+
+ #github
