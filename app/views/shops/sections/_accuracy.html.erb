@@ -20,7 +20,7 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :completeOrder ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :completeOrder ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
@@ -32,7 +32,7 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :condiment ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :condiment ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
@@ -61,21 +61,19 @@
       </div>
     </div>
 
-    <div class="traditional">
-      <div class="mb-3">
-        <%= form.label :readerboard, "Is the Reader Board Message Correct? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :readerboard ,3, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :readerboard ,0, class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >No</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :readerboard ,"N/A", class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >N/A</label>
-        </div>
+    <div class="mb-3">
+      <%= form.label :readerboard, "Is the Reader Board Message Correct? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :readerboard ,3, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :readerboard ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :readerboard ,"N/A", class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >N/A</label>
       </div>
     </div>
 

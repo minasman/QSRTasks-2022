@@ -8,7 +8,7 @@
     </div>
   </div>
   <div id="shiftManagementQuestions" data-toggle-target='content'>
-    <div class="mb-3">
+    <div class="mb-3 col-12 col-md-6">
       <%= form.label :shift_manager_id, "Shift Manager", class: "form-label" %>
       <%= form.select :shift_manager_id, [], {prompt: "Select Manager"}, {class: "form-select", data: { shop_target: "managerList"}, required: true} %>
     </div>
@@ -101,7 +101,7 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :tableService, 0, class: "form-check-input shopRadioButton doc"%>
+        <%= form.radio_button :tableService, 0, class: "form-check-input shopRadioButton"%>
         <label class="form-check-label" >No</label>
       </div>
     </div>

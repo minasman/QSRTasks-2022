@@ -8,7 +8,7 @@
     </div>
   </div>
   <div id="qualityQuestions" data-toggle-target='content'>
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :fresh, "Were all products properly prepared and fresh and hot?  Neatly assembled? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :fresh ,5, class: "form-check-input shopRadioButton ml-5" %>
@@ -19,7 +19,7 @@
         <label class="form-check-label" >No</label>
       </div>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :friesGood, "Were fries fresh and properly salted? Hashbrown hot and properly cooked?", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :friesGood ,5, class: "form-check-input shopRadioButton ml-5" %>
@@ -30,7 +30,7 @@
         <label class="form-check-label" >No</label>
       </div>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :drinkGood, "Did the beverage have good taste?  (Cold/hot, carbonated, prepared correctly,stickered)", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :drinkGood ,5, class: "form-check-input shopRadioButton ml-5" %>
@@ -41,7 +41,7 @@
         <label class="form-check-label" >No</label>
       </div>
     </div>
-    <div class="form-group">
+    <div class="mb-3">
         <%= form.label :qualityComment, "COMMENTS:", class: "font-weight-bold form-label" %><br>
         <%= form.text_area :qualityComment, {class: "form-control", rows: 4} %>
     </div>

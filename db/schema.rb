@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_22_013757) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_21_203441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -355,6 +355,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_22_013757) do
     t.string "tandem"
     t.string "fcWaitTime"
     t.string "fcDeliveryTime"
+    t.string "curbsideTotalTime"
+    t.string "loyalty_name"
     t.string "fcTotalTime"
     t.string "numberGuests"
     t.string "completeOrder"
@@ -404,7 +406,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_22_013757) do
     t.time "qtrTime"
     t.string "glove"
     t.string "pieTimer"
-    t.string "contactless"
+    t.string "bakeryTimer"
     t.string "lotGum"
     t.string "codGum"
     t.string "dtGum"
@@ -421,12 +423,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_22_013757) do
     t.boolean "docRequired"
     t.string "loyalty"
     t.bigint "shopper_id", null: false
-    t.bigint "shift_manager_id", null: false
+    t.bigint "shift_manager_id"
+    t.bigint "order_taker_id"
+    t.bigint "cashier_id"
+    t.bigint "presenter_id"
+    t.bigint "pf_presenter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "loyalty_name"
-    t.string "curbsideTotalTime"
+    t.index ["cashier_id"], name: "index_shops_on_cashier_id"
+    t.index ["order_taker_id"], name: "index_shops_on_order_taker_id"
     t.index ["organization_id"], name: "index_shops_on_organization_id"
+    t.index ["pf_presenter_id"], name: "index_shops_on_pf_presenter_id"
+    t.index ["presenter_id"], name: "index_shops_on_presenter_id"
     t.index ["shift_manager_id"], name: "index_shops_on_shift_manager_id"
     t.index ["shopper_id"], name: "index_shops_on_shopper_id"
     t.index ["store_id"], name: "index_shops_on_store_id"

@@ -8,106 +8,105 @@
     </div>
   </div>
   <div id="cleanQuestions" data-toggle-target='content'>
-    <div class="traditional">
-      <div class="mb-3">
-        <%= form.label :lotGum, "Is the Lot Free of Gum? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :lotGum ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :lotGum ,0, class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    <div class="mb-3">
+      <%= form.label :lotGum, "Is the Lot Free of Gum? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :lotGum ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :codClean, "Is The COD Area Clean? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :codClean ,3, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :codClean ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :lotGum ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :codGum, "Is the COD Free of Gum? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :codGum ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :codGum ,0, class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :codClean, "Is The COD Area Clean? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :codClean ,3, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :dtClean, "Is the DT Lane Clean? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :dtClean ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :dtClean ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :codClean ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :dtGum, "Is the DT Lane Free of Gum? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :dtGum ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :dtGum ,0, class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :codGum, "Is the COD Free of Gum? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :codGum ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :lotClean, "Is the Parking Lot Clean? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :lotClean ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :lotClean ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :codGum ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :corralClean, "Is the Corral Clean?", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :corralClean ,1, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :corralClean ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :dtClean, "Is the DT Lane Clean? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :dtClean ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :lidsClosed, "Are the Dumpster Lids Closed?", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :lidsClosed ,1, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :lidsClosed ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :dtClean ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
-      <div class="mb-3">
-        <%= form.label :dtGlassClean, "Are the DT Glass and Frame Clean?", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :dtGlassClean ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :dtGlassClean ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :dtGum, "Is the DT Lane Free of Gum? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :dtGum ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
       </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :dtGum ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :lotClean, "Is the Parking Lot Clean? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :lotClean ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :lotClean ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :corralClean, "Is the Corral Clean?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :corralClean ,1, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :corralClean ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :lidsClosed, "Are the Dumpster Lids Closed?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :lidsClosed ,1, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :lidsClosed ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
+    <div class="mb-3">
+      <%= form.label :dtGlassClean, "Are the DT Glass and Frame Clean?", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :dtGlassClean ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :dtGlassClean ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+    </div>
 
     <div class="mb-3">
       <%= form.label :windowsClean, "Are Lobby Doors and Windows Clean? ", class: 'form-label' %><br>
@@ -116,22 +115,20 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :windowsClean ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :windowsClean ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="traditional">
-      <div class="mb-3">
-        <%= form.label :trashFull, "Are the outside trash bins clean and NOT overflowing? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :trashFull ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :trashFull ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    <div class="mb-3">
+      <%= form.label :trashFull, "Are the outside trash bins clean and NOT overflowing? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :trashFull ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :trashFull ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
     </div>
 
@@ -154,7 +151,7 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :floorClean ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :floorClean ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
@@ -166,7 +163,7 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :tableClean ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :tableClean ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
@@ -178,22 +175,8 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :drinkClean ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :drinkClean ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
-      </div>
-    </div>
-
-    <div class="wm">
-      <div class="mb-3">
-        <%= form.label :popCornClean, "Was the top of the popcorn machine clean? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :popCornClean ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :popCornClean ,0, class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >No</label>
-        </div>
       </div>
     </div>
 
@@ -204,7 +187,7 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :ventsClean ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :ventsClean ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
@@ -216,50 +199,32 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :sanitizer ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :sanitizer ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="traditional">
-      <div class="mb-3">
-        <%= form.label :tvOn, "Are the Televisions in the Lobby and Playplace on the correct channels? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :tvOn ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :tvOn ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    <div class="mb-3">
+      <%= form.label :tvOn, "Are the Televisions in the Lobby and Playplace on the correct channels? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :tvOn ,2, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :tvOn ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="wm">
-      <div class="mb-3">
-        <%= form.label :tvOn, "Are the Televisions in the Lobby on and playing a movie? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :tvOn ,2, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :tvOn ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+    <div class="mb-3">
+      <%= form.label :restroomClean, "Are the Restrooms Clean? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :restroomClean ,3, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
       </div>
-    </div>
-
-    <div class="traditional">
-      <div class="mb-3">
-        <%= form.label :restroomClean, "Are the Restrooms Clean? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :restroomClean ,3, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :restroomClean ,0, class: "form-check-input shopRadioButton doc" %>
-          <label class="form-check-label" >No</label>
-        </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :restroomClean ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
       </div>
     </div>
 
@@ -270,26 +235,24 @@
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :insideTrash ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :insideTrash ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="traditional">
-      <div class="mb-3">
-        <%= form.label :crewRoom, "Is the Crew Room Clean & Organized? ", class: 'form-label' %><br>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :crewRoom ,1, class: "form-check-input shopRadioButton ml-5" %>
-          <label class="form-check-label" >Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :crewRoom ,0, class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >No</label>
-        </div>
-        <div class="form-check form-check-inline">
-          <%= form.radio_button :crewRoom ,"N/A", class: "form-check-input shopRadioButton" %>
-          <label class="form-check-label" >N/A</label>
-        </div>
+    <div class="mb-3">
+      <%= form.label :crewRoom, "Is the Crew Room Clean & Organized? ", class: 'form-label' %><br>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :crewRoom ,1, class: "form-check-input shopRadioButton ml-5" %>
+        <label class="form-check-label" >Yes</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :crewRoom ,0, class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >No</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <%= form.radio_button :crewRoom ,"N/A", class: "form-check-input shopRadioButton" %>
+        <label class="form-check-label" >N/A</label>
       </div>
     </div>
 

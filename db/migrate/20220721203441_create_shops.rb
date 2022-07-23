@@ -34,6 +34,8 @@ class CreateShops < ActiveRecord::Migration[7.0]
       t.string :tandem
       t.string :fcWaitTime
       t.string :fcDeliveryTime
+      t.string :curbsideTotalTime
+      t.string :loyalty_name
       t.string :fcTotalTime
       t.string :numberGuests
       t.string :completeOrder
@@ -83,7 +85,7 @@ class CreateShops < ActiveRecord::Migration[7.0]
       t.time :qtrTime
       t.string :glove
       t.string :pieTimer
-      t.string :contactless
+      t.string :bakeryTimer
       t.string :lotGum
       t.string :codGum
       t.string :dtGum
@@ -100,7 +102,11 @@ class CreateShops < ActiveRecord::Migration[7.0]
       t.boolean :docRequired
       t.string :loyalty
       t.references :shopper, null: false
-      t.references :shift_manager, null: false
+      t.references :shift_manager
+      t.references :order_taker
+      t.references :cashier
+      t.references :presenter
+      t.references :pf_presenter
 
       t.timestamps
     end

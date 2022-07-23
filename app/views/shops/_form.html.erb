@@ -33,77 +33,67 @@
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :shopType, "Shop Channel", class: "form-label" %>
-        <%= form.select :shop_type, Shop::SHOP_TYPE, {:include_blank => "Select Channel"}, {class: "form-control", required: true }  %>
+        <%= form.select :shopType, Shop::SHOP_TYPE, {:include_blank => "Select Channel"}, {class: "form-control", required: true, data: { action: "change->shop#shoparea" } }  %>
       </div>
     </div>
   </div>
-  <div class="row" id="shift-management">
-    <div class="col">
+  <div id="shopQuestions" style="<%= shop.id.nil? ? 'display: none;' : 'display: block;' %>">
+    <div class="row" id="shift-management">
+      <div class="col">
+        <hr>
+        <%= render :partial => "/shops/sections/shift_management", locals: { form: form } %>
+      </div>
+    </div>
+    <div class="row" id="fast">
+      <div class="col">
+        <hr>
+        <%= render :partial => "/shops/sections/fast", locals: { form: form } %>
+      </div>
+    </div>
+    <div class="row" id="accurate">
       <hr>
-      <%= render :partial => "/shops/sections/shift_management", locals: { form: form } %>
+      <div class="col">
+        <%= render :partial => "/shops/sections/accuracy", locals: { form: form } %>
+      </div>
     </div>
-  </div>
-  <div class="row" id="fast">
-    <div class="col">
+    <div class="row" id="hospitality">
       <hr>
-      <%= render :partial => "/shops/sections/fast", locals: { form: form } %>
+      <div class="col">
+        <%= render :partial => "/shops/sections/hospitality", locals: { form: form } %>
+      </div>
     </div>
-  </div>
-  <div class="row" id="accurate">
-    <hr>
-    <div class="col">
-      <%= render :partial => "/shops/sections/accuracy", locals: { form: form } %>
+    <div class="row" id="quality">
+      <hr>
+      <div class="col">
+        <%= render :partial => "/shops/sections/quality", locals: { form: form } %>
+      </div>
     </div>
-  </div>
-  <div class="row" id="hospitality">
-    <hr>
-    <div class="col">
-      <%= render :partial => "/shops/sections/hospitality", locals: { form: form } %>
+    <div class="row" id="cleanliness">
+      <hr>
+      <div class="col">
+        <%= render :partial => "/shops/sections/cleanliness", locals: { form: form } %>
+      </div>
     </div>
-  </div>
-  <div class="row" id="quality">
-    <hr>
-    <div class="col">
-      <%= render :partial => "/shops/sections/quality", locals: { form: form } %>
+    <div class="row" id="food-safety">
+      <hr>
+      <div class="col">
+        <%= render :partial => "/shops/sections/food_safety", locals: { form: form } %>
+      </div>
     </div>
-  </div>
-  <div class="row" id="cleanliness">
-    <hr>
-    <div class="col">
-      <%= render :partial => "/shops/sections/cleanliness", locals: { form: form } %>
+    <div>
+      <%= form.hidden_field :score %>
+      <%= form.hidden_field :possiblePoints %>
+      <%= form.hidden_field :achievedPoints %>
+      <%= form.hidden_field :docRequired %>
     </div>
-  </div>
-  <div class="row" id="food-safety">
-    <hr>
-    <div class="col">
-      <%= render :partial => "/shops/sections/food_safety", locals: { form: form } %>
+    <div class="mb-3">
+      <%= form.submit class: "btn my-submit" %>
     </div>
-  </div>
-
-
-
-  <div class="mb-3">
-    <%= form.label :possiblePoints, class: "form-label" %>
-    <%= form.number_field :possiblePoints %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :achievedPoints, class: "form-label" %>
-    <%= form.number_field :achievedPoints %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :score, class: "form-label" %>
-    <%= form.text_field :score %>
-  </div>
-
-
-  <div class="mb-3">
-    <%= form.label :docRequired, class: "form-label" %>
-    <%= form.check_box :docRequired %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.submit class: "btn my-submit" %>
   </div>
 <% end %>
+
+<div class="row">
+  <div class="col-auto" >
+    <p style="display: none; bottom: 24px; position: fixed; right: 0; width: 100%; z-index: 5;" id="score" class="bg-dark text-light text-center d-block"></p>
+  </div>
+</div

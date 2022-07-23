@@ -8,31 +8,31 @@
     </div>
   </div>
   <div id="fsQuestions" data-toggle-target='content'>
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :uhcTimer, "Are UHC timers being used correctly? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :uhcTimer ,5, class: "form-check-input shopRadioButton ml-5" %>
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :uhcTimer ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :uhcTimer ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :prepTimer, "Are times on the prep table being used and are current? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :prepTimer ,5, class: "form-check-input shopRadioButton ml-5" %>
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :prepTimer ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :prepTimer ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :bunTimer, "Are the buns held correctly with times marked? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :bunTimer ,3, class: "form-check-input shopRadioButton ml-5" %>
@@ -44,19 +44,19 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :qtrCorrect, "Is the HOTG 4:1 Held in the 2 Drawer Cooler Correctly? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :qtrCorrect ,5, class: "form-check-input shopRadioButton ml-5" %>
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :qtrCorrect ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :qtrCorrect ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :qtrDate, "Secondary Shelf Life on Oldest 4:1 Package:", class: 'form-label' %><br>
       <div class="row">
         <div class="col-6">
@@ -68,19 +68,19 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :glove, "Are Glove Procedures Followed in The Grill Area? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :glove ,2, class: "form-check-input shopRadioButton ml-5" %>
         <label class="form-check-label" >Yes</label>
       </div>
       <div class="form-check form-check-inline">
-        <%= form.radio_button :glove ,0, class: "form-check-input shopRadioButton doc" %>
+        <%= form.radio_button :glove ,0, class: "form-check-input shopRadioButton" %>
         <label class="form-check-label" >No</label>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :pieTimer, "Are the pies held correctly with times marked? ", class: 'form-label' %><br>
       <div class="form-check form-check-inline">
         <%= form.radio_button :pieTimer ,2, class: "form-check-input shopRadioButton ml-5" %>
@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="mb-3">
       <%= form.label :foodSafetyComment, "COMMENTS:", class: "font-weight-bold form-label"%><br>
       <%= form.text_area :foodSafetyComment, {class: "form-control", rows: 4}%>
     </div>
