@@ -42,7 +42,7 @@ gem 'pagy', '~> 5.10', '>= 5.10.1'
 gem 'pg_search', '~> 2.3', '>= 2.3.6'
 gem 'pundit', '~> 2.2'
 gem 'aws-sdk-core', '~> 3.131', '>= 3.131.2'
-gem 'aws-sdk-s3', '~> 1.114'
+gem 'aws-sdk-s3', require: false
 gem 'chartkick', '~> 4.2'
 gem 'groupdate', '~> 6.1'
 gem 'hightop', '~> 0.3.0'

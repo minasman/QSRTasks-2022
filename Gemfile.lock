@@ -327,7 +327,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-sdk-core (~> 3.131, >= 3.131.2)
-  aws-sdk-s3 (~> 1.114)
+  aws-sdk-s3
   bootsnap
   capybara
   chartkick (~> 4.2)
