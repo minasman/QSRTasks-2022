@@ -67,11 +67,11 @@ Rails.application.configure do
     pool_size: 5,
     expire_after: 1.year
 
-  config.action_controller.default_url_options = {host: "qsrtasks.com"}
+  config.action_controller.default_url_options = {host: "qsrtasks.app"}
 
 
   # Use a real queuing backend for Active Job (and separate queues per environment).
-  # config.active_job.queue_adapter     = :resque
+  config.active_job.queue_adapter     = :sidekiq
   # config.active_job.queue_name_prefix = "QSRTasks_2022_b_production"
 
   config.action_mailer.perform_caching = false
@@ -85,7 +85,7 @@ Rails.application.configure do
   config.i18n.fallbacks = true
 
   # Don't log any deprecations.
-  config.active_support.report_deprecations = false
+  config.active_support.report_deprecations = :notify
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
@@ -102,4 +102,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: 'qsrtasks.app' }
+  config.action_mailer.delivery_method = :mailgun
+  config.action_mailer.mailgun_settings = {
+    api_key: ENV['MAILGUN_API_KEY'],
+    domain: ENV['MAILGUN_DOMAIN'],
+  }
+
+  config.time_zone = 'Central Time (US & Canada)'
 end
