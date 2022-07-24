@@ -7,7 +7,7 @@ class Training::TrainingRegistrationController < ApplicationController
 
   def new
     @training_registration = User.find(params[:id])
-    @curriculum = Curriculum.where(start_date: Date.today-2.months..Date.today+1.year).order(name: :asc, start_date: :asc)
+    @curriculum = Curriculum.where(start_date: Date.today..Date.today+1.year).order(name: :asc, start_date: :asc)
     @tclasses = []
   end
 

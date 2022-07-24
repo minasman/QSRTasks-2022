@@ -1,13 +1,17 @@
 <div class="row justify-content-center mb-2">
   <h3 class="text-center">Scheduled For Training</h3>
-  <% @store.users.where(position_id: 15).each do |manager| %>
-    <div class="col-6 col-md-3 col-lg-2">
-      <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to manager.full_name, manager, class: "table-link" %>
-      <% else %>
-        <%= manager.full_name %>
-      <% end %>
-    </div>
+  <% if @students.size > 0 %>
+    <% @students.each do |student| %>
+      <div class="col-6 col-md-3 col-lg-2">
+        <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
+          <%= link_to student.full_name, student, class: "table-link" %>
+        <% else %>
+          <%= student.full_name %>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <h4 class="text-center">No Training Scheduled 😢</h4>
   <% end %>
   <hr class="mt-3" >
 </div>
