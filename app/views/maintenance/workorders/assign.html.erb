@@ -43,7 +43,7 @@
               <td><%= workorder.created_at.strftime("%m/%d/%y") %></td>
               <td><%= link_to workorder.equipment.name, workorder.equipment, class: "table-link", data: { turbo: false } %></td>
               <td><%= workorder.user.full_name %></td>
-              <td><%= workorder.team.size > 0 ? workorder.team : "Not Assigned" %></td>
+              <td><%= workorder.team? ? workorder.team : "Not Assigned" %></td>
               <td><%= workorder.assigned? ? User.find(workorder.assigned).full_name : "Not Assigned" %></td>
               <td><%= link_to workorder.vendor.name, workorder.vendor, class: "table-link", data: { turbo: false } %></td>
               <td><%= workorder.level? ? workorder.level : "Not Assigned" %></td>

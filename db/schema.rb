@@ -561,14 +561,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_24_043525) do
   create_table "wellnesses", force: :cascade do |t|
     t.bigint "organization_id", null: false
     t.bigint "store_id", null: false
-    t.string "first_name"
-    t.string "last_name"
-    t.string "tc"
-    t.string "temp"
-    t.string "q1"
-    t.string "q2"
-    t.string "q3"
-    t.string "q4"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
+    t.string "tc", default: "0", null: false
+    t.string "temp", null: false
+    t.string "q1", null: false
+    t.string "q2", null: false
+    t.string "q3", null: false
+    t.string "q4", null: false
     t.boolean "reported"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
