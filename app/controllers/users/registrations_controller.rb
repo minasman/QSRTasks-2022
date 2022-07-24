@@ -17,6 +17,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def create
     build_resource(sign_up_params)
     resource.organization_id = current_user.organization_id
+    payroll_id = User.last.payroll_id.to_i + 1
+    resource.payroll_id = payroll_id
     resource.save
     yield resource if block_given?
     if resource.persisted?
