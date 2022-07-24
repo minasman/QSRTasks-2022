@@ -1,0 +1,38 @@
+<div class="card mb-5">
+  <h2 class="text-center card-header">COVID-19 Crew Wellness Check</h2>
+  <div class="card-body">
+    <p>
+      <strong>Restaurant:</strong>
+      <%= Store.find(@wellness.store_id).number %>
+    </p>
+
+    <p>
+      <strong>Time Card:</strong>
+      <%= @wellness.tc %>
+    </p>
+
+    <p>
+      <strong>Employee:</strong>
+      <%= @wellness.first_name %> <%= @wellness.last_name %>
+    </p>
+
+    <p>
+      <strong>Current Temperature:</strong>
+      <%= @wellness.temp %>°F
+    </p>
+    <% if (((@wellness.q1.to_i + @wellness.q2.to_i + @wellness.q3.to_i + @wellness.q4.to_i) > 0) || (@wellness.temp.to_f > 99.6)) %>
+      <p>1. Please immediately go to a part of the restaurant where there are no employees or customers where you can wait to speak with a manager. When you speak with your manager, you MUST maintain 6 feet of separation.<br> <br> 1. Por favor, dirígete de inmediato a una parte del restaurante donde no haya ningún empleado ni cliente y donde puedas esperar para hablar con un gerente. Al hablar con tu gerente, DEBES mantenerte a 6 pies de distancia. <br><br> OR / O <br><br> 2. You can also leave the restaurant immediately, do not clock out, and call the manager from a different location. Your manager will clock you out so that you do not have to touch the time clock.<br> <br>2. También puedes irte del restaurante de inmediato; no registres tu salida y llama al gerente desde otro lugar. Tu gerente registrará tu salida para que no tengas que tocar el reloj registrador.</p>
+    <% else %>
+      <p class="text-center"><strong>By clocking in, I agree to and certify that I will read and truthfully answer the COVID-19 questions.</strong></p><hr>
+      <p class="text-center"><strong>Al registrar mi entrada, acepto y certifico que leere y respondere con honestidad las preguntas de COVID-19.</strong></p>
+    <% end %>
+    <div class='row'>
+      <div class='col-6 col-md-3 d-grid gap-2 mb-1'>
+        <%= link_to 'Dashboard', dashboard_path, class: 'btn my-submit' %>
+      </div>
+      <div class='col-6 col-md-3 d-grid gap-2 mb-1'>
+        <%= link_to 'New Wellness Check', new_wellness_path, class: 'btn my-submit' %>
+      </div>
+    </div>
+  </div>
+</div>

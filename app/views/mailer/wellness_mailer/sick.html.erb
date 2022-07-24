@@ -1,0 +1,41 @@
+  <div class="row">
+    <div class="col-12">
+      <h1 class="text-center">Restaurant #<%= @sick.store.number %> Date: <%= @sick.created_at.strftime("%m/%d/%Y") %> at: <%= @sick.created_at.strftime("%I:%M %p") %></h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <p>TC# <%= @sick.tc %> <%=@sick.first_name%> <%= @sick.last_name %> <%= @sick.temp %>°F</p>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <p>1. Do you currently have fever, cough, sore throat, shortness of breath or any other COVID-19 OR flu like symptoms (nausea, vomiting, diarrhea, etc.)?</p>
+      <p><%= @sick.q1 == "0" ? "NO" : "YES" %></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <p>2. Have you been diagnosed with COVID-19 by a medical provider in the last 5 days?'</p>
+      <p><%= @sick.q2 == "0" ? "NO" : "YES" %></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <p>3. In the past 5 days, have you had close contact (within 6 feet for 15 minutes or more, or living in your household) with a person who has been diagnosed with COVID-19 by a medical provider? *If you are fully vaccinated, consider your answer to this question “No” and proceed tothe next question.'</p>
+      <p><%= @sick.q3 == "0" ? "NO" : "YES" %></p>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <p>4. Have you been told by a health care provider or public health official that you should self-quarantine due to potential COVID-19 exposure(s) or that you are suspected of having COVID-19?'</p>
+      <p><%= @sick.q4 == "0" ? "NO" : "YES" %></p>
+    </div>
+  </div>

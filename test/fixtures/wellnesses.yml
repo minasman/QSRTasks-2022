@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  store: one
+  first_name: MyString
+  last_name: MyString
+  tc: MyString
+  temp: MyString
+  q1: MyString
+  q2: MyString
+  q3: MyString
+  q4: MyString
+  reported: false
+
+two:
+  organization: two
+  store: two
+  first_name: MyString
+  last_name: MyString
+  tc: MyString
+  temp: MyString
+  q1: MyString
+  q2: MyString
+  q3: MyString
+  q4: MyString
+  reported: false

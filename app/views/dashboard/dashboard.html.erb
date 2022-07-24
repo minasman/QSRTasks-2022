@@ -1,3 +1,28 @@
+
+<div class="row justify-content-center mb-5">
+  <div class="col-12 col-xl-10">
+    <div class="card card-body" style="background-color: red;" >
+      <h4 class="card-title text-center">COVID-19</h4>
+      <div class="row justify-content-evenly">
+        <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
+          <%= link_to 'Wellness Check', new_wellness_path, class: "btn my-submit" %>
+        </div>
+        <%# if policy(:covid_status).new? %>
+          <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
+          <!-- 11/16/21 Add new_covid_status_path -->
+            <%= link_to 'Add Vaccine Status', '' , class: "btn my-submit" %>
+          </div>
+        <%# end %>
+        <%# if policy(:wellness_report).new? %>
+          <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
+            <%= link_to 'Report', '', class: "btn my-submit" %>
+          </div>
+        <%# end %>
+      </div>
+    </div>
+  </div>
+</div>
+
 <% if current_user.position.name == "Crew" %>
   <%= render "/dashboard/dashboards/crew" %>
 <% elsif current_user.position.name.in? ["Owner", "Director", "Business Director"]%>

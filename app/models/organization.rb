@@ -14,4 +14,6 @@ class Organization < ApplicationRecord
   has_many :new_hires, dependent: :delete_all
   has_many :curriculums, dependent: :delete_all
   has_many :shops, dependent: :delete_all
+  has_many :wellnesses, dependent: :delete_all
+
 end

@@ -1,0 +1,6 @@
+<h1>Daily Wellness Checks</h1>
+<p>Submitted in the last 3 hours</p>
+<p>From <%= 3.hours.ago.strftime("%m/%d/%Y") %> <%= 3.hours.ago.strftime("%I:%M %p")%> to <%= Time.zone.now.strftime("%m/%d/%Y") %> <%= Time.zone.now.strftime("%I:%M %p")%> </p>
+<% for store in @checks do %>
+  <p><%= store.number %> Number of Checks <%= store.wellnesses.current.count > 0 ? store.wellnesses.current.count : 0 %>
+<% end %>

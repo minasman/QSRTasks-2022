@@ -1,0 +1,133 @@
+<%= form_with(model: wellness) do |form| %>
+  <% if wellness.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(wellness.errors.count, "error") %> prohibited this wellness from being saved:</h2>
+
+      <ul>
+        <% wellness.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :store_id, 'Location', class: 'form-label' %>
+        <%= form.collection_select(:store_id, Store.all.order('id ASC'), :id, :number,{ prompt: true, required: true}, { class: "form-control" }) %>
+      </div>
+    </div>
+  </div>
+   <div class="row">
+    <div class="col-12 col-lg-3">
+      <div class="mb-3">
+        <%= form.label :first_name, class: 'form-label' %>
+        <%= form.text_field :first_name, class: 'form-control', required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-4">
+      <div class="mb-3">
+        <%= form.label :last_name, class: 'form-label' %>
+        <%= form.text_field :last_name, class: 'form-control', required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-2">
+      <div class="mb-3">
+        <%= form.label :tc, 'Time Card', class: 'form-label' %>
+        <%= form.text_field :tc, class: 'form-control', required: true %>
+      </div>
+    </div>
+    <div class="col-12 col-lg-3">
+      <div class="mb-3">
+        <%= form.label :temp, 'Current Temperature °F', class: 'form-label' %>
+        <%= form.text_field :temp, class: 'form-control', required: true %>
+      </div>
+    </div>
+  </div>
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :q1, '1. Do you currently have fever, cough, sore throat, shortness of breath or any other COVID-19 OR flu like symptoms (nausea, vomiting, diarrhea, etc.)?', class: 'form-label'%>
+        <%= form.label :q1, '1. ¿Tienes actualmente fiebre, tos, dolor de garganta, dificultad para
+          respirar o cualquier otro síntoma similar al COVID-19 o la influenza (náuseas, vómitos, diarrea, etc.)?', class: 'form-label'%><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q1 ,0, class: "form-check-input shopRadioButton ml-5" %>
+          <label class="form-check-label" >NO</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q1 ,1, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >YES</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :q2, '2. Have you been diagnosed with COVID-19 by a medical provider in the last 5 days?', class: 'form-label' %><br>
+        <%= form.label :q2, '2. ¿Ha sido diagnosticado con COVID-19 por un proveedor médico en los últimos 5 días?', class: 'form-label' %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q2 ,0, class: "form-check-input shopRadioButton ml-5" %>
+          <label class="form-check-label" >NO</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q2 ,1, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >YES</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :q3, '3. In the past 5 days, have you had close contact (within 6 feet for 15 minutes or more, or living in your household) with a person who has been diagnosed with COVID-19 by a medical provider? *If you are fully vaccinated, consider your answer to this question “No” and proceed tothe next question.', class: 'form-label' %>
+        <%= form.label :q3, '3. En los últimos 5 días, ¿ha tenido contacto cercano (a menos de 6 pies durante 15 minutos o más, o viviendo en su hogar) con una persona a la que un proveedor médico le haya diagnosticado COVID-19? *Si está completamente vacunado, considere su respuesta a esta pregunta como “No” y continúe con la siguiente pregunta.', class: 'form-label'%>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q3 ,0, class: "form-check-input shopRadioButton ml-5" %>
+          <label class="form-check-label" >NO</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q3 ,1, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >YES</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <div class="mb-3">
+        <%= form.label :q4, '4. Have you been told by a health care provider or public health official that you should self-quarantine due to potential COVID-19 exposure(s) or that you are suspected of having COVID-19?', class: 'form-label'  %>
+        <%= form.label :q4, '4. ¿Algún profesional de la salud o funcionario de salud pública te ha dicho que debes permanecer en cuarentena debido a una posible exposición al COVID-19 o que se sospecha que tienes COVID-19?', class: 'form-label' %><br>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q4 ,0, class: "form-check-input shopRadioButton ml-5" %>
+          <label class="form-check-label" >NO</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <%= form.radio_button :q4 ,1, class: "form-check-input shopRadioButton" %>
+          <label class="form-check-label" >YES</label>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <h3 class="text-center">If you have answered "yes" to any of these questions: <br>Si ha respondido "sí" a alguna de estas preguntas:</h3>
+      <h5>1. Please immediately go to a part of the restaurant where there are no employees or customers where you can wait to speak with a manager. When you speak with your manager, you MUST maintain 6 feet of separation. <br> <br> 1. Por favor, dirígete de inmediato a una parte del restaurante donde no haya ningún empleado ni cliente y donde puedas esperar para hablar con un gerente. Al hablar con tu gerente, DEBES mantenerte a 6 pies de distancia.</h5>
+      <h3 class="text-center">OR / O </h3>
+      <h5>2. You can also leave the restaurant immediately, do not clock out, and call the manager from a different location. Your manager will clock you out so that you do not have to touch the time clock. <br> <br>2. También puedes irte del restaurante de inmediato; no registres tu salida y llama al gerente desde otro lugar. Tu gerente registrará tu salida para que no tengas que tocar el reloj registrador.</h5>
+      <br>
+    </div>
+  </div>
+  <hr>
+
+  <div>
+    <%= form.submit "Submit Wellness Check", class: "btn my-submit" %>
+  </div>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_21_203441) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_24_032938) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -543,6 +543,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_203441) do
     t.index ["organization_id"], name: "index_vendors_on_organization_id"
   end
 
+  create_table "wellnesses", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "store_id", null: false
+    t.string "first_name"
+    t.string "last_name"
+    t.string "tc"
+    t.string "temp"
+    t.string "q1"
+    t.string "q2"
+    t.string "q3"
+    t.string "q4"
+    t.boolean "reported"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_wellnesses_on_organization_id"
+    t.index ["store_id"], name: "index_wellnesses_on_store_id"
+  end
+
   create_table "workorder_updates", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "workorder_id", null: false
@@ -616,6 +634,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_21_203441) do
   add_foreign_key "users", "organizations"
   add_foreign_key "users", "positions"
   add_foreign_key "vendors", "organizations"
+  add_foreign_key "wellnesses", "organizations"
+  add_foreign_key "wellnesses", "stores"
   add_foreign_key "workorder_updates", "users"
   add_foreign_key "workorder_updates", "workorders"
   add_foreign_key "workorders", "equipment"
