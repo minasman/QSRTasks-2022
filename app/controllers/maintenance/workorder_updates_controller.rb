@@ -11,8 +11,6 @@ class Maintenance::WorkorderUpdatesController < ApplicationController
   # PATCH/PUT /workorder_updates/1 or /workorder_updates/1.json
   def create
     authorize @workorder
-
-    puts "THESE ARE THE PARAMS #{params}"
     if params[:workorder_update][:signature].length > 0
       @workorder_update = @workorder.workorder_updates.create(workorder_params)
       @workorder_update.user = current_user

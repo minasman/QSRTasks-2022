@@ -1,5 +1,12 @@
 <div class="card mb-5">
-  <h2 class="card-header text-center">Open Workorders</h2>
+  <div class="row card-header">
+    <div class="col-12 col-md-9">
+      <h2 class="text-center offset-md-3">Open Workorders</h2>
+    </div>
+    <div class="col-12 col-md-3 text-center align-self-center">
+      <%= link_to "Download CSV", "/weekly_recap.csv", class: "btn my-submit" %>
+    </div>
+  </div>
   <%= form_with url: "",  method: :get, data: { turbo_frame: "workorders", turbo_action: "advance" }, class: "pb-3" do |form| %>
     <div class="pt-3 row justify-content-between">
       <div class="col-12 col-md-5 col-xl-2 ms-3">

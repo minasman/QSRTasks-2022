@@ -29,7 +29,3 @@
 # every '45 21 * * SUN,TUE,THU' do
 #   rake 'background'
 # end
-
-# every '0 9 * * MON' do
-#   rake 'separation'
-# end
