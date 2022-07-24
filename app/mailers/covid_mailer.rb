@@ -1,0 +1,2 @@
+class CovidMailer < ApplicationMailer
+end

@@ -1,0 +1,2 @@
+class WellnessMailer < ApplicationMailer
+end

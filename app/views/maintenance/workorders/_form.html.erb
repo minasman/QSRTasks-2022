@@ -78,19 +78,19 @@
       <div class="col-12 col-md-3">
         <div class= "mb-3" >
           <%= form.label :level, class: "form-label" %>
-          <%= form.select :level, Workorder::PRIORITY, {prompt: "Level"} ,class: "form-select" %>
+          <%= form.select :level, Workorder::PRIORITY, {include_blank: true}, {class: "form-select", prompt: "Level"} %>
         </div>
       </div>
       <div class="col-12 col-md-3">
         <div class= "mb-3" >
           <%= form.label :vendor_id, class: "form-label" %>
-          <%= form.collection_select(:vendor_id, Vendor.all.order('name ASC'), :id, :name, {prompt: "Vendor"} ,class: "form-select") %>
+          <%= form.collection_select(:vendor_id, Vendor.all.order('name ASC'), :id, :name, {include_blank: true}, class: "form-select") %>
         </div>
       </div>
       <div class="col-12 col-md-3">
         <div class= "mb-3" >
           <%= form.label :team, class: "form-label" %>
-          <%= form.select :team, Workorder::TEAM, {prompt: "Team"}, class: "form-select" %>
+          <%= form.select :team, Workorder::TEAM, {include_blank: true}, {class: "form-select"} %>
         </div>
       </div>
     </div>

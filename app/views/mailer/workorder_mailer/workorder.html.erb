@@ -1,0 +1,6 @@
+<h1><strong>Restaurant: </strong><%= @workorder.store.number %></h1>
+<h4>Submitted By <%= @workorder.user.full_name %></h4>
+<p>Work Order # <%= @workorder.id %><br><strong>Submitted On: </strong><%= @workorder.created_at.strftime("%m/%d/%Y")     %> <strong>Time: </strong><%= @workorder.created_at.strftime("%I:%M %p") %> <strong>Status: </strong><%= @workorder.status %> <br>
+        <strong>Equipment: </strong><%= @workorder.equipment_id ? Equipment.find(@workorder.equipment_id).name : "None Specified" %> <strong>#Updates </strong><%= @workorder.workorder_updates.count %><br>
+        <strong>Assigned to: </strong><%= @workorder.assigned ? User.find(@workorder.assigned).full_name : "Not Assigned" %> <strong>Vendor: </strong><%= @workorder.vendor_id ? Vendor.find(@workorder.vendor_id).name : "Not Assigned" %><br> <strong>Priority Level: </strong><%= @workorder.level ? @workorder.level : "Not Assigned" %><br>
+        <strong>Work Order Details: </strong><%= @workorder.workorder_issue %></p>

@@ -49,7 +49,7 @@ gem 'groupdate', '~> 6.1'
 gem 'hightop', '~> 0.3.0'
 
 gem 'phonelib', '~> 0.7.0'
-gem 'twilio-ruby', '~> 5.68'
+gem 'twilio-ruby', '~> 5.70'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

@@ -289,7 +289,7 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
-    twilio-ruby (5.68.0)
+    twilio-ruby (5.70.0)
       faraday (>= 0.9, < 3.0)
       jwt (>= 1.5, <= 2.5)
       nokogiri (>= 1.6, < 2.0)
@@ -362,7 +362,7 @@ DEPENDENCIES
   stackprof (~> 0.2.16)
   stimulus-rails
   turbo-rails
-  twilio-ruby (~> 5.68)
+  twilio-ruby (~> 5.70)
   tzinfo-data
   web-console
   webdrivers

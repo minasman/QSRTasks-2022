@@ -1,0 +1,2 @@
+class AuditMailer < ApplicationMailer
+end

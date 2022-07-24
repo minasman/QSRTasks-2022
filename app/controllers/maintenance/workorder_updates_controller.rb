@@ -21,10 +21,10 @@ class Maintenance::WorkorderUpdatesController < ApplicationController
         @workorder.status = 'Closed'
         @workorder_update.save
         @workorder.save
-        #WorkorderMailer.workorder_closed(@workorder).deliver
+        WorkorderMailer.workorder_closed(@workorder).deliver_later
       else
         @workorder_update.save
-        #WorkorderMailer.workorder_update(@workorder).deliver
+        WorkorderMailer.workorder_update(@workorder).deliver_later
       end
       redirect_to workorder_path(@workorder)
     else

@@ -1,0 +1,2 @@
+class NewHireMailer < ApplicationMailer
+end

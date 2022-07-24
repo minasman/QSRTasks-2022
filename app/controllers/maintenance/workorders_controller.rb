@@ -47,6 +47,7 @@ class Maintenance::WorkordersController < ApplicationController
 
     respond_to do |format|
       if @workorder.save
+        WorkorderMailer.workorder(@workorder).deliver_later
         format.html { redirect_to workorder_url(@workorder), notice: "Workorder was successfully created." }
         format.json { render :show, status: :created, location: @workorder }
       else
@@ -64,6 +65,9 @@ class Maintenance::WorkordersController < ApplicationController
         params[:workorder][:status] = "Open"
       end
       if @workorder.update(workorder_params)
+        if @workorder.assigned?
+          WorkorderMailer.workorder_assigned(@workorder, current_user.full_name).deliver_later
+        end
         format.html { redirect_to workorder_url(@workorder), notice: "Workorder was successfully updated." }
         format.json { render :show, status: :ok, location: @workorder }
       else

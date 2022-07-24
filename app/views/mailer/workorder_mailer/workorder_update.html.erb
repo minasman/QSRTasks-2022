@@ -1,0 +1,11 @@
+<h1><strong>Restaurant: </strong><%= @workorder.store.number %></h1>
+<p>Work Order # <%= @workorder.id %><br><strong>Submitted On: </strong><%= @workorder.created_at.strftime("%m/%d/%Y")     %> <strong>Time: </strong><%= @workorder.created_at.strftime("%I:%M %p") %> <strong>Status: </strong><%= @workorder.status %> <br>
+        <strong>Equipment: </strong><%= @workorder.equipment_id ? Equipment.find(@workorder.equipment_id).name : "None Specified" %> <strong>#Updates </strong><%= @workorder.workorder_updates.count %><br>
+        <strong>Assigned to: </strong><%= @workorder.assigned ? User.find(@workorder.assigned).full_name : "Not Assigned" %> <strong>Vendor: </strong><%= @workorder.vendor_id ? Vendor.find(@workorder.vendor_id).name : "Not Assigned" %><br> <strong>Priority Level: </strong><%= @workorder.level ? @workorder.level : "Not Assigned" %><br>
+        <strong>Work Order Details: </strong><%= @workorder.workorder_issue %></p>
+
+<h5>Latest Update</h5>
+<p><strong>Updated By: </strong><%= @update.user.full_name %> <strong>At: </strong><%= @update.created_at.strftime("%I:%M %p") %><br> <strong>On: </strong><%= @update.created_at.strftime("%m/%d/%Y") %> <strong>Update Details: </strong><br> <%= @update.current_update %></p>
+<% if @update.manager %>
+        <p><strong>Update Verified By:</strong> <%= @update.manager%></p>
+<% end %>
