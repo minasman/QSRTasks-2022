@@ -1,4 +1,4 @@
-class WellnessesController < ApplicationController
+class Covid::WellnessesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_wellness, only: %i[ show edit update destroy ]
 

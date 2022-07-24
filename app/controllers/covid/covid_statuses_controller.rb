@@ -1,4 +1,4 @@
-class CovidStatusesController < ApplicationController
+class Covid::CovidStatusesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_covid_status, only: %i[ show edit update destroy ]
 

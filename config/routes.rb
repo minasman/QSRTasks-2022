@@ -1,8 +1,6 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  resources :covid_statuses
-  resources :wellnesses
 
   root 'public#home'
   get 'public/about'
@@ -114,6 +112,11 @@ Rails.application.routes.draw do
   scope module: 'audits' do
     resources :safe_audits
     #resources :food_safety_audits
+  end
+
+  scope module: 'covid' do
+    resources :covid_statuses
+    resources :wellnesses
   end
 
   resources :positions

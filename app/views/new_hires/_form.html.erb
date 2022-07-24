@@ -1,7 +1,7 @@
 <%= form_with(model: new_hire) do |form| %>
   <% if new_hire.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(new_hire.errors.count, "error") %> prohibited this new_hire from being saved:</h2>
+    <div class="alert alert-danger" >
+      <h2 class="text-center"><%= pluralize(new_hire.errors.count, "error") %> prohibited this applicant from being saved</h2>
 
       <ul>
         <% new_hire.errors.each do |error| %>
@@ -56,6 +56,7 @@
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :email, class: "form-label" %>
+        <em><small>(lowercase only!!)</small></em>
         <%= form.email_field :email, class: "form-control", required: true, data: { action: "change->new-hire#verify_rehire"} %>
       </div>
     </div>

@@ -14,15 +14,18 @@ class StoresController < ApplicationController
   # GET /stores/1 or /stores/1.json
   def show
     authorize @store
+    students = []
     @students = []
     @store.users.each do |user|
       user.tclasses.each do |tclass|
         if tclass.class_date.between?(Date.today, Date.today+30.days)
-          @students.push(user)
+          students.push(user.id)
         end
       end
     end
-    @students.uniq
+    students.flatten.uniq.each do |s|
+      @students.push(User.find(s))
+    end
   end
 
   # GET /stores/new

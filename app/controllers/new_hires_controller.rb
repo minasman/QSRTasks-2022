@@ -16,6 +16,7 @@ class NewHiresController < ApplicationController
 
   # GET /new_hires/1 or /new_hires/1.json
   def show
+    authorize @new_hire
   end
 
   # GET /new_hires/new
@@ -41,6 +42,9 @@ class NewHiresController < ApplicationController
     authorize @new_hire
     respond_to do |format|
       if @new_hire.save
+        NewHireMailer.online_orientation(@new_hire).deliver_later
+        SendHireSmsJob.perform_later(@new_hire, "#{@new_hire.full_name} at #{@new_hire.store.number} submitted for Online Orientation")
+        #send_sms(@new_hire, "#{@new_hire.full_name} at #{@new_hire.store.number} submitted for Online Orientation")
         format.html { redirect_to new_hire_url(@new_hire), notice: "New hire was successfully created." }
         format.json { render :show, status: :created, location: @new_hire }
       else
@@ -68,6 +72,7 @@ class NewHiresController < ApplicationController
   def destroy
     authorize @new_hire
     new_hire_id = "new_hire_#{@new_hire.id}"
+    NewHireMailer.new_hire_removed(@new_hire.full_name, @new_hire.store, @new_hire.orientation, current_user.full_name).deliver_later
     @new_hire.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(new_hire_id) }
@@ -109,9 +114,8 @@ class NewHiresController < ApplicationController
     new_hire = NewHire.find(@target.delete_prefix("new_hire_"))
     @row = params[:row]
     payroll_id = User.last.payroll_id.to_i + 1
-    @user = User.new(first_name: new_hire.first_name, last_name: new_hire.last_name, phone: new_hire.phone, email: new_hire.email, position_id: new_hire.position.id, organization_id: current_user.organization_id, rate: new_hire.rate, payroll_id: payroll_id, password: "stagg#{new_hire.social}", password_confirmation: "stagg#{new_hire.social}", birthdate: new_hire.birthdate, stores: [new_hire.store], hire_date: Date.today)
-    if @user.save
-      new_hire.update(attended: true)
+    if new_hire.update(attended: true)
+      AddNewUserJob.perform_later(new_hire, current_user.organization, payroll_id)
     end
     respond_to do |format|
       format.turbo_stream
@@ -155,5 +159,17 @@ class NewHiresController < ApplicationController
 
     def sort_direction
       %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def send_sms(new_hire, message)
+      list = []
+      list << new_hire.store.users.where(active: true, position_id: Position.where(name: 'General Manager').ids)
+      list += User.where(active: true, position_id: Position.where(name: ['Training Manager', 'HR Manager', 'Director', 'Training Assistant']).ids)
+      list.flatten
+      list.each do |user|
+        if Phonelib.valid?(user.phone)
+          TwilioClient.new.send_text(user, message)
+        end
+      end
     end
 end
