@@ -28,6 +28,7 @@ class Documentations::RewardsController < ApplicationController
   def create
     @reward = Reward.new(reward_params)
     authorize @reward
+    @reward.organization = current_user.organization
 
     respond_to do |format|
       if @reward.save

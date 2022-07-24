@@ -17,13 +17,16 @@ class UserController < ApplicationController
     authorize @user
     if current_user.position.department == "Operations"
       if @user.stores[0].in? current_user.stores
+        @stores = current_user.stores.where(active: true).order(number: :asc)
         render :edit
       else
         redirect_back(fallback_location: dashboard_path, alert: 'You Are Not Authorized To Edit Users Not Under Your Supervision')
       end
-    elsif @user.position.department == current_user.position.department
+    elsif @user.position.department == "Maintenance"
+      @stores = current_user.stores.where(active: true).order(number: :asc)
       render :edit
-    elsif current_user.position.department == 'Administration'
+    elsif current_user.position.department.in? ['Administration', 'Office']
+      @stores = Store.where(active: true).order(number: :asc)
       render :edit
     else
       redirect_back(fallback_location: dashboard_path, alert: 'You Are Not Authorized To Edit Users Not Under Your Supervision')

@@ -1,9 +1,7 @@
 <div class="row justify-content-center mb-5">
   <div class="col-12 col-md-10 col-lg-8 col-xl-7">
     <div class="card card-body">
-
       <h2 class="text-center card-header">Edit <%= @user.full_name %></h2>
-
       <%= form_for(@user, url: user_path(@user), data: {turbo: false}) do |f| %>
         <div class="row mt-3">
           <div class="col">
@@ -22,7 +20,21 @@
                 </div>
               </div>
             </div>
-             <div class="row">
+            <div class="row">
+              <div class="col-12 col-md-6">
+                <div class="mb-3">
+                  <%= f.label :birthdate, "Birthdate", class: "form-label" %>
+                  <%= f.date_field :birthdate, class: "form-control" %>
+                </div>
+              </div>
+              <div class="col-12 col-md-6">
+                <div class="mb-3">
+                  <%= f.label :hire_date, "Hire Date", class: "form-label" %>
+                  <%= f.date_field :hire_date, class: "form-control" %>
+                </div>
+              </div>
+            </div>
+            <div class="row">
               <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <%= f.label :phone, class: "form-label" %>
@@ -33,6 +45,7 @@
               <div class="col-12 col-md-6">
                 <div class="mb-3">
                   <%= f.label :email, class: "form-label" %>
+                  <em><small>(lowercase only!!)</small></em>
                   <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
                 </div>
               </div>
@@ -61,21 +74,19 @@
                 </div>
               </div>
             </div>
-             <% if (current_user.position.department == 'Operations') || (current_user.admin?) %>
-              <div class='mb-3'>
-                <%= f.label :stores, "Assigned Restaurants:", class: 'form-label' %>
-                <div class='row'>
-                  <%= f.collection_check_boxes :store_ids, current_user.stores.all.order(:id), :id, :number do |s| %>
-                    <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
-                      <div class='form-check form-check-inline' style="margin-left: 12px; margin-right: 0px;">
-                        <%= s.check_box(class: "form-check-input") %>
-                        <%= s.label(class: "form-check-label") %>
-                      </div>
+            <div class='mb-3'>
+              <%= f.label :stores, "Assigned Restaurants:", class: 'form-label' %>
+              <div class='row'>
+                <%= f.collection_check_boxes :store_ids, @stores, :id, :number do |s| %>
+                  <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
+                    <div class='form-check form-check-inline' style="margin-left: 12px; margin-right: 0px;">
+                      <%= s.check_box(class: "form-check-input") %>
+                      <%= s.label(class: "form-check-label") %>
                     </div>
-                  <% end %>
-                </div>
+                  </div>
+                <% end %>
               </div>
-            <% end %>
+            </div>
             <div class="row">
               <div class="col-6 col-md-3">
                 <div class="form-check mb-3">
