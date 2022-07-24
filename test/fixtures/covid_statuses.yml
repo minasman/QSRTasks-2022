@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  organization: one
+  first_name: MyString
+  last_name: MyString
+  store: one
+  status: MyString
+  user: one
+  timecard: MyString
+
+two:
+  organization: two
+  first_name: MyString
+  last_name: MyString
+  store: two
+  status: MyString
+  user: two
+  timecard: MyString

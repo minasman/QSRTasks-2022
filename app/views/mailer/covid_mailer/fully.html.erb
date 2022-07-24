@@ -1,0 +1,8 @@
+<h1><%= @covid_status.store.number.to_s + ' TC:  ' + @covid_status.timecard + '  ' +  @covid_status.full_name  %> is now fully vaccinated</h1>
+ <div class='row'>
+  <% @covid_status.pictures.each do |p| %>
+    <div class='col-12 col-lg-4 col-xl-3'>
+      <%= image_tag p.variant(resize_to_fit: [300, 300]), class: "my-4" %>
+    </div>
+  <% end %>
+</div>

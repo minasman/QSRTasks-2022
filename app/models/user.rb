@@ -25,6 +25,8 @@ class User < ApplicationRecord
   has_many :shift_manager_shops, class_name: "Shop", foreign_key: "shift_manager_id"
   has_many :new_hires
   has_and_belongs_to_many :tclasses
+  has_many :covid_statuses
+
 
   scope :maint_list, -> { where(position_id: Position.where(department: 'Maintenance').ids).order("first_name") }
   scope :managers, -> {where(position_id: [5, 15], active: true).order(first_name: :asc)}

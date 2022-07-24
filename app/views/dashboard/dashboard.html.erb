@@ -10,7 +10,7 @@
         <%# if policy(:covid_status).new? %>
           <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
           <!-- 11/16/21 Add new_covid_status_path -->
-            <%= link_to 'Add Vaccine Status', '' , class: "btn my-submit" %>
+            <%= link_to 'Add Vaccine Status', new_covid_status_path , class: "btn my-submit" %>
           </div>
         <%# end %>
         <%# if policy(:wellness_report).new? %>

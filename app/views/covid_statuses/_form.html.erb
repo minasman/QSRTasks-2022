@@ -1,0 +1,70 @@
+<%= form_with(model: covid_status) do |form| %>
+  <% if covid_status.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(covid_status.errors.count, "error") %> prohibited this covid_status from being saved:</h2>
+
+      <ul>
+        <% covid_status.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row my-3">
+    <div class="col-12 col-md-6">
+      <%= form.label :store_id, "Restaurant", class: 'form-label' %>
+      <%= form.collection_select :store_id, Store.where(store_type: ['Traditional',  'OFFICE']).order('id ASC'), :id, :number, {}, {class: "form-control"} %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-2 mb-3">
+      <%= form.label :timecard, class: 'form-label' %>
+      <%= form.text_field :timecard, class: 'form-control' %>
+    </div>
+    <div class="col-12 col-md-5 mb-3">
+      <%= form.label :first_name, class: 'form-label' %>
+      <%= form.text_field :first_name, class: 'form-control' %>
+    </div>
+    <div class="col-12 col-md-5 mb-3">
+      <%= form.label :last_name, class: 'form-label' %>
+      <%= form.text_field :last_name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <%= radio_button_tag(:status, "Unknown", false, :class => "form-check-input") %> Unknown
+  </div>
+  <div class="form-check form-check-inline">
+    <%= radio_button_tag(:status, "Not Vaccinated", false, :class => "form-check-input") %> Not Vaccinated
+  </div>
+  <div class="form-check form-check-inline">
+    <%= radio_button_tag(:status, "Partially Vaccinated", false, :class => "form-check-input") %> Partially Vaccinated
+  </div>
+  <div class="form-check form-check-inline mb-3">
+    <%= radio_button_tag(:status, "Fully Vaccinated", false, :class => "form-check-input") %> Fully Vaccinated
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :pictures, "Picture of COVID Vaccination Document(s) - Required if Fully Vaccinated", class: "form-label" %>
+    <%= form.file_field :pictures, multiple: true, class: "form-control" %>
+  </div>
+
+  <% if current_user.position.name.in? ['Director', 'Owner', 'Business Director', 'HR Manager'] %>
+    <% if @covid_status.pictures.attached? %>
+      <div class='row'>
+        <% @covid_status.pictures.each do |p| %>
+          <div class='col-12 col-lg-4 col-xl-3'>
+            <%= image_tag p.variant(resize_to_fit: [300, 300]), class: "my-4" %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+
+  <div class="d-grid gap-2 d-md-block mb-3">
+    <%= form.submit "Send Vaccination Status", class: 'btn my-submit' %>
+    <%= link_to 'Dashboard', dashboard_path, class: 'btn my-submit' %>
+  </div>
+<% end %>

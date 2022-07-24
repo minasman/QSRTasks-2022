@@ -1,0 +1,59 @@
+<div class='row justify-content-center mb-5'>
+  <div class='col'>
+    <div class='card'>
+      <h2 class="text-center card-header">COVID-19 Vaccination Status</h2>
+
+      <div class='card-body'>
+        <% if @covid_status %>
+          <div class="row">
+            <div class="col-12 col-md-6 my-3">
+              <strong>Store:</strong>
+              <%= @covid_status.store.number %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-2 mb-3">
+              <strong>Timecard:</strong>
+              <%= @covid_status.timecard %>
+            </div>
+            <div class="col-12 col-md-5 mb-3">
+              <strong>Employee:</strong>
+              <%= @covid_status.full_name %>
+            </div>
+            <div class="col-12 col-md-5 mb-3">
+              <strong>Status:</strong>
+              <%= @covid_status.status %>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-md-5 mb-3">
+              <strong>Entered By:</strong>
+              <%= @covid_status.user.full_name %>
+            </div>
+            <div class="col-12 col-md-5 mb-3">
+              <strong>Entered On:</strong>
+              <%= @covid_status.updated_at.strftime('%m/%d/%y') %>
+            </div>
+          </div>
+          <% if current_user.position.name.in? ['Director', 'Owner', 'Business Director', 'HR Manager'] %>
+            <div class='row'>
+              <% @covid_status.pictures.each do |p| %>
+                <div class='col-12 col-lg-4 col-xl-3'>
+                  <%= image_tag p.variant(resize_to_fit: [300, 300]), class: "my-4" %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+            <div class="d-grid gap-2 d-md-block mb-3">
+              <% if policy(:covid_status).edit? %>
+                <%= link_to 'Edit', edit_covid_status_path(@covid_status) , class: 'btn my-submit' %>
+              <% end %>
+              <%= link_to 'Back', covid_statuses_path, class: 'btn my-submit' %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

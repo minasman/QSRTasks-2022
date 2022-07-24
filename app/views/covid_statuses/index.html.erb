@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Covid statuses</h1>
+
+<div id="covid_statuses">
+  <% @covid_statuses.each do |covid_status| %>
+    <%= render covid_status %>
+    <p>
+      <%= link_to "Show this covid status", covid_status %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New covid status", new_covid_status_path %>

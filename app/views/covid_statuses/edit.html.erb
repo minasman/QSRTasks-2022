@@ -1,0 +1,10 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="card-header text-center">Update COVID-19 Vaccination Status for <%=@covid_status.full_name %></h2>
+      <div class="card-body">
+        <%= render "form", covid_status: @covid_status %>
+      </div>
+    </div>
+  </div>
+</div>
