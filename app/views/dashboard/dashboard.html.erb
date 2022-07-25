@@ -1,40 +1,82 @@
-
-<div class="row justify-content-center mb-5">
-  <div class="col-12 col-xl-10">
-    <div class="card card-body" style="background-color: red;" >
-      <h4 class="card-title text-center">COVID-19</h4>
-      <div class="row justify-content-evenly">
-        <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
-          <%= link_to 'Wellness Check', new_wellness_path, class: "btn my-submit" %>
+<% if policy(:wellness).new? %>
+  <div class="row justify-content-center mb-5">
+    <div class="col-12 col-xl-10">
+      <div class="card card-body" style="background-color: red;" >
+        <h4 class="card-title text-center">COVID-19</h4>
+        <div class="row justify-content-evenly">
+          <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
+            <%= link_to 'Wellness Check', new_wellness_path, class: "btn my-submit" %>
+          </div>
+          <% if policy(:covid_status).new? %>
+            <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
+              <%= link_to 'Add Vaccine Status', new_covid_status_path , class: "btn my-submit" %>
+            </div>
+          <% end %>
+          <%# if policy(:wellness_report).new? %>
+            <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
+              <%= link_to 'Report', '', class: "btn my-submit" %>
+            </div>
+          <%# end %>
         </div>
-        <%# if policy(:covid_status).new? %>
-          <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
-          <!-- 11/16/21 Add new_covid_status_path -->
-            <%= link_to 'Add Vaccine Status', new_covid_status_path , class: "btn my-submit" %>
-          </div>
-        <%# end %>
-        <%# if policy(:wellness_report).new? %>
-          <div class="col-4 col-md-2 d-grid gap-2 d-m-block text-center">
-            <%= link_to 'Report', '', class: "btn my-submit" %>
-          </div>
-        <%# end %>
       </div>
     </div>
   </div>
-</div>
-
-<% if current_user.position.name == "Crew" %>
-  <%= render "/dashboard/dashboards/crew" %>
-<% elsif current_user.position.name.in? ["Owner", "Director", "Business Director"]%>
-  <%= render "/dashboard/dashboards/director" %>
-<% elsif current_user.position.name.in? ["Maint Admin", "Maint Department Head", "Maint Tech Department Head", "PM Department Head", "Technology Department Head"]%>
-  <%= render "/dashboard/dashboards/maint_dept_hd" %>
-<% elsif current_user.position.name.in? ["Maint Tech", "Patch Maint", "OTP Tech", "AA"] %>
-  <%= render "/dashboard/dashboards/maint_tech" %>
-<% elsif current_user.position.name.in? ["HR Manager", "Marketing Manager", "AR Manager", "AP Manager", "Payroll Manager", "HR Admin", "AR Admin", "AP Admin", "Marketing Admin"] %>
-  <%= render "/dashboard/dashboards/office" %>
-<% elsif current_user.position.name.in? ["Supervisor", "Operations Manager"] %>
-  <%= render "/dashboard/dashboards/supervisor" %>
-<% else %>
-  <%= render "/dashboard/dashboards/training" %>
 <% end %>
+<div class="row justify-content-center mb-5">
+  <div class="row justify-content-center justify-content-lg-around">
+    <div class="col-auto card py-2 border">
+      <h4>Total Recognition Points: <%= current_user.accumulated_points %></h4>
+      <h5>Commendations Earned </h5>
+      <ul>
+        <li>Praise! <%= current_user.employee_named_documentations.where(level: "Praise!").size %></li>
+        <li>Cheers! <%= current_user.employee_named_documentations.where(level: "Cheers!").size %></li>
+        <li>Applause! <%= current_user.employee_named_documentations.where(level: "Applause!").size %></li>
+      </ul>
+      <h5>Exceptions Earned </h5>
+      <ul>
+        <li>Major <%= current_user.employee_named_documentations.where(level: "Major").size %></li>
+        <li>Serious <%= current_user.employee_named_documentations.where(level: "Serious").size %></li>
+        <li>Critical <%= current_user.employee_named_documentations.where(level: "Critical").size %></li>
+      </ul>
+      <div class="row">
+        <div class="col-12">
+        <h5 class="text-center">You have redeemed <%= number_to_currency(redeemed_dollars(current_user), precision: 0) %></h5>
+        </div>
+      </div>
+      <% if current_user.id === current_user.id %>
+        <%= link_to "Claim Reward", "/rewards/claim_my_reward/#{current_user.id}", class: "btn my-submit" %>
+        <%= link_to "Documentation", documentations_path, class: "btn my-submit my-2" %>
+      <% end %>
+    </div>
+    <div class="col-auto mt-3 mt-md-0">
+      <turbo-frame id="my-schedule" src="/my_schedule/<%= current_user.id %>">
+      </turbo-frame>
+    </div>
+  </div>
+  <div class="mt-4">
+    <% if current_user.position.name == "Crew" %>
+      <%= render "/dashboard/dashboards/crew" %>
+    <% elsif current_user.position.name.in? ["Owner", "Director", "Business Director"]%>
+      <%= render "/dashboard/dashboards/director" %>
+    <% elsif current_user.position.name.in? ["Maint Admin", "Maint Department Head", "Maint Tech Department Head", "PM Department Head", "Technology Department Head"]%>
+      <%= render "/dashboard/dashboards/maint_dept_hd" %>
+    <% elsif current_user.position.name.in? ["Maint Tech", "Patch Maint", "OTP Tech", "AA"] %>
+      <%= render "/dashboard/dashboards/maint_tech" %>
+    <% elsif current_user.position.name.in? ["HR Manager", "Marketing Manager", "AR Manager", "AP Manager", "Payroll Manager", "HR Admin", "AR Admin", "AP Admin", "Marketing Admin"] %>
+      <%= render "/dashboard/dashboards/office" %>
+    <% elsif current_user.position.name.in? ["Supervisor", "Operations Manager"] %>
+      <%= render "/dashboard/dashboards/supervisor" %>
+    <% else %>
+      <%= render "/dashboard/dashboards/training" %>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <% if current_user.position.name.in? ["General Manager", "Supervisor", "Director", "Business Director", "Training Manager", "Training Assistant", "HR Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head"]%>
+        <div class="d-grid gap-2 d-md-flex mt-5">
+          <%= link_to "Add Training", new_training_registration_path(:id => current_user.id), class: "btn my-submit"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

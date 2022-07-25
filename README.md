@@ -26,8 +26,8 @@ TODO:
 Finish testing user access
 
 Shops
-curriculum index
+Finish shop mailer and show page
+
 Audits - Return to Safe Audits
 Training
-Wellness Check & Vaccination
 Dashboards

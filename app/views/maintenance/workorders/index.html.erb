@@ -3,9 +3,11 @@
     <div class="col-12 col-md-9">
       <h2 class="text-center offset-md-3">Open Workorders</h2>
     </div>
-    <div class="col-12 col-md-3 text-center align-self-center">
-      <%= link_to "Download CSV", "/workorders.csv", class: "btn my-submit" %>
-    </div>
+    <% if policy(:workorder).show? %>
+      <div class="col-12 col-md-3 text-center align-self-center">
+        <%= link_to "Download CSV", "/workorders.csv", class: "btn my-submit" %>
+      </div>
+    <% end %>
   </div>
   <%= form_with url: "",  method: :get, data: { turbo_frame: "workorders", turbo_action: "advance", controller: "form", action: "input->form#submit" }, class: "pb-3" do |form| %>
     <div class="pt-3 row justify-content-between">
@@ -47,13 +49,25 @@
             <tr id="<%= dom_id(workorder) %>" >
               <th scope="row" rowspan="2" class="align-middle border-bottom border-dark"><%= i + 1 %></th>
               <td><%= workorder.store.number %></td>
-              <td><%= link_to workorder.id, workorder, class: "table-link", data: { turbo: false } %></td>
+              <% if policy(:workorder).show? %>
+                <td><%= link_to workorder.id, workorder, class: "table-link", data: { turbo: false } %></td>
+              <% else %>
+                <td><%= workorder.id %></td>
+              <% end %>
               <td><%= workorder.created_at.strftime("%m/%d/%y") %></td>
-              <td><%= link_to workorder.equipment.name, workorder.equipment, class: "table-link", data: { turbo: false } %></td>
+              <% if policy(:equipment).show? %>
+                <td><%= link_to workorder.equipment.name, workorder.equipment, class: "table-link", data: { turbo: false } %></td>
+              <% else %>
+                <td><%= workorder.equipment.name %></td>
+              <% end %>
               <td><%= workorder.user.full_name %></td>
               <td><%= workorder.team? ? workorder.team : "Not Assigned" %></td>
               <td><%= workorder.assigned? ? User.find(workorder.assigned).full_name : "Not Assigned" %></td>
-              <td><%= link_to workorder.vendor.name, workorder.vendor, class: "table-link", data: { turbo: false } %></td>
+              <% if policy(:vendor).show? %>
+                <td><%= link_to workorder.vendor.name, workorder.vendor, class: "table-link", data: { turbo: false } %></td>
+              <% else %>
+                <td><%= workorder.vendor.name %></td>
+              <% end %>
               <td><%= workorder.workorder_updates.size %></td>
               <td><%= workorder.workorder_updates.any? ? workorder.workorder_updates.last.created_at.strftime("%m/%d/%y") : "N/A" %></td>
               <td><%= workorder.level? ?  workorder.level : "Not Assigned" %></td>

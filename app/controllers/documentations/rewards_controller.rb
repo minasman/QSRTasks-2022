@@ -72,6 +72,7 @@ class Documentations::RewardsController < ApplicationController
     else
       my_points = normalize_points(@user)
       @rewards = Reward.where(value: 1..my_points)
+      puts "THIS IS MY POINTS NORMALIZED #{my_points}"
     end
   end
 
@@ -115,17 +116,17 @@ class Documentations::RewardsController < ApplicationController
     end
 
     def normalize_points(user)
-      my_points = @user.accumulated_points.to_i
+      my_points = user.accumulated_points
       position = user.position.name
-      if position in ["Crew", "Manager"]
+      if position.in? ["Crew", "Manager", "AA", "Maint Admin", "Maint Tech", "OTP Tech", "Patch Maint", "HR Admin", "AR Admin", "AP Admin", "Marketing Admin", "Payroll Admin", "Shopper", "Training Assistant"]
         my_points
-      elsif position == "General Manager"
+      elsif position.in? ["General Manager", "Marketing Manager", "Training Manager", "Payroll Manager", "AP Manager", "AR Manager", "HR Manager"]
+        my_points = (my_points/3).to_i
+      elsif position.in? ["Supervisor", "PM Department Head", "Maint Tech Department Head", "Technology Department Head"]
         my_points = (my_points/10).to_i
-      elsif position == "Supervisor"
-        my_points = (my_points/10).to_i
-      elsif position == "Operations Manager"
+      elsif position.in? ["Operations Manager", "Maint Department Head"]
         my_points = (my_points/15).to_i
-      elsif position == "Director"
+      elsif position.in? ["Director", "Business Director"]
         my_points = (my_points/30).to_i
       else
         my_points
@@ -134,15 +135,15 @@ class Documentations::RewardsController < ApplicationController
 
     def normalize_value(user, value)
       position = user.position.name
-      if position in ["Crew", "Manager"]
+      if position.in? ["Crew", "Manager", "AA", "Maint Admin", "Maint Tech", "OTP Tech", "Patch Maint", "HR Admin", "AR Admin", "AP Admin", "Marketing Admin", "Payroll Admin", "Shopper", "Training Assistant"]
         value
-      elsif position == "General Manager"
-        value = value * 5
-      elsif position == "Supervisor"
+      elsif position.in? ["General Manager", "Marketing Manager", "Training Manager", "Payroll Manager", "AP Manager", "AR Manager", "HR Manager"]
+        value = value * 3
+      elsif 29.in? ["Supervisor", "PM Department Head", "Maint Tech Department Head", "Technology Department Head"]
         value = value * 10
-      elsif position == "Operations Manager"
+      elsif position.in? ["Operations Manager", "Maint Department Head"]
         value = value * 15
-      elsif position == "Director"
+      elsif position.in? ["Director", "Business Director"]
         value = value * 30
       else
         value

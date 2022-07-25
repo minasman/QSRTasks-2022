@@ -30,8 +30,12 @@ class ShopsController < ApplicationController
     authorize @shop
     @shop.organization = current_user.organization
     @shop.shopper = current_user
+    if @shop.score.to_f < 70
+      @shop.docRequired = true
+    end
     respond_to do |format|
       if @shop.save
+        ShopMailer.shop(@shop).deliver_later
         format.html { redirect_to shop_url(@shop), notice: "Shop was successfully created." }
         format.json { render :show, status: :created, location: @shop }
       else

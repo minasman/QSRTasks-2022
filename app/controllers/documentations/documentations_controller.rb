@@ -42,9 +42,7 @@ class Documentations::DocumentationsController < ApplicationController
     respond_to do |format|
       if @documentation.save
         new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
-        puts "EMPLOYEE TOTAL IS NOW #{@documentation.employee_named.accumulated_points}"
         @documentation.employee_named.update(accumulated_points: new_point_total)
-        puts "EMPLOYEE TOTAL IS changed to #{@documentation.employee_named.accumulated_points}"
         format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
       else
@@ -159,19 +157,19 @@ class Documentations::DocumentationsController < ApplicationController
         end
 
       else
-        if position == "HR Office Admin"
+        if position == "HR Admin"
           flow_list = User.where(position_id: Position.where(name: ["HR Manager", "Business Director"]).ids)
         elsif position == "HR Manager"
           flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
-        elsif position == "Payroll Office Admin"
+        elsif position == "Payroll Admin"
           flow_list = User.where(position_id: Position.where(name: ["Payroll Manager", "Business Director"]).ids)
         elsif position == "Shopper"
           flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
-        elsif position == "AP Office Admin"
+        elsif position == "AP Admin"
           flow_list = User.where(position_id: Position.where(name: ["AP Manager", "Business Director"]).ids)
-        elsif position == "AR Office Admin"
+        elsif position == "AR Admin"
           flow_list = User.where(position_id: Position.where(name: ["AR Manager", "Business Director"]).ids)
-        elsif position == "Marketing Office Admin"
+        elsif position == "Marketing Admin"
           flow_list = User.where(position_id: Position.where(name: ["Marketing Manager", "Business Director"]).ids)
         elsif position == "AP Manager"
           flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)

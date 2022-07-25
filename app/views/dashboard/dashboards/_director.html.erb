@@ -1,0 +1,12 @@
+<div class="row justify-content-center">
+  <div class="col-auto">
+    <div class="card">
+      <h3 class="card-header text-center">Rewards Earned!</h3>
+        <div class="card-body">
+        <% @rewarded.each do |u| %>
+          <h5><%= u.stores[0].number %> <%= u.position.name %>: <%= u.full_name %> - <%= number_to_currency(redeemed_dollars(u), precision: 0)%></h5>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

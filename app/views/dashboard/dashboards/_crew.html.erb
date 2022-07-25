@@ -1,9 +1,5 @@
-<div class="row">
-  <div class="col-auto">
-  </div>
-  <div class="col-auto">
-    <turbo-frame id="my-schedule" src="/schedule">
-  </div>
-  <div class="col-auto">
+<div class="row justify-content-center">
+  <div class="col-12">
+    <%= link_to "My Restaurant", current_user.stores[0], class: "btn my-submit" %>
   </div>
 </div>

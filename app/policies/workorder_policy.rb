@@ -11,7 +11,7 @@ class WorkorderPolicy
   end
 
   def show?
-    index?
+    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'Maint Department Head', 'Maint Tech Department Head', 'PM Department Head', 'Technology Department Head', 'Operations Manager', 'Supervisor', 'General Manager', 'AA', 'Maint Admin', 'Maint Tech', 'OTP Tech', 'Patch Maint', 'Training Manager']
   end
 
   def new?
