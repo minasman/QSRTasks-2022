@@ -6,5 +6,10 @@ export default class extends Controller {
 
   toggle(event) {
     this.contentTarget.classList.toggle("hide")
+    if (event.target.innerText == "X") {
+      event.target.innerText = "+"
+    } else {
+      event.target.innerText = "X"
+    }
   }
 }
