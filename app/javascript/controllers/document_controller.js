@@ -4,7 +4,7 @@ import { get } from "@rails/request.js"
 
 // Connects to data-controller="document"
 export default class extends Controller {
-  static targets = ["employeeList", "levelList", "documentList", "docKlassList"]
+  static targets = ["documentType", "employeeList", "levelList", "documentList", "docKlassList"]
 
   connect() {
   }
@@ -19,7 +19,7 @@ export default class extends Controller {
   }
 
   document_level(e) {
-    let type = document.getElementById(e.path[0].id).value
+    let type = this.documentTypeTarget.value
     this.levelListTarget.selected = ''
     this.docKlassListTarget.value = ''
     document.getElementById("documentation_document_id").value = ''
@@ -30,6 +30,7 @@ export default class extends Controller {
 
   document_level_document(e) {
     let type = document.getElementById(e.path[0].id).value
+    console.log(e.path[0])
     this.levelListTarget.selected = ''
     this.docKlassListTarget.value = ''
     let target = this.levelListTarget.id

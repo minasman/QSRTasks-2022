@@ -47,7 +47,7 @@
     <div class="col-12 col-md-4">
       <div class="mb-3">
         <%= form.label :documentation_type, class: "form-label" %>
-        <%= form.select :documentation_type, Document::DOCUMENT_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true, data: { action: "change->document#document_level"}} %>
+        <%= form.select :documentation_type, Document::DOCUMENT_TYPE, {:include_blank => "Select Type"}, {class: "form-control", required: true, data: { action: "change->document#document_level", document_target: "documentType"}} %>
       </div>
     </div>
     <div class="col-12 col-md-4">
