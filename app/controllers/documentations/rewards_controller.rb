@@ -139,7 +139,7 @@ class Documentations::RewardsController < ApplicationController
         value
       elsif position.in? ["General Manager", "Marketing Manager", "Training Manager", "Payroll Manager", "AP Manager", "AR Manager", "HR Manager"]
         value = value * 3
-      elsif 29.in? ["Supervisor", "PM Department Head", "Maint Tech Department Head", "Technology Department Head"]
+      elsif position.in? ["Supervisor", "PM Department Head", "Maint Tech Department Head", "Technology Department Head"]
         value = value * 10
       elsif position.in? ["Operations Manager", "Maint Department Head"]
         value = value * 15

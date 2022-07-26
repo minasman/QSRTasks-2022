@@ -24,6 +24,8 @@
             <th scope="col">Location</th>
             <th scope="col"><%= sort_link_to "Name", :first_name, data: {turbo_action: "advance" }, class: "table-link" %></th>
             <th scope="col"><%= sort_link_to "Position", :position_id, data: {turbo_action: "advance" }, class: "table-link" %></th>
+            <th scope="col">Birthdate</th>
+            <th scope="col">Hire Date</th>
             <th scope="col">Phone</th>
             <th scope="col">Email</th>
             <th scope="col">Payroll ID</th>
@@ -40,6 +42,8 @@
               <td><%= link_to user.full_name, user, data: {turbo: false}, class: "table-link" %></td>
               <td><%= user.position.name %></td>
               <td><%= sms_to(number_to_phone(user.phone)) %></td>
+              <td><%= user.birthdate.strftime("%m/%d/%Y") %></td>
+              <td><%= user.hire_date.strftime("%m/%d/%Y") %></td>
               <td><%= mail_to(user.email) %></td>
               <td><%= user.payroll_id %></td>
               <td>

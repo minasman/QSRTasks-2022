@@ -43,7 +43,9 @@ class Documentations::DocumentationsController < ApplicationController
       if @documentation.save
         new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
         @documentation.employee_named.update(accumulated_points: new_point_total)
-
+        # Change User.find(2) below to @documentation.employee_named
+        SendDocumentationSmsJob.perform_later(User.find(2), message_to_send(@documentation))
+        DocumentationMailer.new_documentation(@documentation).deliver_later
         format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
       else
@@ -241,5 +243,13 @@ class Documentations::DocumentationsController < ApplicationController
 
     def sort_direction
       %w{ asc desc }.include?(params[:direction]) ? params[:direction] : "asc"
+    end
+
+    def message_to_send(documentation)
+      if documentation.documentation_type == "Commendation"
+        "You have been recognized by #{documentation.awarded_by.full_name} on #{documentation.document_date.strftime("%m/%d/%y")}: #{documentation.description}"
+      else
+        "Your #{documentation.documentation_class} on #{documentation.document_date.strftime("%m/%d/%y")} was identified as an exception by #{documentation.awarded_by.full_name}. Details: #{documentation.description}"
+      end
     end
 end
