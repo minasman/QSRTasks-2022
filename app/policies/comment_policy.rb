@@ -7,7 +7,7 @@ class CommentPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "Crew", "HR Manager", "Training Manager", "HR Office Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Office Admin", "Shopper"]
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "Crew", "HR Manager", "Training Manager", "Training Assistant", "HR Office Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Office Admin", "Shopper"]
   end
 
   def show?

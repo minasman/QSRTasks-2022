@@ -43,6 +43,7 @@ class Documentations::DocumentationsController < ApplicationController
       if @documentation.save
         new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
         @documentation.employee_named.update(accumulated_points: new_point_total)
+
         format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
       else
