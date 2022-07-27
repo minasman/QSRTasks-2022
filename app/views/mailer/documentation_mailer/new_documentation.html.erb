@@ -4,7 +4,7 @@
   <% else %>
     <h4>Your <%= @documentation.documentation_class %> on <%= @documentation.document_date.strftime("%m/%d/%y") %> was identified as an exception by <%= @documentation.awarded_by.full_name %>. Details: <%= @documentation.description %></h4>
   <% end %>
-  <h5 class="text-center">This takes your current point total to <%= @documentation.employee_named.employee_named_documentations.sum(:points) %>!</h5>
+  <h3 class="text-center">This takes your current point total to <%= @documentation.employee_named.employee_named_documentations.sum(:points) %>!</h3>
   <% if @documentation.pictures.any? %>
     <% @documentation.pictures.each do |p|%>
       <div class="row justify-content-center">

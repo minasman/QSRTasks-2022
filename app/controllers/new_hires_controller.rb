@@ -127,7 +127,6 @@ class NewHiresController < ApplicationController
     comment = params[:update]
     @new_hire = NewHire.find(@target.delete_prefix("neh-"))
     @new_hire.update(comments: comment)
-    puts "THIS IS THE NEW HIRE ID #{@new_hire.id}"
     respond_to do |format|
       format.turbo_stream
     end

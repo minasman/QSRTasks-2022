@@ -18,7 +18,7 @@ class StoresController < ApplicationController
     @students = []
     @store.users.each do |user|
       user.tclasses.each do |tclass|
-        if tclass.class_date.between?(Date.today, Date.today+30.days)
+        if tclass.class_date.between?(Date.today, Date.today + 30.days)
           students.push(user.id)
         end
       end

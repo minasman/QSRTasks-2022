@@ -83,9 +83,9 @@ class Documentations::DocumentationsController < ApplicationController
     store = Store.find(params[:store])
     users =  store.users
     if store.store_type == "OFFICE"
-      @employees = User.where(position_id: Position.where(department: ["Office", "Administration", "Maintenance"]).ids).or(User.where(position: Position.where(name: ["Supervisor", "Operations Manager"]))).order(position_id: :desc, first_name: :asc)
+      @employees = User.where(active: true, position_id: Position.where(department: ["Office", "Administration", "Maintenance"]).ids).where.not(id: current_user.id).or(User.where(active: true, position: Position.where(name: ["Supervisor", "Operations Manager"]))).order(position_id: :desc, first_name: :asc)
     else
-      @employees = users.where(position_id: [5, 15, 26], active: true).order(position_id: :desc, first_name: :asc)
+      @employees = users.where(position_id: [5, 15, 26], active: true).where.not(id: current_user.id).order(position_id: :desc, first_name: :asc)
     end
     respond_to do |format|
       format.turbo_stream
@@ -129,61 +129,61 @@ class Documentations::DocumentationsController < ApplicationController
       position = document.position.name
       if department == "Operations"
         if position == "Crew" || position == "Manager"
-          flow_list = named_employee.stores[0].users.where(position_id: Position.where(name: ["General Manager", "Supervisor", "Operations Manager", "Director"]).ids)
+          flow_list = named_employee.stores[0].users.where(active: true, position_id: Position.where(name: ["General Manager", "Supervisor", "Operations Manager", "Director"]).ids)
         elsif position == "General Manager"
-          flow_list = named_employee.stores[0].users.where(position_id: Position.where(name: ["Supervisor", "Operations Manager", "Director"]).ids)
+          flow_list = named_employee.stores[0].users.where(active: true, position_id: Position.where(name: ["Supervisor", "Operations Manager", "Director"]).ids)
         elsif position == "Supervisor"
-          flow_list = named_employee.stores[0].users.where(position_id: Position.where(name: ["Operations Manager", "Director"]).ids)
+          flow_list = named_employee.stores[0].users.where(active: true, position_id: Position.where(name: ["Operations Manager", "Director"]).ids)
         else #Operations Manager
-          flow_list = named_employee.stores[0].users.where(position_id: Position.where(name: ["Director"]).ids)
+          flow_list = named_employee.stores[0].users.where(active: true, position_id: Position.where(name: ["Director"]).ids)
         end
 
       elsif department == "Maintenance"
         if position == "Maint Admin"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "AA"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "Maint Tech"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Tech Department Head", "Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Tech Department Head", "Maint Department Head", "Business Director"]).ids)
         elsif position == "OTP Tech"
-          flow_list = User.where(position_id: Position.where(name: ["Technology Department Head", "Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Technology Department Head", "Maint Department Head", "Business Director"]).ids)
         elsif position == "Patch Maint"
-          flow_list = User.where(position_id: Position.where(name: ["PM Department Head", "Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["PM Department Head", "Maint Department Head", "Business Director"]).ids)
         elsif position == "PM Department Head"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "Maint Tech Department Head"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         elsif position == "Technology Department Head"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Department Head", "Business Director"]).ids)
         else
-          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director"]).ids)
         end
 
       else
         if position == "HR Admin"
-          flow_list = User.where(position_id: Position.where(name: ["HR Manager", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["HR Manager", "Business Director"]).ids)
         elsif position == "HR Manager"
-          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director"]).ids)
         elsif position == "Payroll Admin"
-          flow_list = User.where(position_id: Position.where(name: ["Payroll Manager", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Payroll Manager", "Business Director"]).ids)
         elsif position == "Shopper"
-          flow_list = User.where(position_id: Position.where(name: ["Maint Department Head"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Maint Department Head"]).ids)
         elsif position == "AP Admin"
-          flow_list = User.where(position_id: Position.where(name: ["AP Manager", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["AP Manager", "Business Director"]).ids)
         elsif position == "AR Admin"
-          flow_list = User.where(position_id: Position.where(name: ["AR Manager", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["AR Manager", "Business Director"]).ids)
         elsif position == "Marketing Admin"
-          flow_list = User.where(position_id: Position.where(name: ["Marketing Manager", "Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Marketing Manager", "Business Director"]).ids)
         elsif position == "AP Manager"
-          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director"]).ids)
         elsif position == "AR Manager"
-          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director"]).ids)
         elsif position == "Marketing Manager"
-          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director"]).ids)
         elsif position == "Payroll Manager"
-          flow_list = User.where(position_id: Position.where(name: ["Business Director"]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director"]).ids)
         else #Business Director
-          flow_list = User.where(position_id: Position.where(name: [""]).ids)
+          flow_list = User.where(active: true, position_id: Position.where(name: [""]).ids)
         end
       end
       flow_list.each do |employee|

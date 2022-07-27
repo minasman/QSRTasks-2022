@@ -18,7 +18,7 @@
         <div class="col-12 col-md-4">
           <div class="mb-3" data-controller="equipment" >
             <%= form.label :store_id, class: "form-label" %>
-            <%= form.collection_select :store_id, Store.all.order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", data: { action: "change->equipment#store"}, autofocus: true, required: true} %>
+            <%= form.collection_select :store_id, Store.where(active: true).order('number ASC'), :id, :number, {prompt: "Select Location"}, {class: "form-select", data: { action: "change->equipment#store"}, autofocus: true, required: true} %>
           </div>
         </div>
       </div>

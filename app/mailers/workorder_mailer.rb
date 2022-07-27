@@ -32,8 +32,8 @@ class WorkorderMailer < ApplicationMailer
   private
 
   def email_list(workorder)
-    email = workorder.store.users.uniq.reject { |u| u.position.name.in? ['Manager', 'Crew'] }.map(&:email)
-    workorderAdmins = User.where(position_id: Position.where(name: 'Maint Admin').ids).map(&:email)
+    email = workorder.store.users.where(active: true).uniq.reject { |u| u.position.name.in? ['Manager', 'Crew'] }.map(&:email)
+    workorderAdmins = User.where(active:true, position_id: Position.where(name: 'Maint Admin').ids).map(&:email)
     email += workorderAdmins
     if workorder.assigned?
       assigned = User.find(workorder.assigned)
