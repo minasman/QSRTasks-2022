@@ -11,9 +11,9 @@
               <h5 class="text-center" style="color: red;"><%= @shop.docRequired ? "Documentation Required" : "" %></h5>
           <% end %>
         </div>
-        <hr>
-        <div id="shiftManagment" >
-          <h2 class="text-center">SHIFT MANAGEMENT</h1>
+        <div class="card-body">
+          <div id="shiftManagment" >
+          <h2 class="text-center">SHIFT MANAGEMENT</h2>
           <hr>
           <p>Shift Manager: <%= @shop.shiftManager %><br>
             Is the shift manager up front and visibly in charge?<strong> <%= @shop.upFront.to_i > 0 ? "Yes" : @shop.upFront ? "No" : "Not Answered" %></strong><br>
@@ -33,10 +33,10 @@
             <p>COMMENTS:<br><%= @shop.shiftMgrComment %>
           </p><br>
         </div>
-        <div id="fast">
+          <div id="fast">
           <h2 class="text-center">FAST</h2>
           <hr>
-          <% if @shop.shopType === "DT" %>
+          <% if @shop.shopType === "Drive Thru" %>
             <h5 class="text-center">DRIVE-THRU</h5>
             <p>Enter Wait Time: <strong>
               <% if @shop.waitTime.to_i > 180 %>
@@ -76,7 +76,7 @@
               <% end %></strong><br>
             </p>
           <% end %>
-          <% if @shop.shopType === "FC" %>
+          <% if @shop.shopType === "Front Counter" %>
             <h5 class="text-center">FRONT COUNTER</h5>
             <p>Enter Wait Time: <strong>
               <% if @shop.fcWaitTime.to_i > 180 %>
@@ -99,10 +99,19 @@
               Number of guests ahead of you in line: <strong><%= @shop.numberGuests ? @shop.numberGuests : "Not Answered" %></strong>
             </p>
           <% end %>
+          <% if @shop.shopType === "Curbside" %>
+            <h5 class="text-center">CURBSIDE</h5>
+            <% if @shop.curbsideTotalTime.to_i > 300 %>
+              <%= @shop.curbsideTotalTime %> Seconds - Documentation IS Required
+            <% else %>
+              <%= @shop.curbsideTotalTime %> Seconds
+            <% end  %>
+          <% end %>
           <p>COMMENTS: <br>
-            <%= @shop.fastComment %></p><br>
+            <%= @shop.fastComment %>
+          </p><br>
         </div>
-        <div id="accurate">
+          <div id="accurate">
           <h1 class="text-center">ACCURATE</h1>
           <hr>
           <p>Items Ordered: <%= @shop.itemsOrdered %><br>
@@ -123,7 +132,7 @@
             <%= @shop.accuracyComment %>
           </p><br>
         </div>
-        <div id="hospitality">
+          <div id="hospitality">
           <h1 class="text-center">HOSPITALITY</h1>
           <hr>
           <% if @shop.shopType.in? ["Drive Thru", "Front Counter"] %>
@@ -138,7 +147,6 @@
                   Provide a friendly greeting and closing? <strong><%= @shop.cashierGreeting ? @shop.cashierGreeting.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
                   ASK, 'Would you like to round up your order for donation to RMHC?' <strong><%= @shop.cashierRound ? @shop.cashierRound.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
                   ASK, 'Did your order include ______?' (should be one of the unique items in your order)<strong><%= @shop.cashierAsk ? @shop.cashierAsk.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
-                  Utilize the PED Extension to allow you to make a contactless payment? <strong><%= @shop.contactless ? @shop.contactless.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
                   Cashier Appearance and PPE usage acceptable? <strong><%= @shop.csPPE ? @shop.csPPE.to_i > 0 ? "Yes" : "No - Documentation IS Required": "Not Answered"  %></strong><br>
                 <% end %>
           <% end %>
@@ -156,7 +164,7 @@
             <%= @shop.hospitalityComment %>
           </p><br>
         </div>
-        <div id="quality">
+          <div id="quality">
           <h1 class="text-center">QUALITY</h1>
           <hr>
           <p>Were all products properly prepared and fresh and hot?  Neatly assembled? <strong><%= @shop.fresh ? @shop.fresh.to_i > 0 ? "Yes" : "No" : "Not Answered" %></strong><br>
@@ -167,11 +175,11 @@
             <%= @shop.qualityComment %>
           </p><br>
         </div>
-        <div id="cleanliness">
+          <div id="cleanliness">
           <h1 class="text-center">CLEANLINESS</h1>
           <hr>
           <p>
-            Is the Lot Free of Gum? <strong><%= @shop.lotGum ? @shop.lotGum.to_i > 0 ? "Yes" : "No" : "Not Answered" %></    strong><br>
+            Is the Lot Free of Gum? <strong><%= @shop.lotGum ? @shop.lotGum.to_i > 0 ? "Yes" : "No" : "Not Answered" %></strong><br>
             Is The COD Area Clean? <strong><%= @shop.codClean ? @shop.codClean.to_i > 0 ? "Yes" : "No - Documentation MAY BE Required" : "Not Answered" %></strong><br>
             Is the COD Free of Gum? <strong><%= @shop.codGum ? @shop.codGum.to_i > 0 ? "Yes" : "No" : "Not Answered" %></strong><br>
             Is the DT Lane Clean? <strong><%= @shop.dtClean ? @shop.dtClean.to_i > 0 ? "Yes" : "No - Documentation MAY BE Required" : "Not Answered" %></strong><br>
@@ -202,7 +210,7 @@
             <%= @shop.cleanComment %>
           </p><br>
         </div>
-        <div id="foodSafety">
+          <div id="foodSafety">
           <h1 class="text-center">FOOD SAFETY</h1>
           <hr>
           <p>
@@ -217,6 +225,7 @@
           <p>COMMENTS: <br>
             <%= @shop.foodSafetyComment %>
           </p><br>
+        </div>
         </div>
       </div>
     </div>

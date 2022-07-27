@@ -11,8 +11,8 @@
   </div>
   <div id="shiftManagementQuestions" data-toggle-target='content'>
     <div class="mb-3 col-12 col-md-6">
-      <%= form.label :shift_manager_id, "Shift Manager", class: "form-label" %>
-      <%= form.select :shift_manager_id, [], {prompt: "Select Manager", include_blank: true}, {class: "form-select", data: { shop_target: "managerList"}, required: true} %>
+      <%= form.label :shiftManager, "Shift Manager", class: "form-label" %>
+      <%= form.text_field :shiftManager, class: "form-control" %>
     </div>
     <div class="mb-3">
       <%= form.label :upFront, "Is the shift manager up front and visibly in charge?", class:'form-label'%><br>

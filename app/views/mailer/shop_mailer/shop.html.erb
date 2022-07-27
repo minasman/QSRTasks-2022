@@ -33,7 +33,7 @@
   <div id="fast">
     <h2 class="text-center">FAST</h2>
     <hr>
-    <% if @shop.shopType === "DT" %>
+    <% if @shop.shopType === "Drive Thru" %>
       <h5 class="text-center">DRIVE-THRU</h5>
       <p>Enter Wait Time: <strong>
         <% if @shop.waitTime.to_i > 180 %>
@@ -73,7 +73,7 @@
         <% end %></strong><br>
       </p>
     <% end %>
-    <% if @shop.shopType === "FC" %>
+    <% if @shop.shopType === "Front Counter" %>
       <h5 class="text-center">FRONT COUNTER</h5>
       <p>Enter Wait Time: <strong>
         <% if @shop.fcWaitTime.to_i > 180 %>
@@ -95,6 +95,14 @@
         <% end %> </strong><br>
         Number of guests ahead of you in line: <strong><%= @shop.numberGuests ? @shop.numberGuests : "Not Answered" %></strong>
       </p>
+    <% end %>
+    <% if @shop.shopType === "Curbside" %>
+      <h5 class="text-center">CURBSIDE</h5>
+      <% if @shop.curbsideTotalTime.to_i > 300 %>
+        <%= @shop.curbsideTotalTime %> Seconds - Documentation IS Required
+      <% else %>
+        <%= @shop.curbsideTotalTime %> Seconds
+      <% end  %>
     <% end %>
     <p>COMMENTS: <br>
       <%= @shop.fastComment %></p><br>
@@ -135,7 +143,6 @@
             Provide a friendly greeting and closing? <strong><%= @shop.cashierGreeting ? @shop.cashierGreeting.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
             ASK, 'Would you like to round up your order for donation to RMHC?' <strong><%= @shop.cashierRound ? @shop.cashierRound.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
             ASK, 'Did your order include ______?' (should be one of the unique items in your order)<strong><%= @shop.cashierAsk ? @shop.cashierAsk.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
-            Utilize the PED Extension to allow you to make a contactless payment? <strong><%= @shop.contactless ? @shop.contactless.to_i > 0 ? "Yes" : "No - Documentation IS Required" : "Not Answered" %></strong><br>
             Cashier Appearance and PPE usage acceptable? <strong><%= @shop.csPPE ? @shop.csPPE.to_i > 0 ? "Yes" : "No - Documentation IS Required": "Not Answered"  %></strong><br>
           <% end %>
     <% end %>
