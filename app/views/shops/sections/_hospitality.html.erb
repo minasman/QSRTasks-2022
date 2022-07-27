@@ -11,8 +11,8 @@
   </div>
   <div id="hospitalityQuestions" data-toggle-target='content'>
     <div class="mb-3 service">
-      <%= form.label :otName, "Did the Order Taker:", class: 'form-label' %>
-      <%= form.text_field :otName, placeholder: "Name", class: "form-control" %>
+      <%= form.label :order_taker_id, "Did the Order Taker:", class: 'form-label' %>
+      <%= form.select :order_taker_id, [], {prompt: "Select Order Taker"}, {class: "form-select", data: { shop_target: "otName"}, required: true} %>
     </div>
 
     <div class="mb-3 service">
@@ -92,8 +92,8 @@
     </div>
 
     <div class="mb-3 service">
-      <%= form.label :cashierName, "Did the Cashier:", class: 'form-label' %><br>
-      <%= form.text_field :cashierName, placeholder: "Name", class: "form-control" %>
+      <%= form.label :cashier_id, "Did the Cashier:", class: 'form-label' %><br>
+      <%= form.select :cashier_id, [], {prompt: "Select Order Taker"}, {class: "form-select", data: { shop_target: "cashierName"}, required: true} %>
     </div>
     <div class="mb-3 service">
       <%= form.label :cashierGreeting, "Provide a friendly greeting and closing? ", class: 'form-label' %><br>
@@ -144,8 +144,8 @@
     </div>
 
     <div class="mb-3">
-      <%= form.label :presenterName, "Did the Presenter:", class: 'form-label' %><br>
-      <%= form.text_field :presenterName, placeholder: "Name", class: "form-control" %>
+      <%= form.label :presenter_id, "Did the Presenter:", class: 'form-label' %><br>
+      <%= form.select :presenter_id, [], {prompt: "Select Presenter"}, {class: "form-select", data: { shop_target: "presenterName"}, required: true} %>
     </div>
 
     <div class="mb-3">
@@ -186,8 +186,8 @@
 
     <div class="pf" id="pf">
       <div class="mb-3">
-        <%= form.label :pullForwardPresenterName, "If you were pulled forward, did the pull forward presenter:", class: 'form-label' %><br>
-        <%= form.text_field :pullForwardPresenterName, placeholder: "Name", class: "form-control" %>
+        <%= form.label :pf_presenter_id, "If you were pulled forward, did the pull forward presenter:", class: 'form-label' %><br>
+        <%= form.select :pf_presenter_id, [], {prompt: "Select PF Presenter"}, {class: "form-select", data: { shop_target: "pfPresenterName"}, required: true} %>
       </div>
 
       <div class="mb-3">

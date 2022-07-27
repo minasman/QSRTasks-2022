@@ -54,10 +54,28 @@
         </div>
       </div>
     </div>
-    <div class="col-auto mt-3 mt-md-0">
-      <turbo-frame id="my-schedule" src="/my_schedule/<%= current_user.id %>">
-      </turbo-frame>
-    </div>
+    <% if current_user.position.department == "Operations" %>
+      <div class="col-auto mt-3 mt-md-0">
+        <turbo-frame id="my-schedule" src="/my_schedule/<%= current_user.id %>">
+        </turbo-frame>
+      </div>
+    <% end %>
+    <% if current_user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head"] %>
+      <div class="col-auto">
+        <div class="card">
+          <h3 class="card-header text-center">Rewards Earned!</h3>
+            <div class="card-body">
+            <% if @rewarded.any? %>
+              <% @rewarded.each do |u| %>
+                <h5><%= u.stores[0].number %> <%= u.position.name %>: <%= u.full_name %> - <%= number_to_currency(redeemed_dollars(u), precision: 0)%></h5>
+              <% end %>
+            <% else %>
+              <h5 class="text-center">No Team Rewards Earned 😢</h5>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    <% end %>
   </div>
   <div class="mt-4">
     <% if current_user.position.name == "Crew" %>

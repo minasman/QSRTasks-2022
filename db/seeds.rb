@@ -203,17 +203,7 @@ rewards = {
     'organization_id' => 1,
     'name' => "$100 Gift Card",
     'value' => 100
-  },
-  'Spurs Tickets' =>{
-    'organization_id' => 1,
-    'name' => "Spurs Courtside",
-    'value' => 100
-  },
-  'UT' =>{
-    'organization_id' => 1,
-    'name' => "UT Longhorn Tickets",
-    'value' => 100
-  },
+  }
 }
 
 rewards.each do |_name, reward_hash|
@@ -221,109 +211,109 @@ rewards.each do |_name, reward_hash|
   r.save
 end
 
-docs = {
-  'major1' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Exception',
-    'documentation_class' => 'Behavior',
-    'level' => 'Major',
-    'definition' => "This is a Major Behavior",
-    'points' => -1
-  },
-  'major2' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Exception',
-    'documentation_class' => 'Result',
-    'level' => 'Major',
-    'definition' => "This is a Major Result",
-    'points' => -1
-  },
-  'major3' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Exception',
-    'documentation_class' => 'Behavior',
-    'level' => 'Serious',
-    'definition' => "This is a Serious Behavior",
-    'points' => -2
-  },
-  'major4' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Exception',
-    'documentation_class' => 'Result',
-    'level' => 'Serious',
-    'definition' => "This is a Serious Result",
-    'points' => -2
-  },
-  'major5' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Exception',
-    'documentation_class' => 'Behavior',
-    'level' => 'Critical',
-    'definition' => "This is a Critical Behavior",
-    'points' => -3
-  },
-  'major6' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Exception',
-    'documentation_class' => 'Result',
-    'level' => 'Critical',
-    'definition' => "This is a Critical Result",
-    'points' => -3
-  },
-  'major7' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Commendation',
-    'documentation_class' => 'Behavior',
-    'level' => 'Praise!',
-    'definition' => "This is a Praise! Behavior",
-    'points' => 1
-  },
-  'major8' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Commendation',
-    'documentation_class' => 'Result',
-    'level' => 'Praise!',
-    'definition' => "This is a Praise! Result",
-    'points' => 1
-  },
-  'major9' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Commendation',
-    'documentation_class' => 'Behavior',
-    'level' => 'Cheers!',
-    'definition' => "This is a Cheers! Behavior",
-    'points' => 2
-  },
-  'major10' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Commendation',
-    'documentation_class' => 'Result',
-    'level' => 'Cheers!',
-    'definition' => "This is a Cheers! Result",
-    'points' => 2
-  },
-  'major11' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Commendation',
-    'documentation_class' => 'Behavior',
-    'level' => 'Applause!',
-    'definition' => "This is a Applause! Behavior",
-    'points' => 3
-  },
-  'major12' => {
-    'organization_id' => '1',
-    'documentation_type' => 'Commendation',
-    'documentation_class' => 'Result',
-    'level' => 'Applause!',
-    'definition' => "This is a antother Applause! Result",
-    'points' => 3
-  },
-}
+# docs = {
+#   'major1' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Exception',
+#     'documentation_class' => 'Behavior',
+#     'level' => 'Major',
+#     'definition' => "This is a Major Behavior",
+#     'points' => -1
+#   },
+#   'major2' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Exception',
+#     'documentation_class' => 'Result',
+#     'level' => 'Major',
+#     'definition' => "This is a Major Result",
+#     'points' => -1
+#   },
+#   'major3' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Exception',
+#     'documentation_class' => 'Behavior',
+#     'level' => 'Serious',
+#     'definition' => "This is a Serious Behavior",
+#     'points' => -2
+#   },
+#   'major4' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Exception',
+#     'documentation_class' => 'Result',
+#     'level' => 'Serious',
+#     'definition' => "This is a Serious Result",
+#     'points' => -2
+#   },
+#   'major5' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Exception',
+#     'documentation_class' => 'Behavior',
+#     'level' => 'Critical',
+#     'definition' => "This is a Critical Behavior",
+#     'points' => -3
+#   },
+#   'major6' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Exception',
+#     'documentation_class' => 'Result',
+#     'level' => 'Critical',
+#     'definition' => "This is a Critical Result",
+#     'points' => -3
+#   },
+#   'major7' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Commendation',
+#     'documentation_class' => 'Behavior',
+#     'level' => 'Praise!',
+#     'definition' => "This is a Praise! Behavior",
+#     'points' => 1
+#   },
+#   'major8' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Commendation',
+#     'documentation_class' => 'Result',
+#     'level' => 'Praise!',
+#     'definition' => "This is a Praise! Result",
+#     'points' => 1
+#   },
+#   'major9' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Commendation',
+#     'documentation_class' => 'Behavior',
+#     'level' => 'Cheers!',
+#     'definition' => "This is a Cheers! Behavior",
+#     'points' => 2
+#   },
+#   'major10' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Commendation',
+#     'documentation_class' => 'Result',
+#     'level' => 'Cheers!',
+#     'definition' => "This is a Cheers! Result",
+#     'points' => 2
+#   },
+#   'major11' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Commendation',
+#     'documentation_class' => 'Behavior',
+#     'level' => 'Applause!',
+#     'definition' => "This is a Applause! Behavior",
+#     'points' => 3
+#   },
+#   'major12' => {
+#     'organization_id' => '1',
+#     'documentation_type' => 'Commendation',
+#     'documentation_class' => 'Result',
+#     'level' => 'Applause!',
+#     'definition' => "This is a antother Applause! Result",
+#     'points' => 3
+#   },
+# }
 
-docs.each do |name, position_hash|
-  p = Document.create(position_hash)
-  p.save
-end
+# docs.each do |name, position_hash|
+#   p = Document.create(position_hash)
+#   p.save
+# end
 
 # stores = []
 # first = []

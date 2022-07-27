@@ -27,7 +27,7 @@
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :store_id, "Location", class: "form-label" %>
-        <%= form.collection_select :store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", required: true, data: {action: "change->shop#manager"}} %>
+        <%= form.collection_select :store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", required: true} %>
       </div>
     </div>
     <div class="col-12 col-md-6">

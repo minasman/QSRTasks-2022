@@ -1,3 +1,0 @@
-<%= turbo_stream.update @target do %>
-  <%= options_for_select @managers.collect { |e| [ e.full_name, e.id ] } %>
-<% end %>

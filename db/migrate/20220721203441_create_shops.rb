@@ -102,11 +102,6 @@ class CreateShops < ActiveRecord::Migration[7.0]
       t.boolean :docRequired
       t.string :loyalty
       t.references :shopper, null: false
-      t.references :shift_manager
-      t.references :order_taker
-      t.references :cashier
-      t.references :presenter
-      t.references :pf_presenter
 
       t.timestamps
     end

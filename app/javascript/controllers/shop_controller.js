@@ -4,7 +4,7 @@ import { get } from "@rails/request.js"
 
 // Connects to data-controller="shop"
 export default class extends Controller {
-  static targets = ["managerList"]
+  static targets = ["managerList", "otName", "cashierName", "presenterName", "pfPresenterName"]
 
   connect() {
   }
@@ -13,7 +13,11 @@ export default class extends Controller {
     let store = document.getElementById("shop_store_id").value
     let manager_list = e.target.selectedOptions[0].value
     let target = this.managerListTarget.id
-    get(`/shops/manager_list?target=${target}&store=${store}`, {
+    let otTarget = this.otNameTarget.id
+    let csTarget = this.cashierNameTarget.id
+    let pTarget = this.presenterNameTarget.id
+    let pfTarget = this.pfPresenterNameTarget.id
+    get(`/manager_list?target=${target}&store=${store}&ot=${otTarget}&cs=${csTarget}&p=${pTarget}&pf=${pfTarget}`, {
       responseKind: "turbo-stream"
     })
   }
