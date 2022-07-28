@@ -3,13 +3,13 @@ class DocumentationMailer < ApplicationMailer
 
   def new_documentation(documentation)
     @documentation = documentation
-    email = distribution_list
+    email = distribution_list(@documentation)
     mail(to: email, subject: "#{documentation.documentation_type} generated for #{documentation.employee_named.full_name} @ #{documentation.store.number} by #{documentation.awarded_by.full_name}")
   end
 
   private
 
-  def distribution_list
+  def distribution_list(documentation)
     department = documentation.employee_named.position.department
     position = documentation.employee_named.position.name
     store = documentation.store
