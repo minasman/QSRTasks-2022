@@ -23,7 +23,6 @@ class DocumentationMailer < ApplicationMailer
         flow_list.push(store.users.where(active: true, position_id: Position.where(name: ["Operations Manager", "Director"]).ids, organization_id: documentation.employee_named.organization.id)).map(&:email)
       else
         flow_list.push(store.users.where(active: true, position_id: Position.where(name: ["Director"]).ids, organization_id: documentation.employee_named.organization.id)).map(&:email)
-        end
       end
     elsif department == "Maintenance"
       if position.== ["Maint Admin"]
@@ -58,7 +57,6 @@ class DocumentationMailer < ApplicationMailer
         flow_list = User.where(active: true, position_id: Position.where(name: ["AR Manager", "Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
       elsif position == "Marketing Admin"
         flow_list = User.where(active: true, position_id: Position.where(name: ["Marketing Manager", "Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
-
       elsif position == "HR Manager"
         flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
       elsif position == "AP Manager"
