@@ -7,9 +7,9 @@ class ApplicationController < ActionController::Base
   include Pundit::Authorization
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
-  rescue_from ActionController::Redirecting::UnsafeRedirectError do
-    redirect_to root_url
-  end
+  # rescue_from ActionController::Redirecting::UnsafeRedirectError do
+  #   redirect_to root_url
+  # end
 
   private
 
