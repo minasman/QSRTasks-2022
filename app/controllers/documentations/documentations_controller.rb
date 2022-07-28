@@ -42,7 +42,9 @@ class Documentations::DocumentationsController < ApplicationController
     respond_to do |format|
       if @documentation.save
         new_point_total = @documentation.employee_named.accumulated_points + (@documentation.documentation_type == "Commendation" ? @documentation.points : -@documentation.points)
-        @documentation.employee_named.update(accumulated_points: new_point_total)
+        #(new_point_total <= -10 ? -10 : new_point_total) This line below should limit the points from dropping below
+        # -10. Remove or adjust this guardrail as needed.
+        @documentation.employee_named.update(accumulated_points: (new_point_total <= -10 ? -10 : new_point_total))
         # Change User.find(2) below to @documentation.employee_named
         SendDocumentationSmsJob.perform_later(@documentation.employee_named, message_to_send(@documentation))
         DocumentationMailer.new_documentation(@documentation).deliver_later
