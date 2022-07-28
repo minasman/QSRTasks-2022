@@ -18,7 +18,8 @@ class DocumentationMailer < ApplicationMailer
       if position == "Crew" || position == "Manager"
         flow_list.push(store.users.where(active: true, position_id: Position.where(name: ["Supervisor", "General Manager", "Director", "Operations Manager"]).ids, organization_id: documentation.employee_named.organization.id)).map(&:email)
       elsif position == "General Manager"
-        flow_list.push(store.users.where(active: true, position_id: Position.where(name: ["Supervisor", "Operations Manager", "Director"]).ids, organization_id: documentation.employee_named.organization.id)).map(&:email)
+        flow_list.push(store.users.where(active: true, position_id: Position.where(name: ["Supervisor", "Operations Manager", "Director"]).ids, organization_id: documentation.employee_named.organization.id))[0].map(&:email
+        )
       elsif position == "Supervisor"
         flow_list.push(store.users.where(active: true, position_id: Position.where(name: ["Operations Manager", "Director"]).ids, organization_id: documentation.employee_named.organization.id)).map(&:email)
       else
