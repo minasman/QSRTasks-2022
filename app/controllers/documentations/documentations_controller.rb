@@ -44,7 +44,7 @@ class Documentations::DocumentationsController < ApplicationController
         new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
         @documentation.employee_named.update(accumulated_points: new_point_total)
         # Change User.find(2) below to @documentation.employee_named
-        SendDocumentationSmsJob.perform_later(User.find(2), message_to_send(@documentation))
+        SendDocumentationSmsJob.perform_later(@documentation.employee_named, message_to_send(@documentation))
         DocumentationMailer.new_documentation(@documentation).deliver_later
         format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
