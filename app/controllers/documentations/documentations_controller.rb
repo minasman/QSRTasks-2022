@@ -41,7 +41,7 @@ class Documentations::DocumentationsController < ApplicationController
     end
     respond_to do |format|
       if @documentation.save
-        new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
+        new_point_total = @documentation.employee_named.accumulated_points + (@documentation.documentation_type == "Commendation" ? @documentation.points : -@documentation.points)
         @documentation.employee_named.update(accumulated_points: new_point_total)
         # Change User.find(2) below to @documentation.employee_named
         SendDocumentationSmsJob.perform_later(@documentation.employee_named, message_to_send(@documentation))
