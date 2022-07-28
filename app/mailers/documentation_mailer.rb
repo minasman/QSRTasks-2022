@@ -49,7 +49,7 @@ class DocumentationMailer < ApplicationMailer
         flow_list = User.where(active: true, position_id: Position.where(name: ["HR Manager", "Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
       elsif position == "Payroll Admin"
         flow_list = User.where(active: true, position_id: Position.where(name: ["Payroll Manager", "Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
-      elsif postion == "AP Admin"
+      elsif position == "AP Admin"
         flow_list = User.where(active: true, position_id: Position.where(name: ["AP Manager", "Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
       elsif position == "Shopper"
         flow_list = User.where(active: true, position_id: Position.where(name: ["Business Director", "Director"]).ids, organization_id: current_user.organization.id).map(&:email)
