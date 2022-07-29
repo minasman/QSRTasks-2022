@@ -206,33 +206,43 @@ class Documentations::DocumentationsController < ApplicationController
       when "Maintenance"
         case current_user.position.name
         when "Technology Department Head"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "OTP Tech").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["OTP Tech", "Technology Department Head"]).ids)
         when "PM Department Head"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Patch Maint").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["Patch Maint", "PM Department Head"]).ids)
         when "Maint Tech Department Head"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Maint Tech").ids)
-        else
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["Maint Tech", "Maint Tech Department Head"]).ids)
+        when "Maint Department Head"
           Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(department: "Maintenance").ids)
+        else
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_id: current_user.id)
         end
       when "Office"
         case current_user.position.name
         when "HR Manager"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "HR Admin").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["HR Admin", "HR Manager"]).ids)
         when "Training Manager"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Training Assistant").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["Training Manager", "Training Assistant"]).ids)
         when "Marketing Manager"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Marketing Admin").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["Marketing Admin", "Marketing Manager"]).ids)
         when "AR Manager"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "AR Admin").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["AR Admin", "AR Manager"]).ids)
         when "AP Manager"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "AP Admin").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["AP Admin", "AP Manager"]).ids)
+        when "Payroll Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: ["Payroll Admin", "Payroll Manager"]).ids)
         else
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, position_id: Position.where(name: "Payroll Admin").ids)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_id: current_user.id)
         end
       when "Operations"
         case current_user.position.name
         when "Crew"
           Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_documentations_id: current_user.id)
+        when "Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_documentations_id: current_user.id)
+        when "General Manager"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, store_id: current_user.stores, position_id: Position.where(name: ["Crew", "Manager", "General Manager"]))
+        when "Supervisor"
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, store_id: current_user.stores, position_id: Position.where(name: ["Crew", "Manager", "General Manager", "Supervisor"]))
         else
           Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, store_id: current_user.stores)
         end
