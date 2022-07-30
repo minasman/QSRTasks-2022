@@ -1,0 +1,62 @@
+<turbo-frame id="my-workorders">
+  <% if @workorders.any? %>
+    <div class="table-responsive card-body">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Location</th>
+            <th scope="col">WO#</th>
+            <th scope="col">Submitted On</th>
+            <th scope="col">Equipment</th>
+            <th scope="col">Submitted By</th>
+            <th scope="col">Team</th>
+            <th scope="col">Assigned To</th>
+            <th scope="col">Vendor</th>
+            <th scope="col">Updates</th>
+            <th scope="col">Last Update</th>
+            <th scope="col">Priority</th>
+            <th scope="col">Time Open</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @workorders.each_with_index do |workorder, i| %>
+            <tr id="<%= dom_id(workorder) %>" >
+              <th scope="row" rowspan="2" class="align-middle border-bottom border-dark"><%= i + 1 %></th>
+              <td><%= workorder.store.number %></td>
+              <% if policy(:workorder).show? %>
+                <td><%= link_to workorder.id, workorder, class: "table-link", data: { turbo: false } %></td>
+              <% else %>
+                <td><%= workorder.id %></td>
+              <% end %>
+              <td><%= workorder.created_at.strftime("%m/%d/%y") %></td>
+              <% if policy(:equipment).show? %>
+                <td><%= link_to workorder.equipment.name, workorder.equipment, class: "table-link", data: { turbo: false } %></td>
+              <% else %>
+                <td><%= workorder.equipment.name %></td>
+              <% end %>
+              <td><%= workorder.user.full_name %></td>
+              <td><%= workorder.team? ? workorder.team : "Not Assigned" %></td>
+              <td><%= workorder.assigned? ? User.find(workorder.assigned).full_name : "Not Assigned" %></td>
+              <% if policy(:vendor).show? %>
+                <td><%= link_to workorder.vendor.name, workorder.vendor, class: "table-link", data: { turbo: false } %></td>
+              <% else %>
+                <td><%= workorder.vendor.name %></td>
+              <% end %>
+              <td><%= workorder.workorder_updates.size %></td>
+              <td><%= workorder.workorder_updates.any? ? workorder.workorder_updates.last.created_at.strftime("%m/%d/%y") : "N/A" %></td>
+              <td><%= workorder.level? ?  workorder.level : "Not Assigned" %></td>
+              <td><%= time_ago_in_words(workorder.created_at) %></td>
+            </tr>
+            <tr class="border-bottom border-dark">
+              <th>Description:</th>
+              <td colspan="11"><%= workorder.workorder_issue %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <h4 class="text-center">No Workorders Assigned 😀</h4>
+  <% end %>
+</turbo-frame>

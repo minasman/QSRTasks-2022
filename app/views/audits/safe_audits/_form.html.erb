@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <div class="row">
+  <div class="row"data-controller="safe-audit">
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :safe_audit_date, "Date", class: "form-label" %>
@@ -25,15 +25,15 @@
       </div>
     </div>
     <div class="col-12 col-md-6">
-      <div class="mb-3" data-controller="safe-audit" >
+      <div class="mb-3" >
         <%= form.label :store_id, class: "form-label" %>
-        <%= form.collection_select(:store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number,{ prompt: true}, { class: "form-select", 'data-action': "change->safe-audit#store" }) %>
+        <%= form.collection_select(:store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number,{ prompt: true}, { class: "form-select", data: {action: "change->safe-audit#store change->safe-audit#manager"}, required: true}) %>
       </div>
     </div>
     <div class="col-12 col-md-6">
       <div class="mb-3">
         <%= form.label :manager_id, class: "form-label" %>
-        <%= form.collection_select(:manager_id, User.managers, :id, :full_name, {prompt: true}, {class: "form-select"})%>
+        <%= form.select :manager_id, [], {prompt: "Select Shift Manager"}, {class: "form-select", data: { "safe-audit-target": "managerList"}, required: true} %>
       </div>
     </div>
   </div>
@@ -44,7 +44,7 @@
       <div class="col-6 col-lg-3">
         <div class="mb-3">
           <%= form.label :working_headset, "Working Headset", class: "form-label" %>
-          <%= form.number_field :working_headset, class: "form-control",'data-action': "change->safe-audit#headset" %>
+          <%= form.number_field :working_headset, class: "form-control",'data-action': "change->safe-audit#headset", required: true %>
         </div>
       </div>
       <div class="col-6 col-lg-3">
@@ -72,10 +72,12 @@
     <div class="col-4">
       <div class="mb-3">
         <%= form.label :ipad, "IPads", class: "form-label" %>
-        <%= form.number_field :ipad, class: "form-control" %>
+        <%= form.number_field :ipad, class: "form-control", required: true %>
       </div>
     </div>
   </div>
+
+  START HERE
   <h3 class="text-center">Cash Tills</h3>
   <div class="row align-items-end mb-3" data-controller="safe-audit" data-safe-audit-drawer="0" >
     <div class="col-6 col-md-4">

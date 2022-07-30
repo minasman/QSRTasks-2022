@@ -86,6 +86,7 @@ Rails.application.routes.draw do
       end
     end
     resources :vendors
+    get '/my_workorders/:id' => 'workorders#my_workorders'
   end
 
   scope module: 'training' do
@@ -106,7 +107,11 @@ Rails.application.routes.draw do
   get '/comment_update' => 'new_hires#comment_update'
 
   scope module: 'audits' do
-    resources :safe_audits
+    resources :safe_audits do
+      collection do
+        get :manager_list
+      end
+    end
     #resources :food_safety_audits
   end
 

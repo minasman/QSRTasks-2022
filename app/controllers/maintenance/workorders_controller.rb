@@ -92,6 +92,10 @@ class Maintenance::WorkordersController < ApplicationController
     end
   end
 
+  def my_workorders
+    @workorders = Workorder.where(status: "Open", assigned: params[:id]).order(level: :asc, store_id: :asc, id: :asc).includes(:store)
+  end
+
   def assign
     @workorders = Workorder.where(assigned: nil, status: 'Open').order(store_id: 'ASC', id: 'ASC')
     @workorders = @workorders.search(params[:query]) if params[:query].present?

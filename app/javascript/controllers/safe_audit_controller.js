@@ -1,8 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 import SignaturePad from 'signature_pad'
+import { get } from "@rails/request.js"
 
 // Connects to data-controller="safe-audit"
 export default class extends Controller {
+  static targets = ["managerList"]
+
   connect() {
     var wrapper = document.getElementById("signature-pad")
     var canvas = wrapper.querySelector("canvas")
@@ -16,6 +19,15 @@ export default class extends Controller {
     }
   }
 
+  manager(e) {
+    let store = document.getElementById("safe_audit_store_id").value
+    let manager_list = e.target.selectedOptions[0].value
+    let target = this.managerListTarget.id
+    get(`/safe_audits/manager_list?target=${target}&store=${store}`, {
+      responseKind: "turbo-stream"
+    })
+  }
+
   updateTotal() {
     let safeCount = isNaN(parseFloat(document.getElementById('safeControl').innerText.substring(1))) ? 0.00 : parseFloat(document.getElementById('safeControl').innerText.substring(1))
     const totalSafe = isNaN(parseFloat(document.getElementById('totalSafe').innerText.substring(1))) ?  0.00 : parseFloat(document.getElementById('totalSafe').innerText.substring(1))
@@ -25,6 +37,7 @@ export default class extends Controller {
   }
 
   store(event) {
+    console.log("STORE")
     let safeCount = document.getElementById('safeControl')
     const store = document.getElementById('safe_audit_store_id').value
     fetch(`/stores/${store}.json`)
