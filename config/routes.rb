@@ -115,6 +115,10 @@ Rails.application.routes.draw do
     resources :wellnesses
   end
 
+  scope module: 'reports' do
+    resources :documentation_reports
+  end
+
   resources :positions
   resources :organizations
 

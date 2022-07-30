@@ -100,6 +100,8 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.action_mailbox.ingress = :mailgun
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 

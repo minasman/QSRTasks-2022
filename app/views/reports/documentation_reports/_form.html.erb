@@ -1,0 +1,68 @@
+<%= form_tag("/documentation_reports", method: "get") do %>
+
+  <div class='p-4'>
+    <div class="p-4 shadow-md rounded bg-zinc-50 pb-3">
+      <h2 class="text-xl">Search By: </h2>
+      <h5 class="text-center italic">Choose Only One Search Option</h5>
+      <div class="row">
+        <div class="col-12 col-md-3">
+          <div class="mb-3">
+            <%= label_tag :organization, "All Stores",  class: "form-label" %><br>
+            <%= check_box_tag :organization, "true", false, :class => "form-check-input" %>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="mb-3">
+            <%= label_tag :store_id, "Restaurant",  class: "form-label"  %>
+            <%= collection_select(:searchData, :store_id, Store.all.order('id ASC'), :id, :number, {include_blank: true}, {:class => "form-control"}) %>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="mb-3">
+            <%= label_tag :supervisor_id, "Supervisor",  class: "form-label"  %>
+            <%= collection_select(:searchData, :supervisor_id, User.where(position_id: "4").order('first_name ASC'), :id, :full_name, {include_blank: true}, {:class => "form-control"}) %>
+          </div>
+        </div>
+        <div class="col-12 col-md-3">
+          <div class="mb-3">
+            <%= label_tag :om_id, "Operations Manager", class: "form-label"  %>
+            <%= collection_select(:searchData, :om_id, User.where(position_id: "2"), :id, :full_name, {include_blank: true}, {:class => "form-control"}) %>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <h2 class="text-xl mb-2">Select Date Range:</h2>
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="mb-3">
+            <%= label_tag :start_date, "Start Date", class: "form-label" %>
+            <%= date_field :searchData, :start_date, :class => "form-control", :required => true, value: Date.today - 30.days %>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div class="mb-3">
+            <%= label_tag :end_date, "End Date", class: "form-label"%>
+            <%= date_field :searchData, :end_date, :class => "form-control", :required => true , value: Date.today %>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <h2 class="text-xl mb-2 pt-3" >Select Type of Documentation:</h2>
+      <div class="mb-3">
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag(:type, "Commendation", false, :class => "form-check-inline") %> Commendation
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag(:type, "Exception", false, :class => "form-check-inline") %> Exception
+        </div>
+        <div class="form-check form-check-inline">
+          <%= radio_button_tag(:type, "all", false,:class => "form-check-inline") %> All
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <%= submit_tag "Run Report", class: "btn my-submit" %>
+  </div>
+<% end %>
