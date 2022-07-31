@@ -23,6 +23,8 @@ class Audits::SafeAuditsController < ApplicationController
   # POST /safe_audits or /safe_audits.json
   def create
     @safe_audit = SafeAudit.new(safe_audit_params)
+    @safe_audit.auditor = current_user
+    @safe_audit.organization = current_user.organization
 
     respond_to do |format|
       if @safe_audit.save
@@ -75,6 +77,6 @@ class Audits::SafeAuditsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def safe_audit_params
-      params.require(:safe_audit).permit(:user_id, :store_id, :organization_id, :safe_audit_date, :safe_audit_time, :shift_manager, :comment, :hundred, :fifty, :twenty, :ten, :five, :two, :one, :quarter, :dime, :nickel, :penny, :dollar_coin, :half_dollar, :misc_coin, :gift_certificate, :gift_certificate_redeemed, :receipt, :other, :coin_changer, :drawer, :drawer_amount, :working_headset, :non_working_headset, :total_headset, :misc_other, :total_safe, :safe_variance, :manager, :signature, :missing_headset, :ipad)
+      params.require(:safe_audit).permit(:auditor_id, :store_id, :organization_id, :safe_audit_date, :safe_audit_time, :manager_id, :comment, :hundred, :fifty, :twenty, :ten, :five, :two, :one, :quarter, :dime, :nickel, :penny, :dollar_coin, :half_dollar, :misc_coin, :gift_certificate, :gift_certificate_redeemed, :receipt, :other, :coin_changer, :drawer, :drawer_amount, :working_headset, :non_working_headset, :total_headset, :other, :total_safe, :safe_variance, :shift_manager, :signature, :missing_headset, :ipad, :total_safe, :safe_variance)
     end
 end

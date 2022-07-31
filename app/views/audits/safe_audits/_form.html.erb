@@ -37,402 +37,352 @@
       </div>
     </div>
   </div>
-  <hr>
-  <h3 class="text-center">DT Headsets</h3>
-  <div id="headsets" data-controller="safe-audit" >
-    <div class="row">
-      <div class="col-6 col-lg-3">
-        <div class="mb-3">
-          <%= form.label :working_headset, "Working Headset", class: "form-label" %>
-          <%= form.number_field :working_headset, class: "form-control",'data-action': "change->safe-audit#headset", required: true %>
+
+  <div id="safe-audit-form" class="hide">
+    <hr>
+    <h3 class="text-center">DT Headsets</h3>
+    <div id="headsets" data-controller="safe-audit" >
+      <div class="row">
+        <div class="col-6 col-lg-3">
+          <div class="mb-3">
+            <%= form.label :working_headset, "Working Headset", class: "form-label" %>
+            <%= form.number_field :working_headset, class: "form-control",'data-action': "change->safe-audit#headset", required: true %>
+          </div>
         </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="mb-3">
-          <%= form.label :non_working_headset, "Non-Working Headset", class: "form-label" %>
-          <%= form.number_field :non_working_headset, class: "form-control",'data-action': "change->safe-audit#headset" %>
+        <div class="col-6 col-lg-3">
+          <div class="mb-3">
+            <%= form.label :non_working_headset, "Non-Working Headset", class: "form-label" %>
+            <%= form.number_field :non_working_headset, class: "form-control",'data-action': "change->safe-audit#headset", required: true %>
+          </div>
         </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="mb-3">
-          <%= form.label :total_headset, "Total Headsets", class: "form-label" %>
-          <%= form.number_field :total_headset, class: "form-control", readonly: true %>
+        <div class="col-6 col-lg-3">
+          <div class="mb-3">
+            <%= form.label :total_headset, "Total Headsets", class: "form-label" %>
+            <%= form.number_field :total_headset, class: "form-control", readonly: true %>
+          </div>
         </div>
-      </div>
-      <div class="col-6 col-lg-3">
-        <div class="mb-3">
-          <%= form.label :missing_headset, "Missing Headset", class: "form-label" %>
-          <%= form.number_field :missing_headset, class: "form-control" %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <h3 class="text-center">IPads</h3>
-  <div class="row">
-    <div class="col-4">
-      <div class="mb-3">
-        <%= form.label :ipad, "IPads", class: "form-label" %>
-        <%= form.number_field :ipad, class: "form-control", required: true %>
-      </div>
-    </div>
-  </div>
-
-  START HERE
-  <h3 class="text-center">Cash Tills</h3>
-  <div class="row align-items-end mb-3" data-controller="safe-audit" data-safe-audit-drawer="0" >
-    <div class="col-6 col-md-4">
-        <%= form.label :drawer, class: "form-label" %>
-        <%= form.number_field :drawer, class: "form-control",'data-action': "change->safe-audit#totalDrawer" %>
-    </div>
-    <div class="col-6 col-md-4">
-        <%= form.label :drawer_amount, "Drawer Amount", class: "form-label" %>
-        <%= form.number_field :drawer_amount, class: "form-control",'data-action': "change->safe-audit#totalDrawer" %>
-    </div>
-    <div class="col-4 col-md-4">
-        <h5 id="totalDrawers" class="pl-3 text-2xl font-medium"></h5>
-    </div>
-  </div>
-  <h3 class="text-center">Currency</h3>
-
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :hundred, "Hundreds", class: "form-label" %>
-      <%= form.number_field :hundred, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-        <h5>@ $100.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :fifty, "Fifties", class: "form-label" %>
-      <%= form.number_field :fifty, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-        <h5>@ $50.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :twenty, "Twenties", class: "form-label" %>
-      <%= form.number_field :twenty, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $20.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :ten, "Tens", class: "form-label" %>
-      <%= form.number_field :ten, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $10.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :five, "Fives", class: "form-label" %>
-      <%= form.number_field :five, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $5.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :two, "Twos", class: "form-label" %>
-      <%= form.number_field :two, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $2.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :one, "Ones", class: "form-label" %>
-      <%= form.number_field :one, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $1.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <h3 class="text-center">Rolled Coin</h3>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :quarter, "Quarters", class: "form-label" %>
-      <%= form.number_field :quarter, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $10.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :dime, "Dimes", class: "form-label" %>
-      <%= form.number_field :dime, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $5.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :nickel, "Nickels", class: "form-label" %>
-      <%= form.number_field :nickel, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $2.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :penny, "Pennies", class: "form-label" %>
-      <%= form.number_field :penny, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $0.50 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <h3 class="text-center">Loose Coin</h3>
-
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :dollar_coin, "Dollar Coins", class: "form-label" %>
-      <%= form.number_field :dollar_coin, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $1.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :half_dollar, "Half Dollars", class: "form-label" %>
-      <%= form.number_field :half_dollar, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $0.50 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <div class="mb-3">
-        <%= form.label :misc_coin, "Misc Coins", class: "form-label" %>
-        <%= form.text_field :misc_coin, class: "form-control" %>
-      </div>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <h3 class="text-center">Misc</h3>
-
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :gift_certificate, "Gift Certificates", class: "form-label" %>
-      <%= form.number_field :gift_certificate, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $1.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <%= form.label :gift_certificate_redeemed, "Gift Certificates Redeemed", class: "form-label" %>
-      <%= form.number_field :gift_certificate_redeemed, class: "form-control" %>
-    </div>
-    <div class="col-6 col-md-3">
-      <h5>@ $1.00 = </h5>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <div class="mb-3">
-        <%= form.label :receipt, "Receipts", class: "form-label" %>
-        <%= form.text_field :receipt, class: "form-control" %>
-      </div>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <div class="mb-3">
-        <%= form.label :coin_changer, "Coin Changers",  class: "form-label" %>
-        <%= form.text_field :coin_changer, class: "form-control"%>
-      </div>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-      <div class="mb-3">
-        <%= form.label :other, class: "form-label" %>
-        <%= form.text_field :other, class: "form-control" %>
-      </div>
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-  <hr>
-  <div class="row align-items-end mb-3">
-    <div class="col-0 col-md-4">
-    </div>
-    <div class="col-6 col-md-4">
-      <div class="mb-3">
-        <h3 class="text-xl">Total:</h3>
-      </div>
-    </div>
-    <div class="col-6 col-md-4">
-      <div class="mb-3">
-        <h5 id="totalSafe" class="text-2xl font-medium"></h5>
-      </div>
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-0 col-md-4">
-    </div>
-    <div class="col-6 col-md-4">
-      <h3 class="text-xl">Safe Started At:</h3>
-    </div>
-    <div class="col-6 col-md-4">
-      <h5 id="safeControl" class="text-2xl font-medium"></h5>
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-0 col-md-4">
-    </div>
-    <div class="col-6 col-md-4">
-      <div class="mb-3">
-        <h3 class="text-xl">Variance:</h3>
-      </div>
-    </div>
-    <div class="col-6 col-md-4">
-      <h5 id="safeVariance" class="text-2xl font-medium"></h5>
-    </div>
-  </div>
-  <div class="row align-items-end mb-3">
-    <div class="col-12">
-      <div class="mb-3">
-        <%= form.label :comment, class: "form-label" %>
-        <%= form.text_area :comment, class: "form-control" %>
-      </div>
-    </div>
-  </div>
-
-
-
-  <div class="row align-items-end mb-3">
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-    <div class="col-6 col-md-3">
-    </div>
-  </div>
-
-  <%= form.hidden_field :totalSafe %>
-  <%= form.hidden_field :safeVariance %>
-  <%= form.hidden_field :signature %>
-
-  <div class="row">
-    <div class="col">
-      <div class="mb-3">
-        <div id="signature-pad" class="signature-pad" data-controller='safe-audit'>
-          <div>
-            <br>
-            <h6>Manager's Signature Required Below</h6>
-            <canvas class="shadow-sm p-0 mb-0 bg-white rounded"></canvas>
+        <div class="col-6 col-lg-3">
+          <div class="mb-3">
+            <%= form.label :missing_headset, "Missing Headset", class: "form-label" %>
+            <%= form.number_field :missing_headset, class: "form-control" %>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-    <div class="mb-3">
-      <%= form.label :manager, class: "form-label" %>
-      <%= form.text_field :manager, class: "form-control" %>
+    <h3 class="text-center">IPads</h3>
+    <div class="row">
+      <div class="col-4">
+        <div class="mb-3">
+          <%= form.label :ipad, "IPads", class: "form-label" %>
+          <%= form.number_field :ipad, class: "form-control", required: true %>
+        </div>
+      </div>
     </div>
 
-  <div class="mb-3">
-    <%= form.submit class: "btn my-submit" %>
+    <h3 class="text-center">Cash Tills</h3>
+    <div data-controller="safe-audit">
+      <div class="row align-items-end mb-3" data-safe-audit-drawer="0" >
+        <div class="col-6 col-md-4">
+            <%= form.label :drawer, class: "form-label" %>
+            <%= form.number_field :drawer, class: "form-control",data: {action: "change->safe-audit#run_total", "safe-audit-target": "drawer"} %>
+        </div>
+        <div class="col-6 col-md-4">
+            <%= form.label :drawer_amount, "Drawer Amount", class: "form-label" %>
+            <%= form.number_field :drawer_amount, class: "form-control",data: {action: "change->safe-audit#run_total", "safe-audit-target": "drawerAmount"} %>
+        </div>
+        <div class="col-4 col-md-4">
+            <h5 id="totalDrawers" class="pl-3 text-2xl font-medium" data-safe-audit-target="drawerValue"></h5>
+        </div>
+      </div>
+      <h3 class="text-center">Currency</h3>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :hundred, "Hundreds", class: "form-label" %>
+          <%= form.number_field :hundred, class: "form-control", data: {"safe-audit-target": "hundred", action: "change->safe-audit#run_total"}%>
+        </div>
+        <div class="col-6 col-md-5">
+            <h5>@ $100.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "hundredValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :fifty, "Fifties", class: "form-label" %>
+          <%= form.number_field :fifty, class: "form-control", data: {"safe-audit-target": "fifty", action: "change->safe-audit#run_total"} %>
+        </div>
+        <div class="col-6 col-md-5">
+            <h5>@ $50.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "fiftyValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :twenty, "Twenties", class: "form-label" %>
+          <%= form.number_field :twenty, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "twenty"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $20.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "twentyValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :ten, "Tens", class: "form-label" %>
+          <%= form.number_field :ten, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "ten"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $10.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "tenValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :five, "Fives", class: "form-label" %>
+          <%= form.number_field :five, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "five"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $5.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "fiveValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :two, "Twos", class: "form-label" %>
+          <%= form.number_field :two, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "two"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $2.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "twoValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :one, "Ones", class: "form-label" %>
+          <%= form.number_field :one, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "one"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $1.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "oneValue">
+        </div>
+      </div>
+      <h3 class="text-center">Rolled Coin</h3>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :quarter, "Quarters", class: "form-label" %>
+          <%= form.number_field :quarter, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "quarter"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $10.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "quarterValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :dime, "Dimes", class: "form-label" %>
+          <%= form.number_field :dime, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "dime"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $5.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "dimeValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :nickel, "Nickels", class: "form-label" %>
+          <%= form.number_field :nickel, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "nickel"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $2.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "nickelValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :penny, "Pennies", class: "form-label" %>
+          <%= form.number_field :penny, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "penny"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $0.50 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "pennyValue">
+        </div>
+      </div>
+      <h3 class="text-center">Loose Coin</h3>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :dollar_coin, "Dollar Coins", class: "form-label" %>
+          <%= form.number_field :dollar_coin, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "dollarCoin"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $1.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "dollarCoinValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :half_dollar, "Half Dollars", class: "form-label" %>
+          <%= form.number_field :half_dollar, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "halfDollar"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $0.50 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "halfDollarValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :misc_coin, "Misc Coins", class: "form-label" %>
+          <%= form.text_field :misc_coin, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "miscCoin"} %>
+        </div>
+        <div class="col-6 col-md-5">
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "miscCoinValue">
+        </div>
+      </div>
+      <h3 class="text-center">Misc</h3>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :gift_certificate, "Gift Certificates", class: "form-label" %>
+          <%= form.number_field :gift_certificate, class: "form-control", data: {action: "change->safe-audit#run_total","safe-audit-target": "gc"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $1.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "gcValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :gift_certificate_redeemed, "Gift Certificates Redeemed", class: "form-label" %>
+          <%= form.number_field :gift_certificate_redeemed, class: "form-control", data: {action: "change->safe-audit#run_total", "safe-audit-target": "gcr"} %>
+        </div>
+        <div class="col-6 col-md-5">
+          <h5>@ $1.00 = </h5>
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "gcrValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <div class="mb-3">
+            <%= form.label :receipt, "Receipts", class: "form-label" %>
+            <%= form.text_field :receipt, class: "form-control", data: {action: "change->safe-audit#run_total", "safe-audit-target": "receipt"} %>
+          </div>
+        </div>
+        <div class="col-6 col-md-5">
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "receiptValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :coin_changer, "Coin Changers",  class: "form-label" %>
+          <%= form.text_field :coin_changer, class: "form-control", data: {action: "change->safe-audit#run_total", "safe-audit-target": "changer"}%>
+        </div>
+        <div class="col-6 col-md-5">
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "changerValue">
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-6 col-md-3">
+          <%= form.label :other, class: "form-label" %>
+          <%= form.text_field :other, class: "form-control", data: {action: "change->safe-audit#run_total", "safe-audit-target": "other"} %>
+        </div>
+        <div class="col-6 col-md-5">
+        </div>
+        <div class="col-12 col-md-3" data-safe-audit-target= "otherValue">
+        </div>
+      </div>
+      <hr>
+      <div class="row align-items-end mb-3">
+        <div class="col-0 col-md-3">
+        </div>
+        <div class="col-6 col-md-5">
+          <h3 class="text-xl">Total:</h3>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5 id="totalSafe" class="text-2xl font-medium"></h5>
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-0 col-md-3">
+        </div>
+        <div class="col-6 col-md-5">
+          <h3 class="text-xl">Safe Started At:</h3>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5 id="safeControl" class="text-2xl font-medium"></h5>
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-0 col-md-3">
+        </div>
+        <div class="col-6 col-md-5">
+          <h3 class="text-xl">Variance:</h3>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5 id="safeVariance" class="text-2xl font-medium"></h5>
+        </div>
+      </div>
+      <div class="row align-items-end mb-3">
+        <div class="col-12">
+          <div class="mb-3">
+            <%= form.label :comment, class: "form-label" %>
+            <%= form.text_area :comment, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row align-items-end mb-3">
+      <div class="col-6 col-md-3">
+      </div>
+      <div class="col-6 col-md-3">
+      </div>
+      <div class="col-6 col-md-3">
+      </div>
+      <div class="col-6 col-md-3">
+      </div>
+    </div>
+
+    <%= form.hidden_field :total_safe %>
+    <%= form.hidden_field :safe_variance %>
+    <%= form.hidden_field :signature %>
+
+    <div class="row">
+      <div class="col">
+        <div class="mb-3">
+          <div id="signature-pad" class="signature-pad" data-controller='safe-audit'>
+            <div>
+              <br>
+              <h6>Manager's Signature Required Below</h6>
+              <canvas class="shadow-sm p-0 mb-0 bg-white rounded"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :shift_manager, class: "form-label" %>
+      <%= form.text_field :shift_manager, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.submit class: "btn my-submit" %>
+    </div>
   </div>
+
 <% end %>

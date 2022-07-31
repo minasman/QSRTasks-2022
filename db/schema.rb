@@ -324,7 +324,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_120751) do
     t.integer "total_headset", null: false
     t.float "total_safe"
     t.float "safe_variance"
-    t.string "manager", null: false
+    t.string "shift_manager", null: false
     t.string "signature", null: false
     t.integer "missing_headset"
     t.integer "ipad", null: false
