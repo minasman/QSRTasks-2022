@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>@import url('https://fonts.googleapis.com/css2?family=Seaweed+Script&display=swap');
+    </style>
+  </head>
+  <body>
+    <h1><%= @new_hire.first_name.humanize %>, We are still waiting for your Background Check!</h1>
+    <p><%=@new_hire.first_name.humanize%>, unfortunately we still have not received the results from your background check! Please contact your General Manager, <%= @new_hire.store.users.where(position: 'General Manager')[0].full_name %> at <%= number_to_phone(@new_hire.store.phone)%> to reschedule your orientation.</p>
+    <p>We sincerely apologize for the delay and understand that we are doing all we can to get you on to our team!</p>
+    <p>Until Then...</p>
+    <h4>Take a look at some of the <strong>OUTSTANDING</strong> Benefits You will be enjoying as a member of our TEAM!!!</h4>
+    <ul>
+      <li>2 FREE Meals During Your Shift</li>
+      <li>Uniforms Provided</li>
+      <li>Up to $600 Referral Bonus</li>
+      <li>40% Meal Discounts For You & Your Family When You are Not Working</li>
+      <li>College Tuition Reimbursements up to $800/yr and </li>
+      <li>McPerks Discount Program</li>
+      <li>Career Advancement Opportunities</li>
+      <li>Paid Time Off</li>
+      <li>Flexible Scheduling</li>
+      <li>AND MUCH, MUCH MORE!!!!</li>
+    </ul>
+    <h3>We can't wait to meet you!!</h3>
+    <h1 style="font-family: 'Seaweed Script', cursive;">Ned & Fabiola Stagg</h1>
+  </body>
+</html>

@@ -115,6 +115,7 @@ class NewHiresController < ApplicationController
     payroll_id = User.last.payroll_id.to_i + 1
     if new_hire.update(attended: true)
       AddNewUserJob.perform_later(new_hire, current_user.organization, payroll_id)
+      SendNewHireSmsJob.perform_later(new_hire,"#{new_hire.full_name} at #{new_hire.store.number} has picked up uniform and is ready to work!!")
     end
     respond_to do |format|
       format.turbo_stream
