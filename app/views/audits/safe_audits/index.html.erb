@@ -1,14 +1,46 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Safe audits</h1>
-
-<div id="safe_audits">
-  <% @safe_audits.each do |safe_audit| %>
-    <%= render safe_audit %>
-    <p>
-      <%= link_to "Show this safe audit", safe_audit %>
-    </p>
-  <% end %>
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Safe Audits</h2>
+      <div class="card-body">
+        <% if @safe_audits.any? %>
+          <div class="table table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Store</th>
+                  <th>Date</th>
+                  <th>Completed By</th>
+                  <th>Variance</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @safe_audits.each_with_index do |audit, i| %>
+                  <tr>
+                    <th><%= i + 1%></th>
+                    <td><%= audit.store.number %></td>
+                    <td><%= audit.safe_audit_date.strftime("%m/%d/%Y") %></td>
+                    <td><%= audit.auditor.full_name %></td>
+                    <td><%= number_to_currency(audit.safe_variance) %></td>
+                    <td><%= link_to "Show", audit, class: "px-2 table-link", data: {turbo: :false} %>
+                    <% if policy(:safe_audit).edit? %>
+                      | <%= link_to "Edit", edit_safe_audit_path(audit), class: "px-2 table-link" %>
+                    <% end %>
+                    <% if policy(:safe_audit).destroy? %>
+                      | <%= link_to "Remove", audit,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Remove this Safe Audit!!" } %>
+                    <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <h3 class="text-center">No Safe Audits Completed</h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New safe audit", new_safe_audit_path %>

@@ -36,7 +36,7 @@
         <div class="col-12 col-md-6">
           <div class="mb-3">
             <%= form.label :manager_id, class: "form-label" %>
-            <%= form.select :manager_id, [], {prompt: "Select Shift Manager"}, {class: "form-select", data: { "safe-audit-target": "managerList"}, required: true} %>
+            <%= form.select :manager_id, User.managers.collect { |p| [p.full_name, p.id]}, {prompt: "Select Shift Manager"}, {class: "form-select", data: { "safe-audit-target": "managerList"}, required: true} %>
           </div>
         </div>
       </div>

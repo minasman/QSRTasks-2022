@@ -5,7 +5,6 @@ import SignaturePad from 'signature_pad'
 export default class extends Controller {
   connect() {
     function doMouseUp() {
-      console.log('MouseUp')
       document.getElementById('workorder_update_signature').value = signaturePad.toDataURL("image/jpeg")
     }
     let wrapper = document.getElementById("signature-pad")
@@ -13,7 +12,6 @@ export default class extends Controller {
     let signaturePad = new SignaturePad(canvas, {
       backgroundColor: 'rgb(255, 255, 245)'
     })
-    console.log(signaturePad)
     canvas.addEventListener("touchend", doMouseUp)
     canvas.addEventListener("pointerup", doMouseUp)  }
 }

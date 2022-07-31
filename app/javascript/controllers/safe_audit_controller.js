@@ -7,16 +7,17 @@ export default class extends Controller {
   static targets = ["managerList", "hundred", "hundredValue", "fifty", "fiftyValue", "twenty", "twentyValue", "ten", "tenValue", "five", "fiveValue", "two", "twoValue", "one", "oneValue", "quarter", "quarterValue", "dime", "dimeValue", "nickel", "nickelValue", "penny", "pennyValue", "dollarCoin", "dollarCoinValue", "halfDollar", "halfDollarValue", "miscCoin", "miscCoinValue", "gc", "gcValue", "gcr", "gcrValue", "receipt", "receiptValue", "changer", "changerValue", "other", "otherValue", "drawer", "drawerValue", "drawerAmount"]
 
   connect() {
-    var wrapper = document.getElementById("signature-pad")
-    var canvas = wrapper.querySelector("canvas")
-    var signaturePad = new SignaturePad(canvas, {
-      backgroundColor: 'rgb(255, 255, 255)'
-    })
-    canvas.addEventListener('mouseup', handleMouseUp)
-    canvas.addEventListener('touchend', handleMouseUp)
-    function handleMouseUp() {
-      document.querySelector('#safe_audit_signature').value = signaturePad.toDataURL("image/jpeg")
+
+    function doMouseUp() {
+      document.getElementById('safe_audit_signature').value = signaturePad.toDataURL("image/jpeg")
     }
+    let wrapper = document.getElementById("signature-pad")
+    let canvas = wrapper.querySelector("canvas")
+    let signaturePad = new SignaturePad(canvas, {
+      backgroundColor: 'rgb(255, 255, 245)'
+    })
+    canvas.addEventListener("touchend", doMouseUp)
+    canvas.addEventListener("pointerup", doMouseUp)
     this.run_total()
   }
 

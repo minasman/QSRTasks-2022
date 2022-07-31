@@ -4,7 +4,6 @@ import SignaturePad from 'signature_pad'
 // Connects to data-controller="show-signature"
 export default class extends Controller {
   connect() {
-    console.log('Show connected')
 
     const id = this.data.get('id')
     const signature = this.data.get('signature')

@@ -28,6 +28,7 @@ class Audits::SafeAuditsController < ApplicationController
 
     respond_to do |format|
       if @safe_audit.save
+        AuditMailer.safe_audit(@safe_audit).deliver_later
         format.html { redirect_to safe_audit_url(@safe_audit), notice: "Safe audit was successfully created." }
         format.json { render :show, status: :created, location: @safe_audit }
       else
