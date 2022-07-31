@@ -54,6 +54,12 @@
         </div>
       </div>
     </div>
+    <% if current_user.position.department == "Administration" %>
+      <div class="col-auto mt-3 mt-md-0">
+        <turbo-frame id="day-schedule" src="/day_schedule">
+        </turbo-frame>
+      </div>
+    <% end %>
     <% if current_user.position.department == "Operations" %>
       <div class="col-auto mt-3 mt-md-0">
         <turbo-frame id="my-schedule" src="/my_schedule/<%= current_user.id %>">

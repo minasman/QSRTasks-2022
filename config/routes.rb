@@ -97,6 +97,7 @@ Rails.application.routes.draw do
     get '/register' => 'training_registration#register'
     get '/schedule' => 'curriculums#schedule'
     get '/my_schedule/:id' => 'curriculums#my_schedule'
+    get '/day_schedule' => 'curriculums#day_schedule'
   end
 
   resources :new_hires

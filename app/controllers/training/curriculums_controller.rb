@@ -78,6 +78,18 @@ class Training::CurriculumsController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def day_schedule
+    @tclasses = []
+    Curriculum.is_current.each do |course|
+      course.tclasses.order(class_date: :asc).each do |tclass|
+        if tclass.class_date == Date.today
+          @tclasses.push(tclass)
+        end
+      end
+    end
+    @tclasses.uniq
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_curriculum

@@ -1,0 +1,45 @@
+<turbo-frame id="day-schedule">
+ <div class="row justify-content-center">
+    <div class="col-auto">
+      <div class="card mb-5">
+        <h3 class="text-center card-header">Classes Today</h3>
+        <div class="card-body">
+          <% if @tclasses.size > 0 %>
+            <div class="table table-responsive">
+              <table class="table table-hover">
+                <% @tclasses.each do |tclass| %>
+                  <% unless tclass.class_date < Date.today %>
+                    <thead>
+                      <tr>
+                        <th colspan="4" class="fs-6 text-center"><%= tclass.name %> - <%= tclass.class_date.strftime("%m/%d/%y") %> @ <%= tclass.class_time.strftime("%I:%M %p") %> at <%= tclass.location %></th>
+                      </tr>
+                      <tr>
+                        <th>#</th>
+                        <th>Location</th>
+                        <th>Position</th>
+                        <th>Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% tclass.users.each_with_index do |user, i| %>
+                        <tr>
+                          <td class="fs-6"><%= i + 1 %></td>
+                          <td class="fs-6"><%= user.stores[0].number %></td>
+                          <td class="fs-6"><%= user.position.name %></td>
+                          <td class="fs-6"><%= user.full_name %></td>
+                        </tr>
+                      <% end %>
+                      <% @counter = 0 %>
+                    </tbody>
+                  <% end %>
+                <% end %>
+              </table>
+            </div>
+          <% else %>
+            <h3 class="text-center">No Training Scheduled 🥲</h3>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</turbo-frame>
