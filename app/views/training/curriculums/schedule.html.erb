@@ -7,7 +7,7 @@
           <% if @tclasses.any? %>
             <div class="table table-responsive">
               <table class="table table-hover">
-                <% @tclasses.order(class_date: :asc).each do |tclass| %>
+                <% @tclasses.each do |tclass| %>
                   <% unless tclass.class_date < Date.today %>
                     <thead>
                       <tr>
