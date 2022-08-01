@@ -20,7 +20,7 @@
               <% @tclass.users.each_with_index do |user, i| %>
                 <tr>
                   <td><%= i + 1 %></td>
-                  <td><%= user.stores[0].number %></td>
+                  <td><%= user.stores.size > 0 ? user.stores[0].number : "Inactive?" %></td>
                   <td><%= user.position.name %></td>
                   <td><%= link_to user.full_name, user, class: "table-link" %></td>
                 </tr>
