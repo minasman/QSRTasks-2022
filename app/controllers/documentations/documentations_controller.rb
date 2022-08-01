@@ -236,9 +236,9 @@ class Documentations::DocumentationsController < ApplicationController
       when "Operations"
         case current_user.position.name
         when "Crew"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_documentations_id: current_user.id)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_id: current_user.id)
         when "Manager"
-          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_documentations_id: current_user.id)
+          Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, employee_named_id: current_user.id)
         when "General Manager"
           Documentation.where(document_date: Date.today.beginning_of_quarter..Date.today, store_id: current_user.stores, position_id: Position.where(name: ["Crew", "Manager", "General Manager"]))
         when "Supervisor"

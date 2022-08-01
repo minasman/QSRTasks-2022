@@ -17,6 +17,7 @@ class Maintenance::WorkordersController < ApplicationController
 
   # GET /workorders/1 or /workorders/1.json
   def show
+    authorize @workorder
     respond_to do |format|
       format.html
       format.pdf do
