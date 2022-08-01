@@ -123,6 +123,7 @@ Rails.application.routes.draw do
 
   scope module: 'reports' do
     resources :documentation_reports
+    resources :workorder_reports
   end
 
   resources :positions

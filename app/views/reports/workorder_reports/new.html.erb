@@ -1,0 +1,127 @@
+<div class='row justify-content-center'>
+  <div class='col'>
+    <div class='card'>
+      <div class='card-body'>
+        <h2 class='text-center card-header'>Generate Workorder Report</h2>
+        <%= form_tag("/workorder_reports", method: "get") do %>
+          <h2 class='card-title'>Search By: </h2>
+          <h5 class="text-center font-italic">Choose Only One Search Option</h5>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:organization, "All Stores", class: 'form-label')%>
+                <%= check_box_tag :organization, "true", false, :class => "form-check-imput" %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:store_id, "Restaurant", class: 'form-label') %>
+                <%= collection_select(:searchData, :store_id, Store.all.order('id ASC'), :id, :number, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:supervisor_id, "Supervisor", class: 'form-label') %>
+                <%= collection_select(:searchData, :supervisor_id, User.where(position_id: "4").order('first_name ASC'), :id, :full_name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:om_id, "Operations Manager", class: 'form-label') %>
+                <%= collection_select(:searchData, :om_id, User.where(position_id: "2"), :id, :full_name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h2>Select Date Range:</h2>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+              <div class="mb-3">
+                <%= label_tag(:start_date, "Start Date", class: 'form-label') %>
+                <%= date_field(:searchData, :start_date, :class => "form-control", :required => true, value: Date.today - 30) %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+              <div class="mb-3">
+                <%= label_tag(:end_date, "End Date", class: 'form-label')%>
+                <%= date_field(:searchData, :end_date, :class => "form-control", :required => true, value: Date.today + 1) %>
+              </div>
+            </div>
+          </div>
+          <hr>
+
+          <h2>Select Status of Workorders:</h2>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:status, "Open", false, :class => "form-check-input") %> Open
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:status, "Closed", false, :class => "form-check-input") %> Closed
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:status, "All", false, :class => "form-check-input") %> All
+          </div>
+          <hr>
+
+          <h2>Optional Filters:</h2>
+          <div class='row'>
+            <div class='col-12 col-md-4'>
+              <div class='mb-3'>
+                <%= label_tag(:area, 'Select Equipment Area (Optional)', class: 'form-label') %>
+                <%= collection_select(:searchData, :area, EquipmentArea.all.order('id ASC'), :id, :name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+
+            <div class='col-12 col-md-4'>
+              <div class='mb-3'>
+                <%= label_tag(:team, 'Select Team (Optional)', class: 'form-label') %>
+                <%= select(:searchData, :team, Workorder::TEAM, {include_blank: true}, { :class =>"form-control"}) %>
+              </div>
+            </div>
+
+            <div class='col-12 col-md-4'>
+              <div class='mb-3'>
+                <%= label_tag(:tech, 'Select Tech (Optional)', class: 'form-label') %>
+                <%= collection_select(:searchData, :tech, User.maint_list, :id, :full_name, {include_blank: true}, class: "form-control") %>
+              </div>
+            </div>
+
+            <div class='col-12 col-md-4'>
+              <div class='mb-3'>
+                <%= label_tag(:priority, 'Select Priority (Optional)', class: 'form-label') %>
+                <%= select(:searchData, :priority, Workorder::PRIORITY, {include_blank: true}, { :class =>"form-control"}) %>
+              </div>
+            </div>
+
+            <div class='col-12 col-md-4'>
+              <div class='mb-3'>
+                <%= label_tag(:vendor, 'Select Vendor (Optional)', class: 'form-label') %>
+                <%= collection_select(:searchData, :vendor, Vendor.all.order('id ASC'), :id, :name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+
+            <div class='col-12 col-md-4'>
+              <div class='mb-3'>
+                <%= label_tag(:submitted_by, 'Submitted By? (Optional)', class: 'form-label') %>
+                <%= collection_select(:searchData, :submitted_by, EquipmentArea.all.order('id ASC'), :id, :name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+          </div>
+
+          <br>
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <div class='d-grid gap-2'>
+                <%= submit_tag 'Find Workorders', class: "btn my-submit" %>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 pt-2 pt-md-0">
+              <div class='d-grid gap-2'>
+                <%= link_to "Dashboard", dashboard_path, class: "btn my-submit" %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
