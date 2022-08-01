@@ -7,7 +7,7 @@ class Covid::WellnessesController < ApplicationController
     @wellnesses = Wellness.all
     if current_user.position.department.in? ["Administration", "Office"]
       @wellenesses
-    elsif (current_user.postion.name.in? ["Operations Manager", "Supervisor", "General Manager", "Manager", "Maint Department Head", "AA", "PM Department Head", "Technology Department Head", "Maint Tech Department Head"]) &&(@wellness.store.in? current_user.stores)
+    elsif (current_user.position.name.in? ["Operations Manager", "Supervisor", "General Manager", "Manager", "Maint Department Head", "AA", "PM Department Head", "Technology Department Head", "Maint Tech Department Head"]) &&(@wellness.store.in? current_user.stores)
       @wellnesses.where(store_id: current_user.store_ids)
     else
       redirect_to dashboard_path, alert: "You can only view wellness checks under your supervision"
@@ -20,7 +20,7 @@ class Covid::WellnessesController < ApplicationController
     authorize @wellness
     if current_user.position.department.in? ["Administration", "Office"]
       @welleness
-    elsif (current_user.postion.name.in? ["Operations Manager", "Supervisor", "General Manager", "Manager", "Maint Department Head", "AA", "PM Department Head", "Technology Department Head", "Maint Tech Department Head"]) &&(@wellness.store.in? current_user.stores)
+    elsif (current_user.position.name.in? ["Operations Manager", "Supervisor", "General Manager", "Manager", "Maint Department Head", "AA", "PM Department Head", "Technology Department Head", "Maint Tech Department Head"]) &&(@wellness.store.in? current_user.stores)
       @wellness
     else
       redirect_to dashboard_path, alert: "You can only view wellness checks under your supervision"
