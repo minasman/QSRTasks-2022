@@ -1,0 +1,11 @@
+<div class="row">
+  <div class="col-auto">
+    <div class="card">
+      <h3 class="text-center card-header">My Workorders</h3>
+      <div class="card-body">
+        <turbo-frame id="my-workorders" src="/my_workorders/<%= current_user.id %>">
+        </turbo-frame>
+      </div>
+    </div>
+  </div>
+</div>
