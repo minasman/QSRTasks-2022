@@ -68,6 +68,18 @@ class Comments::CommentsController < ApplicationController
     end
   end
 
+  def ftks_comments
+    @comment_count = {}
+    Store.where(active: true, store_type: "Traditional").order(number: :asc).each do |store|
+      list = []
+      list.push(store.comments.where(visit_date: Time.now.beginning_of_week..Time.now, source: "1-800#", comment_type: "Complaint").size)
+      list.push(store.comments.where(visit_date: Time.now.beginning_of_month..Time.now, source: "1-800#", comment_type: "Complaint").size)
+      list.push(store.comments.where(visit_date: Time.now.beginning_of_quarter..Time.now, source: "1-800#", comment_type: "Complaint").size)
+      list.push(store.comments.where(visit_date: Time.now.beginning_of_year..Time.now, source: "1-800#", comment_type: "Complaint").size)
+      @comment_count["#{store.number}"] = list
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment

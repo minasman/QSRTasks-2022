@@ -1,0 +1,28 @@
+<div class="row mb-5">
+  <div class="col-auto">
+    <div class="table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Store</th>
+            <th>wtd</th>
+            <th>mtd</th>
+            <th>qtd</th>
+            <th>ytd</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @comment_count.keys.each do |key| %>
+            <tr>
+              <td><%= key %></td>
+              <td><%= @comment_count[key][0] %></td>
+              <td><%= @comment_count[key][1] %></td>
+              <td><%= @comment_count[key][2] %></td>
+              <td><%= @comment_count[key][3] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -15,7 +15,7 @@ class Workorder < ApplicationRecord
     user: [:first_name, :last_name],
     store: [:number, :name],
     equipment: :name,
-  }, against: [:team, :level], using: {tsearch: {prefix: true}}
+  }, against: [:team, :level, :id], using: {tsearch: {prefix: true}}
 
   validate :acceptable_images
 
