@@ -24,7 +24,7 @@
                       <% tclass.users.each_with_index do |user, i| %>
                         <tr>
                           <td class="fs-6"><%= i + 1 %></td>
-                          <td class="fs-6"><%= user.stores[0].number %></td>
+                          <td class="fs-6"><%= user.stores.size > 0 ? user.stores[0].number : "Inactive?" %></td>
                           <td class="fs-6"><%= user.position.name %></td>
                           <td class="fs-6"><%= user.full_name %></td>
                         </tr>
