@@ -13,7 +13,7 @@
   <div class="row">
     <div class="col-12 col-md-4">
       <div class="mb-3" data-controller="equipment" >
-        <%= form.label :store_id, class: "form-label" %>
+        <%= form.label :store_id, "Location", class: "form-label" %>
         <%= form.collection_select :store_id, Store.where(active: true).order('number ASC'), :id, :number, {prompt: "Select Location"}, {class: "form-select", data: { action: "change->equipment#store"}, autofocus: true, required: true} %>
       </div>
     </div>
@@ -22,13 +22,13 @@
   <div class="row" data-controller="equipment" >
     <div class="col-12 col-md-4">
       <div class="mb-3" >
-        <%= form.label :equipment_area_id, class: "form-label" %>
+        <%= form.label :equipment_area_id, "Equipment Area", class: "form-label" %>
         <%= form.collection_select :equipment_area_id, EquipmentArea.all.order('name ASC'), :id, :name, {prompt: "Select Equipment Area"}, {class: "form-select", data: { action: "change->equipment#equipment_type" }, disabled: true, required: true} %>
       </div>
     </div>
     <div class="col-12 col-md-4">
       <div class="mb-3" >
-        <%= form.label :equipment_type_id, class: "form-label" %>
+        <%= form.label :equipment_type_id, "Equipment Type", class: "form-label" %>
         <% if @workorder.equipment_type.nil? %>
           <%= form.select :equipment_type_id, [],  {prompt: "Select Equipment Type"}, {class: "form-select", data: {action: "change->equipment#equipment_choice",  equipment_target: "equipmentArea"}, disabled: true, required: true} %>
         <% else %>

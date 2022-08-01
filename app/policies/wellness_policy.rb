@@ -7,11 +7,13 @@ class WellnessPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "Payroll Admin", "AR Admin", "Training Assistant", "Marketing Manager", "Marketing Admin", "AR Manager", "AP Manager", "AP Admin", "Patch Maint", "OTP Tech", "Maint Tech", "Maint Admin"]
+    @user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "PM Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"
+    ]
   end
 
   def new?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "Payroll Admin", "AR Admin", "Training Assistant", "Marketing Manager", "Marketing Admin", "AR Manager", "AP Manager", "AP Admin", "Patch Maint", "OTP Tech", "Maint Tech", "Maint Admin"]
+    @user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "PM Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"
+    ]
   end
 
   def show?
