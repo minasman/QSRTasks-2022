@@ -15,7 +15,7 @@
     <div class="col-12">
       <div class="mb-3">
         <%= form.label :store_id, 'Location', class: 'form-label' %>
-        <%= form.collection_select(:store_id, Store.all.order('id ASC'), :id, :number,{ prompt: true, required: true}, { class: "form-control" }) %>
+        <%= form.collection_select(:store_id, Store.where(active: true).order('number ASC'), :id, :number,{ prompt: true, required: true}, { class: "form-control" }) %>
       </div>
     </div>
   </div>
