@@ -47,7 +47,7 @@ class Covid::WellnessesController < ApplicationController
     respond_to do |format|
       if @wellness.save
         WellnessMailer.sick(@wellness).deliver_later if sick(params)
-        format.html { redirect_to wellness_url(@wellness), notice: "Wellness was successfully created." }
+        format.html { redirect_to wellness_path(@wellness), notice: "Wellness was successfully created." }
         format.json { render :show, status: :created, location: @wellness }
       else
         format.html { render :new, status: :unprocessable_entity }
