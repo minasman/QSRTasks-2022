@@ -138,6 +138,7 @@ GEM
     hightop (0.3.0)
       activesupport (>= 5.2)
     hiredis (0.6.3)
+    honeybadger (4.12.1)
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
@@ -341,6 +342,7 @@ DEPENDENCIES
   groupdate (~> 6.1)
   hightop (~> 0.3.0)
   hiredis (~> 0.6.3)
+  honeybadger (~> 4.12, >= 4.12.1)
   image_processing (~> 1.2)
   jbuilder
   jsbundling-rails
