@@ -45,7 +45,7 @@ class Training::TrainingRegistrationController < ApplicationController
     existing_classes.uniq
     respond_to do |format|
       if @training_registration.update(tclass_ids: existing_classes)
-        format.html { redirect_to @training_registration, notice: "#{tclasses.size - 1} Training Classes Added!!" }
+        format.html { redirect_to user_path(@training_registration), notice: "#{tclasses.size - 1} Training Classes Added!!" }
         format.json { render :show, status: :ok, location: @training_registration }
       else
         format.html { render :edit, status: :unprocessable_entity }
