@@ -103,7 +103,7 @@ class Training::CurriculumsController < ApplicationController
 
     def my_people
       tclass_list = []
-      Tclass.order(class_date: :asc).each do |tclass|
+      Tclass.where(class_date: Date.today..Date.today+2.years).order(class_date: :asc).each do |tclass|
         tclass.users.each do |user|
           if user.stores[0].in? current_user.stores
             tclass_list.push(tclass)
