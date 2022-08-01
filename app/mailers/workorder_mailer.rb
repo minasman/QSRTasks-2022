@@ -33,7 +33,7 @@ class WorkorderMailer < ApplicationMailer
 
   def email_list(workorder)
     if workorder.store.number == 9
-      email = workorder.store.users.where(active: true).uniq.reject { |u| u.position.name.in? ["Manager", "Crew", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "PM Maint", "Maint Tech", "AA", "Shopper"] }.map(&:email)
+      email = workorder.store.users.where(active: true).uniq.reject { |u| u.position.name.in? ["Manager", "Crew", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "Patch Maint", "Maint Tech", "AA", "Shopper"] }.map(&:email)
     else
       email = workorder.store.users.where(active: true).uniq.reject { |u| u.position.name.in? ['Manager', 'Crew'] }.map(&:email)
     end

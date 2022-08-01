@@ -63,7 +63,7 @@ class DashboardController < ApplicationController
           flow_list = User.where(active: true, position_id: Position.where(name: ["Payroll Admin"]).ids, organization_id: current_user.organization.id).where.not(redeemed_rewards: [])
         end
       else
-        flow_list = User.where(active: true, position_id: Position.where(name: ["Operations Manager", "Supervisor", "General Manager", "Manager", "Crew", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "PM Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"]).ids, organization_id: current_user.organization.id).where.not(redeemed_rewards: [])
+        flow_list = User.where(active: true, position_id: Position.where(name: ["Operations Manager", "Supervisor", "General Manager", "Manager", "Crew", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "Patch Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"]).ids, organization_id: current_user.organization.id).where.not(redeemed_rewards: [])
       end
     end
 end

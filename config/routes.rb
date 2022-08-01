@@ -39,6 +39,7 @@ Rails.application.routes.draw do
     resources :comments do
       resources :comment_updates, only: %i[new create index]
     end
+    get '/ftks_comments' => 'comments#ftks_comments'
   end
 
   scope module: 'documentations' do

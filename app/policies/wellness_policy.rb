@@ -7,12 +7,12 @@ class WellnessPolicy < ApplicationPolicy
   end
 
   def index?
-    @user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "PM Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"
+    @user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "Patch Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"
     ]
   end
 
   def new?
-    @user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "PM Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"
+    @user.position.name.in? ["Owner", "Director", "Business Director", "Operations Manager", "Supervisor", "General Manager", "Manager", "HR Manager", "Payroll Manager", "Training Manager", "AR Manager", "AP Manager", "Marketing Manager", "HR Admin", "Payroll Admin", "Training Assistant", "AR Admin", "AP Admin", "Marketing Admin", "Maint Department Head", "PM Department Head", "Maint Tech Department Head", "Technology Department Head", "OTP Tech", "Patch Maint", "Maint Tech", "AA", "Maint Admin", "Shopper"
     ]
   end
 

@@ -15,21 +15,21 @@ class NewHireMailer < ApplicationMailer
 
   def unapproved_background(new_hire)
     @new_hire = new_hire
-    email = new_hire.store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director', 'HR Manager', 'HR Office Admin']).ids).map(&:email)
+    email = new_hire.store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director', 'HR Manager', 'HR Admin']).ids).map(&:email)
     email << new_hire.email
     mail(to: email, subject: "#{new_hire.full_name} we are not able to offer you employment at this time")
   end
 
   def pending_background(new_hire)
     @new_hire = new_hire
-    email = new_hire.store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director', 'HR Manager', 'HR Office Admin']).ids).map(&:email)
+    email = new_hire.store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director', 'HR Manager', 'HR Admin']).ids).map(&:email)
     email << new_hire.email
     mail(to: email, subject: "#{new_hire.full_name}, we are still pending your background check results")
   end
 
   def new_hire_removed(new_hire, store, orientation, user)
     email = store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director']).ids).map(&:email)
-    stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Office Admin', 'Training Manager']).ids).map(&:email)
+    stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Admin', 'Training Manager']).ids).map(&:email)
     email += stafflist
     email = email.uniq
     mail(to: email, subject: "#{new_hire} from #{store.number} was removed by #{user}")
@@ -47,7 +47,7 @@ class NewHireMailer < ApplicationMailer
   def approved_background(new_hire)
     @new_hire = new_hire
     email = new_hire.store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director']).ids).map(&:email)
-    stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Office Admin', 'Training Manager']).ids).map(&:email)
+    stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Admin', 'Training Manager']).ids).map(&:email)
     email += stafflist
     email = email.uniq
     mail(to: email, subject: "#{@new_hire.store.number} background for #{@new_hire.full_name} has been approved")
@@ -56,7 +56,7 @@ class NewHireMailer < ApplicationMailer
   def unapproved_background_staff(new_hire)
     @new_hire = new_hire
     email = new_hire.store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director']).ids).map(&:email)
-    stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Office Admin', 'Training Manager']).ids).map(&:email)
+    stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Admin', 'Training Manager']).ids).map(&:email)
     email += stafflist
     email = email.uniq
     mail(to: email, subject: "#{@new_hire.store.number} background for #{@new_hire.full_name} is NOT APPROVED")
