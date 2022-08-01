@@ -53,7 +53,7 @@ class Maintenance::WorkordersController < ApplicationController
     respond_to do |format|
       if @workorder.save
         WorkorderMailer.workorder(@workorder).deliver_later
-        format.html { redirect_to workorder_url(@workorder), notice: "Workorder was successfully created." }
+        format.html { redirect_to workorder_path(@workorder), notice: "Workorder was successfully created." }
         format.json { render :show, status: :created, location: @workorder }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -73,7 +73,7 @@ class Maintenance::WorkordersController < ApplicationController
         if @workorder.assigned?
           WorkorderMailer.workorder_assigned(@workorder, current_user.full_name).deliver_later
         end
-        format.html { redirect_to workorder_url(@workorder), notice: "Workorder was successfully updated." }
+        format.html { redirect_to workorder_path(@workorder), notice: "Workorder was successfully updated." }
         format.json { render :show, status: :ok, location: @workorder }
       else
         format.html { render :edit, status: :unprocessable_entity }

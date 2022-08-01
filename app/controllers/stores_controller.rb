@@ -46,7 +46,7 @@ class StoresController < ApplicationController
     @store.organization = current_user.organization
     respond_to do |format|
       if @store.save
-        format.html { redirect_to store_url(@store), notice: "Store was successfully created." }
+        format.html { redirect_to store_path(@store), notice: "Store was successfully created." }
         format.json { render :show, status: :created, location: @store }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class StoresController < ApplicationController
     respond_to do |format|
       if @store.update(store_params)
         format.html do
-          redirect_to store_url(@store), notice: 'Restaurant was successfully updated.'
+          redirect_to store_path(@store), notice: 'Restaurant was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @store }
       else

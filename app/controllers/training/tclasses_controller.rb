@@ -27,7 +27,7 @@ class Training::TclassesController < ApplicationController
 
     respond_to do |format|
       if @tclass.save
-        format.html { redirect_to tclass_url(@tclass), notice: "Tclass was successfully created." }
+        format.html { redirect_to tclass_path(@tclass), notice: "Tclass was successfully created." }
         format.json { render :show, status: :created, location: @tclass }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Training::TclassesController < ApplicationController
   def update
     respond_to do |format|
       if @tclass.update(tclass_params)
-        format.html { redirect_to tclass_url(@tclass), notice: "Tclass was successfully updated." }
+        format.html { redirect_to tclass_path(@tclass), notice: "Tclass was successfully updated." }
         format.json { render :show, status: :ok, location: @tclass }
       else
         format.html { render :edit, status: :unprocessable_entity }

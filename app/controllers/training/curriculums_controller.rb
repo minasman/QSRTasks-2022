@@ -33,7 +33,7 @@ class Training::CurriculumsController < ApplicationController
 
     respond_to do |format|
       if @curriculum.save
-        format.html { redirect_to curriculum_url(@curriculum), notice: "Curriculum was successfully created." }
+        format.html { redirect_to curriculum_path(@curriculum), notice: "Curriculum was successfully created." }
         format.json { render :show, status: :created, location: @curriculum }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class Training::CurriculumsController < ApplicationController
     authorize @curriculum
     respond_to do |format|
       if @curriculum.update(curriculum_params)
-        format.html { redirect_to curriculum_url(@curriculum), notice: "Curriculum was successfully updated." }
+        format.html { redirect_to curriculum_path(@curriculum), notice: "Curriculum was successfully updated." }
         format.json { render :show, status: :ok, location: @curriculum }
       else
         format.html { render :edit, status: :unprocessable_entity }

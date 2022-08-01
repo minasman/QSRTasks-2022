@@ -41,11 +41,10 @@ class Reports::DocumentationReportsController < ApplicationController
 
   # POST /documentation_reports or /documentation_reports.json
   def create
-    puts "THIS IS THE PARAMS...........................#{params}"
     @documentation_report = DocumentationReport.new(documentation_report_params)
 
     respond_to do |format|
-      format.html { redirect_to documentation_report_url(@documentation_report), notice: "Documentation report was successfully created." }
+      format.html { redirect_to documentation_report_path(@documentation_report), notice: "Documentation report was successfully created." }
       format.json { render :show, status: :created, location: @documentation_report }
     end
   end
@@ -54,7 +53,7 @@ class Reports::DocumentationReportsController < ApplicationController
   def update
     respond_to do |format|
       if @documentation_report.update(documentation_report_params)
-        format.html { redirect_to documentation_report_url(@documentation_report), notice: "Documentation report was successfully updated." }
+        format.html { redirect_to documentation_report_path(@documentation_report), notice: "Documentation report was successfully updated." }
         format.json { render :show, status: :ok, location: @documentation_report }
       else
         format.html { render :edit, status: :unprocessable_entity }

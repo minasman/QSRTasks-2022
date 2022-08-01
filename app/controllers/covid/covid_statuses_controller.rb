@@ -36,7 +36,7 @@ class Covid::CovidStatusesController < ApplicationController
         if @covid_status.status == 'Fully Vaccinated'
           CovidMailer.fully(@covid_status).deliver_later
         end
-        format.html { redirect_to covid_status_url(@covid_status), notice: "Covid status was successfully created for #{@covid_status.full_name}." }
+        format.html { redirect_to covid_status_path(@covid_status), notice: "Covid status was successfully created for #{@covid_status.full_name}." }
         format.json { render :show, status: :created, location: @covid_status }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -55,7 +55,7 @@ class Covid::CovidStatusesController < ApplicationController
         if @covid_status.status == 'Fully Vaccinated'
           CovidMailer.fully(@covid_status).deliver_later
         end
-        format.html { redirect_to covid_status_url(@covid_status), notice: "Covid status was successfully updated." }
+        format.html { redirect_to covid_status_path(@covid_status), notice: "Covid status was successfully updated." }
         format.json { render :show, status: :ok, location: @covid_status }
       else
         format.html { render :edit, status: :unprocessable_entity }

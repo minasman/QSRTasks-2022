@@ -33,7 +33,7 @@ class Maintenance::VendorsController < ApplicationController
     @vendor.organization = current_user.organization
     respond_to do |format|
       if @vendor.save
-        format.html { redirect_to vendor_url(@vendor), notice: "Vendor was successfully created." }
+        format.html { redirect_to vendor_path(@vendor), notice: "Vendor was successfully created." }
         format.json { render :show, status: :created, location: @vendor }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class Maintenance::VendorsController < ApplicationController
     authorize @vendor
     respond_to do |format|
       if @vendor.update(vendor_params)
-        format.html { redirect_to vendor_url(@vendor), notice: "Vendor was successfully updated." }
+        format.html { redirect_to vendor_path(@vendor), notice: "Vendor was successfully updated." }
         format.json { render :show, status: :ok, location: @vendor }
       else
         format.html { render :edit, status: :unprocessable_entity }

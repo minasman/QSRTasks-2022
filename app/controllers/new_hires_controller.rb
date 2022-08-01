@@ -44,7 +44,7 @@ class NewHiresController < ApplicationController
       if @new_hire.save
         NewHireMailer.online_orientation(@new_hire).deliver_later
         SendHireSmsJob.perform_later(@new_hire, "#{@new_hire.full_name} at #{@new_hire.store.number} submitted for Online Orientation")
-        format.html { redirect_to new_hire_url(@new_hire), notice: "New hire was successfully created." }
+        format.html { redirect_to new_hire_path(@new_hire), notice: "New hire was successfully created." }
         format.json { render :show, status: :created, location: @new_hire }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -58,7 +58,7 @@ class NewHiresController < ApplicationController
     authorize @new_hire
     respond_to do |format|
       if @new_hire.update(new_hire_params)
-        format.html { redirect_to new_hire_url(@new_hire), notice: "New hire was successfully updated." }
+        format.html { redirect_to new_hire_path(@new_hire), notice: "New hire was successfully updated." }
         format.json { render :show, status: :ok, location: @new_hire }
       else
         format.html { render :edit, status: :unprocessable_entity }

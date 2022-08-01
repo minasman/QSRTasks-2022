@@ -37,7 +37,7 @@ class Comments::CommentUpdatesController < ApplicationController
   def update
     respond_to do |format|
       if @comment_update.update(comment_update_params)
-        format.html { redirect_to comment_update_url(@comment_update), notice: "Comment Update Successfully Added" }
+        format.html { redirect_to comment_update_path(@comment_update), notice: "Comment Update Successfully Added" }
         format.json { render :show, status: :ok, location: @comment_update }
       else
         format.html { render :edit, status: :unprocessable_entity }

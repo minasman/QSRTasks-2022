@@ -38,7 +38,7 @@ class UserController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         format.html do
-          redirect_to user_index_url,  notice: 'User was successfully updated.'
+          redirect_to user_index_path,  notice: 'User was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @store }
       else

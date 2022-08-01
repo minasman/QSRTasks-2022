@@ -29,7 +29,7 @@ class Audits::SafeAuditsController < ApplicationController
     respond_to do |format|
       if @safe_audit.save
         AuditMailer.safe_audit(@safe_audit).deliver_later
-        format.html { redirect_to safe_audit_url(@safe_audit), notice: "Safe audit was successfully created." }
+        format.html { redirect_to safe_audit_path(@safe_audit), notice: "Safe audit was successfully created." }
         format.json { render :show, status: :created, location: @safe_audit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -42,7 +42,7 @@ class Audits::SafeAuditsController < ApplicationController
   def update
     respond_to do |format|
       if @safe_audit.update(safe_audit_params)
-        format.html { redirect_to safe_audit_url(@safe_audit), notice: "Safe audit was successfully updated." }
+        format.html { redirect_to safe_audit_path(@safe_audit), notice: "Safe audit was successfully updated." }
         format.json { render :show, status: :ok, location: @safe_audit }
       else
         format.html { render :edit, status: :unprocessable_entity }

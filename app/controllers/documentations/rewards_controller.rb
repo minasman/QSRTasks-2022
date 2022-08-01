@@ -32,7 +32,7 @@ class Documentations::RewardsController < ApplicationController
 
     respond_to do |format|
       if @reward.save
-        format.html { redirect_to reward_url(@reward), notice: "Reward was successfully created." }
+        format.html { redirect_to reward_path(@reward), notice: "Reward was successfully created." }
         format.json { render :show, status: :created, location: @reward }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -46,7 +46,7 @@ class Documentations::RewardsController < ApplicationController
     authorize @reward
     respond_to do |format|
       if @reward.update(reward_params)
-        format.html { redirect_to reward_url(@reward), notice: "Reward was successfully updated." }
+        format.html { redirect_to reward_path(@reward), notice: "Reward was successfully updated." }
         format.json { render :show, status: :ok, location: @reward }
       else
         format.html { render :edit, status: :unprocessable_entity }

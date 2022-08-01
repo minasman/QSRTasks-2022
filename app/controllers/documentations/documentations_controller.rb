@@ -48,7 +48,7 @@ class Documentations::DocumentationsController < ApplicationController
         # Change User.find(2) below to @documentation.employee_named
         SendDocumentationSmsJob.perform_later(@documentation.employee_named, message_to_send(@documentation))
         DocumentationMailer.new_documentation(@documentation).deliver_later
-        format.html { redirect_to new_documentation_url, notice: "Documentation was successfully created." }
+        format.html { redirect_to new_documentation_path, notice: "Documentation was successfully created." }
         format.json { render :show, status: :created, location: @documentation }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -61,7 +61,7 @@ class Documentations::DocumentationsController < ApplicationController
   def update
     respond_to do |format|
       if @documentation.update(documentation_params)
-        format.html { redirect_to documentation_url(@documentation), notice: "Documentation was successfully updated." }
+        format.html { redirect_to documentation_path(@documentation), notice: "Documentation was successfully updated." }
         format.json { render :show, status: :ok, location: @documentation }
       else
         format.html { render :edit, status: :unprocessable_entity }

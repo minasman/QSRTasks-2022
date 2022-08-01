@@ -26,7 +26,7 @@ class Maintenance::Equipment::EquipmentAreasController < ApplicationController
     @equipment_area.organization = current_user.organization
     respond_to do |format|
       if @equipment_area.save
-        format.html { redirect_to equipment_area_url(@equipment_area), notice: "Equipment area was successfully created." }
+        format.html { redirect_to equipment_area_path(@equipment_area), notice: "Equipment area was successfully created." }
         format.json { render :show, status: :created, location: @equipment_area }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +39,7 @@ class Maintenance::Equipment::EquipmentAreasController < ApplicationController
   def update
     respond_to do |format|
       if @equipment_area.update(equipment_area_params)
-        format.html { redirect_to equipment_area_url(@equipment_area), notice: "Equipment area was successfully updated." }
+        format.html { redirect_to equipment_area_path(@equipment_area), notice: "Equipment area was successfully updated." }
         format.json { render :show, status: :ok, location: @equipment_area }
       else
         format.html { render :edit, status: :unprocessable_entity }

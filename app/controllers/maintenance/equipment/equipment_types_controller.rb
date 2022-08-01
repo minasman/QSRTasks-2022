@@ -27,7 +27,7 @@ class Maintenance::Equipment::EquipmentTypesController < ApplicationController
 
     respond_to do |format|
       if @equipment_type.save
-        format.html { redirect_to equipment_type_url(@equipment_type), notice: "Equipment type was successfully created." }
+        format.html { redirect_to equipment_type_path(@equipment_type), notice: "Equipment type was successfully created." }
         format.json { render :show, status: :created, location: @equipment_type }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -40,7 +40,7 @@ class Maintenance::Equipment::EquipmentTypesController < ApplicationController
   def update
     respond_to do |format|
       if @equipment_type.update(equipment_type_params)
-        format.html { redirect_to equipment_type_url(@equipment_type), notice: "Equipment type was successfully updated." }
+        format.html { redirect_to equipment_type_path(@equipment_type), notice: "Equipment type was successfully updated." }
         format.json { render :show, status: :ok, location: @equipment_type }
       else
         format.html { render :edit, status: :unprocessable_entity }

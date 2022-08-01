@@ -26,7 +26,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.save
         format.html do
-          redirect_to organization_url(@organization),
+          redirect_to organization_path(@organization),
                       notice: 'Organization was successfully created.'
         end
         format.json { render :show, status: :created, location: @organization }
@@ -44,7 +44,7 @@ class OrganizationsController < ApplicationController
     respond_to do |format|
       if @organization.update(organization_params)
         format.html do
-          redirect_to organization_url(@organization),
+          redirect_to organization_path(@organization),
                       notice: 'Organization was successfully updated.'
         end
         format.json { render :show, status: :ok, location: @organization }

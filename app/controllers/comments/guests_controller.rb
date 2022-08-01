@@ -33,7 +33,7 @@ class Comments::GuestsController < ApplicationController
 
     respond_to do |format|
       if @guest.save
-        format.html { redirect_to guest_url(@guest), notice: "Guest was successfully created." }
+        format.html { redirect_to guest_path(@guest), notice: "Guest was successfully created." }
         format.json { render :show, status: :created, location: @guest }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,7 +47,7 @@ class Comments::GuestsController < ApplicationController
     authorize @guest
     respond_to do |format|
       if @guest.update(guest_params)
-        format.html { redirect_to guest_url(@guest), notice: "Guest was successfully updated." }
+        format.html { redirect_to guest_path(@guest), notice: "Guest was successfully updated." }
         format.json { render :show, status: :ok, location: @guest }
       else
         format.html { render :edit, status: :unprocessable_entity }

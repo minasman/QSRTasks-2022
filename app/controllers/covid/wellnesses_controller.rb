@@ -61,7 +61,7 @@ class Covid::WellnessesController < ApplicationController
     authorize @wellness
     respond_to do |format|
       if @wellness.update(wellness_params)
-        format.html { redirect_to wellness_url(@wellness), notice: "Wellness was successfully updated." }
+        format.html { redirect_to wellness_path(@wellness), notice: "Wellness was successfully updated." }
         format.json { render :show, status: :ok, location: @wellness }
       else
         format.html { render :edit, status: :unprocessable_entity }
