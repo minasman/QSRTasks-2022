@@ -7,7 +7,7 @@ class CovidStatusPolicy
   end
 
   def index?
-    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'HR Admin', 'Payroll Admin','Payroll Manager', 'Maint Admin', 'Marketing Manager', 'Training Manager', 'Operations Manager', 'Maint Department Head', 'PM Department Head',  'Technology Department Head', 'Maint Tech Department Head', 'Supervisor', 'General Manager', 'Manager']
+    @user.position.name.in? ['Owner', 'AP Manager', 'AR Manager', 'AR Admin', 'AP Admin','Director', 'Business Director', 'HR Manager', 'HR Admin', 'Payroll Admin','Payroll Manager', 'Maint Admin', 'Marketing Manager', 'Training Manager', 'Operations Manager', 'Maint Department Head', 'PM Department Head',  'Technology Department Head', 'Maint Tech Department Head', 'Supervisor', 'General Manager']
   end
 
   def show?
@@ -15,7 +15,7 @@ class CovidStatusPolicy
   end
 
   def create?
-    @user.position.name.in? ['Owner', 'Director', 'Business Director', 'HR Manager', 'HR Admin', 'Payroll Admin','Payroll Manager', 'Maint Admin', 'Marketing Manager', 'Training Manager', 'Operations Manager', 'Maint Department Head', 'PM Department Head', 'Technology Department Head', 'Maint Tech Department Head', 'Supervisor', 'General Manager', 'Manager']
+    @user.position.name.in? ['Owner', 'AP Manager', 'AR Manager', 'AR Admin', 'AP Admin', 'Director', 'Business Director', 'HR Manager', 'HR Admin', 'Payroll Admin','Payroll Manager', 'Maint Admin', 'Marketing Manager', 'Training Manager', 'Operations Manager', 'Maint Department Head', 'PM Department Head', 'Technology Department Head', 'Maint Tech Department Head', 'Supervisor', 'General Manager']
   end
 
   def new?
