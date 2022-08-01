@@ -71,7 +71,7 @@ class NewHiresController < ApplicationController
   def destroy
     authorize @new_hire
     new_hire_id = "new_hire_#{@new_hire.id}"
-    NewHireMailer.new_hire_removed(@new_hire.full_name, @new_hire.store, @new_hire.orientation, current_user.full_name).deliver_later
+    NewHireMailer.new_hire_removed(@new_hire.full_name, @new_hire.store, current_user.full_name).deliver_later
     @new_hire.destroy
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(new_hire_id) }

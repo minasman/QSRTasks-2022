@@ -27,7 +27,7 @@ class NewHireMailer < ApplicationMailer
     mail(to: email, subject: "#{new_hire.full_name}, we are still pending your background check results")
   end
 
-  def new_hire_removed(new_hire, store, orientation, user)
+  def new_hire_removed(new_hire, store, user)
     email = store.users.where(active: true, position_id: Position.where(name: ['Supervisor', 'Operations Manager', 'General Manager', 'Director']).ids).map(&:email)
     stafflist = User.where(active: true, position_id: Position.where(name: ['HR Manager', 'HR Admin', 'Training Manager']).ids).map(&:email)
     email += stafflist
