@@ -6,7 +6,6 @@ class StoresController < ApplicationController
   def index
     @stores = store_list(current_user)
     @stores = @stores.search(params[:query]) if params[:query].present?
-    puts @stores
     @pagy, @stores = pagy @stores, items: params.fetch(:count, 10)
     authorize Store
   end
@@ -87,7 +86,6 @@ class StoresController < ApplicationController
   def inactive_stores
     @stores = Store.where(active: false).order( store_type: "DESC", number: "ASC")
     @stores = @stores.search(params[:query]) if params[:query].present?
-    puts @stores
     @pagy, @stores = pagy @stores, items: params.fetch(:count, 10)
   end
 

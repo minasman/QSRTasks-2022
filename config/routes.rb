@@ -60,6 +60,7 @@ Rails.application.routes.draw do
         get '/redeem_points/:id/reward/:reward_id' => 'rewards#redeem_points'
       end
     end
+    resources :oepe_imports
     get '/rewards/claim_my_reward/:id' => 'rewards#claim_my_reward'
     get '/pending_to_redeem/' => 'rewards#pending_to_redeem'
     get '/pay_out/:id/:reward' => 'rewards#pay_out'

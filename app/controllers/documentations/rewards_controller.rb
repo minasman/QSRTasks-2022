@@ -72,7 +72,6 @@ class Documentations::RewardsController < ApplicationController
     else
       my_points = normalize_points(@user)
       @rewards = Reward.where(value: 1..my_points)
-      puts "THIS IS MY POINTS NORMALIZED #{my_points}"
     end
   end
 

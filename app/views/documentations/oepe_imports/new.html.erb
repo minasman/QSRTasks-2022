@@ -1,0 +1,31 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Import Peak OEPE Times</h2>
+      <div class="card-body">
+        <h3>Requirements</h3>
+          <ul>
+            <li>File must be xlsx, xls or csv</li>
+            <li>File must start on 1st row</li>
+            <li>Cell 1A must have the date</li>
+            <li>On Second Row, First column header "location""</li>
+            <li>On Second Row, Second column header "oepe"</li>
+          </ul>
+          <h5>Select File</h5>
+          <%= form_for @oepe_import do |f| %>
+            <% if @oepe_import.errors.any? %>
+              <%= pluralize(@oepe_import.errors.count, "error") %> prevented us from
+              importing your spreadsheet. Please update your spreadsheet and try agin.
+              <ul>
+                <% @oepe_import.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            <% end %>
+            <%= f.file_field :file, class: "form-control mb-3" %>
+            <%= f.submit "Import File", class: "btn my-submit" %>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</div>

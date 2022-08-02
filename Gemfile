@@ -87,5 +87,8 @@ gem 'rack-mini-profiler', '~> 2.0'
 gem 'stackprof', '~> 0.2.16'
 gem 'honeybadger', '~> 4.12', '>= 4.12.1'
 
+#add to read excel sheets 8/1/22
+gem 'roo', '~> 2.9'
+
 
  #github
