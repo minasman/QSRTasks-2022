@@ -157,7 +157,7 @@ export default class extends Controller {
     let safeTotalValue = parseFloat(parseFloat(drawerTotal) + parseFloat(hundredTotal) + parseFloat(fiftyTotal) + parseFloat(twentyTotal) + parseFloat(tenTotal) + parseFloat(fiveTotal) + parseFloat(twoTotal) + parseFloat(oneTotal) + parseFloat(quarterTotal) + parseFloat(dimeTotal) + parseFloat(nickelTotal) + parseFloat(pennyTotal) + parseFloat(dollarTotal) + parseFloat(halfDollarTotal) + parseFloat(miscCoinTotal) + parseFloat(gcTotal) + parseFloat(gcrTotal) + parseFloat(receiptTotal) + parseFloat(changerTotal) + parseFloat(otherTotal)).toFixed(2)
 
     totalSafe.innerText = `$${safeTotalValue}`
-    safeVariance.innerText = `$${(parseFloat(safeControl.innerText.substring(1)).toFixed(2) - safeTotalValue).toFixed(2)}`
+    safeVariance.innerText = `$${(parseFloat(safeTotalValue - safeControl.innerText.substring(1)).toFixed(2)).toFixed(2)}`
 
     document.querySelector('#safe_audit_total_safe').value = safeTotalValue
     document.querySelector('#safe_audit_safe_variance').value = document.getElementById('safeVariance').innerText.substring(1)
