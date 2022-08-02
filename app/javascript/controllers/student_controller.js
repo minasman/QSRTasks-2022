@@ -13,7 +13,6 @@ export default class extends Controller {
 
   get_tclasses(event) {
     const curriculum = event.target.selectedOptions[0].value
-    console.log(this.tclassesTarget)
     const id = this.idValue
     get(`/get_classes?curriculum=${curriculum}&id=${id}`, {
       responseKind: "turbo-stream"

@@ -23,8 +23,6 @@ export default class extends Controller {
     const target = event.target.id
     const row = event.path[2].firstElementChild.innerText
 
-    console.log(event.target.id)
-    console.log(row)
     get(`/comment_update?target=${target}&row=${row}&update=${update}`, {
      responseKind: "turbo-stream"
    })

@@ -30,7 +30,6 @@ export default class extends Controller {
 
   document_level_document(e) {
     let type = document.getElementById(e.path[0].id).value
-    console.log(e.path[0])
     this.levelListTarget.selected = ''
     this.docKlassListTarget.value = ''
     let target = this.levelListTarget.id
