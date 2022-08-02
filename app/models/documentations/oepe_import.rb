@@ -66,6 +66,8 @@ class OepeImport
     else
       doc = Documentation.new
     end
+    updated_points = employee_named.accumulated_points + (doc.documentation_type == "Commendation" ? doc.points : -doc.points)
+    employee_named.update(accumulated_points: updated_points)
     if doc && doc.save
       flow_of_accountability(doc, employee_named, params)
       SendDocumentationSmsJob.perform_later(doc.employee_named, message_to_send(doc))
@@ -154,8 +156,8 @@ class OepeImport
       flow_document.position = employee.position
       flow_document.description = "Initial Named Employee: #{document.employee_named.full_name} at #{document.store.number}: #{document.description}"
       flow_document.save
-      updated_points = flow_document.employee_named.accumulated_points + (flow_document.documentation_type == "Commendation" ? flow_document.points : -flow_document.points)
-      flow_document.employee_named.update(accumulated_points: updated_points)
+      updated_points = employee.accumulated_points + (flow_document.documentation_type == "Commendation" ? flow_document.points : -(flow_document.points))
+      employee.update(accumulated_points: updated_points)
     end
   end
 

@@ -23,13 +23,7 @@ Things you may want to cover:
 
 * ...
 TODO:
-Finish testing user access
-
-Shops
-Finish shop mailer and show page
-
-Audits - Return to Safe Audits
-Training
+FIX DOCUMENTATION SCORING ASAP
 Dashboards
 
 
