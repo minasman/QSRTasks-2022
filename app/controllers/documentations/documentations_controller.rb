@@ -36,16 +36,16 @@ class Documentations::DocumentationsController < ApplicationController
       :points => Document.find(params[:documentation][:document_id]).points
     )
     @documentation = Documentation.new(new_params)
-    if params[:documentation][:individual] == "0"
-      flow_of_accountability(@documentation, new_params)
-    end
+
     respond_to do |format|
       if @documentation.save
+        if params[:documentation][:individual] == "0"
+          flow_of_accountability(@documentation, new_params)
+        end
         new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
         #(new_point_total <= -10 ? -10 : new_point_total) This line below should limit the points from dropping below
         # -10. Remove or adjust this guardrail as needed.
         @documentation.employee_named.update(accumulated_points: (new_point_total <= -10 ? -10 : new_point_total))
-        # Change User.find(2) below to @documentation.employee_named
         SendDocumentationSmsJob.perform_later(@documentation.employee_named, message_to_send(@documentation))
         DocumentationMailer.new_documentation(@documentation).deliver_later
         format.html { redirect_to new_documentation_path, notice: "Documentation was successfully created." }
@@ -189,13 +189,7 @@ class Documentations::DocumentationsController < ApplicationController
         end
       end
       flow_list.each do |employee|
-        flow_document = Documentation.new(new_params)
-        flow_document.employee_named = employee
-        flow_document.position = employee.position
-        flow_document.description = "Initial Named Employee: #{document.employee_named.full_name} at #{document.store.number}: #{document.description}"
-        flow_document.save
-        updated_points = employee.accumulated_points + flow_document.points
-        employee.update(accumulated_points: updated_points)
+        CreateDocumentationJob.perform_later(employee, new_params, document)
       end
     end
 
