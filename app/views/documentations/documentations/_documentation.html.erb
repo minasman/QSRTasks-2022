@@ -9,7 +9,7 @@
       <% end %>
     </div>
     <div class="col-12">
-      <h5 class="text-center">This takes your current point total to <%= documentation.employee_named.employee_named_documentations.sum(:points) %>!</h5>
+      <h5 class="text-center">This takes your current point total to <%= documentation.employee_named.accumulated_points %>!</h5>
     </div>
   </div>
   <% if documentation.pictures.any? %>
