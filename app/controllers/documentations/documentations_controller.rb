@@ -41,7 +41,7 @@ class Documentations::DocumentationsController < ApplicationController
     end
     respond_to do |format|
       if @documentation.save
-        new_point_total = @documentation.employee_named.accumulated_points + (@documentation.documentation_type == "Commendation" ? @documentation.points : -@documentation.points)
+        new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
         #(new_point_total <= -10 ? -10 : new_point_total) This line below should limit the points from dropping below
         # -10. Remove or adjust this guardrail as needed.
         @documentation.employee_named.update(accumulated_points: (new_point_total <= -10 ? -10 : new_point_total))
@@ -194,7 +194,7 @@ class Documentations::DocumentationsController < ApplicationController
         flow_document.position = employee.position
         flow_document.description = "Initial Named Employee: #{document.employee_named.full_name} at #{document.store.number}: #{document.description}"
         flow_document.save
-        updated_points = employee.accumulated_points + (flow_document.documentation_type == "Commendation" ? flow_document.points : -flow_document.points)
+        updated_points = employee.accumulated_points + flow_document.points
         employee.update(accumulated_points: updated_points)
       end
     end
