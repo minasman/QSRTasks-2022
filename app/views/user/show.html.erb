@@ -31,6 +31,12 @@
     <% if current_user.position.name.in? ["General Manager", "Supervisor", "Director", "Business Director", "Training Manager", "Training Assistant", "HR Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head"]%>
       <div class="d-grid gap-2 d-md-flex mt-5">
         <%= link_to "Add Training", new_training_registration_path(:id => @user.id), class: "btn my-submit"%>
+        <% if policy(:user).edit? %>
+          <%= link_to "Edit", edit_user_path(@user), class: "btn my-submit",  data: { turbo: false } %>
+        <% end %>
+        <% if policy(:user).destroy? %>
+          <%= link_to "Deactivate", @user,  class: "btn my-submit",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Deactivate #{@user.full_name.titleize}! Note that ALL earned Points (#{@user.accumulated_points}), Rewards and Documentation will be PERMANENTLY lost!" } %>
+        <% end %>
       </div>
     <% end %>
   </div>
