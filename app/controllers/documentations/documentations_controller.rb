@@ -36,10 +36,11 @@ class Documentations::DocumentationsController < ApplicationController
       :points => Document.find(params[:documentation][:document_id]).points
     )
     @documentation = Documentation.new(new_params)
+    @documentation.individual = params[:documentation][:individual] == "0" ? "1" : "0"
 
     respond_to do |format|
       if @documentation.save
-        if params[:documentation][:individual] == "0"
+        if !@documentation.individual
           flow_of_accountability(@documentation, new_params)
         end
         new_point_total = @documentation.employee_named.accumulated_points + @documentation.points
