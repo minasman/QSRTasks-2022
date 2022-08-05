@@ -14,7 +14,7 @@ class Comment < ApplicationRecord
   COMMENT_TYPES = %w[Complaint Compliment Inquiry]
   SOURCE = ['1-800#', 'VOICE', 'Local']
   URGENT = %w[General Urgent]
-  CONTACT_TYPE = %w[Phone Email Mail Voice Other]
+  CONTACT_TYPE = ["Phone", "Email", "Mail", "Voice", "Social Media", "Other"]
   ORDER_POINT = %w[DT FC Mobile Kiosk Delivery Other]
   STATUS = %w[Open Closed]
 
