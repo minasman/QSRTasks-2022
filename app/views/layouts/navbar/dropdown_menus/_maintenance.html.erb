@@ -69,5 +69,15 @@
         </li>
       <% end %>
     <% end %>
+    <hr>
+    <%= form_tag(workorders_path, {method: "get", class: 'form px-3 py-2'}) do %>
+      <div class="mb-2">
+        <%= text_field :workorder_number, params[:workorder_number], placeholder: "Workorder #", class: 'form-control' %>
+      </div>
+      <div class='d-grid gap-2'>
+        <%= submit_tag("Get Workorder", class: "btn btn-sm my-drop-submit") %>
+      </div>
+    <% end %>
+
   </ul>
 </li>
