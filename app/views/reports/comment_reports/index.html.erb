@@ -1,0 +1,51 @@
+<div class='row justify-content-center'>
+  <div class='col-auto'>
+    <div class='card card-body' style="height: 84vh; overflow: scroll;">
+      <% if @comment_reports.any? %>
+        <h1 class="text-center card-header">Comments</h1>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">#</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Store</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Case Number</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Date Received</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Visit Date</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Name</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Phone</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Issue</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Source</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Type</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Updates</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Time Open</th>
+                <th style='background-color: rgb(255, 255, 255);' class='text-center' scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @comment_reports.each_with_index do |c, i| %>
+                <tr>
+                  <th scope="row"><%= i + 1 %></th>
+                  <td><%= c.store.number %></td>
+                  <td><%= link_to c.case_number, comment_path(c), class: 'btn btn-sm index-link w-100' %></td>
+                  <td><%= c.created_at ? c.created_at.strftime("%m/%d/%Y") : "Date Not Given" %></td>
+                  <td><%= c.visit_date ? c.visit_date.strftime("%m/%d/%Y") : "Date Not Given" %></td>
+                  <td><%= c.guest ? (link_to c.guest.full_name, guest_path(c.guest.id), class: 'btn btn-sm index-link w-100') : "No Guest Identified" %></td>
+                  <td><%= c.guest ? number_to_phone(c.guest.phone, area_code: true) : "No Phone" %></td>
+                  <td><%= c.first_issue %></td>
+                  <td><%= c.source %></td>
+                  <td><%= c.comment_type %></td>
+                  <td><%= c.comment_updates.count %></td>
+                  <td><%= c.status === "Open" ? time_ago_in_words(c.created_at) : distance_of_time_in_words(c.updated_at, c.created_at) %></td>
+                  <td><%= c.status %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+        <h1 class="text-center">No Comments Available<h1>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -21,7 +21,7 @@
       </li>
       <% if policy(:comment).index? %>
         <li>
-          <%= link_to "", class: "dropdown-item" do %>
+          <%= link_to new_comment_report_path, class: "dropdown-item" do %>
             <i class="fa-solid fa-file-chart-column me-1"></i>
             Comment Report
           <% end %>
@@ -31,7 +31,7 @@
     <% if policy(:guest).index? %>
       <li><hr class="dropdown-divider"></li>
       <li>
-        <%= link_to  guests_path, class: "dropdown-item" do %>
+        <%= link_to guests_path, class: "dropdown-item" do %>
           <i class="fa-solid fa-people-group me-1"></i>
           Guests
         <% end %>

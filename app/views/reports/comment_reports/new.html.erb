@@ -1,0 +1,110 @@
+<div class='row justify-content-center'>
+  <div class='col'>
+    <div class='card'>
+      <h2 class='text-center card-header'>Generate Comment Report</h2>
+      <div class="card-body">
+        <%= form_tag("/comment_reports", method: "get") do %>
+          <h2 class='card-title'>Search By: </h2>
+          <h5 class="text-center font-italic">Choose Only One Search Option</h5>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:organization, "All Stores") %>
+                <%= check_box_tag :organization, "true", false, :class => "form-check-input" %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:store_id, "Restaurant") %>
+                <%= collection_select(:searchData, :store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:supervisor_id, "Supervisor") %>
+                <%= collection_select(:searchData, :supervisor_id, User.where(position_id: "4").order('first_name ASC'), :id, :full_name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-3">
+              <div class="mb-3">
+                <%= label_tag(:om_id, "Operations Manager") %>
+                <%= collection_select(:searchData, :om_id, User.where(position_id: "2"), :id, :full_name, {include_blank: true}, {:class => "form-control"}) %>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h2>Select Date Range:</h2>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+              <div class="mb-3">
+                <%= label_tag(:start_date, "Start Date") %>
+                <%= date_field(:searchData, :start_date, :class => "form-control", :required => true, value: Date.today-1.month) %>
+              </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+              <div class="mb-3">
+                <%= label_tag(:end_date, "End Date")%>
+                <%= date_field(:searchData, :end_date, :class => "form-control", :required => true, value: Date.today ) %>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <h2>Select Type of Comments:</h2>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:type, "Inquiry", false, :class => "form-check-input") %> Inquiry
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:type, "Complaint", false, :class => "form-check-input") %> Complaint
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:type, "Compliment", false, :class => "form-check-input") %> Compliment
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:type, "All", false,:class => "form-check-input") %> All
+          </div>
+          <hr>
+          <h2>Select Source of Comments:</h2>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:source, "Local", false, :class => "form-check-input") %> Local
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:source, "VOICE", false,:class => "form-check-input") %> VOICE
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:source, "1-800#", false, :class => "form-check-input") %> 1-800#
+          </div>
+          <div class="form-check form-check-inline">
+            <%= radio_button_tag(:source, "All", false, :class => "form-check-input") %> All
+          </div>
+          <hr>
+          <div class="mb-3">
+            <h2>Select Status of Comments:</h2>
+            <div class="form-check form-check-inline">
+              <%= radio_button_tag(:status, "Open", false, :class => "form-check-input") %><label class="form-check-label">Open</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <%= radio_button_tag(:status, "Closed", false, :class => "form-check-input") %> Closed
+            </div>
+            <div class="form-check form-check-inline">
+              <%= radio_button_tag(:status, "All", false, :class => "form-check-input") %> All
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-12 col-md-3">
+              <div class='d-grid gap-2'>
+                <%= submit_tag 'Find Comments', class: "btn my-submit" %>
+              </div>
+            </div>
+            <div class="col-12 col-md-3 pt-2 pt-md-0">
+              <div class='d-grid gap-2'>
+                <%= link_to "Dashboard", dashboard_path, class: "btn my-submit" %>
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

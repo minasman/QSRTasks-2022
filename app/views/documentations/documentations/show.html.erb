@@ -3,7 +3,9 @@
   <div class="card-body">
     <%= render @documentation %>
     <div class="d-grid gap-2 d-md-flex">
-      <%= link_to "Edit", edit_documentation_path(@documentation), class: "btn my-submit" %>
+      <% if policy(:documentation).edit? %>
+        <%= link_to "Edit", edit_documentation_path(@documentation), class: "btn my-submit" %>
+      <% end %>
       <%= link_to "Documentations", documentations_path, class: "btn my-submit" %>
     </div>
   </div>
