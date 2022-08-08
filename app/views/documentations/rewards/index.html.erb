@@ -18,7 +18,7 @@
                 <tr id="<%= dom_id(reward) %>">
                   <td><%= i + 1 %></td>
                   <td><%= reward.name %></td>
-                  <td><%= reward.value %></td>
+                  <td><%= normalize_points(current_user,reward.value) %></td>
                   <td>
                     <%= link_to "Show", reward, class: "px-2 table-link" %>
                     <% if policy(:reward).edit? %>
