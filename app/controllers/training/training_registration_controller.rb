@@ -29,7 +29,7 @@ class Training::TrainingRegistrationController < ApplicationController
     @curriculum = Curriculum.find(params[:curriculum])
     @c_id = params[:curriculum]
     @c = Curriculum.where(start_date: Date.today-2.months..Date.today+1.year).order(name: :asc, start_date: :asc)
-    @tclasses = @curriculum.tclasses.order(class_date: :asc)
+    @tclasses = @curriculum.tclasses.where(class_date: Date.today..Date.today+1.year).order(class_date: :asc)
     @target = params[:target]
     respond_to do |format|
       format.turbo_stream
