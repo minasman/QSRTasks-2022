@@ -6,8 +6,9 @@ class Training::TrainingRegistrationController < ApplicationController
   end
 
   def new
+    # Need to set @curriculum to pull courses that have active classes
     @training_registration = User.find(params[:id])
-    @curriculum = Curriculum.where(start_date: Date.today..Date.today+1.year).order(name: :asc, start_date: :asc)
+    @curriculum = Curriculum.is_current.order(name: :asc, start_date: :asc)
     @tclasses = []
   end
 
