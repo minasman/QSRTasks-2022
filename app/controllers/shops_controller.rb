@@ -22,7 +22,7 @@ class ShopsController < ApplicationController
   # GET /shops/1/edit
   def edit
     authorize @shop
-    if @shop.auditor != current_user
+    if @shop.shopper != current_user
       respond_to do |format|
         format.html { redirect_to shop_url(@shop), alert: "You cannot edit an shop you did not generate" }
       end
