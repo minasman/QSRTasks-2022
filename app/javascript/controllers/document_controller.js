@@ -28,6 +28,11 @@ export default class extends Controller {
       responseKind: "turbo-stream"})
   }
 
+  document_klass(e) {
+    this.docKlassListTarget.value = ''
+    document.getElementById("documentation_document_id").value = ''
+  }
+
   document_level_document(e) {
     let type = document.getElementById(e.path[0].id).value
     this.levelListTarget.selected = ''
