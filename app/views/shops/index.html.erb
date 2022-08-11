@@ -28,7 +28,15 @@
                     <td><%= shop.shopType %></td>
                     <td><%= shop.score %></td>
                     <td><%= shop.shiftManager %></td>
-                    <td>Show | Edit | Remove </td>
+                    <td>
+                      <%= link_to "Show", shop, class: "table-link" %>
+                      <% if policy(:shop).edit? %>
+                        <%= link_to "Edit", edit_shop_path(shop), class: "table-link", data: {turbo: false} %>
+                      <% end %>
+                      <% if policy(:shop).destroy? %>
+                        <%= link_to "Remove", shop, class: "table-link", data: { turbo_method: :delete } %>
+                      <% end %>
+                    </td>
                   </tr>
                 <% end %>
               </tbody>
