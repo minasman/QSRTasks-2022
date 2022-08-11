@@ -30,10 +30,10 @@ class User < ApplicationRecord
   scope :managers, -> {where(position_id: [5, 15], active: true).order(first_name: :asc)}
   scope :crew, -> {where(position_id: [26], active: true).order(first_name: :asc)}
   scope :first_week, -> {where(active: true, hire_date: Date.today - 7.days..Date.today).order(first_name: :asc)}
-  scope :second_week, -> {where(active: true, hire_date: Date.today - 14.days..Date.today - 7.days).order(first_name: :asc)}
-  scope :third_week, -> {where(active: true, hire_date: Date.today - 21.days..Date.today - 14.days).order(first_name: :asc)}
-  scope :fourth_week, -> {where(active: true, hire_date: Date.today - 28.days..Date.today - 21.days).order(first_name: :asc)}
-  scope :second_month, -> {where(active: true, hire_date: Date.today - 2.months..Date.today - 28.days).order(first_name: :asc)}
+  scope :second_week, -> {where(active: true, hire_date: Date.today - 14.days..Date.today - 8.days).order(first_name: :asc)}
+  scope :third_week, -> {where(active: true, hire_date: Date.today - 21.days..Date.today - 15.days).order(first_name: :asc)}
+  scope :fourth_week, -> {where(active: true, hire_date: Date.today - 28.days..Date.today - 22.days).order(first_name: :asc)}
+  scope :second_month, -> {where(active: true, hire_date: Date.today - 2.months..Date.today - 29.days).order(first_name: :asc)}
   scope :third_month, -> {where(active: true, hire_date: Date.today - 3.months..Date.today - 2.months).order(first_name: :asc)}
 
   include PgSearch::Model
