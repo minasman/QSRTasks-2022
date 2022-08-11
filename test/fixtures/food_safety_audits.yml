@@ -1,0 +1,85 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fs1_us: MyString
+  fs2_us: MyString
+  fs3_us: MyString
+  fs4_us: MyString
+  fs5_us: MyString
+  fs6_us: MyString
+  fs7_us: MyString
+  fs8_us: MyString
+  fs9_us: MyString
+  fs10_us: MyString
+  fs11_us: MyString
+  fs12_us: MyString
+  fs13_us: MyString
+  fs14_us: MyString
+  fs15_us: MyString
+  fs16_us: MyString
+  fs17_us: MyString
+  fs18_us: MyString
+  fs19_us: MyString
+  fs19_us_01: MyString
+  fs20_us: MyString
+  fs21_us: MyString
+  fs22_us: MyString
+  fs23_us: MyString
+  fs24_us: MyString
+  fs25_us: MyString
+  fs26_us: MyString
+  fs26_us_01: MyString
+  fs27_us: MyString
+  fs28_us: MyString
+  fs29_us: MyString
+  fs30_us: MyString
+  fs31_us: MyString
+  fs32_us: MyString
+  fs33_us: MyString
+  store: one
+  organization: one
+  score: MyString
+  shop_date: 2022-08-08
+  shop_time: 2022-08-08 15:50:16
+
+two:
+  fs1_us: MyString
+  fs2_us: MyString
+  fs3_us: MyString
+  fs4_us: MyString
+  fs5_us: MyString
+  fs6_us: MyString
+  fs7_us: MyString
+  fs8_us: MyString
+  fs9_us: MyString
+  fs10_us: MyString
+  fs11_us: MyString
+  fs12_us: MyString
+  fs13_us: MyString
+  fs14_us: MyString
+  fs15_us: MyString
+  fs16_us: MyString
+  fs17_us: MyString
+  fs18_us: MyString
+  fs19_us: MyString
+  fs19_us_01: MyString
+  fs20_us: MyString
+  fs21_us: MyString
+  fs22_us: MyString
+  fs23_us: MyString
+  fs24_us: MyString
+  fs25_us: MyString
+  fs26_us: MyString
+  fs26_us_01: MyString
+  fs27_us: MyString
+  fs28_us: MyString
+  fs29_us: MyString
+  fs30_us: MyString
+  fs31_us: MyString
+  fs32_us: MyString
+  fs33_us: MyString
+  store: two
+  organization: two
+  score: MyString
+  shop_date: 2022-08-08
+  shop_time: 2022-08-08 15:50:16

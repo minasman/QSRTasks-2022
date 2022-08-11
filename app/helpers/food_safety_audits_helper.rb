@@ -1,0 +1,2 @@
+module FoodSafetyAuditsHelper
+end

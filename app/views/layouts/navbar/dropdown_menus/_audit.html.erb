@@ -21,7 +21,7 @@
     <% end %>
     <% if policy(:safe_audit).new? %>
       <li>
-        <%= link_to  "", class: "dropdown-item" do %>
+        <%= link_to new_food_safety_audit_path, class: "dropdown-item" do %>
           <i class="fa fa-heart-circle-check me-1"></i>
           New Food Safety Audit
         <% end %>
@@ -29,7 +29,7 @@
     <% end %>
     <% if policy(:safe_audit).index? %>
       <li>
-        <%= link_to  "", class: "dropdown-item" do %>
+        <%= link_to food_safety_audits_path, class: "dropdown-item" do %>
           <i class="fa fa-folders me-1"></i>
           Food Safety Audits
         <% end %>

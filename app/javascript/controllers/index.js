@@ -19,6 +19,9 @@ application.register("document", DocumentController)
 import EquipmentController from "./equipment_controller.js"
 application.register("equipment", EquipmentController)
 
+import FoodSafetyController from "./food_safety_controller.js"
+application.register("food-safety", FoodSafetyController)
+
 import FormController from "./form_controller.js"
 application.register("form", FormController)
 

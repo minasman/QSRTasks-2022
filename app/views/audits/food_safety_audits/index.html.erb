@@ -1,0 +1,46 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Food Safety Audits</h2>
+      <div class="card-body">
+        <% if @food_safety_audits.any? %>
+          <div class="table table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Store</th>
+                  <th>Date</th>
+                  <th>Completed By</th>
+                  <th>Score</th>
+                  <th class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @food_safety_audits.each_with_index do |audit, i| %>
+                  <tr>
+                    <th><%= i + 1%></th>
+                    <td><%= audit.store.number %></td>
+                    <td><%= audit.shop_date.strftime("%m/%d/%Y") %></td>
+                    <td><%= audit.auditor.full_name %></td>
+                    <td><%= audit.score %>%%</td>
+                    <td><%= link_to "Show", audit, class: "px-2 table-link", data: {turbo: :false} %>
+                    <% if policy(:food_safety_audit).edit? %>
+                      | <%= link_to "Edit", edit_food_safety_audit_path(audit), class: "px-2 table-link" %>
+                    <% end %>
+                    <% if policy(:food_safety_audit).destroy? %>
+                      | <%= link_to "Remove", audit,  class: "px-2 table-link",  data: { turbo_method: :delete, turbo_confirm: "You Are About To Remove this Food Safety Audit!!" } %>
+                    <% end %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <h3 class="text-center">No Food Safety Audits Completed</h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

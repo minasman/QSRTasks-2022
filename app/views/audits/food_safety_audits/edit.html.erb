@@ -1,0 +1,1193 @@
+<div class="row justify-content-center0" style="margin-bottom: 125px">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Edit Food Safety Audit</h2>
+      <div class="card-body">
+        <%= form_with(model: @food_safety_audit, data: {controller: "food-safety"}) do |form| %>
+          <% if @food_safety_audit.errors.any? %>
+            <div style="color: red">
+              <h2><%= pluralize(@food_safety_audit.errors.count, "error") %> prohibited this @food_safety_audit from being saved:</h2>
+
+              <li>
+                <% @food_safety_audit.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </li>
+            </div>
+          <% end %>
+
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <%= form.label :shop_date, "Date", class: "form-label" %>
+                <%= form.date_field :shop_date, class: "form-control", value: Date.today %>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+            <div class="mb-3">
+                <%= form.label :shop_time, "Time", class: "form-label" %>
+                <%= form.time_field :shop_time, class: "form-control", required: true %>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3" >
+                <%= form.label :store_id, class: "form-label" %>
+                <%= form.collection_select(:store_id, Store.where(active: true, store_type: "Traditional").order('number ASC'), :id, :number,{ prompt: true}, { class: "form-select", data: {action: "change->food-safety#manager"}, required: true}) %>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="mb-3">
+                <%= form.label :manager_id, class: "form-label" %>
+                <%= form.select :manager_id, [], {prompt: "Select Shift Manager"}, {class: "form-select", data: { "food-safety-target": "managerList"}, required: true} %>
+              </div>
+            </div>
+          </div>
+
+          <div id="audit-form">
+            <hr>
+            <h4 class="text-center bg-danger p-2">CRITICAL FOOD SAFETY</h4>
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS1-US</strong> Is the restaurant free of a pest infestation and/or signs of an active pest infestation in the restaurant building, adjoining corral area, and any area within 10 feet of the building?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Look for any pests or signs of pests. Walk around the interior of the restaurant, including storage areas, and look under shelves and equipment for the presence of rodents, cockroaches, small flies, chewed boxes/food/wires, and/or droppings. Walk around the exterior within 10 feet of the restaurant and the corral area to ensure no pest infestation or signs of infestation are present. The corral area is not evaluated in Walmarts or other locations where the corral area is not under the control of the restaurant.</p>
+                  <p><strong>CITE</strong> for pest infestation as follows:</p>
+                  <ul>
+                    <li>Un-trapped live rodent(s)</li>
+                    <li>Any live cockroach(es)</li>
+                    <li>Any unmanaged or excessive presence of other pests. (e.g. small flies). If greater than 5 small flies are congregating in one area such as drains or areas with stagnant water; this colid indicate a small fly infestation Other examples of “one area” are service area, production area, storage area, or ware washing area”.
+                    <li>Signs of an active pest infestation (e.g. fresh rodent droppings).</li>
+                  </ul>
+                  <p><strong>If you observe any of the following, CITE under FS21</strong></p>
+                  <ul>
+                    <li>Dead cockroaches</li>
+                    <li>Trapped rodents</li>
+                    <li>Trailing ant activity in one area</li>
+                    <li>Greater than 5 large flies in one area. If greater than 5 large flies are congregating in one area such as the dining area, food prep area, front counter area, or food storage areas. Large flies are a nuisance to customers and employees and can land on food, but they are not typically considered to be an infestation. They get into the restaurant due to windows and/or doors being left open and if the restaurant does not have a positive air balance.</li>
+                  </ul>
+                  <p><strong>NOTE:</strong> Contact your OAL, or Ops Officer if OAL can’t be reached, if you are unsure whether or not the restaurant has an infestation and if the restaurant has an infestation, to determine the appropriate actions that can be taken with the owner/operator, up to and including closing the restaurant.
+                  </p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs1_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs1_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS2-US</strong> Are the internal temperatures of beef patties after cooking at or above 155°F?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Ask the manager or crew member to let you know when the next run of 10:1 beef patties will be cooked so that you can check them. If not notified, you must ask them to cook the restaurant’s full run size. If conducting a morning visit, you must wait to request this until they begin their lunch transition. Take the internal temperature of the patties following the procedures in the Food Safety Booklet. Refer to the Food Safety Booklet for the definition and procedures for the “full run” size. A restaurant’s full run size applies to all Food Safety Verifications.</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>If any internal temperatures of frozen or fresh beef after cookiing are below 155°F.</li>
+                  </ul>
+                  <p><strong>COACH</strong> for the following:</p>
+                  <ul>
+                    <li>If any internal temperatures of fresh beef after cooking are below 175°F and above 155°F.</li>
+                  </ul>
+                  <p>Notify the manager immediately if the product does not meet the required food safety internal temperature standard. Ask them to make the necessary adjustments per the Food Safety booklet and ask the manager to cook another run of patties to ensure that the issue is corrected. Ask the manager to demonstrate that the temperatures are correct; document in your notes that you confirmed that corrective action was taken. Note why the product did not meet temperature and record reason(s) in the GDCT visit form. For an RGRV, you should observe during the transition to regular menu that the restaurant is completing the required food safety checks across all the platens where the product is cooked for the day and that the products meet the internal temperature standard. If they are not completing the required checks or are not taking the proper corrective action if the product temperatures do not meet the standard, this would be cited under FS7-US.</p>
+
+                  <p><strong>EXCEPTION:</strong> If you are conducting your internal temperature check during the breakfast to the regular menu transition period and you observe a patty that does not meet the required food safety internal temperature standard, you must notify the manager immediately so that the product is not served. Ask them to make the necessary adjustments per the Food Safety booklet and cook another run of patties to demonstrate that the internal temperatures meet the food safety standard and that the issue is corrected.</p>
+                  <ul>
+                    <li>If the time is still within 1 hour of the restaurant’s transition from breakfast to regular menu operations and the manager states that the daily food safety checks have not been conducted, you should <strong>NOT</strong> cite a finding. Encourage the manager to complete the rest of their Daily Food Safety Checklist as soon as possible to ensure that safe cooking temperatures are being achieved for all products.</li>
+                    <li>If the manager states that the Food Safety Checklist has been completed, then <strong>CITE</strong> a finding. <strong>REMEMBER:</strong> This exception rule is only to be followed during the 1-hour transition from breakfast to regular menu operations. For the unannounced verification, 4:1 patties will be checked when you observe the manager demonstrate the internal temperature check procedure when you evaluate question <strong>FS7-US</strong>.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs2_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs2_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS3-US</strong> Are the internal temperatures of chicken products after cooking at or above 165°F?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Ask the manager or crew member to let you know when the next full run of Crispy Chicken patties is cooked. If not notified, you must ask them to cook the restaurant’s full run size. If conducting a morning visit, you must wait to request this until they begin their transition to regular menu. Take the internal temperatures of the portions following the procedures in the Food Safety Booklet. </p>
+                  <p><strong>CITE</strong> if any temperatures are below 165°F.</p>
+                  <p><strong>NOTE:</strong> If Crispy Chicken Patties are not available, then verify the temperature of grilled chicken patties or chicken McNuggets instead. Other chicken products may be checked under this question if observed being cooked but not all types of chicken are required to be checked in each vat.</p>
+                  <p><strong>IMPORTANT:</strong> Notify the manager immediately if the product does not meet the required food safety internal temperature standard. Ask them to make the necessary adjustments per the Food Safety Booklet and cook another run of the product to ensure that the issue is corrected. Ask the manager to demonstrate that the temperatures are correct; document in your notes that you confirmed that corrective action was taken.</p>
+                  <p><strong>EXCEPTION:</strong> Follow the same exception protocol as stated in <strong>FS2-US</strong> if you are checking the internal temperatures within the one-hour period after the transition from breakfast to regular menu operations. This exception does not apply for breakfast chicken or any chicken product served at breakfast since the product should have been checked during breakfast operations</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs3_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs3_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS4-US</strong> Is the internal temperature of Filet-O-Fish portions after cooking at or above 155°F?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Ask the manager or crew member to let you know when the next full run of Filet-O-Fish patties is cooked. If not notified, you must ask them to cook the restaurant’s full run size. If conducting a morning visit, you must wait to request this until they begin their transition to regular menu. Take the internal temperatures of the portions following the procedures in the Food Safety Booklet.</p>
+                  <p><strong>CITE</strong> if any temperatures below 155°F.</p>
+                  <p><strong>IMPORTANT:</strong> Notify the manager immediately if the product does not meet the required food safety internal temperature standard. Ask them to make the necessary adjustments per the Food Safety Booklet and cook another run of the product to ensure that the issue is corrected. Ask the manager to demonstrate that the temperatures are correct; document in your notes that you confirmed that corrective action was taken.</p>
+                  <p><strong>EXCEPTION</strong> Follow the same exception protocol as stated in <strong>FS2-US</strong> if you are checking the internal temperatures within the one-hour period after the transition from breakfast to regular menu operations</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs4_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs4_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS5-US</strong> Are the internal temperatures of breakfast steak and breakfast sausage after cooking at or above 155°F?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Ask the manager or crew member to let you know when a full run of breakfast sausage and breakfast steak is cooked next. If not notified, you must ask them to cook the restaurant’s full run size. Take the internal temperatures of the corner patties following the procedures in the Food Safety Booklet.The internal temperatures of both breakfast steak and sausage must be checked if both products are being served at the time of the visit.</p>
+                  <p><strong>CITE</strong> if any temperatures are below 155°F for steak or sausage.</p>
+                  <p><strong>IMPORTANT:</strong> Notify the manager immediately if the product does not meet the required food safety internal temperature standard. Ask them to make the necessary adjustments per the Food Safety Booklet and cook another run of the product to ensure that the issue is corrected. Ask the manager to demonstrate that the temperatures are correct; document in your notes that you confirmed that corrective action was taken.</p>
+                  <p><strong>NOTE: This exception only applies for All Day Breakfast operations</strong></p>
+                  <p><strong>EXCEPTION:</strong> If the <strong>time is still within 1 hour of the restaurant’s transition from breakfast to regular menu operations and</strong> sausage is being moved to a different platen than it was being cooked on for breakfast, and the restaurant has not yet completed their food safety check, follow the same exception given for beef under FS2.  If sausage is being cooked on the same platen for regular menu as it was for breakfast, then this exception does not apply as the sausage should have already been checked during breakfast operations.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs5_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs5_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS6-US</strong> Are the internal temperature of round eggs after cooking at or above 155°F?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Ask the manager or crew member to let you know when round eggs are cooked next. If not notified, you must ask them to cook the restaurant’s full run size. Take the internal temperatures of the corner round eggs following the procedures as per the directions in the Food Safety Booklet. The check for round eggs after cooking must always be completed if round eggs are being served during the visit.</p>
+                  <p><strong>CITE</strong> if any temperatures are below 155°F</p>
+                  <p><strong>COACH</strong> for the following:</p>
+                  <ul>
+                    <li>If temperatures are above 155°F and yolks are not gelled.</li>
+                  </ul>
+                  <p><strong>NOTE: This exception only applies for All Day Breakfast operations</strong></p>
+                  <p><strong>EXCEPTION: </strong>  If the <strong>time is still within 1 hour of the restaurant’s transition from breakfast to regular menu operations and round eggs are</strong> being moved to a different platen or egg cooker, then were being cooked on for breakfast, and the restaurant has not yet completed their food safety check, follow the same exception given for beef under FS2.  If round eggs are being cooked on the same platen or egg cooker for regular menu as it was for breakfast, then this exception does not apply as the round eggs should have already been checked during breakfast operations.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs6_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs6_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="text-light bg-danger rounded p-1"><strong>FS7-US</strong> Can managers (or staff assigned to complete the checklist) demonstrate they have been trained on properly completing the procedures on the Food Safety Daily Checklist and can take corrective action?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>For Verification During a RGRV:</strong> Observe the person doing the food safety checks on multiple cooked products and determine if they are trained on how to complete these other food safety checks in addition to the check on 4:1 beef patties. It is not necessary to observe all food safety checks on all products during this visit.</p>
+                  <p><strong>For Verification During a Follow-up Food Safety Verification:</strong> Ask the manager to demonstrate how to check internal temperatures of 4:1 beef patties after cooking. The restaurant’s full run size of patties must be cooked for the demonstration.</p>
+                  <p><strong>For Verification using Digital Food Safety (DFS) During an RGRV or Follow-up Food Safety Verification:</strong>Ask the manager to demonstrate how to check internal temperatures of 4:1 beef patties after cooking using their DFS app. The restaurant’s full run size of patties must be cooked for the demonstration.</p>
+                  <p>If the manager has completed all their food safety checks already for the day and does not know how to complete an additional optional check using DFS, please refer to the US ROIP Website for step by step procedures on optional food safety checks for the approved digital food safety apps (JOLT or SQUADLE).</p>
+                  <p><strong>NOTE:</strong> For other unapproved DFS apps, the restaurant must be able to demonstrate how to check internal temperatures of 4:1 patties after cooking using their DFS app. If the DFS app at the restaurant is inoperable for whatever reason, the manager needs to demonstrate the procedure using the pyrometer and recording the temperatures on a paper checklist.</p>
+                  <p><strong>ASSESSMENT:</strong> If more than one manager is working at the restaurant, ask them to decide who will demonstrate the procedure to you. Observe that at a minimum, the pyrometer probe is properly placed in the center of the beef patty and that all the patties that are cooked are being temped. Ask the manager what the minimum required cooking temperature is for the 4:1 beef patties that they are temping.</p>
+                  <p><strong>CITE</strong> if 2 or more of the following 4 numbered items below are observed:</p>
+                    <ol>
+                      <li>If the pyrometer is not being properly placed in the center of the patties.</li>
+                      <li>If all the 4:1 patties cooked are not checked.</li>
+                      <li>If the manager does not know the correct minimum required internal temperature after cooking is 175°F.</li>
+                      <li>If the manager does not take proper corrective action when a product is undercooked or if the manager is unable to demonstrate an adequate understanding of the key corrective action steps listed below that should be taken when a product is undercooked: <strong>NOTE:</strong> even if more than one step (a-d) is incorrect, it still constitutes only one numbered item missed</li>
+                      <ol type="a">
+                        <li>Discard the product.</li>
+                        <li>Wash, rinse, and sanitize the probe, utensils, and tray after discarding products that did not meet minimum temperatures.</li>
+                        <li>Make adjustments per McDonald’s protocol in the Food Safety Booklet.</li>
+                        <li>Run another product verification to ensure the correct cooking temperature is achieved.</li>
+                      </ol>
+                    </ol>
+                  <p><strong>DO NOT CITE</strong> if only 1 incorrect procedure is observed. <strong>COACH</strong> the correct procedure.</p>
+                  <p><strong>NOTE:</strong> If the internal temperature is out of compliance, refer to <strong>FS2-US</strong></p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs7_us ,-1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs7_us ,'critical', class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                  <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <hr>
+            <h4 class="text-center bg-secondary p-2">TCS for Refrigerated Products</h4>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS8-US</strong> Are all Time-Temperature Control for Safety (TCS) refrigerated products in code (within primary shelf life)? If no, mark what product is not in code:</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <ul>
+                    <li>Check to make sure that all items stored in refrigerators are not expired per the manufacturer's expiration date (primary shelf life).</li>
+                    <li>Check time and temperature control for safety (TCS) foods like produce, fresh beef, Canadian bacon, and dairy products such as shake and sundae mix.</li>
+                    <li>Check apple slices and milk jugs in service area refrigerators.</li>
+                  </ul>
+                  <p><strong>COACH</strong> if the primary shelf life of sauces, dressings, and other non-TCS food products are expired.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs8_us ,5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs8_us ,0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <hr>
+            <h4 class="text-center bg-secondary p-2">Hygeine & Sanitation</h4>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS9-US</strong> Handwashing sinks: Is there warm running water and required supplies at all handwashing sinks? Are hand wash sinks easily accessed by employees and only used for hand washing, not preparing food, or storing equipment?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed:</p>
+                  <p>Hand Sinks Stocked</p>
+                  <ul>
+                    <li>Check all hand sinks, including restrooms, for stocked and functional soap dispensers, and paper towels, or a functional hand dryer. Cite if restrooms do not have at least one stocked, functional soap dispenser and either paper towels or at least one functional dryer.</li>
+                    <li>All hand sinks must be functional and provide at minimum water at 100oF. Allow 1-2 minutes for the water temperature to reach and maintain temperature and check the temperature using a calibrated pyrometer.</li>
+                    <li>The soap must be Ecolab-approved hand soap.</li>
+                  </ul>
+                  <p>Accessibility</p>
+                  <ul>
+                    <li>Sinks should not be obstructed and should be easily accessed by employees.</li>
+                    <li>Employees should be able to wash their hands easily without any challenges, such as not being able to reach taps or paper towels.</li>
+                    <li>No other tasks involving food prep, food contact surfaces, or wiping cloths may be completed at the handwashing sink (e.g. utensils rinsed or left in the sink, lemons washed in the sink, wiping cloth left or rinsed, dumping beverages or ice, etc.)</li>
+                  </ul>
+                  <p><strong>CITE</strong> if sinks are used for any purposes other than handwashing or are not accessible.</p>
+                  <p><strong>COACH</strong>, but do not cite if paper towels are at the hand sink available but not stocked in the dispenser.</p>
+                  <p><strong>NOTE:</strong> If non-Ecolab hand soap is stocked at a hand sink, only <strong>CITE under FS28-US</strong>.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs9_us ,5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs9_us ,0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="p-1"><strong>FS10-US</strong> Handwashing procedure: Are hands properly washed following handwashing procedures at the required times and is a system in place to ensure hourly hand washing by all employees?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed:</p>
+                  <p>Washing Hands when Required: Check that employees are washing their hands at the appropriate times.</p>
+                  <ul>
+                    <li>Before putting on new <strong>clear/white</strong> disposable gloves when changing tasks</li>
+                    <li>After performing a non-food task (mopping, taking out the trash, and retrieving food from the walk-in refrigerator or stockroom).</li>
+                    <li>After taking a break or using the restroom.</li>
+                    <li>Before entering the production area and going to work at the food preparation stations.</li>
+                    <li>After coughing/sneezing or touching any part of the body.</li>
+                    <li>If a food handler is observed handling their cell phone and fails to wash their hands before resuming with food prep.</li>
+                  </ul>
+                  <p>Handwashing Procedure: Observe employees washing their hands. Confirm they are following the proper procedure.</p>
+                  <ul>
+                    <li>CITE if an employee is observed not following the proper handwashing procedure.</li>
+                  </ul>
+                  <p>Handwashing System: Ask the manager, <strong>“What time is your next handwashing cycle? How are you tracking that?”</strong></p>
+                  <ul>
+                    <li>The manager should describe a process that identifies a method for tracking time to ensure this occurs on an hourly basis for all employees. For example, this could be that they link it to another hourly routine like a travel path or could be a timer.</li>
+                    <li>If the manager can tell you when the next handwash is (should be within the next hour) and they can explain a reliable process to track the time, this is acceptable.</li>
+                    <li>If you get to observe the one-hour handwash, check to see that the Manager monitors all employees for handwashing.</li>
+                  </ul>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>It is evident that there is no process in place. (Example: if the manager states that a timer is used to monitor handwashing, but the timer is broken or not in use).</li>
+                  </ul>
+                  <p><strong>EXCEPTION:</strong> Employees are not required to wash hands after removing a pair of blue gloves and then putting on a new pair of blue gloves.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs10_us ,5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs10_us ,0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="p-1"><strong>FS11-US</strong> Sanitized towel/cloth buckets: Do sanitized towel buckets contain towels and chlorine sanitizer solution at the correct concentration checked with a chlorine test strip?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Chlorine Test Strips<br>
+                  Ask the manager or a crew member for chlorine test strips/kits used to check sanitizer buckets. The chlorine test strips must be in usable condition (not water damaged) and not expired. If found water damaged or expired, ensure that they are the only test strips available before citing.</p>
+                  <p>Clean Towel Bucket Sanitizer Concentration<br>
+                  To test the chlorine concentration in the towel bucket, use the restaurant’s test strips, and follow the procedures in the Food Safety Booklet.</p>
+                  <p><strong>CITE</strong> if the concentration is less than 50 ppm (only <strong>COACH</strong>, do not cite if higher than 100 ppm)</p>
+                  <p>Sanitizer Bucket Use<br>
+                  Sanitized towel buckets should be located at the grill and near the front counter. If the unit is small (ex. a Walmart restaurant) and one bucket can be easily accessed from all areas, this is acceptable.</p>
+                  <p><strong>CITE</strong> if there are no clean towels in the clean towel buckets.</p>
+                  <p><strong>COACH:</strong> if the bucket has a missing or expired 2-hour time label.</p>
+                  <p><strong>NOTE:</strong> The Quat test strips will be assessed under question <strong>FS13-US</strong>.</p>
+                  <p><strong>NOTE:</strong> Soiled towels stored with clean towels in the clean towel bucket should be cited under question <strong>FS12-US</strong>.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs11_us, 1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs11_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="p-1"><strong>FS12-US</strong> Sanitizer-soaked towels/cloths: Are sanitizer-soaked towels and grill cloths used at food, beverage preparation, and service areas placed into the soiled towel bucket after using and not left sitting out on surfaces?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Sanitizer-soaked towels and grill cloths must be placed in the soiled towel bucket after every use. They should not be left sitting out on surfaces or placed back into the clean towel sanitizer bucket.</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>If sanitized towels that are not in active/continuous use and are left sitting out on surfaces.</li>
+                    <li>If soiled towels are observed stored with clean towels in the clean towel bucket.</li>
+                  </ul>
+                  <p><strong>EXCEPTION:</strong> If a towel is momentarily placed on a surface but is observed to be in continuous use (e.g. when sanitizing a pyrometer probe between product temperature checks) do not cite.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs12_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs12_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="p-1"><strong>FS13-US</strong> Utensils and trays sanitizing: Are all in-use UHC trays, grill utensils, prep table utensils, and utensil holders clean (no build-up), washed, and sanitized at least every 4 hours as per approved procedure? Do the back sink and soap/sanitizer dispensers or dishwashers function (hot water 110˚F or higher in the wash bin/sink) with all required supplies? Does the sanitizer solution have the right concentration when checked with an appropriate test strip?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>UHC Trays/Prep Area Small Wares:<br>
+                  Randomly check plastic and wire UHC trays in use for cleanliness. Additionally, check utensils (spatulas, yellow yolk breaking tool, etc.), and utensil holders in use in the kitchen area for cleanliness.</p>
+                  <ul>
+                    <li><strong>CITE</strong> for excessive grease or product build-up (more than 1-day build-up; describe build-up observed)</li>
+                  </ul>
+                  <p>4-Hour System for In-use Food Contact Surfaces:<br>
+                  To assess for a system in place, ask the manager, <strong>“When is the next time that your in-use trays and utensils will be washed/rinsed/sanitized? Please explain the process used.”</strong></p>
+                  <ul>
+                    <li><strong>CITE</strong> if the manager cannot describe a process including how the 4-hour time requirement is being tracked and how they ensure that all in-use utensils are being addressed. For example, it is done at transition between breakfast and lunch; have set periods they can readily communicate, remove in-use utensils by stations; have a back-up set to swap out.</li>
+                  </ul>
+                  <p>3-Compartment Sink and Quat Sanitizer Concentration/Test Strips<br>
+                  If the 3-compartment sink is observed in active use, assess that it is set up properly and that the proper wash, rinse, and sanitize procedures are being followed.</p>
+                  <p>Always check the following:</p>
+                  <ul>
+                    <li>Allow 1-2 minutes for the water temperature to reach and maintain temperature and check the temperature using a calibrated pyrometer that the 3-compartment sink has hot water at a minimum of 110°F in the wash bin/sink and is stocked with detergent and sanitizer. Both chemical dispensers should be functional.</li>
+                    <li>Check the Quat sanitizer concentration from the automated dispenser even when the 3-part sink is not in use.</li>
+                    <li>Ask the manager or a crew member for the Quat test strips used to check the 3-compartment sink. The Quat test strips must be in usable condition (not water damaged) and not expired. If found water damaged or expired, ensure that they are the only test strips available before citing.</li>
+                    <li><strong>CITE</strong> if the back sink or chemical dispensers are not functional.</li>
+                    <li><strong>CITE</strong> if the water temperature is below 110°F in the wash bin/sink.</li>
+                  </ul>
+                  <p>Follow the procedures in the Food Safety Booklet for checking Quat sanitizer concentration.</p>
+                  <ul>
+                    <li><strong>CITE</strong> if the Quat concentration is below 200 ppm.</li>
+                  </ul>
+                  <p>Warewasher: Test the chlorine sanitizer in the warewasher/dishwasher if present:</p>
+                  <ul>
+                    <li>Run the warewasher for one cycle.</li>
+                    <li>Open the door and remove the rack.</li>
+                    <li>Dip the chlorine strip into the tank water solution and immediately blot on a paper towel.</li>
+                    <li>Choose the color on the chart that most closely matches the color of the test strip.</li>
+                  </ul>
+                  <p><strong>CITE</strong> if the concentration is below 50 ppm (only COACH, do not cite if higher than 100 ppm).</p>
+                  <p><strong>CITE</strong> If the proper wash, rinse and sanitize procedures are not being followed.</p>
+                  <p>Keeping Soiled Raw Wares for Fresh Beef Separate:</p>
+                  <p><strong>COACH</strong>  if these procedures are not being followed:</p>
+                  <ul>
+                    <li>All soiled raw wares that may have come into contact with fresh beef are washed and sanitized last (or in a separate load in the warewasher).</li>
+                    <li>Soiled blue raw beef trays and lids are kept in the blue bus box until cleaned.</li>
+                    <li>The back sink is properly sanitized after washing soiled raw wares.</li>
+                  </ul>
+                  <p><strong>NOTE: CITE</strong> for damaged/expired Quat test strips under this question. If chlorine test strips are not meeting the standard, <strong>CITE</strong> in <strong>FS11-US</strong>.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs13_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs13_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <hr>
+            <h4 class="text-center bg-secondary p-2">Contamination Prevention</h4>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS14-US</strong> State of cleanliness: Is the restaurant (all areas) in a good state of cleanliness? In all areas, the floors/walls/ceilings and equipment do not have excessive soil, grease, or food debris build-up? Are the floors free of standing or puddling water?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Structure: The floors, walls, and ceilings are maintained clean and with no excessive build-up of grease or food debris (more than 1-day build-up; describe buildup observed).</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>If floors, walls, or ceiling have an excessive buildup of grease or food debris (more than 1-day buildup).</li>
+                    <li>Very low or no grout lines or floor drains <strong>with</strong> food debris/standing water, excessive grease/food debris build-up under grill/fryer, mold build-up along the wall at the 3- compartment sink, etc.</li>
+                    <li>Puddling or standing water on the floors. If this is <strong>CITED</strong> due to missing or cracked floor tiles or low grout lines, cite under <strong>FS15-US</strong>.</li>
+                  </ul>
+                  <p>Equipment: Assess all in-use equipment that is used to prepare or hold food for cleanliness.</p>
+                  <ul>
+                    <li><strong>CITE</strong> for excessive, encrusted food debris, mold/organic matter, or grease build-up (more than 1-day build-up; describe build-up observed)</li>
+                      <ul>
+                        <li>E.g. mold or buildup in soda nozzles, mold/organic matter build-up on Blended Ice Machine rinsing area for pitchers</li>
+                      </ul>
+                    <li><strong>COACH</strong> for less than an excessive buildup of grease or food debris (less than a day of buildup) on non-food contact areas such as spillage of fries in a secondary freezer.</li>
+                    <li>Do NOT cite ice transfer buckets, ice scoops, ice machines, ice bins or ice chutes under this question but rather under <strong>FS16-US</strong></li>
+                  </ul>
+                  <p><strong>NOTE:</strong> Equipment in storage should not be assessed. Cleanliness of UHC equipment (plastic/wire trays) and utensils in use in the prep area should not be assessed under this question but rather under <strong>FS13-US</strong>. The ice machine, ice chutes on beverage dispensers, and cleanliness of the ice bucket should be assessed under question <strong>FS16-US</strong>.</p>
+                  <p><strong>EXCEPTION:</strong> Do not cite for dust buildup on non-food contact surfaces.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs14_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs14_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS15-US</strong> State of repair: Is the restaurant (all areas), the floors/walls/ceilings, and equipment functioning properly and in a good state of repair (not cracked or damaged)? The freezers should not have excessive buildup of ice.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Structure: The floors, walls, and ceilings are maintained in good repair.  There should be no significant damage to floors, walls, and ceilings.</p>
+                  <ul>
+                    <li><strong>CITE</strong> if floors, walls, or ceiling tiles (including light shields) are damaged, presenting a potential physical contamination hazard</li>
+                    <li><strong>CITE</strong> if floor or ceiling tiles (including light shields) are missing in food preparation or storage areas.</li>
+                    <li><strong>COACH</strong> for missing wall tiles, minor floor, or ceiling tiles missing OR damaged in other areas of the restaurant.</li>
+                  </ul>
+                  <p>Equipment: Assess all in-use equipment that is used to prepare or hold food for being in good repair.</p>
+                  <ul>
+                    <li><strong>CITE</strong> if food equipment is damaged presenting a potential physical contamination hazard.</li>
+                      <ul>
+                        <li>E.g., frayed fry baskets with metal pieces sticking out, broken/frayed UHC wire racks, notably cracked food contact surfaces such as food pans, blended ice pitchers, etc.</li>
+                      </ul>
+                    <li><strong>CITE</strong> for food equipment that is no longer smooth and easily cleanable and could harbor food or bacteria.</li>
+                      <ul>
+                        <li>E.g., An ice transfer bucket or a plastic spatula that is heavily scratched/gouged</li>
+                      </ul>
+                    <li><strong>CITE</strong> if the grease trap is not working properly and is overflowing. Depending on the severity of this observation it may be classified as a sewage backup and the restaurant should follow the imminent health hazard information at the top of the guide for remediation activities.</li>
+                    <li><strong>CITE</strong> if the freezers have excessive ice buildup.</li>
+                      <ul>
+                        <li>E.g., ice buildup covering the condenser fans, condensate drip pan, or evaporator coils. Excessive means layered and three-dimensional ice buildup, not a little frost.</li>
+                        <li> Do not cite if ice buildup is excessive AND the freezer is NOT maintaining adequate temperatures. Cite under FS-23 but note the excessive build-up here.</li>
+                      </ul>
+                    <li><strong>COACH</strong> if the freezers have ice buildup on floors, walls, or ceiling</li>
+                  </ul>
+                  <p><strong>EXCEPTION:</strong> Do not cite for baseboards that are cracked or missing, unless there’s a visible gap/entry point for pests. Assess under <strong>FS21-US</strong>.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs15_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs15_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS16-US</strong> Water and ice: Are appropriate measures taken to protect water and ice from foreign material, chemicals, and/or bacterial contamination? Are water filters in date and ice machines free from mold or buildup?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> Assess that the back of the house ice machine is maintained clean inside and free from visible mold or build-up. Check for mold or build-up in the ice machine by wiping a napkin or paper towel across the metal drop plate and around the inner walls. Cell phone cameras should not be used to assess this question. Observe that the ice machine door seals properly to protect the ice from any foreign contamination. Assess ice bins and ice chutes for cleanliness through visual inspection.</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>If there is visible mold or build-up in the ice machine, ice bins, or on ice chutes.</li>
+                    <li>If there is visible mold or build-up in the ice transfer bucket or ice scoops.</li>
+                    <li>Ice scoop not stored in the holder</li>
+                    <li>Ice bins not kept covered</li>
+                  </ul>
+                  <p><strong>COACH</strong>  if the ice bucket is stored upright and not stored inverted on a clean surface. Do NOT cite for ice bins with an over a shelf that covers the bin.</p>
+                  <p>Ask the Manager if they are part of the Coca-Cola QMP program (i.e. Coke technicians manage the replacement of the water filters).</p>
+                  <ul>
+                    <li>If the manager states, “Yes”, then there is no need to check that the water filters are dated.</li>
+                    <li>If the manager states “No”, then check that the water filters are dated. Only CITE if not dated. Do not assess the date itself.</li>
+                    <ul>
+                      <li>The restaurant needs to have a system in place that identifies and tracks when the water filters need to be replaced.</li>
+                      <li><strong>COACH</strong> if a system is not in place.</li>
+                    </ul>
+                  </ul>
+                  <p><strong>NOTE:</strong> Ice bucket and scoops not in good repair should be cited under FS15-US</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs16_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs16_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS17-US</strong> Food product opened: Are opened packages of food in storage, (including dry storage, refrigerators, and freezers) covered/wrapped, off the floor and away from walls, and stored according to proper procedures? If no, mark what product is not stored properly.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.Look to see that all food in refrigerators, freezers, and in dry storage are covered/wrapped and stored properly 6 inches off the floor (exception is buns in bun racks). If plastic wrap is used, it must effectively protect the entire product.</p>
+                  <p>Prep Area Coolers: All products must be stored covered.</p>
+                  <p><strong>CITE for the following:</strong></p>
+                  <ul>
+                    <li>If the product is not stored covered</li>
+                    <li>If raw products are not stored separately from ready-to-eat foods (RTE foods) as outlined in the McDonald’s procedures for storing products. For example, shell eggs not in the original case are stored on the same shelf or above produce or other RTE foods.</li>
+                  </ul>
+                  <p><strong>EXCEPTIONS:</strong> Do not cite products left in open bags or stored uncovered in the grill side refrigerator and freezer or the fryer side freezer, as these are considered to be in continuous use. French Fry Dispenser:</p>
+                  <ul>
+                    <li>Do not assess the product in the French fry dispenser.</li>
+                  </ul>
+                  <p>Walk-in Refrigerator and Walk-in Freezers: Product should be stored covered and 2 inches away from the wall and 6 inches off the floor</p>
+                  <p><strong>CITE</strong> only if the product is touching the wall or if the product is touching the floor as well as if the product is not stored covered</p>
+                  <p>Dry Storage/Stockroom: Food products should be stored covered and 6 inches off the floor.</p>
+                  <ul>
+                    <li><strong>CITE</strong> if the product is stored uncovered.  This CITE is only for exposed food, not packaged food inside of an open case.</li>
+                    <li><strong>CITE</strong> only if the product/product case is stored directly on the floor.</li>
+                  </ul>
+                  <p><strong>COACH</strong> only, do not cite if food is stored below 6 in. but is not directly on the floor in all areas.</p>
+                  <p><strong>NOTE:</strong> Primary shelf lives are assessed under <strong>FS8-US</strong> and secondary shelf lives are under <strong>FS25-US</strong></p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs17_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs17_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS18-US</strong> Raw food product handling: Are blue disposable glove procedures or dedicated tongs used to prevent cross-contamination when handling all raw meat or poultry products (including shell eggs) at the grill station and fryer station? Are dedicated utensils used for raw products (e.g. the yellow yolk breaking tool is only used to break egg yolks)?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Blue Glove Usage<br>
+                  Check that when employees handle raw protein products, they are wearing blue disposable gloves or are using dedicated tongs to handle raw protein products. Focus on raw meat, chicken, and shell eggs. Ensure that clear/white gloves are not being used instead of blue gloves to handle raw protein products. If observed, <strong>CITE</strong> under question <strong>FS19-US</strong>.</p>
+                  <p><strong>CITE</strong> if blue gloves are not removed before:</p>
+                  <ul>
+                    <li>Touching trays, tray liners, or equipment to lower platens</li>
+                    <li>Touching utensils</li>
+                    <li>Removing cooked products from the grill</li>
+                    <li>Moving to the prep table</li>
+                    <li>When cooking chicken, (McChicken, chicken fillet) blue gloves must be removed before the fryer basket handle is touched</li>
+                    <li>If bare hand contact is used with handling raw product at the grill/fryer</li>
+                    <li>If dedicated tongs are used for anything other than handling raw protein products</li>
+                  </ul>
+                  <p><strong>Do Not Cite if bare hands are used</strong> to handle non-raw protein products during the cooking process at the grill or fryer (ex. folded eggs, Canadian bacon, liquid eggs, hash browns). The use of clear or blue gloves is also acceptable to use when preparing this product.</p>
+                  <p>Proper Removal of Blue Gloves<br>
+                  Ensure that blue gloves are removed properly to avoid contacting the portions that came in contact with raw products. They should be peeled off from the base while grabbing from the back of the wrist and pulling off the glove by turning it inside out. They should not be pulled off from fingers or an area that contacted raw products.</p>
+                  <p><strong>CITE</strong> if blue gloves are not being removed using the proper procedure.</p>
+                  <p><strong>COACH</strong> if blue gloves are removed in front of the wrist instead of the back of the wrist.</p>
+                  <p><strong>CITE if Double Gloving is observed</strong><br>
+                  Double gloves are not permitted (unless in rare cases this is being required by local jurisdiction [e.g. Maricopa County, AZ] for our restaurants to be allowed to use the blue disposable gloves). Special requirements are set for these procedures.<br>
+                  White/clear gloves cannot be worn under Blue gloves. If when informing the Manager that double gloving was observed they state it is required by the local jurisdiction, do not cite. Employees are not required to wash hands after removing a pair of blue gloves and then putting on a new pair of blue gloves.</p>
+                  <p>Egg Yolk Breaking Tool</p>
+                  <ul>
+                    <li><strong>CITE</strong> if the egg yolk breaking tool is not available or used properly</li>
+                    <li><strong>CITE</strong> if the egg yolk breaking tool is not used to break raw egg yolks</li>
+                    <li><strong>CITE</strong> if the egg yolk breaking tool is used for items other than raw eggs</li>
+                    <li><strong>CITE</strong> if the egg yolk breaking tool is improperly stored in contact with food or utensils used for cooked food.</li>
+                  </ul>
+                  <p><strong>COACH</strong> but do not cite if bare hand contact is observed with chicken McNuggets as they are being poured into the fry basket.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs18_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs18_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS19-US</strong> Ready-to-eat food product handling: Are clear/white disposable gloves worn for food preparation of ready to eat foods at the sandwich prep table, salad prep table, and in all other areas to prevent bare hand contact with any cooked or ready-to-eat foods?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong><br>
+                  Clear/white disposable Glove Usage<br>
+                  Employees must wear clear/white disposable gloves when working with ready-to-eat foods under the following circumstances:</p>
+                  <ul>
+                    <li>Working at the prep table preparing and wrapping sandwiches.</li>
+                    <li>Working at the salad prep table sorting lettuce, slicing lemons, or any other prep task involving ready-to-eat foods at this station.</li>
+                    <li>All other prep tasks with ready-to-eat foods.</li>
+                    <li>Placing a new liner in tea and coffee dispensers.</li>
+                  </ul>
+                <p><strong>CITE</strong> if disposable gloves are not worn for the above or if bare hand contact is observed for handling ready-to-eat foods that will not be heated or cooked</p>
+                <p><strong>CITE</strong> if clear/white gloves are being used to handle raw protein products instead of blue gloves.</p>
+                <p><strong>Do not cite if bare hands are used</strong> to handle non-raw protein products during the cooking process at the grill or fryer (ex. folded eggs, Canadian bacon, liquid eggs, hash browns). The use of clear or blue gloves is also acceptable to use when preparing this product.</p>
+                <p><strong>COACH</strong> that ideally hands are washed before handling these products with bare hands or suggest that blue gloves or dedicated tongs are also acceptable.</p>
+                <p>Clear/white disposable gloves are removed when required and no double gloving of disposable gloves - a double set of white gloves should not be worn.<br>
+                Gloves should not be re-used and must be replaced when damaged or contaminated before resuming food handling/preparation. E.g. getting stock from walk-in coolers, handling trash, etc.</p>
+                <ul>
+                  <li>Do not cite if you walk into the back of house 3-compartment sink/storage areas and see employees wearing clear/white gloves as they wash dishes, handle garbage, or if a crew member is observed wearing clear/white gloves in the front of the house when performing a cleaning task.</li>
+                  <li><strong>CITE</strong> only if you have witnessed the entire process of the clear/white disposable gloves getting contaminated and food handling/preparation being resumed.</li>
+                  <li>Do not cite for employees wearing clear/white gloves touching prep area refrigerator handles and resuming food prep.</li>
+                </ul>
+                <p><strong>NOTE:</strong> If gloves are changed when required but hands are not washed, <strong>CITE</strong> under <strong>FS10-US</strong>.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs19_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs19_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS19-US-01</strong> Good hygienic practices: Are proper personal hygiene procedures being followed? </label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Fingernails: All employees that prepare food should keep their fingernails trimmed, filed, and maintained so the edges and surfaces are cleanable and not rough; and should not wear fingernail polish or artificial fingernails when working with exposed food, unless they are wearing intact disposable gloves that are not torn or damaged.</p>
+                  <p><strong>CITE</strong> for employees handling exposed food with fingernail polish/artificial fingernails or fingernails not trimmed, filed, and maintained so the edges and surfaces are cleanable and not rough unless they are wearing intact disposable gloves that are not torn or damaged.</p>
+                  <p>Jewelry: All employees that prepare food may not wear jewelry on their arms or hands except for a plain ring such as a wedding band.</p>
+                  <p><strong>CITE</strong> for employees preparing food while wearing jewelry, that is more than a plain ring, on arms or hands.</p>
+                  <p>Hair Restraints: All employees that prepare food in the kitchen must wear a hat, visor, or hair net and beard covering to properly restrain hair from falling into food.</p>
+                  <p><strong>CITE</strong> for hair that is not properly restrained and has the potential to fall into food.</p>
+                  <p>Uniforms and Aprons: All employees that prepare food shall wear clean outer clothing and aprons to prevent contamination of food, equipment, utensils, linens, and single-service and single-use articles. If excessive encrusted food buildup is observed on employees’ outer clothing/aprons, ask the manager what their system is for ensuring employees come to work with a clean uniform and employees working in the production area are provided with clean aprons.</p>
+                  <p><strong>CITE</strong> for excessive encrusted food buildup on outer clothing/aprons that can flake off and fall into food (e.g. heavy food debris) on employees handling open food.</p>
+                  <p>Employee Food & Beverages: All employee food and beverages shall be stored and consumed only in designated areas where the contamination of exposed food, clean equipment, utensils, linens, unwrapped single-service, and single-use articles or other items needing protection cannot result.</p>
+                  <p><strong>CITE</strong> for employees storing or consuming food (includes gum) and beverages in undesignated areas where the contamination of exposed food, clean equipment, utensils, linens, unwrapped single-service, and single-use articles or other items needing protection can result.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs19_us_01, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs19_us_01, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS20-US</strong> Chemical management: Are chemicals stored away from food and packaging?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.Chemicals should be stored away from food or food contact surfaces/packaging in the back of house food prep/kitchen areas, service areas, and storage areas when not in active use. For example, the grill cleaner should not be left at the grill station when not in active use and spray bottles should not be stored in the front-line area next to or above food or packaging.</p>
+                  <p>Observe that chemicals are not being improperly used posing a risk of contamination of food or food contact surfaces (ex. spraying around open food or packaging). Observe that chemicals are not stored in food containers.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs20_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs20_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS21-US</strong> Pest management: Is a pest management program and pest prevention steps and behaviors in place and being managed effectively? Is the restaurant properly pest proofed to prevent the entry of pests (e.g. gaps under doors are sealed)?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Confirm that the restaurant has a Pest Management Program in place.</p>
+                  <ul>
+                    <li>Ask the manager to show you a pest service report from their last visit. As long as a service report is available within the last 60 days, this will suffice as having a program in place. <strong>CITE</strong> if the report is older than 60 days or if no pest service report is available for review.</li>
+                    <li>Check that there are no ongoing pest activity issues noted in the report. If pest activity was noted in the previous report and it is still present, <strong>CITE</strong>.</li>
+                    <li>Review the most recent pest control report, ensuring all recommendations have been corrected or are in an action plan to correct. If the pest management program and pest prevention steps and behaviors are not in place or are not complete, then <strong>CITE</strong> this question. Include in the comments specifics on what you observed.</li>
+                  </ul>
+                  <p><strong>CITE</strong> if the restaurant is not pest proofed and all potential entry points do not have adequate seals.</p>
+                  <ul>
+                    <li>There should not be any gaps underneath any entry doors.</li>
+                    <li>Doors should have sweeps/weather stripping and should be kept closed when not in use.</li>
+                    <li>If either drive-thru window is left open and there are no cars in the drive-thru.</li>
+                    <ul>
+                      <li><strong>COACH</strong> if either drive-thru window is left open while not in active use (i.e. not closed between cars.)</li>
+                    </ul>
+                  </ul>
+                  <p><strong>CITE</strong> for the following type of pest activity if observed:</p>
+                  <ul>
+                    <li>Dead cockroach (es)</li>
+                    <li>Trapped rodent (s)</li>
+                    <li>Trailing ant activity in one area</li>
+                    <li>High large fly activity is greater than 5 in one area. Cite if greater than 5 large flies are congregating in one area such as the dining area, food prep area, front counter area, or food storage areas. Large flies are a nuisance to customers and employees and can land on food, but they are not typically considered to be an infestation. They get into the restaurant due to windows and/or doors being left open and if the restaurant does not have a positive air balance.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs21_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs21_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS22-US</strong> Are non-food spill clean-up procedures in place?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> if one or more occurrence is observed.</p>
+                  <p>Ask a manager to see the McDonald’s approved procedures that explain proper clean-up of non-food spills.</p>
+                  <ul>
+                    <li>If the manager does not have the McDonald’s approved documented procedure, they must be able to describe the correct procedure and the correct chemical to use (Kay Peroxide 3N1 Cleaner/Disinfectant).</li>
+                    <li>If the manager presents a documented procedure, it must be the McDonald’s approved procedure (Ecolab Kay card or O&T).</li>
+                    <li>Any other documented biohazard spill procedure is not acceptable.</li>
+                    <li>Ask the manager to show you that the Kay Peroxide Cleaner/Disinfectant (3N1) is available in the restaurant.</li>
+                  </ul>
+                  <p>If a non-food spill occurs while completing the visit, observe that the proper procedures are followed.</p>
+                  <p><strong>NOTE:</strong> some restaurants may have a kit that is required by their local health jurisdiction. This is fine; however, they should still be knowledgeable about the McDonald’s approved documented procedure and have the correct chemical to use on site (Kay Peroxide 3N1/Disinfectant)</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs22_us, 1, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs22_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <hr>
+            <h4 class="text-center bg-secondary p-2">Storage</h4>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS23-US</strong> Frozen products: Are walk-in freezers and any other primary storage freezers operating at 0°F or below? Are secondary storage freezers keeping products solidly frozen? If no, check which units are not at the proper temperature.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong><br>
+                  Check the temperature of the walk-in freezer or primary storage freezer for non-traditional restaurants. Unit temperatures should be at 0°F or below.</p>
+                  <p>Check the frozen product in the <strong>two</strong> most frequently used secondary freezers to see if it is solidly frozen. If not, specify which secondary units are not at proper temperatures.</p>
+                  <p><strong>CITE</strong> if the walk-in freezer or other primary storage freezer is above 0°F and the unit is not in defrost<br>
+                  <strong>CITE</strong> if the walk-in freezer or other primary storage freezer is above 10°F even if the unit is in defrost<br>
+                  <strong>CITE</strong> if the product in the secondary freezers are not solidly frozen<br>
+                  <strong>COACH</strong> if the walk-in freezer or other primary storage freezer is above 0°F but below 10°F and the unit is in defrost</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs23_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs23_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS24-US</strong> Refrigerated products: Are refrigerated products inside refrigerated units at or below 40°F? If no, note which units do not meet the temperature standard.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.When taking temperatures, follow the food safety directions found in the current Daily Food Safety Booklet.</p>
+                  <p>Take internal temperatures of food products from the walk-in refrigerator</p>
+                  <ul>
+                    <li>For the walk-in refrigerator, take temperatures of 2 different products in opposite locations of the unit.</li>
+                  </ul>
+                  <p><strong>CITE</strong> if any of the 2 product temperatures in the walk-in refrigerator are above 40°F</p>
+                  <p>Take internal temperatures in two of the most frequently used secondary/reach-in refrigerators</p>
+                  <ul>
+                    <li>Always take a product temperature from the refrigerated unit near the prep line or sandwich area holding multiple produce products</li>
+                  </ul>
+                  <p><strong>CITE</strong> if any product temperatures found in the secondary/reach-in refrigerators that were checked are above 40°F</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs24_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs24_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS25-US</strong> Are secondary shelf lives of all Time-Temperature Control for Safety (TCS) products held at room temperature and in refrigerators properly marked and within their secondary shelf lives? If no, mark what product is not in code.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong> if one or more occurrence is observed.</p>
+                  <p>Labeling of Opened/Prepped TCS Products Held at Room Temperature<br>
+                  Check that the following TCS products held at room temperature are marked with a secondary shelf life, are not expired per the marked secondary shelf life, and that no marked shelf lives are greater than four hours from the current time.</p>
+                  <ul>
+                    <li>Shredded lettuce, sliced tomatoes, leaf lettuce, cheese, and all types of onions (chopped, sliced, fried onion strings, and reconstituted) <strong>held at the prep table or in the chilled rail</strong></li>
+                    <li>Meat (Canadian bacon) and egg products near the <strong>grill</strong> area that is stored at room temperature</li>
+                    <li>Apple slices, butter pats, or other TCS foods held at room temperature or in chill pans</li>
+                    <li>Softened butter held in a squeeze bottle or food pan at room temperature></li>
+                  </ul>
+                  <p><strong>NOTE:</strong> if an approved timing app is used as an alternative to marking the product with a secondary shelf, each container of product held at room temperature must have a countdown timer allocated to each container of product that is actively timing each container of product. The countdown timer has not expired, and the expiration time cannot be greater than 4 hours from the current time. Some health departments may not allow the use of timing in an app as a replacement for marking the product with a secondary shelf life or expiration time</p>
+                  <p><strong>CITE</strong> if TCS food items stored at the prep table, in the chilled rail, service, or grill area are not marked with a legible secondary shelf life (or are not being timed if a timing app is being used) or are expired per the secondary life marked on the product (or the time has expired if using a timing app). Or if the time marked on the product (or on the timing app) is greater than 4 hours from the current time.</p>
+                  <p>Labeling of Opened/Prepped TCS Products Held Under Refrigeration<br>
+                  Check that a sampling of 5 opened, prepped, or thawing-from-frozen TCS products are properly labeled with a secondary shelf life and are not expired per the marked secondary shelf life.</p>
+                  <p><strong>CITE</strong> If the secondary shelf life of 3 or more TCS products (out of 5 products checked) is found to be expired or not marked with a secondary shelf life.</p>
+                  <p><strong>COACH</strong> If the secondary shelf life of 2 or fewer TCS products (out of 5 products checked) is found to be expired or not marked with a secondary shelf life.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs25_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs25_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS26-US</strong> Leftover heated foods: Are leftover heated foods discarded (including any shake/sundae mix removed from heat treatment shake/sundae machines)? If no, mark what product.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Check that no previously heated foods have been placed in the walk-in or reach-in refrigerators for use the next day (such as soups, sauces, and gravies).</p>
+                  <ul>
+                    <li><strong>CITE</strong> if cooked/heated foods are being saved (unless being saved for a “Food Donation” program).</li>
+                    <ul>
+                      <li>Food used for the “Food Donation” program must be stored in the freezer and never in a refrigerator. <strong>CITE</strong> if not observed stored in the freezer.</li>
+                      <li>“Food Donation” products will typically be stored in a plastic bag in the freezer and should not be assessed for labeling/expiration. A limited number of restaurants participate in this type of program.</li>
+                    </ul>
+                    <li><strong>CITE</strong> f shake and sundae mix removed from the heat treatment shake/sundae machine is being saved in the walk-in refrigerator</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs26_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs26_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS26-US-01</strong> Hot holding units: Are heated foods in a hot holding unit at or above 140 °F? If no, select which product(s), which type of hot holding unit(s) (UHC, Marinator, Extended Hot Holding Cabinet, etc.), and if the products are being held without a timing mechanism.</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Pick three random products in the UHC, Marinator, and/or Extended Hot Holding Cabinet and verify temperature is above 140°F with a clean/sanitized pyrometer.</p>
+                  <p><strong>CITE</strong> for any product held below 140°F. Note the unit, product cited as well as if the product was being timed or not.</p>
+                  <p><strong>NOTE:</strong> If a restaurant has either a Marinator and/or Extended Hot Holding Cabinet in addition to a UHC, pick the three products from those hot holding environments rather than the UHC.</p>
+                  <p><strong>EXCEPTION:</strong>Do not check/observe for Muffins, Biscuit, or Bagel products holding at appropriate temperatures.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs26_us_01, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs26_us_01, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <hr>
+            <h4 class="text-center bg-secondary p-2">Cooking</h4>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS27-US</strong> Pyrometer: Is the Pyrometer calibrated, working correctly, and is the probe clean?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>All restaurants are required to have a pyrometer with a needle probe for taking temperatures. The majority of restaurants will have a Cooper Atkins pyrometer. If another type of pyrometer is observed, do not cite.  Most locations are now using a Bluetooth pyrometer with DFS tablet that displays the temperature readout. You will require manager assistance with checking the Bluetooth pyrometer calibration.</p>
+                  <p>Confirm calibration of the restaurant’s pyrometer. It must be within +/- 2°F of 32°F.</p>
+                  <p><strong>NOTE:</strong>If you confirm calibration of the pyrometer, per the procedures listed in the Food Safety Booklet, and it is within +/- 2°F of 32°F, then it is calibrated properly and it is not necessary to adjust or compensate readings when taking product temperatures.</p>
+                  <ul>
+                    <li>If the restaurant has already done its calibration check for its Bluetooth pyrometer for the day, it is acceptable to have the manager show you the verification in the digital food safety checklist. This only applies to the Bluetooth pyrometer.</li>
+                  </ul>
+                  <p>Check that the probe is clean</p>
+                  <p><strong>CITE</strong> if there is excessive, encrusted food residue present.</p>
+                  <p>Check if the restaurant has a backup pyrometer and probe. <strong>COACH</strong> and note if they do not have a backup pyrometer and probe.</p>
+                  <p><strong>NOTE:</strong> In order to use DFS the way it is intended, the restaurant does need to use the Bluetooth-enabled pyrometer, but if it is broken or not working they can still use another approved non-Bluetooth pyrometer and manually enter the temperatures. If the restaurant has a functioning pyrometer they would be in compliance.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs27_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs27_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+
+            <hr>
+            <h4 class="text-center bg-secondary p-2">General</h4>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS28-US</strong> Sourcing: Are all food, food packaging, equipment (including utensils), and cleaning chemicals from approved sources?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong><br>
+                  While in food storage areas, look for any food products and food packaging that are not in McDonald’s packaging and do not have a WRIN number on the case. Verify that cleaning chemicals come from the Distribution Center, primarily these will be Ecolab/Kay productsLook to see that all food, food packaging, and cleaning chemicals, are from the McDonald’s Distribution Center. Look for any store-bought food not provided by McDonald’s Suppliers.Look for approved equipment, including small wares from approved McDonald’s Kitchen Equipment Suppliers.</p>
+                  <p><strong>NOTE:</strong>Cleaning tablets for the espresso machine that is from the manufacturer of the machine, including Melitta, Urnex, and Sinfonia are approved. Wipes and Hand Sanitizing wipes from Progressive Products are also approved.</p>
+                  <p><strong>CITE</strong> if one or more occurrence is observed.</p>
+                  <ul>
+                    <li>Food, food packaging or equipment is not from approved sources.</li>
+                    <li>Store-bought cleaning chemicals are present.</li>
+                    <li>Unapproved hand soap is observed stocked at a hand sink.</li>
+                  </ul>
+                  <p><strong>EXCEPTION:</strong> Do <strong>not cite</strong> for employees’ food from home stored in refrigerators, if observed. This is not assessed as part of the Food Safety Verification. If observed, COACH the restaurant to store all employee food in a separate refrigerator that is designated for employee food only.  If that option is not available, coach to store in a refrigerator in a clearly labeled container as “Employee Food Only” and store on the bottom shelf away from all McDonald’s items.”</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs28_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs28_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS29-US</strong> Employee health: Do managers understand employee illness symptoms and reportable illness causes for when an employee cannot be working? Do managers also understand when an employee can return to work after illness?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Start by asking the manager first: <strong>“Without referencing any materials, can you please recall the illness symptoms when an employee cannot be working in the restaurant?”</strong> Let the Manager know that they are not allowed to reference any materials to answer this question. If the Manager immediately references material before you can let them know of the requirement, do not cite but <strong>COACH</strong> that they should be able to recall these from memory.</p>
+                  <p>The manager must recall, at a minimum, the first three symptoms listed (vomiting, diarrhea and jaundice) below:</p>
+                  <ul>
+                    <li>Vomiting</li>
+                    <li>Diarrhea</li>
+                    <li>Jaundice (yellow eyes or skin)</li>
+                    <li>Fever with Sore throat</li>
+                    <li>Have a lesion containing pus such as a boil or infected wound that is open or draining and is not properly covered</li>
+                  </ul>
+                  <p><strong>CITE</strong> if less than 3 are recalled.</p>
+                  <p>Ask the manager, <strong>“What are the reportable illnesses (or the Big 6) when an employee is ill and cannot be working in the restaurant?”</strong></p>
+                  <p>Let them know they may reference materials that are readily accessible for this question if needed. The manager should be able to recall the 5 main names below or refer to the readily accessible reference materials:</p>
+                  <ul>
+                    <li>Salmonella (Nontyphoidal and Typhoid fever (caused by Salmonella Typhi)- do not need to specify each type</li>
+                    <li>Shigella</li>
+                    <li>Hepatitis A Virus</li>
+                    <li>Norovirus</li>
+                    <li>E. coli (shiga toxin-producing)</li>
+                  </ul>
+                  <p>Also, ask the manager, <strong>“When an ill employee should be allowed to return to work?”</strong></p>
+                  <ul>
+                    <li>They should state that they should wait for a minimum of 24 hours symptom-free, or that they would contact HR Consulting for guidance. If the manager asks how to contact HR Consulting share the following phone number with them: 877- 623-1955.</li>
+                  </ul>
+                  <p>Observe during the visit that no employees exhibit any of the illness symptoms listed above.</p>
+                  <p><strong>CITE</strong> if employees exhibiting any of the illness symptoms above are observed.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs29_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs29_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS30-US</strong>  Staff training: Are all managers (including shift managers) trained and currently certified in food safety through ServSafe (or an equivalent and accredited food safety training course)? Are all employees trained and verified on food safety and sanitation per McDonald's current training program?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT:</strong><br>
+                  Instead of asking for manager schedules, ask how many managers/shift managers work in the restaurant, then ask to see all their ServSafe or equivalent food safety certification. Check that the certificate dates are current. </p>
+                  <p><strong>CITE</strong> if one or more occurrence is observed.</p>
+                  <p>Any mangers or shift managers are missing Certified Food Safety Manager certificates or have certificates that are not issued by organizations that require at least 8 hours of classroom study and a proctored certification exam.</p>
+                  <p>Certified Food Protection Manager Certificates from the following national organizations are acceptable in addition to ServSafe:</p>
+                  <ul>
+                    <li>Prometric</li>
+                    <li>Above Training State Food Safety Company</li>
+                    <li>National Registry of Food Safety Professionals</li>
+                    <li>360 Training Company</li>
+                  </ul>
+                  <p><strong>CITE</strong> if the restaurant does not have the certification records for all their managers for review during the visit.</p>
+                  <p>Ask the manager, <strong>“Please explain your process for tracking that all employees have received food safety training.”</strong></p>
+                  <ul>
+                    <li>The manager should be able to explain a process for keeping track of who has been trained on food safety and share their tracking document to show training has been completed. The tracking document must be available for review during the visit. Printed and signed Station Observation Checklists (SOCs) are not required by McDonald’s for tracking purposes.</li>
+                    <li><strong>CITE</strong> if there is no tracking process in place.</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs30_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs30_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS31-US</strong> Food Safety Checklists: Are at least the last 60 days of correctly completed Food Safety Daily Checklists available? Are the last two correctly completed Monthly Food Safety Procedure Verifications available? (For Digital Food Safety please reference the Food Safety Guide)</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p><strong>For Paper Food Safety Records:</strong><br>
+                  Ask the manager to provide you with the file or booklets of completed checklists for the last 60 days.</p>
+                  <p>Review the last 14 days to verify that the Food Safety Daily Checklists are not missing required sections or days and are being completed according to the appropriate Food Safety Booklet procedures.  Browse through the remaining 60 days of checklists and spot-check a few days for missing required sections or days.</p>
+                  <p>Check that the restaurant has the last two Monthly Food Safety Procedure Verifications available and completed.</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>3 or more missing required sections on different days or 3 missing days within the 14 days record review</li>
+                    <li>The last two Monthly Food Safety Procedure Verifications NOT available and properly completed</li>
+                    <li>12 or more missing required sections on different days or 12 missing days within the 60 days record spot check</li>
+                  </ul>
+                  <p><strong>COACH</strong> for minor deviations such as a few missing products or refrigerator checks, missing manager signoffs, or not answering the quality questions correctly based on the recorded temperatures.</p>
+                  <p><strong>NOTE:</strong> Do not cite if the last two Monthly Food Safety Procedure Verifications are not completed by the 15th of the month.</p>
+                  <p><strong>For Digital Food Safety Records:</strong><br>
+                  You DO NOT need to review the last 14 days to verify that checklists are being completed according to the food safety booklet procedures. The software does this automatically.</p>
+                  <p>You DO need to review that the Food Safety Daily Checklist completion percentage is above 80% for the \past 60 days.<br>
+                  You DO need to review that the last two Monthly Food Safety Procedure Verifications are available and completed.<br>
+                  To access these reports on the approved digital food safety apps (JOLT or SQUADLE) ask the manager in charge to show you or verify using the step-by-step procedures, which can be found on the US ROIP Website.</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>Less than 80% completion percentage for the last 60 days of Food Safety Daily Checklists</li>
+                    <li>The last two Monthly Food Safety Procedure Verifications NOT available and properly completed</li>
+                  </ul>
+                  <p><strong>NOTE:</strong> If the restaurant has been on Digital Food Safety less than 60 days or has days missing due to technical issues, you will also have to review Paper Food Safety Checklists using the “For Paper Food Safety Records” assessment criteria listed above.</p>
+                  <p><strong>NOTE:</strong> For other unapproved digital food safety apps, the restaurant must be able to provide the last 60 days of daily food safety checklists and the last two Monthly Food Safety Procedure Verifications for your review, and the same method for the paper checklists must be utilized to assess completion.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs31_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs31_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS32-US</strong> Health Department Inspections: When reviewing the most recent health department inspection report, have all critical violations noted by the health department been corrected or a plan in place to correct issues?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <ul>
+                    <li>Check that the most recent Health Department inspection form is available in the restaurant and that all <strong>Critical</strong> Food Safety violations have been corrected.</li>
+                    <li>Check that there is an action plan for any items that are not yet completed.</li>
+                    <li>Read the comments section of the report for more specifics about the violations.</li>
+                  </ul>
+                  <p><strong>CITE</strong> if any critical violations have not been corrected or there is no action plan to correct them.</p>
+                  <p><strong>COACH</strong> for any other non-critical violations that have not yet been corrected.</p>
+                  <p><strong>NOTE:</strong> It is acceptable for the last Health Department inspection to be accessed electronically (e.g. ROIP website or other websites, saved file, etc.) if not available in printed format.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs32_us, 5, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs32_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="mb-3">
+              <label class="p-1"><strong>FS33-US</strong> Allergen management: Are nut-containing McFlurry mix-ins kept in the orange container with lid and a dedicated scoop?</label>
+              <h5 data-action="click->food-safety#toggle"><strong>SEE INFO</strong></h5>
+              <div data-food-safety-target="info" class="card hide">
+                <div class="card-body">
+                  <p class=""><strong>ASSESSMENT: CITE</strong> if one or more occurrence is observed.</p>
+                  <p>At the McFlurry station, check to see that all nut-containing mix-ins are in orange containers with a lid and a dedicated scoop.</p>
+                  <p><strong>CITE</strong> for the following:</p>
+                  <ul>
+                    <li>Nut containing mix-in(s) is not in the orange container</li>
+                    <li>Nut containing mix-in(s) does not have a lid on the orange container</li>
+                    <li>Nut-free mix-in(s) is in an orange container</li>
+                    <li>There is no dedicated scoop for each nut containing mix-in/container</li>
+                  </ul>
+                  <p>If the restaurant is not selling mix-ins containing nuts, assess this question as meeting standards.</p>
+                </div>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs33_us, 3, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <%= form.radio_button :fs33_us, 0, class: "form-check-input shopRadioButton", 'data-action': "click->food-safety#score" %>
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="border">
+              <ol>
+                <li>Unacceptable Audit - Critical Question Missed: Critical Food Safety questions are FS1-FS7. If not compliant these questions result in the evaluation not meeting standards</li>
+                  <ol type="a">
+                    <li>Non-compliant criteria must be corrected immediately by restaurant team to remove the risk before evaluator leaves the premises.</li>
+                    <li>Follow-up full announced visit, by a McDonald's operations professional  is required within 14 days to review findings from visit.</li>
+                    <li>Restaurant team to address all non-compliant criteria ready for follow-up visit.</li>
+                </ol>
+                <li>Unacceptable Audit – Score below 80%: Non-critical questions are FS8-FS33.  If score is below 80% the visit results in not meeting standards</li>
+                  <ol type="a">
+                    <li>A follow-up full announced visit, by McDonald’s operations professional is required within 30-90 days to review findings from visit.</li>
+                    <li>Restaurant team to address all non-compliant criteria ready for follow-up visit.</li>
+                  </ol>
+                <li>Acceptable Audit – Score 80-99%: Non-critical findings resulting with overall score of > 80%</li>
+                  <ol type="a">
+                    <li>Restaurant team to address all non-compliant criteria and document.</li>
+                  </ol>
+                <li>Acceptable Audit – Score 100%:  No further remediation necessary</li>
+              </ol>
+            </div>
+            <div>
+              <%= form.hidden_field :score %>
+              <%= form.hidden_field :critical %>
+            </div>
+            <div class="m-3">
+              <%= form.submit class: "btn my-submit" %>
+            </div>
+          </div>
+        <% end %>
+        <div class="row">
+          <div class="col-auto" >
+            <p style="display: none; bottom: 24px; position: fixed; right: 0; width: 100%; z-index: 5;" id="score" class="bg-dark text-light text-center d-block"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

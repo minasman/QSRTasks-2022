@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_27_120751) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_08_205016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -217,6 +217,58 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_120751) do
     t.datetime "updated_at", null: false
     t.index ["equipment_area_id"], name: "index_equipment_types_on_equipment_area_id"
     t.index ["organization_id"], name: "index_equipment_types_on_organization_id"
+  end
+
+  create_table "food_safety_audits", force: :cascade do |t|
+    t.string "fs1_us"
+    t.string "fs2_us"
+    t.string "fs3_us"
+    t.string "fs4_us"
+    t.string "fs5_us"
+    t.string "fs6_us"
+    t.string "fs7_us"
+    t.string "fs8_us"
+    t.string "fs9_us"
+    t.string "fs10_us"
+    t.string "fs11_us"
+    t.string "fs12_us"
+    t.string "fs13_us"
+    t.string "fs14_us"
+    t.string "fs15_us"
+    t.string "fs16_us"
+    t.string "fs17_us"
+    t.string "fs18_us"
+    t.string "fs19_us"
+    t.string "fs19_us_01"
+    t.string "fs20_us"
+    t.string "fs21_us"
+    t.string "fs22_us"
+    t.string "fs23_us"
+    t.string "fs24_us"
+    t.string "fs25_us"
+    t.string "fs26_us"
+    t.string "fs26_us_01"
+    t.string "fs27_us"
+    t.string "fs28_us"
+    t.string "fs29_us"
+    t.string "fs30_us"
+    t.string "fs31_us"
+    t.string "fs32_us"
+    t.string "fs33_us"
+    t.bigint "store_id", null: false
+    t.bigint "organization_id", null: false
+    t.string "score"
+    t.date "shop_date"
+    t.time "shop_time"
+    t.bigint "auditor_id"
+    t.bigint "manager_id"
+    t.boolean "critical"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["auditor_id"], name: "index_food_safety_audits_on_auditor_id"
+    t.index ["manager_id"], name: "index_food_safety_audits_on_manager_id"
+    t.index ["organization_id"], name: "index_food_safety_audits_on_organization_id"
+    t.index ["store_id"], name: "index_food_safety_audits_on_store_id"
   end
 
   create_table "guests", force: :cascade do |t|
@@ -627,6 +679,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_27_120751) do
   add_foreign_key "equipment_areas", "organizations"
   add_foreign_key "equipment_types", "equipment_areas"
   add_foreign_key "equipment_types", "organizations"
+  add_foreign_key "food_safety_audits", "organizations"
+  add_foreign_key "food_safety_audits", "stores"
   add_foreign_key "guests", "organizations"
   add_foreign_key "new_hires", "organizations"
   add_foreign_key "new_hires", "positions"

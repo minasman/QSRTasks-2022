@@ -14,6 +14,8 @@ class User < ApplicationRecord
   has_many :workorder_updates
   has_many :auditor_safe_audits, class_name: "SafeAudit", foreign_key: "auditor_id"
   has_many :manager_safe_audits, class_name: "SafeAudit", foreign_key: "manager_id"
+  has_many :manager_food_safety_audits, class_name: "FoodSafetyAudit", foreign_key: "manager_id"
+  has_many :auditor_food_safety_audits, class_name: "FoodSafetyAudit", foreign_key: "manager_id"
   has_many :employee_named_documentations, class_name: "Documentation", foreign_key: "employee_named_id"
   has_many :awarded_by_documentations, class_name: "Documentation", foreign_key: "awarded_by_id"
   has_many :instructor_tclasses, class_name: "Tclass", foreign_key: "instructor_id"

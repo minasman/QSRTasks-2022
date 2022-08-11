@@ -1,0 +1,82 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="text-center">Restaurant <%= @food_safety_audit.store.number %> Date: <%= @food_safety_audit.shop_date.strftime("%m/%d/%Y")%> at <%= @food_safety_audit.shop_time.strftime("%l:%M %p")%></h2>
+        <h3 class="text-center">Completed By: <%= @food_safety_audit.auditor.full_name %> Score: <%= @food_safety_audit.score %>%</h3>
+        <h3 class="text-center">Shift Manager: <%= @food_safety_audit.manager.full_name %></h3>
+        <% if @food_safety_audit.score.to_i < 80 %>
+          <h3 class="text-center text-light bg-danger p-1">Documentation Required</h3>
+        <% elsif @food_safety_audit.critical == "true" %>
+          <h3 class="text-center text-light bg-danger p-1">Critical Violation Documentation Required</h3>
+        <% else %>
+          <h3 class="text-center text-light bg-success p-1">Acceptable Visit Praise! Commendation Recommended</h3>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <h4 class="text-center bg-danger p-2">CRITICAL FOOD SAFETY</h4>
+        <p><strong>FS1-US</strong> Is the restaurant free of a pest infestation and/or signs of an active pest infestation in the restaurant building, adjoining corral area, and any area within 10 feet of the building?<strong> <%= @food_safety_audit.fs1_us ==  "critical" ? "NO" :  "YES" %></strong><br>
+        <strong>FS2-US</strong> Are the internal temperatures of beef patties after cooking at or above 155°F?<strong> <%= @food_safety_audit.fs2_us ==  "critical" ? "NO" :  "YES" %></strong><br>
+        <strong>FS3-US</strong> Are the internal temperatures of chicken products after cooking at or above 165°F?<strong> <%= @food_safety_audit.fs3_us ==  "critical" ? "NO" :  "YES" %></strong><br>
+        <strong>FS4-US</strong> Is the internal temperature of Filet-O-Fish portions after cooking at or above 155°F?<strong> <%= @food_safety_audit.fs4_us ==  "critical" ? "NO" :  "YES" %></strong><br>
+        <strong>FS5-US</strong> Are the internal temperatures of breakfast steak and breakfast sausage after cooking at or above 155°F?<strong> <%= @food_safety_audit.fs5_us ==  "critical" ? "NO" :  "YES" %></strong><br>
+        <strong>FS6-US</strong> Are the internal temperature of round eggs after cooking at or above 155°F?<strong> <%= @food_safety_audit.fs6_us ==  "critical" ? "NO" :  "YES" %></strong><br>
+        <strong>FS7-US</strong> Can managers (or staff assigned to complete the checklist) demonstrate they have been trained on properly completing the procedures on the Food Safety Daily Checklist and can take corrective action?<strong> <%= @food_safety_audit.fs7_us ==  "critical" ? "NO" :  "YES" %></strong></p>
+        <h4 class="text-center bg-secondary p-2">TCS for Refrigerated Products</h4>
+        <p><strong>FS8-US</strong> Are all Time-Temperature Control for Safety (TCS) refrigerated products in code (within primary shelf life)? If no, mark what product is not in code:<strong> <%= @food_safety_audit.fs8_us.to_i > 0 ? "YES" : "NO" %></strong></p>
+        <h4 class="text-center bg-secondary p-2">Hygeine & Sanitation</h4>
+        <p><strong>FS9-US</strong> Handwashing sinks: Is there warm running water and required supplies at all handwashing sinks? Are hand wash sinks easily accessed by employees and only used for hand washing, not preparing food, or storing equipment?<strong> <%= @food_safety_audit.fs9_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS10-US</strong> Handwashing procedure: Are hands properly washed following handwashing procedures at the required times and is a system in place to ensure hourly hand washing by all employees?<strong> <%= @food_safety_audit.fs10_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS11-US</strong> Sanitized towel/cloth buckets: Do sanitized towel buckets contain towels and chlorine sanitizer solution at the correct concentration checked with a chlorine test strip?<strong> <%= @food_safety_audit.fs11_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS12-US</strong> Sanitizer-soaked towels/cloths: Are sanitizer-soaked towels and grill cloths used at food, beverage preparation, and service areas placed into the soiled towel bucket after using and not left sitting out on surfaces?<strong> <%= @food_safety_audit.fs12_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS13-US</strong> Utensils and trays sanitizing: Are all in-use UHC trays, grill utensils, prep table utensils, and utensil holders clean (no build-up), washed, and sanitized at least every 4 hours as per approved procedure? Do the back sink and soap/sanitizer dispensers or dishwashers function (hot water 110˚F or higher in the wash bin/sink) with all required supplies? Does the sanitizer solution have the right concentration when checked with an appropriate test strip?<strong> <%= @food_safety_audit.fs13_us.to_i > 0 ? "YES" : "NO" %></strong></p>
+        <h4 class="text-center bg-secondary p-2">Contamination Prevention</h4>
+        <p><strong>FS14-US</strong> State of cleanliness: Is the restaurant (all areas) in a good state of cleanliness? In all areas, the floors/walls/ceilings and equipment do not have excessive soil, grease, or food debris build-up? Are the floors free of standing or puddling water?<strong> <%= @food_safety_audit.fs14_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS15-US</strong> State of repair: Is the restaurant (all areas), the floors/walls/ceilings, and equipment functioning properly and in a good state of repair (not cracked or damaged)? The freezers should not have excessive buildup of ice.<strong> <%= @food_safety_audit.fs15_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS16-US</strong> Water and ice: Are appropriate measures taken to protect water and ice from foreign material, chemicals, and/or bacterial contamination? Are water filters in date and ice machines free from mold or buildup?<strong> <%= @food_safety_audit.fs16_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS17-US</strong> Food product opened: Are opened packages of food in storage, (including dry storage, refrigerators, and freezers) covered/wrapped, off the floor and away from walls, and stored according to proper procedures? If no, mark what product is not stored properly. <strong><%= @food_safety_audit.fs17_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS18-US</strong> Raw food product handling: Are blue disposable glove procedures or dedicated tongs used to prevent cross-contamination when handling all raw meat or poultry products (including shell eggs) at the grill station and fryer station? Are dedicated utensils used for raw products (e.g. the yellow yolk breaking tool is only used to break egg yolks)?<strong><%= @food_safety_audit.fs18_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS19-US</strong> Ready-to-eat food product handling: Are clear/white disposable gloves worn for food preparation of ready to eat foods at the sandwich prep table, salad prep table, and in all other areas to prevent bare hand contact with any cooked or ready-to-eat foods?<strong><%= @food_safety_audit.fs19_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS19-US-01</strong> Good hygienic practices: Are proper personal hygiene procedures being followed?<strong><%= @food_safety_audit.fs19_us_01.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS20-US</strong> Chemical management: Are chemicals stored away from food and packaging?<strong><%= @food_safety_audit.fs20_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS21-US</strong> Pest management: Is a pest management program and pest prevention steps and behaviors in place and being managed effectively? Is the restaurant properly pest proofed to prevent the entry of pests (e.g. gaps under doors are sealed)?<strong><%= @food_safety_audit.fs21_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS22-US</strong> Are non-food spill clean-up procedures in place?<strong><%= @food_safety_audit.fs22_us.to_i > 0 ? "YES" : "NO" %></strong></p>
+        <h4 class="text-center bg-secondary p-2">Storage</h4>
+        <p><strong>FS23-US</strong> Frozen products: Are walk-in freezers and any other primary storage freezers operating at 0°F or below? Are secondary storage freezers keeping products solidly frozen? If no, check which units are not at the proper temperature.<strong><%= @food_safety_audit.fs23_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS24-US</strong> Refrigerated products: Are refrigerated products inside refrigerated units at or below 40°F? If no, note which units do not meet the temperature standard.<strong><%= @food_safety_audit.fs24_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS25-US</strong> Are secondary shelf lives of all Time-Temperature Control for Safety (TCS) products held at room temperature and in refrigerators properly marked and within their secondary shelf lives? If no, mark what product is not in code.<strong><%= @food_safety_audit.fs25_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS26-US</strong> Leftover heated foods: Are leftover heated foods discarded (including any shake/sundae mix removed from heat treatment shake/sundae machines)? If no, mark what product.<strong><%= @food_safety_audit.fs26_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS26-US-01</strong> Hot holding units: Are heated foods in a hot holding unit at or above 140 °F? If no, select which product(s), which type of hot holding unit(s) (UHC, Marinator, Extended Hot Holding Cabinet, etc.), and if the products are being held without a timing mechanism.<strong><%= @food_safety_audit.fs26_us_01.to_i > 0 ? "YES" : "NO" %></strong></p>
+        <h4 class="text-center bg-secondary p-2">Cooking</h4>
+        <p><strong>FS27-US</strong> Pyrometer: Is the Pyrometer calibrated, working correctly, and is the probe clean?<strong><%= @food_safety_audit.fs27_us.to_i > 0 ? "YES" : "NO" %></strong></p>
+        <h4 class="text-center bg-secondary p-2">General</h4>
+        <p><strong>FS28-US</strong> Sourcing: Are all food, food packaging, equipment (including utensils), and cleaning chemicals from approved sources?<strong><%= @food_safety_audit.fs28_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS29-US</strong> Employee health: Do managers understand employee illness symptoms and reportable illness causes for when an employee cannot be working? Do managers also understand when an employee can return to work after illness?<strong><%= @food_safety_audit.fs29_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS30-US</strong>  Staff training: Are all managers (including shift managers) trained and currently certified in food safety through ServSafe (or an equivalent and accredited food safety training course)? Are all employees trained and verified on food safety and sanitation per McDonald's current training program?<strong><%= @food_safety_audit.fs30_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS31-US</strong> Food Safety Checklists: Are at least the last 60 days of correctly completed Food Safety Daily Checklists available? Are the last two correctly completed Monthly Food Safety Procedure Verifications available? (For Digital Food Safety please reference the Food Safety Guide)<strong><%= @food_safety_audit.fs31_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS32-US</strong> Health Department Inspections: When reviewing the most recent health department inspection report, have all critical violations noted by the health department been corrected or a plan in place to correct issues?<strong><%= @food_safety_audit.fs32_us.to_i > 0 ? "YES" : "NO" %></strong><br>
+        <strong>FS33-US</strong> Allergen management: Are nut-containing McFlurry mix-ins kept in the orange container with lid and a dedicated scoop?<strong><%= @food_safety_audit.fs33_us.to_i > 0 ? "YES" : "NO" %></strong></p>
+        <div class="border">
+          <ol>
+            <li>Unacceptable Audit - Critical Question Missed: Critical Food Safety questions are FS1-FS7. If not compliant these questions result in the evaluation not meeting standards</li>
+              <ol type="a">
+                <li>Non-compliant criteria must be corrected immediately by restaurant team to remove the risk before evaluator leaves the premises.</li>
+                <li>Follow-up full announced visit, by a McDonald's operations professional  is required within 14 days to review findings from visit.</li>
+                <li>Restaurant team to address all non-compliant criteria ready for follow-up visit.</li>
+            </ol>
+            <li>Unacceptable Audit – Score below 80%: Non-critical questions are FS8-FS33.  If score is below 80% the visit results in not meeting standards</li>
+              <ol type="a">
+                <li>A follow-up full announced visit, by McDonald’s operations professional is required within 30-90 days to review findings from visit.</li>
+                <li>Restaurant team to address all non-compliant criteria ready for follow-up visit.</li>
+              </ol>
+            <li>Acceptable Audit – Score 80-99%: Non-critical findings resulting with overall score of > 80%</li>
+              <ol type="a">
+                <li>Restaurant team to address all non-compliant criteria and document.</li>
+              </ol>
+            <li>Acceptable Audit – Score 100%:  No further remediation necessary</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

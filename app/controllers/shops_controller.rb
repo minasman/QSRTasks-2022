@@ -4,7 +4,7 @@ class ShopsController < ApplicationController
 
   # GET /shops or /shops.json
   def index
-    @shops = Shop.all
+    @shops = Shop.where(store_id: current_user.stores)
     authorize Shop
   end
 
@@ -22,6 +22,11 @@ class ShopsController < ApplicationController
   # GET /shops/1/edit
   def edit
     authorize @shop
+    if @shop.auditor != current_user
+      respond_to do |format|
+        format.html { redirect_to shop_url(@shop), alert: "You cannot edit an shop you did not generate" }
+      end
+    end
   end
 
   # POST /shops or /shops.json

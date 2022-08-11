@@ -5,24 +5,34 @@ class Audits::SafeAuditsController < ApplicationController
   # GET /safe_audits or /safe_audits.json
   def index
     @safe_audits = SafeAudit.all
+    authorize SafeAudit
   end
 
   # GET /safe_audits/1 or /safe_audits/1.json
   def show
+    authorize @safe_audit
   end
 
   # GET /safe_audits/new
   def new
     @safe_audit = SafeAudit.new
+    authorize @safe_audit
   end
 
   # GET /safe_audits/1/edit
   def edit
+    authorize @safe_audit
+    if @safe_audit.auditor != current_user
+      respond_to do |format|
+        format.html { redirect_to safe_audit_url(@safe_audit), alert: "You cannot edit an audit you did not generate" }
+      end
+    end
   end
 
   # POST /safe_audits or /safe_audits.json
   def create
     @safe_audit = SafeAudit.new(safe_audit_params)
+    authorize @safe_audit
     @safe_audit.auditor = current_user
     @safe_audit.organization = current_user.organization
 
@@ -40,6 +50,7 @@ class Audits::SafeAuditsController < ApplicationController
 
   # PATCH/PUT /safe_audits/1 or /safe_audits/1.json
   def update
+    authorize @safe_audit
     respond_to do |format|
       if @safe_audit.update(safe_audit_params)
         format.html { redirect_to safe_audit_path(@safe_audit), notice: "Safe audit was successfully updated." }
@@ -53,6 +64,7 @@ class Audits::SafeAuditsController < ApplicationController
 
   # DELETE /safe_audits/1 or /safe_audits/1.json
   def destroy
+    authorize @safe_audit
     @safe_audit.destroy
 
     respond_to do |format|

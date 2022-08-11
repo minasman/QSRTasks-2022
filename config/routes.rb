@@ -100,6 +100,7 @@ Rails.application.routes.draw do
     get '/schedule' => 'curriculums#schedule'
     get '/my_schedule/:id' => 'curriculums#my_schedule'
     get '/day_schedule' => 'curriculums#day_schedule'
+    get '/training_history/:id' => 'curriculums#training_history'
   end
 
   resources :new_hires
@@ -115,7 +116,11 @@ Rails.application.routes.draw do
         get :manager_list
       end
     end
-    #resources :food_safety_audits
+    resources :food_safety_audits do
+      collection do
+        get :manager_list
+      end
+    end
   end
 
   scope module: 'covid' do

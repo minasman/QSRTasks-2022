@@ -1,14 +1,43 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Shops</h1>
-
-<div id="shops">
-  <% @shops.each do |shop| %>
-    <%= render shop %>
-    <p>
-      <%= link_to "Show this shop", shop %>
-    </p>
-  <% end %>
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Shops</h2>
+      <div class="card-body">
+        <% if @shops.any? %>
+          <div class="table table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Store</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Type</th>
+                  <th>Score</th>
+                  <th>Manager</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @shops.each_with_index do |shop, i| %>
+                  <tr>
+                    <th><%= i + 1 %></th>
+                    <td><%= shop.store.number %></td>
+                    <td><%= shop.shop_date.strftime("%m/%d/%Y") %></td>
+                    <td><%= shop.shop_time.strftime("%l:%M %P") %></td>
+                    <td><%= shop.shop.shopType %></td>
+                    <td><%= shop.shop.score %></td>
+                    <td><%= shop.shiftManager %></td>
+                    <td>Show | Edit | Remove </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        <% else %>
+          <h3 class="text-center">No Shops Completed</h3>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to "New shop", new_shop_path %>
