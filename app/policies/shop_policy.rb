@@ -15,7 +15,7 @@ class ShopPolicy < ApplicationPolicy
   end
 
   def new?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "AA", "Shopper"]
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "AA", "Shopper", "Training Manager"]
   end
 
   def create?

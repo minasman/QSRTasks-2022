@@ -4,7 +4,11 @@ class ShopsController < ApplicationController
 
   # GET /shops or /shops.json
   def index
-    @shops = Shop.where(store_id: current_user.stores)
+    if current_user.position.department == "Operations"
+      @shops = Shop.where(store_id: current_user.stores)
+    else
+      @shops = Shop.where(organization_id: current_user.organization.id)
+    end
     authorize Shop
   end
 
