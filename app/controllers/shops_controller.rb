@@ -28,7 +28,7 @@ class ShopsController < ApplicationController
     authorize @shop
     if @shop.shopper != current_user
       respond_to do |format|
-        format.html { redirect_to shop_url(@shop), pass allow_other_host: true, alert: "You cannot edit an shop you did not generate" }
+        format.html { redirect_to shop_url(@shop), alert: "You cannot edit an shop you did not generate" }
       end
     end
   end
