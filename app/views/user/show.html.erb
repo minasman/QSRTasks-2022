@@ -1,30 +1,38 @@
-<div class="card">
+<div class="card mb-5">
   <h2 class="card-header text-center"><%= @user.full_name %></h2>
   <div class="card-body">
-    <div class="row">
-      <div class="col-auto border">
-        <h4>Total Recognition Points: <%= @user.accumulated_points %></h4>
-        <h5>Earned documentation: </h5>
-        <ul>
-          <li>Praise! <%= @user.employee_named_documentations.where(level: "Praise!").size %></li>
-          <li>Cheers! <%= @user.employee_named_documentations.where(level: "Cheers!").size %></li>
-          <li>Applause! <%= @user.employee_named_documentations.where(level: "Applause!").size %></li>
-          <li>Major <%= @user.employee_named_documentations.where(level: "Major").size %></li>
-          <li>Serious <%= @user.employee_named_documentations.where(level: "Serious").size %></li>
-          <li>Critical <%= @user.employee_named_documentations.where(level: "Critical").size %></li>
-        </ul>
-        <div class="row">
-          <div class="col-12">
-          <h5 class="text-center">You have redeemed <%= number_to_currency(redeemed_dollars(@user), precision: 0) %></h5>
+    <div class="row justify-content-center">
+      <div class="col-auto ">
+        <div class="card">
+          <h3 class="text-center card-header">Total Recognition Points: <%= @user.accumulated_points %></h3>
+          <div class="card-body">
+            <h5>Earned documentation: </h5>
+            <ul>
+              <li>Praise! <%= @user.employee_named_documentations.where(level: "Praise!").size %></li>
+              <li>Cheers! <%= @user.employee_named_documentations.where(level: "Cheers!").size %></li>
+              <li>Applause! <%= @user.employee_named_documentations.where(level: "Applause!").size %></li>
+              <li>Major <%= @user.employee_named_documentations.where(level: "Major").size %></li>
+              <li>Serious <%= @user.employee_named_documentations.where(level: "Serious").size %></li>
+              <li>Critical <%= @user.employee_named_documentations.where(level: "Critical").size %></li>
+            </ul>
+            <div class="row">
+              <div class="col-12">
+              <h5 class="text-center">You have redeemed <%= number_to_currency(redeemed_dollars(@user), precision: 0) %></h5>
+              </div>
+            </div>
+            <% if @user.id === current_user.id %>
+              <%= link_to "Documentation", documentations_path, class: "btn my-submit my-3" %>
+              <%= link_to "Claim Reward", "/rewards/claim_my_reward/#{@user.id}", class: "btn my-submit my-3" %>
+            <% end %>
           </div>
         </div>
-        <% if @user.id === current_user.id %>
-          <%= link_to "Documentation", documentations_path, class: "btn my-submit my-3" %>
-          <%= link_to "Claim Reward", "/rewards/claim_my_reward/#{@user.id}", class: "btn my-submit my-3" %>
-        <% end %>
       </div>
       <div class="col-auto">
         <turbo-frame id="my-schedule" src="/my_schedule/<%= @user.id %>">
+        </turbo-frame>
+      </div>
+      <div class="col-auto">
+        <turbo-frame id="training-history" src="/training_history/<%= @user.id %>">
         </turbo-frame>
       </div>
     </div>

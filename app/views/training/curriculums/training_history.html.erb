@@ -1,0 +1,35 @@
+<turbo-frame id="training-history">
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <div class="card">
+        <h3 class="text-center card-header">Training History</h3>
+        <div class="card-body">
+          <% if @curriculum.any? %>
+            <table class="table table-hover">
+              <tbody>
+                <% @curriculum.each do |curriculum| %>
+                  <tr>
+                    <th colspan="3" class="text-center"><%= curriculum.name %></th>
+                  </tr>
+                  <% curriculum.tclasses.order(class_date: :asc).each do |tclass| %>
+                    <% if tclass.in? @tclasses %>
+                      <tr id="<%= dom_id(tclass) %>">
+                        <td><%= tclass.class_date.strftime("%m/%d/%Y")%></td>
+                        <td><%= tclass.name %></td>
+                        <% if (current_user.admin) || (current_user.position.name.in? ["Training Manager", "Training Assistant"]) %>
+                          <td><%= link_to "Remove Class", "/remove_class/#{@user.id}/#{tclass.id}", class: "ps-4 text-danger float-end table-link", data: { turbo: false } %></td>
+                        <% end %>
+                      </tr>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </tbody>
+            </table>
+          <% else %>
+            <h4 class="text-center">No Training Completed 😢</h4>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

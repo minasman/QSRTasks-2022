@@ -101,6 +101,8 @@ Rails.application.routes.draw do
     get '/my_schedule/:id' => 'curriculums#my_schedule'
     get '/day_schedule' => 'curriculums#day_schedule'
     get '/training_history/:id' => 'curriculums#training_history'
+    get '/remove_class_from_list/:id/:tclass_id' => 'tclasses#remove_class_from_list'
+    get '/remove_class/:id/:tclass_id' => 'tclasses#remove_class'
   end
 
   resources :new_hires

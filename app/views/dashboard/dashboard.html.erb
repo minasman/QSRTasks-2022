@@ -94,10 +94,12 @@
       <%= render "/dashboard/dashboards/maint_tech" %>
     <% elsif current_user.position.name.in? ["HR Manager", "Marketing Manager", "AR Manager", "AP Manager", "Payroll Manager"] %>
       <%= render "/dashboard/dashboards/office_dh" %>
-    <% elsif current_user.position.name.in? ["HR Admin", "AR Admin", "AP Admin", "Marketing Admin"] %>
+    <% elsif current_user.position.name.in? ["HR Admin", "AR Admin", "AP Admin", "Marketing Admin", "Payroll Admin", "Shopper"] %>
       <%= render "/dashboard/dashboards/office" %>
     <% elsif current_user.position.name.in? ["Supervisor", "Operations Manager"] %>
       <%= render "/dashboard/dashboards/supervisor" %>
+    <% elsif current_user.position.name.in? ["General Manager", "Manager"]%>
+      <%= render "/dashboard/dashboards/manager"%>
     <% else %>
       <%= render "/dashboard/dashboards/training" %>
     <% end %>

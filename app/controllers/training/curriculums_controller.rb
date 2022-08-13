@@ -90,6 +90,17 @@ class Training::CurriculumsController < ApplicationController
     @tclasses.uniq
   end
 
+  def training_history
+    @user = User.find(params[:id])
+    @curriculum = []
+    if @user.tclasses.any?
+      @tclasses = @user.tclasses.where(class_date: Date.today - 100.years..Date.today).order(class_date: :asc)
+    end
+    if @tclasses
+        @curriculum = @tclasses.map(&:curriculum).uniq
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_curriculum

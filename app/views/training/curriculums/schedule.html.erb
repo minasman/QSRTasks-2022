@@ -22,11 +22,11 @@
                     </thead>
                     <tbody>
                       <% tclass.users.each do |user| %>
-                        <% if user.stores[0].in? current_user.stores %>
+                        <% if (user.stores[0].in? current_user.stores) || (current_user.position.name.in? ["Training Mananger", "Training Assistant"]) %>
                           <% @counter += 1 %>
                           <tr>
                             <td><%= @counter %></td>
-                            <td><%= user.stores[0].number %></td>
+                            <td><%= user.stores.any? ? user.stores[0].number : "Not Assigned" %></td>
                             <td><%= user.position.name %></td>
                             <td><%= user.full_name %></td>
                           </tr>

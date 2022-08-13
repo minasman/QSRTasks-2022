@@ -59,6 +59,25 @@ class Training::TclassesController < ApplicationController
     end
   end
 
+  def remove_class_from_list
+    @user = User.find(params[:id])
+    @tclass = Tclass.find(params[:tclass_id])
+    @user.tclasses.delete(params[:tclass_id])
+    tclass_id = "tclass_#{params[:tclass_id]}"
+    respond_to do |format|
+      format.html { redirect_to @tclass, notice: "#{@user.full_name} was successfully removed." }
+    end
+  end
+
+  def remove_class
+    @user = User.find(params[:id])
+    @user.tclasses.delete(params[:tclass_id])
+    tclass_id = "tclass_#{params[:tclass_id]}"
+    respond_to do |format|
+      format.html { redirect_to @user, notice: "Training class was successfully removed." }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_tclass
