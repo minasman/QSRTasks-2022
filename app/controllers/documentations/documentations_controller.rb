@@ -61,7 +61,12 @@ class Documentations::DocumentationsController < ApplicationController
   # PATCH/PUT /documentations/1 or /documentations/1.json
   def update
     respond_to do |format|
-      if @documentation.update(documentation_params)
+      params[:documentation][:individual] = true
+      new_params = documentation_params.merge!(
+        :points => Document.find(params[:documentation][:document_id]).points
+      )
+      if @documentation.update(new_params)
+        update_points(@documentation.employee_named)
         format.html { redirect_to documentation_path(@documentation), notice: "Documentation was successfully updated." }
         format.json { render :show, status: :ok, location: @documentation }
       else
@@ -74,8 +79,10 @@ class Documentations::DocumentationsController < ApplicationController
   # DELETE /documentations/1 or /documentations/1.json
   def destroy
     authorize @documentation
+    user = @documentation.employee_named
     documentation_id = "documentation_#{@documentation.id}"
     @documentation.destroy
+    update_points(user)
     respond_to do |format|
       format.turbo_stream { render turbo_stream: turbo_stream.remove(documentation_id) }
     end
@@ -124,6 +131,19 @@ class Documentations::DocumentationsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def documentation_params
       params.require(:documentation).permit(:organization_id, :store_id, :employee_named_id, :awarded_by_id, :position_id, :document_id, :documentation_type, :level, :documentation_class, :description, :points, :document_date, :individual, pictures: [])
+    end
+
+    def update_points(user)
+      points = 0
+      rewarded = 0
+      user.employee_named_documentations.each do |doc|
+        points += doc.points
+      end
+      user.rewards.each do |reward|
+        rewarded += normal_points(user, Reward.find(reward).value)
+      end
+      points = points - rewarded
+      user.update(accumulated_points: points)
     end
 
     def flow_of_accountability(document, new_params)
@@ -257,6 +277,23 @@ class Documentations::DocumentationsController < ApplicationController
         "You have been recognized by #{documentation.awarded_by.full_name} on #{documentation.document_date.strftime("%m/%d/%y")}: #{documentation.description}"
       else
         "Your #{documentation.documentation_class} on #{documentation.document_date.strftime("%m/%d/%y")} was identified as an exception by #{documentation.awarded_by.full_name}. Details: #{documentation.description}"
+      end
+    end
+
+    def normal_points(user, value)
+      position = user.position.name
+      if position.in? ["Crew", "Manager", "AA", "Maint Admin", "Maint Tech", "OTP Tech", "Patch Maint", "HR Admin", "AR Admin", "AP Admin", "Marketing Admin", "Payroll Admin", "Shopper", "Training Assistant"]
+        value
+      elsif position.in? ["General Manager", "Marketing Manager", "Training Manager", "Payroll Manager", "AP Manager", "AR Manager", "HR Manager"]
+        value = value * 3
+      elsif position.in? ["Supervisor", "PM Department Head", "Maint Tech Department Head", "Technology Department Head"]
+        value = value * 10
+      elsif position.in? ["Operations Manager", "Maint Department Head"]
+        value = value * 15
+      elsif position.in? ["Director", "Business Director"]
+        value = value * 30
+      else
+        value
       end
     end
 end

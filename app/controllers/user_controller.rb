@@ -79,7 +79,7 @@ class UserController < ApplicationController
 
   def user_list(active)
     users = User.all.where(organization_id: current_user.organization.id, active: active).order('first_name ASC').includes(:stores)
-    if current_user.position.department == 'Administration'
+    if (current_user.position.department == 'Administration') || (current_user.position.name.in? ["Training Manager", "Training Assistant", "HR Manager"])
       users
     elsif current_user.position.department == 'Operations'
      users =  users.where(stores: { id: current_user.stores.ids },  position_id: Position.where(name: [ 'General Manager', 'Manager', 'Crew']).ids).order(position_id: :asc)
