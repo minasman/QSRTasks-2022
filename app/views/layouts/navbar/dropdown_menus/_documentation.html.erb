@@ -11,6 +11,14 @@
         <% end %>
       </li>
     <% end %>
+    <% if current_user.position.department == "Administration" %>
+      <li>
+        <%= link_to "/tracking", class: "dropdown-item" do %>
+          <i class="fa-solid fa-chart-mixed me-1"></i>
+          Document Tracking
+        <% end %>
+      </li>
+    <% end %>
     <% if policy(:oepe_import).new? %>
       <li>
         <%= link_to new_oepe_import_path, class: "dropdown-item" do %>

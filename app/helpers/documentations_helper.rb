@@ -7,4 +7,16 @@ module DocumentationsHelper
     end
     reward_count
   end
+
+  def self_awarded(user)
+    number = 0
+    if user.employee_named_documentations.any?
+      user.employee_named_documentations.each do |doc|
+        if doc.awarded_by_id == user.id
+          number += 1
+        end
+      end
+    end
+    number
+  end
 end
