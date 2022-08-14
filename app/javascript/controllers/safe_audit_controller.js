@@ -18,7 +18,7 @@ export default class extends Controller {
     })
     canvas.addEventListener("touchend", doMouseUp)
     canvas.addEventListener("pointerup", doMouseUp)
-    this.run_total()
+    //this.run_total()
   }
 
   manager(e) {
@@ -154,10 +154,30 @@ export default class extends Controller {
     changerValue.innerHTML = `<h5 class="mt-2 mt-md-0">$${changerTotal}</h5>`
     otherValue.innerHTML = `<h5 class="mt-2 mt-md-0">$${otherTotal}</h5>`
 
-    let safeTotalValue = parseFloat(parseFloat(drawerTotal) + parseFloat(hundredTotal) + parseFloat(fiftyTotal) + parseFloat(twentyTotal) + parseFloat(tenTotal) + parseFloat(fiveTotal) + parseFloat(twoTotal) + parseFloat(oneTotal) + parseFloat(quarterTotal) + parseFloat(dimeTotal) + parseFloat(nickelTotal) + parseFloat(pennyTotal) + parseFloat(dollarTotal) + parseFloat(halfDollarTotal) + parseFloat(miscCoinTotal) + parseFloat(gcTotal) + parseFloat(gcrTotal) + parseFloat(receiptTotal) + parseFloat(changerTotal) + parseFloat(otherTotal)).toFixed(2)
+    let safeTotalValue =
+    ((isNaN(parseFloat(drawerTotal)) ? 0 : parseFloat(drawerTotal))  +
+    (isNaN(parseFloat(hundredTotal))  ? 0 : parseFloat(hundredTotal))+
+    (isNaN(parseFloat(fiftyTotal))  ? 0 : parseFloat(fiftyTotal))+
+    (isNaN(parseFloat(twentyTotal))  ? 0 : parseFloat(twentyTotal))+
+    (isNaN(parseFloat(tenTotal))  ? 0 : parseFloat(tenTotal))+
+    (isNaN(parseFloat(fiveTotal))  ? 0 : parseFloat(fiveTotal))+
+    (isNaN(parseFloat(twoTotal))  ? 0 : parseFloat(twoTotal))+
+    (isNaN(parseFloat(oneTotal))  ? 0 : parseFloat(oneTotal))+
+    (isNaN(parseFloat(quarterTotal)) ? 0 : parseFloat(quarterTotal)) +
+    (isNaN(parseFloat(dimeTotal)) ? 0 : parseFloat(dimeTotal)) +
+    (isNaN(parseFloat(nickelTotal)) ? 0 : parseFloat(nickelTotal)) +
+    (isNaN(parseFloat(pennyTotal)) ? 0 : parseFloat(pennyTotal)) +
+    (isNaN(parseFloat(dollarTotal)) ? 0 : parseFloat(dollarTotal)) +
+    (isNaN(parseFloat(halfDollarTotal)) ? 0 : parseFloat(halfDollarTotal)) +
+    (isNaN(parseFloat(miscCoinTotal)) ? 0 : parseFloat(miscCoinTotal)) +
+    (isNaN(parseFloat(gcTotal)) ? 0 : parseFloat(gcTotal)) +
+    (isNaN(parseFloat(gcrTotal)) ? 0 : parseFloat(gcrTotal)) +
+    (isNaN(parseFloat(receiptTotal)) ? 0 : parseFloat(receiptTotal)) +
+    (isNaN(parseFloat(changerTotal)) ? 0 : parseFloat(changerTotal)) +
+    (isNaN(parseFloat(otherTotal)) ? 0 : parseFloat(otherTotal))).toFixed(2)
 
     totalSafe.innerText = `$${safeTotalValue}`
-    safeVariance.innerText = `$${(parseFloat(safeTotalValue - safeControl.innerText.substring(1)).toFixed(2)).toFixed(2)}`
+    safeVariance.innerText = `$${(parseFloat(safeTotalValue - safeControl.innerText.substring(1)).toFixed(2))}`
 
     document.querySelector('#safe_audit_total_safe').value = safeTotalValue
     document.querySelector('#safe_audit_safe_variance').value = document.getElementById('safeVariance').innerText.substring(1)
