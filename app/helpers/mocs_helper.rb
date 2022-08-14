@@ -1,0 +1,2 @@
+module MocsHelper
+end

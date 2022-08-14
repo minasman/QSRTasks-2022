@@ -1,5 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
+  resources :mocs
   root 'public#home'
   get 'public/about'
   get 'public/careers'
