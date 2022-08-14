@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @moc %>
+
+<div>
+  <%= link_to "Edit this moc", edit_moc_path(@moc) %> |
+  <%= link_to "Back to mocs", mocs_path %>
+
+  <%= button_to "Destroy this moc", @moc, method: :delete %>
+</div>

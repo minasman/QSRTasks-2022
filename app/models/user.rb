@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_many :new_hires
   has_and_belongs_to_many :tclasses
   has_many :covid_statuses
+  has_one :food_handler_card
 
 
   scope :maint_list, -> { where(active: true, position_id: Position.where(department: 'Maintenance').ids)

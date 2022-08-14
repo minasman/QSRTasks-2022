@@ -1,0 +1,592 @@
+<%= form_with(model: moc) do |form| %>
+  <% if moc.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(moc.errors.count, "error") %> prohibited this moc from being saved:</h2>
+
+      <ul>
+        <% moc.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :organization_id, style: "display: block" %>
+    <%= form.text_field :organization_id %>
+  </div>
+
+  <div>
+    <%= form.label :store_id, style: "display: block" %>
+    <%= form.text_field :store_id %>
+  </div>
+
+  <div>
+    <%= form.label :moc_date, style: "display: block" %>
+    <%= form.date_field :moc_date %>
+  </div>
+
+  <div>
+    <%= form.label :moc_time, style: "display: block" %>
+    <%= form.time_field :moc_time %>
+  </div>
+
+  <div>
+    <%= form.label :ops_score, style: "display: block" %>
+    <%= form.text_field :ops_score %>
+  </div>
+
+  <div>
+    <%= form.label :service_score, style: "display: block" %>
+    <%= form.text_field :service_score %>
+  </div>
+
+  <div>
+    <%= form.label :quality_score, style: "display: block" %>
+    <%= form.text_field :quality_score %>
+  </div>
+
+  <div>
+    <%= form.label :cleanliness_score, style: "display: block" %>
+    <%= form.text_field :cleanliness_score %>
+  </div>
+
+  <div>
+    <%= form.label :verified, style: "display: block" %>
+    <%= form.check_box :verified %>
+  </div>
+
+  <div>
+    <%= form.label :dt_cars_target_1, style: "display: block" %>
+    <%= form.text_field :dt_cars_target_1 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_cars_target_2, style: "display: block" %>
+    <%= form.text_field :dt_cars_target_2 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_cars_target_3, style: "display: block" %>
+    <%= form.text_field :dt_cars_target_3 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_cars_actual_1, style: "display: block" %>
+    <%= form.text_field :dt_cars_actual_1 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_cars_actual_2, style: "display: block" %>
+    <%= form.text_field :dt_cars_actual_2 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_cars_actual_3, style: "display: block" %>
+    <%= form.text_field :dt_cars_actual_3 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_oepe_target_1, style: "display: block" %>
+    <%= form.text_field :dt_oepe_target_1 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_oepe_target_2, style: "display: block" %>
+    <%= form.text_field :dt_oepe_target_2 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_oepe_target_3, style: "display: block" %>
+    <%= form.text_field :dt_oepe_target_3 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_oepe_actual_1, style: "display: block" %>
+    <%= form.text_field :dt_oepe_actual_1 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_oepe_actual_2, style: "display: block" %>
+    <%= form.text_field :dt_oepe_actual_2 %>
+  </div>
+
+  <div>
+    <%= form.label :dt_oepe_actual_3, style: "display: block" %>
+    <%= form.text_field :dt_oepe_actual_3 %>
+  </div>
+
+  <div>
+    <%= form.label :di_guest_target_1, style: "display: block" %>
+    <%= form.text_field :di_guest_target_1 %>
+  </div>
+
+  <div>
+    <%= form.label :di_guest_target_2, style: "display: block" %>
+    <%= form.text_field :di_guest_target_2 %>
+  </div>
+
+  <div>
+    <%= form.label :di_guest_target_3, style: "display: block" %>
+    <%= form.text_field :di_guest_target_3 %>
+  </div>
+
+  <div>
+    <%= form.label :di_guest_actual_1, style: "display: block" %>
+    <%= form.text_field :di_guest_actual_1 %>
+  </div>
+
+  <div>
+    <%= form.label :di_guest_actual_2, style: "display: block" %>
+    <%= form.text_field :di_guest_actual_2 %>
+  </div>
+
+  <div>
+    <%= form.label :di_guest_actual_3, style: "display: block" %>
+    <%= form.text_field :di_guest_actual_3 %>
+  </div>
+
+  <div>
+    <%= form.label :di_time_target_1, style: "display: block" %>
+    <%= form.text_field :di_time_target_1 %>
+  </div>
+
+  <div>
+    <%= form.label :di_time_target_2, style: "display: block" %>
+    <%= form.text_field :di_time_target_2 %>
+  </div>
+
+  <div>
+    <%= form.label :di_time_target_3, style: "display: block" %>
+    <%= form.text_field :di_time_target_3 %>
+  </div>
+
+  <div>
+    <%= form.label :di_time_actual_1, style: "display: block" %>
+    <%= form.text_field :di_time_actual_1 %>
+  </div>
+
+  <div>
+    <%= form.label :di_time_actual_2, style: "display: block" %>
+    <%= form.text_field :di_time_actual_2 %>
+  </div>
+
+  <div>
+    <%= form.label :di_time_actual_3, style: "display: block" %>
+    <%= form.text_field :di_time_actual_3 %>
+  </div>
+
+  <div>
+    <%= form.label :add_target_1, style: "display: block" %>
+    <%= form.text_field :add_target_1 %>
+  </div>
+
+  <div>
+    <%= form.label :add_target_2, style: "display: block" %>
+    <%= form.text_field :add_target_2 %>
+  </div>
+
+  <div>
+    <%= form.label :add_target_3, style: "display: block" %>
+    <%= form.text_field :add_target_3 %>
+  </div>
+
+  <div>
+    <%= form.label :add_actual_1, style: "display: block" %>
+    <%= form.text_field :add_actual_1 %>
+  </div>
+
+  <div>
+    <%= form.label :add_actual_2, style: "display: block" %>
+    <%= form.text_field :add_actual_2 %>
+  </div>
+
+  <div>
+    <%= form.label :add_actual_3, style: "display: block" %>
+    <%= form.text_field :add_actual_3 %>
+  </div>
+
+  <div>
+    <%= form.label :q1, style: "display: block" %>
+    <%= form.text_field :q1 %>
+  </div>
+
+  <div>
+    <%= form.label :q2, style: "display: block" %>
+    <%= form.text_field :q2 %>
+  </div>
+
+  <div>
+    <%= form.label :q3, style: "display: block" %>
+    <%= form.text_field :q3 %>
+  </div>
+
+  <div>
+    <%= form.label :q4, style: "display: block" %>
+    <%= form.text_field :q4 %>
+  </div>
+
+  <div>
+    <%= form.label :q5, style: "display: block" %>
+    <%= form.text_field :q5 %>
+  </div>
+
+  <div>
+    <%= form.label :q6, style: "display: block" %>
+    <%= form.text_field :q6 %>
+  </div>
+
+  <div>
+    <%= form.label :q7, style: "display: block" %>
+    <%= form.text_field :q7 %>
+  </div>
+
+  <div>
+    <%= form.label :q8, style: "display: block" %>
+    <%= form.text_field :q8 %>
+  </div>
+
+  <div>
+    <%= form.label :q9, style: "display: block" %>
+    <%= form.text_field :q9 %>
+  </div>
+
+  <div>
+    <%= form.label :q10, style: "display: block" %>
+    <%= form.text_field :q10 %>
+  </div>
+
+  <div>
+    <%= form.label :q11, style: "display: block" %>
+    <%= form.text_field :q11 %>
+  </div>
+
+  <div>
+    <%= form.label :q12, style: "display: block" %>
+    <%= form.text_field :q12 %>
+  </div>
+
+  <div>
+    <%= form.label :q13, style: "display: block" %>
+    <%= form.text_field :q13 %>
+  </div>
+
+  <div>
+    <%= form.label :q14, style: "display: block" %>
+    <%= form.text_field :q14 %>
+  </div>
+
+  <div>
+    <%= form.label :q15, style: "display: block" %>
+    <%= form.text_field :q15 %>
+  </div>
+
+  <div>
+    <%= form.label :q16, style: "display: block" %>
+    <%= form.text_field :q16 %>
+  </div>
+
+  <div>
+    <%= form.label :q17, style: "display: block" %>
+    <%= form.text_field :q17 %>
+  </div>
+
+  <div>
+    <%= form.label :q18, style: "display: block" %>
+    <%= form.text_field :q18 %>
+  </div>
+
+  <div>
+    <%= form.label :q19, style: "display: block" %>
+    <%= form.text_field :q19 %>
+  </div>
+
+  <div>
+    <%= form.label :q20, style: "display: block" %>
+    <%= form.text_field :q20 %>
+  </div>
+
+  <div>
+    <%= form.label :q21, style: "display: block" %>
+    <%= form.text_field :q21 %>
+  </div>
+
+  <div>
+    <%= form.label :q22, style: "display: block" %>
+    <%= form.text_field :q22 %>
+  </div>
+
+  <div>
+    <%= form.label :q23, style: "display: block" %>
+    <%= form.text_field :q23 %>
+  </div>
+
+  <div>
+    <%= form.label :q24, style: "display: block" %>
+    <%= form.text_field :q24 %>
+  </div>
+
+  <div>
+    <%= form.label :q25, style: "display: block" %>
+    <%= form.text_field :q25 %>
+  </div>
+
+  <div>
+    <%= form.label :q26, style: "display: block" %>
+    <%= form.text_field :q26 %>
+  </div>
+
+  <div>
+    <%= form.label :q27, style: "display: block" %>
+    <%= form.text_field :q27 %>
+  </div>
+
+  <div>
+    <%= form.label :q28, style: "display: block" %>
+    <%= form.text_field :q28 %>
+  </div>
+
+  <div>
+    <%= form.label :q29, style: "display: block" %>
+    <%= form.text_field :q29 %>
+  </div>
+
+  <div>
+    <%= form.label :q30, style: "display: block" %>
+    <%= form.text_field :q30 %>
+  </div>
+
+  <div>
+    <%= form.label :q31, style: "display: block" %>
+    <%= form.text_field :q31 %>
+  </div>
+
+  <div>
+    <%= form.label :q32, style: "display: block" %>
+    <%= form.text_field :q32 %>
+  </div>
+
+  <div>
+    <%= form.label :q33, style: "display: block" %>
+    <%= form.text_field :q33 %>
+  </div>
+
+  <div>
+    <%= form.label :q34, style: "display: block" %>
+    <%= form.text_field :q34 %>
+  </div>
+
+  <div>
+    <%= form.label :q35, style: "display: block" %>
+    <%= form.text_field :q35 %>
+  </div>
+
+  <div>
+    <%= form.label :q36, style: "display: block" %>
+    <%= form.text_field :q36 %>
+  </div>
+
+  <div>
+    <%= form.label :q37, style: "display: block" %>
+    <%= form.text_field :q37 %>
+  </div>
+
+  <div>
+    <%= form.label :q38, style: "display: block" %>
+    <%= form.text_field :q38 %>
+  </div>
+
+  <div>
+    <%= form.label :q39, style: "display: block" %>
+    <%= form.text_field :q39 %>
+  </div>
+
+  <div>
+    <%= form.label :q40, style: "display: block" %>
+    <%= form.text_field :q40 %>
+  </div>
+
+  <div>
+    <%= form.label :q41, style: "display: block" %>
+    <%= form.text_field :q41 %>
+  </div>
+
+  <div>
+    <%= form.label :q42, style: "display: block" %>
+    <%= form.text_field :q42 %>
+  </div>
+
+  <div>
+    <%= form.label :q43, style: "display: block" %>
+    <%= form.text_field :q43 %>
+  </div>
+
+  <div>
+    <%= form.label :q44, style: "display: block" %>
+    <%= form.text_field :q44 %>
+  </div>
+
+  <div>
+    <%= form.label :q45, style: "display: block" %>
+    <%= form.text_field :q45 %>
+  </div>
+
+  <div>
+    <%= form.label :q46, style: "display: block" %>
+    <%= form.text_field :q46 %>
+  </div>
+
+  <div>
+    <%= form.label :q47, style: "display: block" %>
+    <%= form.text_field :q47 %>
+  </div>
+
+  <div>
+    <%= form.label :q48, style: "display: block" %>
+    <%= form.text_field :q48 %>
+  </div>
+
+  <div>
+    <%= form.label :q49, style: "display: block" %>
+    <%= form.text_field :q49 %>
+  </div>
+
+  <div>
+    <%= form.label :q50, style: "display: block" %>
+    <%= form.text_field :q50 %>
+  </div>
+
+  <div>
+    <%= form.label :q51, style: "display: block" %>
+    <%= form.text_field :q51 %>
+  </div>
+
+  <div>
+    <%= form.label :q52, style: "display: block" %>
+    <%= form.text_field :q52 %>
+  </div>
+
+  <div>
+    <%= form.label :q53, style: "display: block" %>
+    <%= form.text_field :q53 %>
+  </div>
+
+  <div>
+    <%= form.label :q54, style: "display: block" %>
+    <%= form.text_field :q54 %>
+  </div>
+
+  <div>
+    <%= form.label :q55, style: "display: block" %>
+    <%= form.text_field :q55 %>
+  </div>
+
+  <div>
+    <%= form.label :q56, style: "display: block" %>
+    <%= form.text_field :q56 %>
+  </div>
+
+  <div>
+    <%= form.label :q57, style: "display: block" %>
+    <%= form.text_field :q57 %>
+  </div>
+
+  <div>
+    <%= form.label :q58, style: "display: block" %>
+    <%= form.text_field :q58 %>
+  </div>
+
+  <div>
+    <%= form.label :q59, style: "display: block" %>
+    <%= form.text_field :q59 %>
+  </div>
+
+  <div>
+    <%= form.label :q60, style: "display: block" %>
+    <%= form.text_field :q60 %>
+  </div>
+
+  <div>
+    <%= form.label :q61, style: "display: block" %>
+    <%= form.text_field :q61 %>
+  </div>
+
+  <div>
+    <%= form.label :q62, style: "display: block" %>
+    <%= form.text_field :q62 %>
+  </div>
+
+  <div>
+    <%= form.label :q63, style: "display: block" %>
+    <%= form.text_field :q63 %>
+  </div>
+
+  <div>
+    <%= form.label :q64, style: "display: block" %>
+    <%= form.text_field :q64 %>
+  </div>
+
+  <div>
+    <%= form.label :opstotal, style: "display: block" %>
+    <%= form.text_field :opstotal %>
+  </div>
+
+  <div>
+    <%= form.label :qualitytotal, style: "display: block" %>
+    <%= form.text_field :qualitytotal %>
+  </div>
+
+  <div>
+    <%= form.label :servicetotal, style: "display: block" %>
+    <%= form.text_field :servicetotal %>
+  </div>
+
+  <div>
+    <%= form.label :cleantotal, style: "display: block" %>
+    <%= form.text_field :cleantotal %>
+  </div>
+
+  <div>
+    <%= form.label :signature, style: "display: block" %>
+    <%= form.text_field :signature %>
+  </div>
+
+  <div>
+    <%= form.label :preshiftsuccess, style: "display: block" %>
+    <%= form.text_field :preshiftsuccess %>
+  </div>
+
+  <div>
+    <%= form.label :servicesuccess, style: "display: block" %>
+    <%= form.text_field :servicesuccess %>
+  </div>
+
+  <div>
+    <%= form.label :grillsuccess, style: "display: block" %>
+    <%= form.text_field :grillsuccess %>
+  </div>
+
+  <div>
+    <%= form.label :cleansuccess, style: "display: block" %>
+    <%= form.text_field :cleansuccess %>
+  </div>
+
+  <div>
+    <%= form.label :postshiftsuccess, style: "display: block" %>
+    <%= form.text_field :postshiftsuccess %>
+  </div>
+
+  <div>
+    <%= form.label :very_good_comments, style: "display: block" %>
+    <%= form.text_field :very_good_comments %>
+  </div>
+
+  <div>
+    <%= form.label :more_practice_comments, style: "display: block" %>
+    <%= form.text_field :more_practice_comments %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

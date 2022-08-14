@@ -31,7 +31,7 @@
             <% if current_user.admin %>
               <th scope="col">Points</th>
             <% end %>
-            <th scope="col">Payroll ID</th>
+            <th scope="col">ServSafe Exp</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -51,7 +51,7 @@
               <% if current_user.admin %>
                 <td><%= user.accumulated_points %></td>
               <% end %>
-              <td><%= user.payroll_id %></td>
+              <td><%= user.food_handler_card ? user.food_handler_card.expiration_date.strftime("%m/%d/%Y") : "No Card" %></td>
               <td>
                 <% if current_user.position.name == "Director" %>
                   <%= link_to "Login As ", masquerade_path(user), class: "px-2 table-link", data: { turbo: false } %> |

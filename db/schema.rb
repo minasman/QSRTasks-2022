@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_08_205016) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_14_112350) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -219,6 +219,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_205016) do
     t.index ["organization_id"], name: "index_equipment_types_on_organization_id"
   end
 
+  create_table "food_handler_cards", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "store_id", null: false
+    t.bigint "user_id", null: false
+    t.date "issue_date"
+    t.date "expiration_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_food_handler_cards_on_organization_id"
+    t.index ["store_id"], name: "index_food_handler_cards_on_store_id"
+    t.index ["user_id"], name: "index_food_handler_cards_on_user_id"
+  end
+
   create_table "food_safety_audits", force: :cascade do |t|
     t.string "fs1_us"
     t.string "fs2_us"
@@ -280,6 +293,128 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_205016) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["organization_id"], name: "index_guests_on_organization_id"
+  end
+
+  create_table "mocs", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "store_id", null: false
+    t.date "moc_date"
+    t.time "moc_time"
+    t.string "ops_score"
+    t.string "service_score"
+    t.string "quality_score"
+    t.string "cleanliness_score"
+    t.boolean "verified"
+    t.string "dt_cars_target_1"
+    t.string "dt_cars_target_2"
+    t.string "dt_cars_target_3"
+    t.string "dt_cars_actual_1"
+    t.string "dt_cars_actual_2"
+    t.string "dt_cars_actual_3"
+    t.string "dt_oepe_target_1"
+    t.string "dt_oepe_target_2"
+    t.string "dt_oepe_target_3"
+    t.string "dt_oepe_actual_1"
+    t.string "dt_oepe_actual_2"
+    t.string "dt_oepe_actual_3"
+    t.string "di_guest_target_1"
+    t.string "di_guest_target_2"
+    t.string "di_guest_target_3"
+    t.string "di_guest_actual_1"
+    t.string "di_guest_actual_2"
+    t.string "di_guest_actual_3"
+    t.string "di_time_target_1"
+    t.string "di_time_target_2"
+    t.string "di_time_target_3"
+    t.string "di_time_actual_1"
+    t.string "di_time_actual_2"
+    t.string "di_time_actual_3"
+    t.string "add_target_1"
+    t.string "add_target_2"
+    t.string "add_target_3"
+    t.string "add_actual_1"
+    t.string "add_actual_2"
+    t.string "add_actual_3"
+    t.string "q1"
+    t.string "q2"
+    t.string "q3"
+    t.string "q4"
+    t.string "q5"
+    t.string "q6"
+    t.string "q7"
+    t.string "q8"
+    t.string "q9"
+    t.string "q10"
+    t.string "q11"
+    t.string "q12"
+    t.string "q13"
+    t.string "q14"
+    t.string "q15"
+    t.string "q16"
+    t.string "q17"
+    t.string "q18"
+    t.string "q19"
+    t.string "q20"
+    t.string "q21"
+    t.string "q22"
+    t.string "q23"
+    t.string "q24"
+    t.string "q25"
+    t.string "q26"
+    t.string "q27"
+    t.string "q28"
+    t.string "q29"
+    t.string "q30"
+    t.string "q31"
+    t.string "q32"
+    t.string "q33"
+    t.string "q34"
+    t.string "q35"
+    t.string "q36"
+    t.string "q37"
+    t.string "q38"
+    t.string "q39"
+    t.string "q40"
+    t.string "q41"
+    t.string "q42"
+    t.string "q43"
+    t.string "q44"
+    t.string "q45"
+    t.string "q46"
+    t.string "q47"
+    t.string "q48"
+    t.string "q49"
+    t.string "q50"
+    t.string "q51"
+    t.string "q52"
+    t.string "q53"
+    t.string "q54"
+    t.string "q55"
+    t.string "q56"
+    t.string "q57"
+    t.string "q58"
+    t.string "q59"
+    t.string "q60"
+    t.string "q61"
+    t.string "q62"
+    t.string "q63"
+    t.string "q64"
+    t.string "opstotal"
+    t.string "qualitytotal"
+    t.string "servicetotal"
+    t.string "cleantotal"
+    t.string "signature"
+    t.string "preshiftsuccess"
+    t.string "servicesuccess"
+    t.string "grillsuccess"
+    t.string "cleansuccess"
+    t.string "postshiftsuccess"
+    t.string "very_good_comments"
+    t.string "more_practice_comments"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id"], name: "index_mocs_on_organization_id"
+    t.index ["store_id"], name: "index_mocs_on_store_id"
   end
 
   create_table "new_hires", force: :cascade do |t|
@@ -679,9 +814,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_08_205016) do
   add_foreign_key "equipment_areas", "organizations"
   add_foreign_key "equipment_types", "equipment_areas"
   add_foreign_key "equipment_types", "organizations"
+  add_foreign_key "food_handler_cards", "organizations"
+  add_foreign_key "food_handler_cards", "stores"
+  add_foreign_key "food_handler_cards", "users"
   add_foreign_key "food_safety_audits", "organizations"
   add_foreign_key "food_safety_audits", "stores"
   add_foreign_key "guests", "organizations"
+  add_foreign_key "mocs", "organizations"
+  add_foreign_key "mocs", "stores"
   add_foreign_key "new_hires", "organizations"
   add_foreign_key "new_hires", "positions"
   add_foreign_key "new_hires", "stores"

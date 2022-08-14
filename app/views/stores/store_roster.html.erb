@@ -5,16 +5,17 @@
     <h3 class="text-center">
       <%= @store.street %>, <%= @store.city %> <%= @store.state%> <%= @store.zip %>
     </h3>
-    <h4 class="text-center"><%= @store.phone %> | <%= @store.email %></h4>
-    <h4 class="text-center">Safe <%= number_to_currency(@store.safe, precision: 0) %> | # Headsets <%= @store.headset %></h4>
+    <h4 class="text-center"><%= number_to_phone(@store.phone) %> | <%= @store.email %></h4>
   </div>
 </div>
   <div class="card-body">
     <%= render "/stores/staff/management" %>
     <%= render "/stores/staff/roster" %>
-
     <div class="d-grid gap-1 d-md-flex justify-content-md-end" >
       <%= link_to "Back", :back, class: "btn my-submit me-md-1" %>
+      <% if policy(:food_handler_card).index? %>
+        <%= link_to "Servsafe Cards", food_handler_cards_path(:store_id => @store.id), class: "btn my-submit me-md-1" %>
+      <% end %>
       <%= link_to "Restaurants", stores_path, class: "btn my-submit me-md-1" %>
       <% if current_user.admin %>
         <%= link_to "Edit", edit_store_path(@store), class: "btn my-submit me-md-1" %>

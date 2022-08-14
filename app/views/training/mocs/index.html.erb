@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Mocs</h1>
+
+<div id="mocs">
+  <% @mocs.each do |moc| %>
+    <%= render moc %>
+    <p>
+      <%= link_to "Show this moc", moc %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New moc", new_moc_path %>

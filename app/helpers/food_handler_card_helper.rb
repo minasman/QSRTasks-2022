@@ -1,0 +1,2 @@
+module FoodHandlerCardHelper
+end

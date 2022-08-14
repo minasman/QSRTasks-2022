@@ -3,9 +3,9 @@
   <% @store.users.where(position_id: 15).each do |manager| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Training Manager", "Training Assistant", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to manager.full_name, manager, class: "table-link" %>
+        <%= link_to "#{manager.full_name.titleize}#{manager.food_handler_card ? "" : "*"}", manager, class: "table-link" %>
       <% else %>
-        <%= manager.full_name %>
+        <%= "#{manager.full_name.titleize}#{manager.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>

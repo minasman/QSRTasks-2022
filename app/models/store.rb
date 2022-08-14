@@ -14,6 +14,7 @@ class Store < ApplicationRecord
   has_many :wellnesses
   has_many :covid_statuses
   has_many :food_safety_audits
+  has_many :food_handler_cards
 
 
   validates :number, :name, :store_type, :phone, :email, :city, :state, :zip, :headset, :street, presence: true

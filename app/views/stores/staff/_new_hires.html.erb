@@ -4,9 +4,9 @@
   <% @store.users.first_week.each do |new_hire| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to new_hire.full_name, new_hire, class: "table-link" %>
+        <%= link_to "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}", new_hire, class: "table-link" %>
       <% else %>
-        <%= new_hire.full_name.titleize %>
+        <%= "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>
@@ -16,9 +16,9 @@
   <% @store.users.second_week.each do |new_hire| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to new_hire.full_name, new_hire, class: "table-link" %>
+        <%= link_to "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}", new_hire, class: "table-link" %>
       <% else %>
-        <%= new_hire.full_name.titleize %>
+        <%= "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>
@@ -28,9 +28,9 @@
   <% @store.users.third_week.each do |new_hire| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to new_hire.full_name, new_hire, class: "table-link" %>
+        <%= link_to "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}", new_hire, class: "table-link" %>
       <% else %>
-        <%= new_hire.full_name.titleize %>
+        <%= "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>
@@ -40,9 +40,9 @@
   <% @store.users.fourth_week.each do |new_hire| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to new_hire.full_name, new_hire, class: "table-link" %>
+        <%= link_to "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}", new_hire, class: "table-link" %>
       <% else %>
-        <%= new_hire.full_name.titleize %>
+        <%= "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>
@@ -52,22 +52,24 @@
   <% @store.users.second_month.each do |new_hire| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to new_hire.full_name, new_hire, class: "table-link" %>
+        <%= link_to "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}", new_hire, class: "table-link" %>
       <% else %>
-        <%= new_hire.full_name.titleize %>
+        <%= "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>
 </div>
-<div class="row justify-content-center mb-5">
+<div class="row justify-content-center">
   <h3 class="text-center">New Team Members (61-90 Days)</h3>
   <% @store.users.third_month.each do |new_hire| %>
     <div class="col-6 col-md-3 col-lg-2">
       <% if current_user.position.name.in? (["General Manager", "Supervisor", "Operations Manager", "Director"]) %>
-        <%= link_to new_hire.full_name, new_hire, class: "table-link" %>
+        <%= link_to "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}", new_hire, class: "table-link" %>
       <% else %>
-        <%= new_hire.full_name.titleize %>
+        <%= "#{new_hire.full_name.titleize}#{new_hire.food_handler_card ? "" : "*"}" %>
       <% end %>
     </div>
   <% end %>
 </div>
+<hr>
+<small class="mb-5">* Missing Food Handler/Servsafe Card</small>

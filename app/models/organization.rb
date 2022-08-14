@@ -17,6 +17,7 @@ class Organization < ApplicationRecord
   has_many :wellnesses, dependent: :delete_all
   has_many :covid_statuses, dependent: :delete_all
   has_many :food_safety_audits, dependent: :delete_all
+  has_many :food_handler_cards, dependent: :delete_all
 
 
 end

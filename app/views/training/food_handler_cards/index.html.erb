@@ -1,0 +1,30 @@
+<div class="row justify-content-center mb-5">
+  <div class="col-auto">
+    <div class="card">
+      <h2 class="text-center card-header">Food Handler/ServSafe Cards</h2>
+      <div class="card-body">
+        <div class="row">
+          <% if @food_handler_cards.any? %>
+            <% @food_handler_cards.each do |card| %>
+              <div class="col-auto mb-3">
+                <div class="card">
+                  <h4 class="text-center card-header"><%= card.user.full_name %> - <%= card.user.position.name %></h4>
+                  <div class="card-body">
+                    <p>Issued On: <%= card.issue_date.strftime("%m/%d/%Y") %> - Expires On: <%= card.expiration_date.strftime("%m/%d/%Y") %></p>
+                    <div class='row'>
+                      <div class='col-auto'>
+                        <%= image_tag card.picture.variant(resize_to_fit: [300, 135]), class: "my-4" %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <h4 class="text-center">No Cards Found 😢</h4>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
