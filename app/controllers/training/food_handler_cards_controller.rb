@@ -29,12 +29,16 @@ class Training::FoodHandlerCardsController < ApplicationController
   def create
     @food_handler_card = FoodHandlerCard.new(food_handler_card_params)
     authorize @food_handler_card
-    @food_handler_card.organization = current_user.organization
+    @food_handler_card.organization_id = current_user.organization.id
     respond_to do |format|
       if @food_handler_card.save
         format.html { redirect_to user_path(@food_handler_card.user), notice: "ServSafe was successfully created." }
         format.json { render :show, status: :created, location: @food_handler_card }
       else
+        @user = @food_handler_card.user
+        @food_handler_card.errors.each do |e|
+          puts e.full_message
+        end
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @food_handler_card.errors, status: :unprocessable_entity }
       end
