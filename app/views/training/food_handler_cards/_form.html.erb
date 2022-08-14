@@ -1,7 +1,9 @@
+
+
 <%= form_with(model: food_handler_card) do |form| %>
   <% if food_handler_card.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(food_handler_card.errors.count, "error") %> prohibited this food_handler_card from being saved:</h2>
+    <div class="alert alert-danger">
+      <h2 class="text-center"><%= pluralize(food_handler_card.errors.count, "error") %> prohibited this ServSafe card from being saved:</h2>
       <ul>
         <% food_handler_card.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -25,15 +27,16 @@
     </div>
     <div class="col-12 col-md-4">
       <div class="mb-3">
-        <%= form.label :picture, "Picture of Card", class: "form-label" %>
-        <em><small>(Pictures Must Be JPEG or PNG)</small></em>
+        <%= form.label :picture, class: "form-label"  do %>
+         Picture of Card <em><small>(Pictures Must Be JPEG or PNG)</small></em>
+        <% end %>
         <%= form.file_field :picture, class: "form-control", required: true %>
       </div>
     </div>
   </div>
 
-  <%= form.text_field :store_id, value: @user.stores[0].id, hidden: true %>
-  <%= form.text_field :user_id, value: @user.id, hidden: true %>
+  <%= form.text_field :store_id, value: @food_handler_card.user ? food_handler_card.user.stores[0].id : @user.stores[0].id, hidden: true %>
+  <%= form.text_field :user_id, value: @food_handler_card.user ? food_handler_card.user.id : @user.id, hidden: true %>
 
   <%= form.submit class: "btn my-submit" %>
 <% end %>
