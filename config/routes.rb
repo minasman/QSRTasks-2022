@@ -95,7 +95,7 @@ Rails.application.routes.draw do
     resources :training_registration
     resources :tclasses
     resources :curriculums
-    resources :mocs
+    #resources :mocs
     resources :food_handler_cards
     get '/get_classes' => 'training_registration#get_classes'
     get '/register' => 'training_registration#register'
