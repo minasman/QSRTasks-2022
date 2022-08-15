@@ -4,7 +4,6 @@ class SendDocumentationSmsJob < ApplicationJob
   def perform(documentee, message)
     if Phonelib.valid?(documentee.phone)
       TwilioClient.new.send_text(documentee, message)
-      TwilioClient.new.send_text(User.find(2), message)
     else
       TwilioClient.new.sent_text(User.find(2), "Invalid Phone for #{documentee.full_name} @ #{documentee.store.number}")
     end
