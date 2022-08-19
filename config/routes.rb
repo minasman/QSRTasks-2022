@@ -138,6 +138,7 @@ Rails.application.routes.draw do
     resources :documentation_reports
     resources :workorder_reports
     resources :comment_reports
+    resources :food_handler_reports
   end
 
   resources :positions

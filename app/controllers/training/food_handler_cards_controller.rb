@@ -63,6 +63,8 @@ class Training::FoodHandlerCardsController < ApplicationController
     authorize @food_handler_card
   end
 
+
+
   private
 
   def set_food_handler_card
