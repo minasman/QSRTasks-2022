@@ -9,7 +9,7 @@ class FoodHandlerCard < ApplicationRecord
 
   def acceptable_images
     return unless picture.attached?
-    acceptable_types = ["image/jpeg", "image/png"]
+    acceptable_types = ["image/jpeg", "image/png", "application/pdf"]
     unless acceptable_types.include?(picture.content_type)
       errors.add(:picture, "Pictures Must Be JPEG or PNG")
     end

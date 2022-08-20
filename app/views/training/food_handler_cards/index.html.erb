@@ -9,7 +9,14 @@
               <div class="card-body">
                 <p>Issued On: <%= card.issue_date.strftime("%m/%d/%Y") %> - Expires On: <%= card.expiration_date.strftime("%m/%d/%Y") %></p>
                 <div class='row'>
-                  <%= image_tag card.picture.variant(resize_to_fit: [550, 550]), class: "my-4" %>
+                  <div class="col">
+                    <% if card.picture.image? %>
+                      <%= image_tag card.picture.variant(resize_to_fit: [550, 550]), class: "my-4" %>
+                    <% elsif card.picture.previewable? %>
+                      <%= image_tag card.picture.preview(resize_to_fit: [550, 550]) %>
+                    <% else %>
+                    <% end %>
+                  </div>
                 </div>
               </div>
             </div>
