@@ -1,5 +1,9 @@
-<p>Welcome <%= @email %>!</p>
+<p>Welcome to Stagg Restaurants!!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>You have been given access to our employee portal QSRTasks. This is where you can view information about your restaurant.</p>
+<p>The information includes, restaurant team, guest feedback, restaurant maintenence requests, the organization training schedule and information regarding your performance.</p>
+<p>Once you confirm your account, use the email that you provided - <%= @email %>. The password that you will use to log in is: "stagg" + the last 5 digits of your social security number.</p>
+
+<p>Please confirm your account email through the link below:</p>
 
 <p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
