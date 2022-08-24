@@ -11,7 +11,7 @@
         <h4 class="text-center">Commendations</h4>
         <h5 class="text-center">MTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_month..Date.today, documentation_type: "Commendation").size %> QTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_quarter..Date.today, documentation_type: "Commendation").size %> YTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_year..Date.today, documentation_type: "Commendation").size %></h5>
         <h4 class="text-center">Documentations</h4>
-        <h5 class="text-center">MTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_month..Date.today, documentation_type: "Documentation").size %> QTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_quarter..Date.today, documentation_type: "Documentation").size %> YTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_year..Date.today, documentation_type: "Documentation").size %></h5>
+        <h5 class="text-center">MTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_month..Date.today, documentation_type: "Exception").size %> QTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_quarter..Date.today, documentation_type: "Exception").size %> YTD: <%= @store.documentations.where(document_date: Date.today.beginning_of_year..Date.today, documentation_type: "Exception").size %></h5>
       <% end %>
     </div>
   <div class="card-body">
