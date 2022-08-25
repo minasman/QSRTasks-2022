@@ -6,7 +6,7 @@ class Maintenance::WorkordersController < ApplicationController
   def index
     if params[:workorder_number]
       @workorder = Workorder.where(id: params[:workorder_number]).first
-      redirect_to @workorder, allow_other_host: true
+      redirect_to @workorder
     else
       @workorders = workorder_list
       @csvworkorders = @workorders
