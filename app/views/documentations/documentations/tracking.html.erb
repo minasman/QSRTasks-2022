@@ -10,27 +10,43 @@
                 <tr>
                   <th>Name</th>
                   <th>Position</th>
-                  <th>#Named</th>
-                  <th>Commendations</th>
-                  <th>Exceptions</th>
-                  <th>#Awarded</th>
-                  <th>Commendations</th>
-                  <th>Exceptions</th>
-                  <th>#Awarded Self</th>
+                  <th># Awarded</th>
+                  <th># Major</th>
+                  <th># Serious</th>
+                  <th># Critical</th>
+                  <th># Praise!</th>
+                  <th># Cheers!</th>
+                  <th># Applause!</th>
+                  <th># Given Out</th>
+                  <th># Major</th>
+                  <th># Serious</th>
+                  <th># Critical</th>
+                  <th># Praise!</th>
+                  <th># Cheers!</th>
+                  <th># Applause!</th>>
+                  <th>#Awarded To Self</th>
                 </tr>
               </thead>
               <tbody>
-                <% User.all.order(position_id: :asc, first_name: :asc).each do |user| %>
+                <% User.where(position_id: [1,2,3,4,5,6,7,8,9,12,14,16,21,22,23,24]).order(position_id: :asc, first_name: :asc).each do |user| %>
                   <% if user.employee_named_documentations.any? || user.awarded_by_documentations.any? %>
                     <tr>
                       <td><%= user.full_name %></td>
                       <td><%= user.position.name %></td>
                       <td><%= user.employee_named_documentations.size %></td>
-                      <td><%= user.employee_named_documentations.where(documentation_type: "Commendation").size %></td>
-                      <td><%= user.employee_named_documentations.where(documentation_type: "Exception").size %></td>
+                      <td><%= user.employee_named_documentations.where(level: "Major").size %></td>
+                      <td><%= user.employee_named_documentations.where(level: "Serious").size %></td>
+                      <td><%= user.employee_named_documentations.where(level: "Critical").size %></td>
+                      <td><%= user.employee_named_documentations.where(level: "Praise!").size %></td>
+                      <td><%= user.employee_named_documentations.where(level: "Cheers!").size %></td>
+                      <td><%= user.employee_named_documentations.where(level: "Applause!").size %></td>
                       <td><%= user.awarded_by_documentations.size %></td>
-                      <td><%= user.awarded_by_documentations.where(documentation_type: "Commendation").size %></td>
-                      <td><%= user.awarded_by_documentations.where(documentation_type: "Exception").size %></td>
+                      <td><%= user.awarded_by_documentations.where(level: "Major").size %></td>
+                      <td><%= user.awarded_by_documentations.where(level: "Serious").size %></td>
+                      <td><%= user.awarded_by_documentations.where(level: "Critical").size %></td>
+                      <td><%= user.awarded_by_documentations.where(level: "Praise!").size %></td>
+                      <td><%= user.awarded_by_documentations.where(level: "Cheers!").size %></td>
+                      <td><%= user.awarded_by_documentations.where(level: "Applause!").size %></td>
                       <td><%= self_awarded(user) %></td>
                     </tr>
                   <% end %>
