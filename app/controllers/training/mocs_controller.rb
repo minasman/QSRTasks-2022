@@ -1,4 +1,4 @@
-class MocsController < ApplicationController
+class Training::MocsController < ApplicationController
   before_action :set_moc, only: %i[ show edit update destroy ]
 
   # GET /mocs or /mocs.json

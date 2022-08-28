@@ -107,7 +107,6 @@ class CreateMocs < ActiveRecord::Migration[7.0]
       t.string :q59
       t.string :q60
       t.string :q61
-      t.string :q61
       t.string :q62
       t.string :q63
       t.string :q64
