@@ -12,50 +12,101 @@
   <% end %>
 
   <div class="card-header">
-    <h2 text-center">Shift Leader Performance Tool</h2>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :store_id, "Location", class: "form-label" %>
-        <%= form.collection_select :store_id, Store.where(active: true).order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", required: true} %>
+    <h2>Shift Leader Performance Tool</h2>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :store_id, "Location", class: "form-label" %>
+          <%= form.collection_select :store_id, Store.where(active: true).order('number ASC'), :id, :number, {prompt: "Select Restaurant"}, {class: "form-select", required: true} %>
+        </div>
       </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :moc_date, class: "form-label" %>
-        <%= form.date_field :moc_date %>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :moc_date, "Date", class: "form-label" %>
+          <%= form.date_field :moc_date, class: "form-control" %>
+        </div>
       </div>
-    </div>
-    <div class="col-12 col-md-6 col-lg-3">
-      <div class="mb-3">
-        <%= form.label :moc_time, class: "form-label" %>
-        <%= form.time_field :moc_time %>
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="mb-3">
+          <%= form.label :moc_time, "Time", class: "form-label" %>
+          <%= form.time_field :moc_time, class: "form-control"  %>
+        </div>
       </div>
     </div>
   </div>
   <div class="card-body">
-    <div class="mb-3">
-      <%= form.label :ops_score, class: "form-label" %>
-      <%= form.text_field :ops_score %>
+    <div class="row">
+      <div class="col-5">
+        <div class="mb-3">
+          <%= form.label :ops_score, class: "form-label" %>
+          <%= form.text_field :ops_score, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="mb-3">
+          <%= form.label :service_score, class: "form-label" %>
+          <%= form.text_field :service_score, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="mb-3">
+          <%= form.label :quality_score, class: "form-label" %>
+          <%= form.text_field :quality_score, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="mb-3">
+          <%= form.label :cleanliness_score, class: "form-label" %>
+          <%= form.text_field :cleanliness_score, class: "form-control" %>
+        </div>
+      </div>
+      <div class="col-2">
+        <div class="mb-3">
+          <%= form.label :verified, class: "form-label" %>
+          <%= form.check_box :verified, class: "form-control" %>
+        </div>
+      </div>
     </div>
-
-    <div class="mb-3">
-      <%= form.label :service_score, class: "form-label" %>
-      <%= form.text_field :service_score %>
+    <div class="row">
+      <div class="col">
+        <h3>Purpose</h3>
+        <ol>
+          <li>To determine if the shift leader can lead the shift successfully.</li>
+          <li>To assess the shift leader to establish what is working well and what would work even better by:</li>
+          <ul>
+            <li>Setting performance expectations</li>
+            <li>Reinforcing standards of operations</li>
+            <li>Reinforcing effective people practices</li>
+          </ul>
+        </ol>
+      </div>
+      <div class="col">
+        <h3>Instructions</h3>
+        <ol>
+          <li>The Coach and Participant</li>
+          <ul>
+            <li>Review the document to understand the behaviors of a successful shift leader.</li>
+            <li>St and record shift targets</li>
+          </ul>
+          <li>The Coach</li>
+          <ul>
+            <li>Observes pre-shift, managing the area, and post-shift tasks.</li>
+            <li>Complete points assessment for all four sections.</li>
+          </ul>
+          <li>The Coach</li>
+          <ul>
+            <li>Determine the result by totaling the questions answered "yes" for each section.</li>
+          </ul>
+          <li>The Coach & Participant</li>
+          <ul>
+            <li>Use the "Shift Leader Success Factors" page of this tool to discuss what the partipant did well, and what they may need more practice with.</li>
+            <li>Develop an action plan</li>
+          </ul>
+        </ol>
+      </div>
     </div>
+    <div class="row">
 
-    <div class="mb-3">
-      <%= form.label :quality_score, class: "form-label" %>
-      <%= form.text_field :quality_score %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :cleanliness_score, class: "form-label" %>
-      <%= form.text_field :cleanliness_score %>
-    </div>
-
-    <div class="mb-3">
-      <%= form.label :verified, class: "form-label" %>
-      <%= form.check_box :verified %>
     </div>
 
     <div class="mb-3">
