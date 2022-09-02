@@ -27,7 +27,7 @@ class User < ApplicationRecord
 
 
   scope :maint_list, -> { where(active: true, position_id: Position.where(department: 'Maintenance').ids)
-                            .or(where(active: true, position_id: Position.where(name: ["HR Manager", "Director", "Business Director", "Marketing Manager", "Payroll Manager", "AR Manager", "AP Manager", "Training Manager"]).ids)).order(position_id:  :desc, first_name: :asc) }
+                            .or(where(active: true, position_id: Position.where(name: ["HR Manager", "Director", "Business Director", "Marketing Manager", "Payroll Manager", "AR Manager", "AP Manager", "Training Manager"]).ids)).order(first_name: :asc) }
   scope :managers, -> {where(position_id: [5, 15], active: true).order(first_name: :asc)}
   scope :crew, -> {where(position_id: [26], active: true).order(first_name: :asc)}
   scope :first_week, -> {where(active: true, hire_date: Date.today - 7.days..Date.today).order(first_name: :asc)}
