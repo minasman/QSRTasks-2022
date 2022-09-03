@@ -9,7 +9,7 @@ task update_points: :environment do
       end
       if user.rewards.any?
         user.rewards.each do |reward|
-          reward_value = Reward.find(reward).value
+          reward_value = Reward.find(reward).value.to_i
           if position.in? ["Crew", "Manager", "AA", "Maint Admin", "Maint Tech", "OTP Tech", "Patch Maint", "HR Admin", "AR Admin", "AP Admin", "Marketing Admin", "Payroll Admin", "Shopper", "Training Assistant"]
             reward_value
           elsif position.in? ["General Manager", "Marketing Manager", "Training Manager", "Payroll Manager", "AP Manager", "AR Manager", "HR Manager"]
