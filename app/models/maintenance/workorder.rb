@@ -75,4 +75,8 @@ class Workorder < ApplicationRecord
     end
   end
 
+  def pictures=(attachables)
+    pictures.attach(attachables)
+  end
+
 end
