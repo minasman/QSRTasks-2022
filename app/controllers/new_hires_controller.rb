@@ -102,6 +102,12 @@ class NewHiresController < ApplicationController
     @target = params[:target]
     @row = params[:row]
     @new_hire = NewHire.find(@target.delete_prefix("new_hire_"))
+    if @received && @approve
+      SendNewHireBackgroundSmsJob.perform_later(@new_hire, "#{@new_hire.full_name} at #{@new_hire.store.number} background check was approved")
+    end
+    if @received && @not_approved
+      SendNewHireBackgroundSmsJob.perform_later(@new_hire, "#{@new_hire.full_name} at #{@new_hire.store.number} background check was not approved")
+    end
     @new_hire.update(background_received: @received, background_ok: @approve, background_na: @not_approved)
     respond_to do |format|
       format.turbo_stream
