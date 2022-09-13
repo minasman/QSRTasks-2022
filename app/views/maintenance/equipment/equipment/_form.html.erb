@@ -44,7 +44,7 @@
   <%= form.fields_for :store_list do |f| %>
     <div class='mb-3'>
       <%= f.label :stores, "Restaurants:", class: 'form-label' %>
-      <%= link_to "ALL", "", class: "btn btn-sm my-submit", data: { action: "equipment#store" }%>
+      <%= link_to "ALL", "", class: "btn btn-sm my-submit", data: { action: "equipment#store_choice" }%>
       <div class='row'>
         <%= f.collection_check_boxes :store_id, Store.where(active: true).order('number ASC'), :id, :number do |s| %>
           <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
