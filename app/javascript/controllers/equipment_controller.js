@@ -40,4 +40,12 @@ export default class extends Controller {
       responseKind: "turbo-stream"
     })
   }
+
+  store(e) {
+    e.preventDefault()
+    let mylist = document.getElementsByName("equipment[store_list][store_id][]")
+    for (let i = 1; i < mylist.length; i++ ) {
+      mylist[i].checked = true
+    }
+  }
 }

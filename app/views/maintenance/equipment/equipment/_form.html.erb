@@ -1,4 +1,4 @@
-<%= form_with(model: equipment) do |form| %>
+<%= form_with(model: equipment, data: {controller:"equipment"}) do |form| %>
   <% if equipment.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(equipment.errors.count, "error") %> prohibited this equipment from being saved:</h2>
@@ -44,6 +44,7 @@
   <%= form.fields_for :store_list do |f| %>
     <div class='mb-3'>
       <%= f.label :stores, "Restaurants:", class: 'form-label' %>
+      <%= link_to "ALL", "", class: "btn btn-sm my-submit", data: { action: "equipment#store" }%>
       <div class='row'>
         <%= f.collection_check_boxes :store_id, Store.where(active: true).order('number ASC'), :id, :number do |s| %>
           <div class="col-3 col-md-2 text-left" style="padding: 0px 15px 0px 0px;">
