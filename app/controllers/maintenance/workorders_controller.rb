@@ -112,7 +112,7 @@ class Maintenance::WorkordersController < ApplicationController
     @workorders = Workorder.where(status: 'Open').order('store_id').order('created_at')
     @csvworkorders = @workorders
     @workorders = @workorders.search(params[:query]) if params[:query].present?
-    @pagy, @workorders = pagy @workorders.reorder(sort_column => sort_direction), items: params.fetch(:count, 10)
+    @pagy, @workorders = pagy @workorders.reorder(sort_column => sort_direction), items: params.fetch(:count, 500)
     respond_to do |format|
       format.html
       format.csv { send_data Workorder.to_csv(@csvworkorders), filename: "workorders-#{current_user.full_name}.csv" }

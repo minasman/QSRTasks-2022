@@ -13,7 +13,7 @@
         <div class="row">
           <%= form.label "Show", class: "col-4 mb-3 col-form-label" %>
           <div class="col-7">
-            <%= form.select :count, options_for_select([10, 25, 50], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
+            <%= form.select :count, options_for_select([500, 10, 25], selected: params[:count]), {}, { onchange: "this.form.requestSubmit()", class: "form-control", placeholder: "Show"}  %>
           </div>
         </div>
       </div>
@@ -40,16 +40,18 @@
             <th scope="col">Last Update</th>
             <th scope="col">Priority</th>
             <th scope="col">Time Open</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           <% @workorders.each_with_index do |workorder, i| %>
             <tr id="<%= dom_id(workorder) %>" class="" >
               <th scope="row" rowspan="<%= workorder.workorder_updates.size + 2 %>" class="align-middle"><%= i + 1 %></th>
-              <td><%= workorder.store.number %></td>
-              <td><%= link_to workorder.id, workorder, class: "table-link", data: { turbo: false } %></td>
+              <td><strong><%= workorder.store.number %></strong></td>
+              <td><%= link_to workorder.id, workorder, class: "btn btn-sm my-submit", data: { turbo: false } %></td>
               <td><%= workorder.created_at.strftime("%m/%d/%y") %></td>
-              <td><%= link_to workorder.equipment.name, workorder.equipment, class: "table-link", data: { turbo: false } %></td>
+              <td><%= link_to workorder.equipment.name, workorder.equipment, class: "btn btn-sm my-submit", data: { turbo: false } %></td>
               <td><%= workorder.user.full_name %></td>
               <td><%= workorder.team.nil? ? workorder.team : "Not Assigned" %></td>
               <td><%= workorder.assigned? ? User.find(workorder.assigned).full_name : "Not Assigned" %></td>
@@ -58,17 +60,20 @@
               <td><%= workorder.workorder_updates.any? ? workorder.workorder_updates.last.created_at.strftime("%m/%d/%y") : "N/A" %></td>
               <td><%= workorder.level %></td>
               <td><%= time_ago_in_words(workorder.created_at) %></td>
+              <td><%= link_to "Update", new_workorder_workorder_update_path(workorder), class: "btn btn-sm my-submit", data: { turbo: false }, target: :blank %>
+              </td>
+              <td><%= link_to "Edit", edit_workorder_path(workorder), class: "btn btn-sm my-submit", data: { turbo: false }, target: :blank %></td>
             </tr>
             <tr class="" style="border-color: transparent; border-style: none;">
               <th style="border-style: none;">Description:</th>
-              <td colspan="11" style="border-style: none;"><%= workorder.workorder_issue %></td>
+              <td colspan="13" style="border-style: none;"><%= workorder.workorder_issue %></td>
             </tr>
             <% if workorder.workorder_updates.any? %>
               <% workorder.workorder_updates.order(id: :desc).each do |update| %>
                 <tr>
                   <td><%= update.created_at.strftime("%m/%d/%y") %></td>
                   <td><%= update.user.full_name %></td>
-                  <td colspan="10"><%= update.current_update %></td>
+                  <td colspan="12"><%= update.current_update %></td>
                 </tr>
               <% end %>
             <% end %>
