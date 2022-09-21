@@ -4,6 +4,7 @@ task update_points: :environment do
       position = user.position.name
       points = 0
       rewarded = 0
+      rewards = 0
       user.employee_named_documentations.each do |doc|
         points += doc.points
       end
@@ -23,7 +24,7 @@ task update_points: :environment do
           else
             redeemed_reward_value
           end
-          rewarded += rewarded + redeemed_reward_value
+          rewarded += redeemed_reward_value
         end
       end
 
@@ -43,7 +44,7 @@ task update_points: :environment do
           else
             reward_value
           end
-          rewarded += rewarded + reward_value
+          rewarded += reward_value
         end
       end
 
