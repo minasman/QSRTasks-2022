@@ -51,7 +51,7 @@
       <div class="pt-5">
         <h2 class="text-xl font-medium">Updates</h2>
         <% @workorder.workorder_updates.order(created_at: "DESC").each do |update| %>
-          <p class="py-3"><strong>Date: </strong><%= update.created_at.strftime('%m/%d/%Y') %>
+          <p class="py-3"><strong>Date: </strong><%= update.created_at.strftime('%m/%d/%Y') %> @ <%= update.created_at.strftime('%I:%M %P') %>
             <br>
             <strong>Submitted By: </strong><%= update.user.full_name %>
             <br>
