@@ -15,7 +15,7 @@ class DocumentationPolicy < ApplicationPolicy
   end
 
   def new?
-    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "HR Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Shopper", "Marketing Manager", "AR Manager", "AP Manager", "Training Assistant", "Marketing Manager"]
+    @user.position.name.in? ["Director", "Owner", "Business Director", "Operations Manager", "Supervisor", "General Manager", "HR Manager", "Manager", "Training Manager", "HR Admin", "Payroll Manager", "Maint Department Head", "Technology Department Head", "PM Department Head", "Maint Tech Department Head", "AA", "Shopper", "Marketing Manager", "AR Manager", "AP Manager", "Training Assistant", "Marketing Manager"]
 
   end
 
