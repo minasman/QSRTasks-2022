@@ -37,7 +37,7 @@
       <div class="mb-3">
         <div class="form-check mb-3">
           <%= form.label :individual, "Flow To All", class: "form-check-label" %>
-          <%= form.check_box :individual, class: "form-check-input" %>
+          <%= form.check_box :individual, class: "form-check-input", disabled: current_user.position.name == "Manager" ? true : false %>
         </div>
       </div>
     </div>
